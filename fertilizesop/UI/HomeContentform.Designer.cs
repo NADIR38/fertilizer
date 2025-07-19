@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -58,36 +58,36 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblbills = new System.Windows.Forms.Label();
+            this.iconPictureBox8 = new FontAwesome.Sharp.IconPictureBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblreturn = new System.Windows.Forms.Label();
+            this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.lblbest = new System.Windows.Forms.Label();
+            this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
             this.lbljsj = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblsupp = new System.Windows.Forms.Label();
+            this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
             this.ser = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblcustomers = new System.Windows.Forms.Label();
+            this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
             this.lblrepairs = new System.Windows.Forms.Label();
+            this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.lblsales = new System.Windows.Forms.Label();
+            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
             this.lbltotalp = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.iconPictureBox8 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -104,20 +104,20 @@
             this.panel11.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox8)).BeginInit();
+            this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).BeginInit();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
+            this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
+            this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
+            this.panel20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -242,11 +242,11 @@
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Linen;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Lime;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Linen;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Lime;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
@@ -289,11 +289,11 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Linen;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Lime;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Linen;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Lime;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
@@ -495,6 +495,21 @@
             this.lblbills.TabIndex = 2;
             this.lblbills.Text = "0";
             // 
+            // iconPictureBox8
+            // 
+            this.iconPictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox8.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox8.IconChar = FontAwesome.Sharp.IconChar.Print;
+            this.iconPictureBox8.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox8.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox8.IconSize = 55;
+            this.iconPictureBox8.Location = new System.Drawing.Point(275, 13);
+            this.iconPictureBox8.Name = "iconPictureBox8";
+            this.iconPictureBox8.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox8.TabIndex = 1;
+            this.iconPictureBox8.TabStop = false;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -530,6 +545,21 @@
             this.lblreturn.Size = new System.Drawing.Size(70, 81);
             this.lblreturn.TabIndex = 2;
             this.lblreturn.Text = "0";
+            // 
+            // iconPictureBox7
+            // 
+            this.iconPictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox7.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox7.IconChar = FontAwesome.Sharp.IconChar.DesktopAlt;
+            this.iconPictureBox7.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox7.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox7.IconSize = 55;
+            this.iconPictureBox7.Location = new System.Drawing.Point(276, 3);
+            this.iconPictureBox7.Name = "iconPictureBox7";
+            this.iconPictureBox7.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox7.TabIndex = 1;
+            this.iconPictureBox7.TabStop = false;
             // 
             // label14
             // 
@@ -567,6 +597,21 @@
             this.lblbest.TabIndex = 2;
             this.lblbest.Text = "0";
             // 
+            // iconPictureBox6
+            // 
+            this.iconPictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox6.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox6.IconChar = FontAwesome.Sharp.IconChar.Laptop;
+            this.iconPictureBox6.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox6.IconSize = 55;
+            this.iconPictureBox6.Location = new System.Drawing.Point(276, 3);
+            this.iconPictureBox6.Name = "iconPictureBox6";
+            this.iconPictureBox6.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox6.TabIndex = 1;
+            this.iconPictureBox6.TabStop = false;
+            // 
             // lbljsj
             // 
             this.lbljsj.AutoSize = true;
@@ -602,6 +647,21 @@
             this.lblsupp.Size = new System.Drawing.Size(70, 81);
             this.lblsupp.TabIndex = 2;
             this.lblsupp.Text = "0";
+            // 
+            // iconPictureBox5
+            // 
+            this.iconPictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.MoneyBillAlt;
+            this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox5.IconSize = 55;
+            this.iconPictureBox5.Location = new System.Drawing.Point(276, 3);
+            this.iconPictureBox5.Name = "iconPictureBox5";
+            this.iconPictureBox5.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox5.TabIndex = 1;
+            this.iconPictureBox5.TabStop = false;
             // 
             // ser
             // 
@@ -639,6 +699,21 @@
             this.lblcustomers.TabIndex = 2;
             this.lblcustomers.Text = "0";
             // 
+            // iconPictureBox4
+            // 
+            this.iconPictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox4.IconChar = FontAwesome.Sharp.IconChar.Newspaper;
+            this.iconPictureBox4.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox4.IconSize = 55;
+            this.iconPictureBox4.Location = new System.Drawing.Point(275, 3);
+            this.iconPictureBox4.Name = "iconPictureBox4";
+            this.iconPictureBox4.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox4.TabIndex = 1;
+            this.iconPictureBox4.TabStop = false;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -674,6 +749,21 @@
             this.lblrepairs.Size = new System.Drawing.Size(70, 81);
             this.lblrepairs.TabIndex = 2;
             this.lblrepairs.Text = "0";
+            // 
+            // iconPictureBox3
+            // 
+            this.iconPictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.ScrewdriverWrench;
+            this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox3.IconSize = 55;
+            this.iconPictureBox3.Location = new System.Drawing.Point(276, 3);
+            this.iconPictureBox3.Name = "iconPictureBox3";
+            this.iconPictureBox3.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox3.TabIndex = 1;
+            this.iconPictureBox3.TabStop = false;
             // 
             // label6
             // 
@@ -711,6 +801,21 @@
             this.lblsales.TabIndex = 2;
             this.lblsales.Text = "0";
             // 
+            // iconPictureBox1
+            // 
+            this.iconPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconPictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Coins;
+            this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox1.IconSize = 55;
+            this.iconPictureBox1.Location = new System.Drawing.Point(276, 3);
+            this.iconPictureBox1.Name = "iconPictureBox1";
+            this.iconPictureBox1.Size = new System.Drawing.Size(56, 55);
+            this.iconPictureBox1.TabIndex = 1;
+            this.iconPictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -747,122 +852,6 @@
             this.lbltotalp.TabIndex = 2;
             this.lbltotalp.Text = "0";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(17, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(134, 25);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Total Products";
-            // 
-            // iconPictureBox8
-            // 
-            this.iconPictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox8.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox8.IconChar = FontAwesome.Sharp.IconChar.Print;
-            this.iconPictureBox8.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox8.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox8.IconSize = 55;
-            this.iconPictureBox8.Location = new System.Drawing.Point(275, 13);
-            this.iconPictureBox8.Name = "iconPictureBox8";
-            this.iconPictureBox8.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox8.TabIndex = 1;
-            this.iconPictureBox8.TabStop = false;
-            // 
-            // iconPictureBox7
-            // 
-            this.iconPictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox7.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox7.IconChar = FontAwesome.Sharp.IconChar.DesktopAlt;
-            this.iconPictureBox7.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox7.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox7.IconSize = 55;
-            this.iconPictureBox7.Location = new System.Drawing.Point(276, 3);
-            this.iconPictureBox7.Name = "iconPictureBox7";
-            this.iconPictureBox7.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox7.TabIndex = 1;
-            this.iconPictureBox7.TabStop = false;
-            // 
-            // iconPictureBox6
-            // 
-            this.iconPictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox6.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox6.IconChar = FontAwesome.Sharp.IconChar.Laptop;
-            this.iconPictureBox6.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox6.IconSize = 55;
-            this.iconPictureBox6.Location = new System.Drawing.Point(276, 3);
-            this.iconPictureBox6.Name = "iconPictureBox6";
-            this.iconPictureBox6.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox6.TabIndex = 1;
-            this.iconPictureBox6.TabStop = false;
-            // 
-            // iconPictureBox5
-            // 
-            this.iconPictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.MoneyBillAlt;
-            this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox5.IconSize = 55;
-            this.iconPictureBox5.Location = new System.Drawing.Point(276, 3);
-            this.iconPictureBox5.Name = "iconPictureBox5";
-            this.iconPictureBox5.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox5.TabIndex = 1;
-            this.iconPictureBox5.TabStop = false;
-            // 
-            // iconPictureBox4
-            // 
-            this.iconPictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox4.IconChar = FontAwesome.Sharp.IconChar.Newspaper;
-            this.iconPictureBox4.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox4.IconSize = 55;
-            this.iconPictureBox4.Location = new System.Drawing.Point(275, 3);
-            this.iconPictureBox4.Name = "iconPictureBox4";
-            this.iconPictureBox4.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox4.TabIndex = 1;
-            this.iconPictureBox4.TabStop = false;
-            // 
-            // iconPictureBox3
-            // 
-            this.iconPictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.ScrewdriverWrench;
-            this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox3.IconSize = 55;
-            this.iconPictureBox3.Location = new System.Drawing.Point(276, 3);
-            this.iconPictureBox3.Name = "iconPictureBox3";
-            this.iconPictureBox3.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox3.TabIndex = 1;
-            this.iconPictureBox3.TabStop = false;
-            // 
-            // iconPictureBox1
-            // 
-            this.iconPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Coins;
-            this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 55;
-            this.iconPictureBox1.Location = new System.Drawing.Point(276, 3);
-            this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Size = new System.Drawing.Size(56, 55);
-            this.iconPictureBox1.TabIndex = 1;
-            this.iconPictureBox1.TabStop = false;
-            // 
             // iconPictureBox2
             // 
             this.iconPictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -877,6 +866,17 @@
             this.iconPictureBox2.Size = new System.Drawing.Size(56, 55);
             this.iconPictureBox2.TabIndex = 1;
             this.iconPictureBox2.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(17, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(134, 25);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Total Products";
             // 
             // HomeContentform
             // 
@@ -913,27 +913,27 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox8)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.ResumeLayout(false);
 

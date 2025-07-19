@@ -1,4 +1,7 @@
-﻿using fertilizesop.UI;
+﻿using fertilizesop.BL.Bl;
+using fertilizesop.DL;
+using fertilizesop.Interfaces.BLInterfaces;
+using fertilizesop.UI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,9 +14,7 @@ namespace fertilizesop
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        
         public static IServiceProvider ServiceProvider { get; private set; }
 
         [STAThread]
@@ -28,9 +29,17 @@ namespace fertilizesop
             Application.Run(ServiceProvider.GetRequiredService<dashboardform>());
         }
         public static void configureServices(IServiceCollection services)
-        {
+        {//DL Layer
+            services.AddScoped<ICustomerDl,CustomerDl>();
+
+            //Bl Layer
+            services.AddScoped<ICustomerBl, CustomerBl>();
+            //UI Layer
             services.AddTransient<HomeContentform>();
             services.AddTransient<dashboardform>();
+            services.AddTransient<AddCustomer>();
+            services.AddTransient<CustomerForm>();
+
         }
     }
 }

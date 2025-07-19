@@ -302,6 +302,11 @@ namespace fertilizesop.UI
             Application.Exit();
         }
 
-    
+        private void btncustomers_Click_1(object sender, EventArgs e)
+        {
+            activebutton(sender, sidebarColors[5]);
+            var f = Program.ServiceProvider.GetRequiredService<CustomerForm>();
+            LoadFormIntoPanel(f);
+        }
     }
 }

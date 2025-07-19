@@ -121,7 +121,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Models\Customers.cs" />
+    <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="DL\CustomerDl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ICustomerBl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ICustomerDl.cs" />
+    <Compile Include="Interfaces\Isupplier.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="UI\AddCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddCustomer.Designer.cs">
+      <DependentUpon>AddCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\dashboardform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +155,13 @@
     <Compile Include="UI\HomeContentform.Designer.cs">
       <DependentUpon>HomeContentform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIHelper.cs" />
+    <EmbeddedResource Include="UI\AddCustomer.resx">
+      <DependentUpon>AddCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\dashboardform.resx">
       <DependentUpon>dashboardform.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,10 +201,6 @@
   <ItemGroup>
     <None Include="Resources\Fertilizer Shop Logo Design-Photoroom.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\Bl\Models\" />
-    <Folder Include="Interfaces\BLInterfaces\" />
-    <Folder Include="Interfaces\DLinterfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

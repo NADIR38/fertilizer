@@ -35,6 +35,7 @@
             this.panelcust = new System.Windows.Forms.Panel();
             this.panelsupp = new System.Windows.Forms.Panel();
             this.panelreturn = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btndashboard = new FontAwesome.Sharp.IconButton();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
@@ -62,7 +63,6 @@
             this.btnorder = new FontAwesome.Sharp.IconButton();
             this.btnlogout = new FontAwesome.Sharp.IconButton();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.panelmenu.SuspendLayout();
             this.panelinventory.SuspendLayout();
             this.panelbatch.SuspendLayout();
@@ -168,6 +168,15 @@
             this.panelreturn.Name = "panelreturn";
             this.panelreturn.Size = new System.Drawing.Size(270, 62);
             this.panelreturn.TabIndex = 14;
+            // 
+            // panel10
+            // 
+            this.panel10.AutoScroll = true;
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(270, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1042, 1010);
+            this.panel10.TabIndex = 14;
             // 
             // pictureBox1
             // 
@@ -552,6 +561,7 @@
             this.btncustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btncustomers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btncustomers.UseVisualStyleBackColor = false;
+            this.btncustomers.Click += new System.EventHandler(this.btncustomers_Click_1);
             // 
             // iconPictureBox5
             // 
@@ -785,15 +795,6 @@
             this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton2.UseVisualStyleBackColor = false;
             this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
-            // 
-            // panel10
-            // 
-            this.panel10.AutoScroll = true;
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(270, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1042, 1010);
-            this.panel10.TabIndex = 14;
             // 
             // dashboardform
             // 
