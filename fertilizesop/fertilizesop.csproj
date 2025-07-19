@@ -121,7 +121,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\bl\Customerbl.cs" />
+    <Compile Include="BL\Models\Ipersons.cs" />
+    <Compile Include="BL\Models\persons\Customer.cs" />
+    <Compile Include="BL\Models\persons\Supplier.cs" />
+    <Compile Include="DL\custumerdl.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="Interfaces\BLinterfaces\Icustomerbl.cs" />
+    <Compile Include="Interfaces\DLInterfaces\Icustomerdl.cs" />
+    <Compile Include="UI\Addcustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Addcustomer.Designer.cs">
+      <DependentUpon>Addcustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\dashboardform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +149,9 @@
     <Compile Include="UI\HomeContentform.Designer.cs">
       <DependentUpon>HomeContentform.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Addcustomer.resx">
+      <DependentUpon>Addcustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\dashboardform.resx">
       <DependentUpon>dashboardform.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,10 +191,6 @@
   <ItemGroup>
     <None Include="Resources\Fertilizer Shop Logo Design-Photoroom.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\Bl\Models\" />
-    <Folder Include="Interfaces\BLInterfaces\" />
-    <Folder Include="Interfaces\DLinterfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

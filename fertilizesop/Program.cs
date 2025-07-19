@@ -1,8 +1,13 @@
-﻿using fertilizesop.UI;
+﻿using fertilizesop.BL.bl;
+using fertilizesop.DL;
+using fertilizesop.Interfaces.BLinterfaces;
+using fertilizesop.Interfaces.DLInterfaces;
+using fertilizesop.UI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -14,6 +19,7 @@ namespace fertilizesop
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        //public static IServiceProvider ServiceProvider { get; private set; }
         public static IServiceProvider ServiceProvider { get; private set; }
 
         [STAThread]
@@ -23,14 +29,22 @@ namespace fertilizesop
             Application.SetCompatibleTextRenderingDefault(false);
 
             var services = new ServiceCollection();
-            configureServices(services);
+            configurationservices(services);
             ServiceProvider = services.BuildServiceProvider();
-            Application.Run(ServiceProvider.GetRequiredService<dashboardform>());
+            var mainform = ServiceProvider.GetRequiredService<Addcustomer>();
+            Application.Run(mainform);
         }
-        public static void configureServices(IServiceCollection services)
+
+        public static void configurationservices (IServiceCollection services)
         {
+            services.AddScoped<Icustomerbl, Customerbl>();
+
+            services.AddScoped<Icustomerdl , custumerdl>();
+
             services.AddTransient<HomeContentform>();
             services.AddTransient<dashboardform>();
+            services.AddTransient<Addcustomer>();
+
         }
-    }
+    }    
 }
