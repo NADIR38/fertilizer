@@ -133,5 +133,10 @@ namespace fertilizesop.UI
         {
             load();
         }
+
+        private void btncancle1_Click(object sender, EventArgs e)
+        {
+            paneledit.Visible=false;
+        }
     }
 }

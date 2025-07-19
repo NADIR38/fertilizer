@@ -1,18 +1,17 @@
-﻿using System;
+﻿﻿using fertilizesop.BL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fertilizesop.BL.Models;
 
-namespace fertilizesop.Interfaces.BLinterfaces
+namespace fertilizesop.Interfaces.BLInterfaces
 {
-    public interface Icustomerbl
+    public interface ICustomerBl
     {
-        bool addcustomer(Ipersons p);
-        bool updatecustomer(Ipersons p);
-        bool deletecustomer(Ipersons p);
-        List<Ipersons> getcustomers();
-        List<Ipersons> searchcustomer();
+        bool Addcustomer(Customers s);
+        List<Isupplier> getcustomers();
+        List<Isupplier> searchcustomers(string text);
+        bool update(Customers c);
     }
 }

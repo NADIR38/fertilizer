@@ -1,4 +1,4 @@
-﻿using fertilizesop.BL.Models;
+﻿﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
 using System;
@@ -48,7 +48,7 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-               
+
 
                 return idl.searchcustomers(text);
             }

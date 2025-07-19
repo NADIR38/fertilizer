@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+﻿using fertilizesop.BL.Models;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,62 +10,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fertilizesop.BL.Models;
-using fertilizesop.BL.Models.persons;
-using fertilizesop.Interfaces.BLinterfaces;
-using MySql.Data.MySqlClient;
-
+using fertilizesop.Interfaces.BLInterfaces;
 namespace fertilizesop.UI
 {
-    public partial class Addcustomer : Form
+    public partial class AddCustomer : Form
     {
-        private readonly Icustomerbl _customerbl;
-        public Addcustomer(Icustomerbl customerbl)
+        private readonly ICustomerBl ibl;
+        public AddCustomer(ICustomerBl ibl)
         {
             InitializeComponent();
-            _customerbl = customerbl;
+            this.ibl = ibl;
         }
 
-        private void iconButton1_Click(object sender, EventArgs e)
+        private void btnsave_Click(object sender, EventArgs e)
         {
-            string firstname = txtname.Text;
-            string lastname = txtlastname.Text;
-            string type = comboBox1.Text.Trim();
-            string address = txtaddress.Text;
-            string email = txtemail.Text;
-            string contact = txtcontact.Text;
+            string fname = txtname.Text.Trim();
+            string last_name = txtlname.Text.Trim();
+            string address = txtaddress.Text.Trim();
+            string phone_number = txtcontact.Text.Trim();
             try
             {
-                if(string.IsNullOrWhiteSpace(firstname))
+                var customers = new Customers(0, fname, phone_number, address, last_name);
+                var result = ibl.Addcustomer(customers);
+                if (result)
                 {
-                    throw new ArgumentException("Name is required.");
-                }
-                if (string.IsNullOrWhiteSpace(type))
-                    throw new ArgumentException("Customer type must be selected.");
-
-                else if (string.IsNullOrWhiteSpace(address))
-                {
-                    throw new ArgumentException("Address is required");
-                }
-
-                if(comboBox1.Text == "Regular")
-                {
-                    if (string.IsNullOrWhiteSpace(email))
-                        throw new ArgumentException("Email is required for Regular customers.");
-
-                    if (string.IsNullOrWhiteSpace(address))
-                        throw new ArgumentException("Address is required for Regular customers.");
-                }
-                Ipersons p = new Customer(firstname , lastname , type, address, email, contact);
-                MessageBox.Show("Customer created with ID: " + ((Customer)p).id);
-                bool result = _customerbl.addcustomer(p);
-                if(result)
-                {
-                    MessageBox.Show("Customer added successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Customer added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtname.Clear();
+                    txtaddress.Clear();
+                    txtcontact.Clear();
+                    txtlname.Clear();
                 }
                 else
                 {
-                    MessageBox.Show("Error savin customer","error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to add customer. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (ArgumentNullException ex)
@@ -83,14 +63,5 @@ namespace fertilizesop.UI
             }
         }
 
-        private void txtemail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

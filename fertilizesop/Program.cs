@@ -1,10 +1,8 @@
 ﻿using fertilizesop.BL.Bl;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
-﻿using fertilizesop.BL.bl;
-using fertilizesop.DL;
-using fertilizesop.Interfaces.BLinterfaces;
-using fertilizesop.Interfaces.DLInterfaces;
+
+
 using fertilizesop.UI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -33,14 +31,14 @@ namespace fertilizesop
             Application.SetCompatibleTextRenderingDefault(false);
 
             var services = new ServiceCollection();
-            configurationservices(services);
+            configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<Addcustomer>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer
-            services.AddScoped<ICustomerDl,CustomerDl>();
+            services.AddScoped<ICustomerDl, CustomerDl>();
 
             //Bl Layer
             services.AddScoped<ICustomerBl, CustomerBl>();
@@ -49,16 +47,6 @@ namespace fertilizesop
             services.AddTransient<dashboardform>();
             services.AddTransient<AddCustomer>();
             services.AddTransient<CustomerForm>();
-
-        public static void configurationservices (IServiceCollection services)
-        {
-            services.AddScoped<Icustomerbl, Customerbl>();
-
-            services.AddScoped<Icustomerdl , custumerdl>();
-
-            services.AddTransient<HomeContentform>();
-            services.AddTransient<dashboardform>();
-            services.AddTransient<Addcustomer>();
 
         }
     }    

@@ -1,5 +1,5 @@
+﻿
 ﻿using fertilizesop.BL.Models;
-using fertilizesop.Interfaces.BLInterfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using fertilizesop.Interfaces.BLInterfaces;
 namespace fertilizesop.UI
 {
     public partial class AddCustomer : Form
@@ -24,10 +24,10 @@ namespace fertilizesop.UI
 
         private void btnsave_Click(object sender, EventArgs e)
         {
-            string fname=txtname.Text.Trim();
-            string last_name=txtlname.Text.Trim();
-            string address=txtaddress.Text.Trim();
-            string phone_number=txtcontact.Text.Trim();
+            string fname = txtname.Text.Trim();
+            string last_name = txtlname.Text.Trim();
+            string address = txtaddress.Text.Trim();
+            string phone_number = txtcontact.Text.Trim();
             try
             {
                 var customers = new Customers(0, fname, phone_number, address, last_name);
@@ -63,5 +63,5 @@ namespace fertilizesop.UI
             }
         }
 
-        }
     }
+}

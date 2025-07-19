@@ -166,7 +166,7 @@
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
-            // AddCustomer
+            // Addcustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -182,7 +182,7 @@
             this.Controls.Add(this.txtname);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
-            this.Name = "AddCustomer";
+            this.Name = "Addcustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCustomer";
             this.ResumeLayout(false);
