@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using fertilizesop.BL.Models;
 using fertilizesop.Interfaces.BLInterfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace fertilizesop.UI
 {
     public partial class supplierform : Form
     {
         private readonly Isupplierbl _customerbl;
+        private int customerid = -1;
         public supplierform(Isupplierbl customerbl)
         {
             InitializeComponent();
@@ -57,7 +59,7 @@ namespace fertilizesop.UI
 
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtfirstname.Text))
+            if (string.IsNullOrEmpty(txtfirstname.Text))
             {
                 MessageBox.Show("Pease enter a name first");
                 return;
@@ -67,21 +69,20 @@ namespace fertilizesop.UI
             string address = txtaddress.Text;
             try
             {
-                var supplier = new Suppliers(fname, contact, address);
-                bool result = _customerbl.addsupplier(supplier);
+                var supplier = new Suppliers(customerid, fname, contact, address);
+                bool result = _customerbl.updatesupplier(supplier);
                 if (result)
                 {
-                    MessageBox.Show("supplier saved successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("supplier updated successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     clearfields();
+                    editpanel.Visible = false;
+                    load();
                 }
-                else
-                {
-                    MessageBox.Show("Invalid data entered");
-                }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error saving the supplier " +  ex.Message);
+                MessageBox.Show("Error saving the supplier " + ex.Message);
             }
         }
 
@@ -92,7 +93,8 @@ namespace fertilizesop.UI
 
         private void Addbutton_Click(object sender, EventArgs e)
         {
-            editpanel.Visible = true;
+            var form = Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            form.ShowDialog();
         }
 
         private void btncancel_Click(object sender, EventArgs e)
@@ -108,7 +110,19 @@ namespace fertilizesop.UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if(e.ColumnIndex <0 || e.RowIndex < 0)
+            {
+                return;
+            }
+            var columnname = dataGridView1.Columns[e.ColumnIndex].Name;
+            var rowname = dataGridView1.Rows[e.RowIndex];
+            customerid = Convert.ToInt32(rowname.Cells["Id"].Value);
+            editpanel.Visible = true;
+            txtaddress.Text = rowname.Cells["address"].Value.ToString();
+            txtfirstname.Text = rowname.Cells["first_name"].Value.ToString();
+            txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
+            UIHelper.RoundPanelCorners(editpanel, 20);
+            UIHelper.ShowCenteredPanel(this, editpanel);
         }
 
         private void supplierform_Load(object sender, EventArgs e)

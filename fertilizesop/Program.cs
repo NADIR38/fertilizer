@@ -48,7 +48,8 @@ namespace fertilizesop
             services.AddTransient<dashboardform>();
             services.AddTransient<AddCustomer>();
             services.AddTransient<CustomerForm>();
-            services.AddTransient < supplierform>();
+            services.AddTransient<supplierform>();
+            services.AddTransient<Addsupplier>();
 
         }
     }    

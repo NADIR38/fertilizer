@@ -17,7 +17,7 @@ namespace fertilizesop.UI
 {
     public partial class CustomerForm : Form
     {
-        int selectedCustomerId = -1;
+        private int selectedCustomerId = -1;
         private readonly ICustomerBl ibl;
         public CustomerForm(ICustomerBl ibl)
         {

@@ -63,7 +63,14 @@ namespace fertilizesop.BL.Bl
 
         public bool updatesupplier(Suppliers s)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _supplierdl.updatesupplier(s);
+            }
+            catch(Exception e)
+            {
+                throw new Exception("error in supplierbl " + e.Message);
+            }
         }
         private void validatesuppliers(Suppliers s)
         {

@@ -113,6 +113,27 @@ namespace fertilizesop.DL
 
         public bool updatesupplier(Suppliers s)
         {
+            try
+            {
+                using (var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    con.Open();
+                    string query = "update suppliers set name = @name , phone = @phone , address = @address where supplier_id = @id";
+                    using (var cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("name", s.first_Name);
+                        cmd.Parameters.AddWithValue("phone", string.IsNullOrEmpty(s.phonenumber) ? (object)DBNull.Value : s.phonenumber);
+                        cmd.Parameters.AddWithValue("address", string.IsNullOrEmpty(s.Address) ? (object)DBNull.Value : s.Address);
+                        cmd.Parameters.AddWithValue("Id", s.Id);
+                        int executeid = cmd.ExecuteNonQuery();
+                        return executeid > 0;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception("erroe in supplierdl " +e.Message);
+            }
             throw new NotImplementedException();
         }
     }
