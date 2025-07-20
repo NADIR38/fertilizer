@@ -10,7 +10,7 @@ namespace fertilizesop.Interfaces.BLInterfaces
     public interface Isupplierbl
     {
         bool addsupplier(Suppliers s);
-        bool deletesupplier(Suppliers s);
+        bool deletesupplier(int s);
         bool updatesupplier(Suppliers s);
         List<Suppliers> searchsupplier(string text);
         List<Suppliers> getsupplier();

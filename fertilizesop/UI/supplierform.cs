@@ -24,7 +24,7 @@ namespace fertilizesop.UI
             editpanel.Visible = false;
         }
 
-        private void load()
+        public void load()
         {
             var supplier = _customerbl.getsupplier();
             dataGridView1.Columns.Clear();
@@ -32,6 +32,7 @@ namespace fertilizesop.UI
             dataGridView1.DataSource = supplier.OfType<Suppliers>().Select(c=> new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
             dataGridView1.Columns["Id"].Visible = false;
             UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
+            UIHelper.AddButtonColumn(dataGridView1, "Delete", "Delete", "Delete");
             
         }
         
@@ -110,19 +111,47 @@ namespace fertilizesop.UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex <0 || e.RowIndex < 0)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
             {
                 return;
             }
             var columnname = dataGridView1.Columns[e.ColumnIndex].Name;
             var rowname = dataGridView1.Rows[e.RowIndex];
             customerid = Convert.ToInt32(rowname.Cells["Id"].Value);
-            editpanel.Visible = true;
-            txtaddress.Text = rowname.Cells["address"].Value.ToString();
-            txtfirstname.Text = rowname.Cells["first_name"].Value.ToString();
-            txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
-            UIHelper.RoundPanelCorners(editpanel, 20);
-            UIHelper.ShowCenteredPanel(this, editpanel);
+            if (columnname == "Edit")
+            {
+                editpanel.Visible = true;
+                txtaddress.Text = rowname.Cells["address"].Value.ToString();
+                txtfirstname.Text = rowname.Cells["first_name"].Value.ToString();
+                txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
+                UIHelper.RoundPanelCorners(editpanel, 20);
+                UIHelper.ShowCenteredPanel(this, editpanel);
+            }
+
+            else if (columnname == "Delete")
+            {
+                try
+                {
+                    var confirm = MessageBox.Show("Are you sure that you want to delete this supplier", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        bool result = _customerbl.deletesupplier(customerid);
+                        if (result)
+                        {
+                            MessageBox.Show("Supplier deleted successfully", "Deletion succesfull" , MessageBoxButtons.OK , MessageBoxIcon.Information);
+                            load();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error in deleting the supplier");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error in deleting the supplier" + ex.Message);
+                }
+            } 
         }
 
         private void supplierform_Load(object sender, EventArgs e)
@@ -144,6 +173,12 @@ namespace fertilizesop.UI
             dataGridView1.DataSource = sup.OfType<Suppliers>().Select(c => new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
             dataGridView1.Columns["Id"].Visible = false;
             UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
+            UIHelper.AddButtonColumn(dataGridView1, "Delete", "Delete", "Deleter");
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            load();
         }
     }
 }

@@ -8,6 +8,7 @@ using fertilizesop.BL.Models;
 using fertilizesop.Interfaces.DLinterfaces;
 using KIMS;
 using MySql.Data.MySqlClient;
+using Mysqlx;
 
 namespace fertilizesop.DL
 {
@@ -33,13 +34,34 @@ namespace fertilizesop.DL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error adding supplier " + ex.Message);
+                throw new Exception("Error adding supplier " );
             }
         }
 
-        public bool deletesupplier(Suppliers s)
+        public bool deletesupplier(int s)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    con.Open();
+                    string query = "delete from suppliers where supplier_id = @s";
+                    using (var cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("s", s);
+                        int executedid = cmd.ExecuteNonQuery();
+                        return executedid > 0;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("DL error occurred while deleting supplier: " + ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in deleting the supplier in the datah layer" );
+            }
         }
 
         public List<Suppliers> getsupplier()

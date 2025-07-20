@@ -31,8 +31,16 @@ namespace fertilizesop.BL.Bl
             }
         }
 
-        public bool deletesupplier(Suppliers s)
+        public bool deletesupplier(int s)
         {
+            try
+            {
+                return _supplierdl.deletesupplier(s);
+            }
+            catch
+            {
+                throw new Exception("Error in bl while deleting the supplier");
+            }
             throw new NotImplementedException();
         }
 

@@ -15,10 +15,12 @@ namespace fertilizesop.UI
     public partial class Addsupplier : Form
     {
         private readonly Isupplierbl _supplierbl;
-        public Addsupplier(Isupplierbl supplierbl)
+        private readonly supplierform _sup;
+        public Addsupplier(Isupplierbl supplierbl, supplierform sup)
         {
             InitializeComponent();
             _supplierbl = supplierbl;
+            _sup = sup;
         }
 
         private void btnsave_Click(object sender, EventArgs e)
@@ -38,7 +40,9 @@ namespace fertilizesop.UI
                 if (result)
                 {
                     MessageBox.Show("supplier saved successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _sup.load();
                     clearfields();
+                    this.Close();
                 }
                 else
                 {
