@@ -27,62 +27,10 @@ namespace fertilizesop.UI
             paneledit.Visible = false;
             this.textBox1.TextChanged += textBox1_TextChanged;
             UIHelper.StyleGridView(dataGridView2);
-            this.KeyPreview = true;
-            this.KeyDown += CustomerForm_KeyDown;
+
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
 
             UIHelper.ApplyButtonStyles(dataGridView2);
-        }
-        private void CustomerForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.R)
-            {
-                // Ctrl+R → Refresh
-                pictureBox1_Click(sender, e);
-                e.Handled = true;
-            }
-            else if (e.Control && e.KeyCode == Keys.S)
-            {
-                // Ctrl+S → Save
-                if (paneledit.Visible)
-                {
-                    btnsave.PerformClick();
-                    e.Handled = true;
-                }
-            }
-            else if (e.KeyCode == Keys.Escape)
-            {
-                // Esc → Close panel
-                if (paneledit.Visible)
-                {
-                    paneledit.Visible = false;
-                    e.Handled = true;
-                }
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                // Enter → Edit selected row
-                if (!paneledit.Visible && dataGridView2.Focused)
-                {
-                    editSelectedCustomer();
-                    e.Handled = true;
-                }
-            }
-        }
-        private void editSelectedCustomer()
-        {
-            if (dataGridView2.CurrentRow != null)
-            {
-                var row = dataGridView2.CurrentRow;
-                selectedCustomerId = Convert.ToInt32(row.Cells["Id"].Value);
-                txtname.Text = row.Cells["first_Name"].Value?.ToString();
-                txtlname.Text = row.Cells["last_name"].Value?.ToString();
-                txtcontact.Text = row.Cells["phonenumber"].Value?.ToString();
-                txtaddress.Text = row.Cells["Address"].Value?.ToString();
-
-                UIHelper.RoundPanelCorners(paneledit, 20);
-                UIHelper.ShowCenteredPanel(this, paneledit);
-            }
         }
 
         private void iconButton9_Click(object sender, EventArgs e)
@@ -101,7 +49,6 @@ namespace fertilizesop.UI
         private void CustomerForm_Load(object sender, EventArgs e)
         {
           load();
-            dataGridView2.Focus();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -185,7 +132,6 @@ namespace fertilizesop.UI
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             load();
-            dataGridView2.Focus();
         }
 
         private void btncancle1_Click(object sender, EventArgs e)
