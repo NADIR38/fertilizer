@@ -122,11 +122,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Bl\ProductsBl.cs" />
     <Compile Include="BL\Bl\Supplierbl.cs" />
     <Compile Include="BL\Models\Customers.cs" />
     <Compile Include="BL\Models\Isupplier.cs" />
+    <Compile Include="BL\Models\Products.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
     <Compile Include="DL\CustomerDl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IProductBl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IProductsDl.cs" />
+    <Compile Include="DL\ProductsDl.cs" />
     <Compile Include="DL\Supplierdl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ICustomerBl.cs" />
     <Compile Include="Interfaces\BLInterfaces\Isupplierbl.cs" />
@@ -138,6 +143,12 @@
     </Compile>
     <Compile Include="UI\AddCustomer.Designer.cs">
       <DependentUpon>AddCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Addproductform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Addproductform.Designer.cs">
+      <DependentUpon>Addproductform.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Addsupplier.cs">
       <SubType>Form</SubType>
@@ -165,6 +176,12 @@
     <Compile Include="UI\HomeContentform.Designer.cs">
       <DependentUpon>HomeContentform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Productsform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Productsform.Designer.cs">
+      <DependentUpon>Productsform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\supplierform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +191,9 @@
     <Compile Include="UI\UIHelper.cs" />
     <EmbeddedResource Include="UI\AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Addproductform.resx">
+      <DependentUpon>Addproductform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Addsupplier.resx">
       <DependentUpon>Addsupplier.cs</DependentUpon>
@@ -196,6 +216,9 @@
     </Compile>
     <EmbeddedResource Include="UI\HomeContentform.resx">
       <DependentUpon>HomeContentform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Productsform.resx">
+      <DependentUpon>Productsform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\supplierform.resx">
       <DependentUpon>supplierform.cs</DependentUpon>

@@ -32,17 +32,21 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<supplierform>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer
             services.AddScoped<ICustomerDl, CustomerDl>();
             services.AddScoped<Isupplierdl, Supplierdl>();
+            services.AddScoped<IProductsDl, ProductsDl>();
+
 
             //Bl Layer
             services.AddScoped<ICustomerBl, CustomerBl>();
             services.AddScoped<Isupplierbl, Supplierbl>();
+            services.AddScoped<IProductBl,ProductsBl>();
+
             //UI Layer
             services.AddTransient<HomeContentform>();
             services.AddTransient<dashboardform>();
@@ -50,6 +54,8 @@ namespace fertilizesop
             services.AddTransient<CustomerForm>();
             services.AddTransient<supplierform>();
             services.AddTransient<Addsupplier>();
+            services.AddTransient<Addproductform>();
+            services.AddTransient<Productsform>();
 
         }
     }    

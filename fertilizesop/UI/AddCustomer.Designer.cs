@@ -43,7 +43,8 @@
             // txtaddress
             // 
             this.txtaddress.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtaddress.Location = new System.Drawing.Point(54, 342);
+            this.txtaddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtaddress.Location = new System.Drawing.Point(53, 358);
             this.txtaddress.Multiline = true;
             this.txtaddress.Name = "txtaddress";
             this.txtaddress.Size = new System.Drawing.Size(313, 35);
@@ -56,7 +57,7 @@
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.lblAddress.Location = new System.Drawing.Point(57, 298);
+            this.lblAddress.Location = new System.Drawing.Point(56, 314);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(92, 30);
             this.lblAddress.TabIndex = 198;
@@ -66,7 +67,8 @@
             // txtlname
             // 
             this.txtlname.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtlname.Location = new System.Drawing.Point(59, 160);
+            this.txtlname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtlname.Location = new System.Drawing.Point(58, 176);
             this.txtlname.Multiline = true;
             this.txtlname.Name = "txtlname";
             this.txtlname.Size = new System.Drawing.Size(313, 35);
@@ -78,7 +80,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label4.Location = new System.Drawing.Point(57, 127);
+            this.label4.Location = new System.Drawing.Point(56, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 30);
             this.label4.TabIndex = 195;
@@ -88,7 +90,8 @@
             // txtcontact
             // 
             this.txtcontact.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtcontact.Location = new System.Drawing.Point(54, 245);
+            this.txtcontact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcontact.Location = new System.Drawing.Point(53, 261);
             this.txtcontact.Multiline = true;
             this.txtcontact.Name = "txtcontact";
             this.txtcontact.Size = new System.Drawing.Size(313, 35);
@@ -100,7 +103,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label7.Location = new System.Drawing.Point(54, 212);
+            this.label7.Location = new System.Drawing.Point(53, 228);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 30);
             this.label7.TabIndex = 193;
@@ -110,7 +113,8 @@
             // txtname
             // 
             this.txtname.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtname.Location = new System.Drawing.Point(62, 79);
+            this.txtname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtname.Location = new System.Drawing.Point(61, 95);
             this.txtname.Multiline = true;
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(313, 35);
@@ -122,7 +126,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label6.Location = new System.Drawing.Point(60, 46);
+            this.label6.Location = new System.Drawing.Point(59, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(120, 30);
             this.label6.TabIndex = 192;
@@ -157,7 +161,7 @@
             this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnsave.IconSize = 35;
             this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(117, 500);
+            this.btnsave.Location = new System.Drawing.Point(105, 460);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(132, 42);
             this.btnsave.TabIndex = 4;
@@ -166,12 +170,12 @@
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
-            // Addcustomer
+            // AddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
-            this.ClientSize = new System.Drawing.Size(429, 649);
+            this.ClientSize = new System.Drawing.Size(429, 572);
             this.Controls.Add(this.txtaddress);
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.txtlname);
@@ -182,7 +186,9 @@
             this.Controls.Add(this.txtname);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
-            this.Name = "Addcustomer";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "AddCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCustomer";
             this.ResumeLayout(false);

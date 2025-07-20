@@ -3,14 +3,8 @@ using fertilizesop.Interfaces.BLInterfaces;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace fertilizesop.UI
@@ -100,7 +94,7 @@ namespace fertilizesop.UI
         }
         private void CustomerForm_Load(object sender, EventArgs e)
         {
-          load();
+            load();
             dataGridView2.Focus();
         }
 
@@ -110,6 +104,7 @@ namespace fertilizesop.UI
             if (string.IsNullOrEmpty(text))
             {
                 load();
+                dataGridView2.Focus();
                 return;
             }
             var list = ibl.searchcustomers(text);
@@ -133,7 +128,7 @@ namespace fertilizesop.UI
                 txtlname.Text = row.Cells["last_name"].Value?.ToString();
                 txtcontact.Text = row.Cells["phonenumber"].Value?.ToString();
                 txtaddress.Text = row.Cells["Address"].Value?.ToString();
-             
+
 
                 UIHelper.RoundPanelCorners(paneledit, 20);
                 UIHelper.ShowCenteredPanel(this, paneledit);
@@ -147,12 +142,12 @@ namespace fertilizesop.UI
             string phone = txtcontact.Text.Trim();
             string address = txtaddress.Text.Trim();
 
-         
-     
+
+
 
             try
             {
-                var customer = new Customers(selectedCustomerId, name,phone, address, lname);
+                var customer = new Customers(selectedCustomerId, name, phone, address, lname);
                 bool result = ibl.update(customer);
 
                 MessageBox.Show(result ? "Customer updated successfully." : "Failed to update customer.", result ? "Success" : "Error",
@@ -163,7 +158,7 @@ namespace fertilizesop.UI
                     txtname.Clear();
                     txtlname.Clear();
                     txtcontact.Clear();
-                    txtaddress.Clear(); 
+                    txtaddress.Clear();
                     paneledit.Visible = false;
                     load();
                 }
@@ -190,7 +185,7 @@ namespace fertilizesop.UI
 
         private void btncancle1_Click(object sender, EventArgs e)
         {
-            paneledit.Visible=false;
+            paneledit.Visible = false;
         }
     }
 }
