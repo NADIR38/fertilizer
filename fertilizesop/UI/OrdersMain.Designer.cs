@@ -38,13 +38,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.paneledit = new System.Windows.Forms.Panel();
+            this.date = new System.Windows.Forms.DateTimePicker();
+            this.btncancle1 = new FontAwesome.Sharp.IconButton();
+            this.cmbSuppliers = new System.Windows.Forms.ComboBox();
+            this.btnsave = new FontAwesome.Sharp.IconButton();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.cmbSuppliers = new System.Windows.Forms.ComboBox();
-            this.date = new System.Windows.Forms.DateTimePicker();
-            this.btncancle1 = new FontAwesome.Sharp.IconButton();
-            this.btnsave = new FontAwesome.Sharp.IconButton();
             this.iconButton9 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.orderdata)).BeginInit();
@@ -124,7 +124,7 @@
             this.orderdata.ReadOnly = true;
             this.orderdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.orderdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.orderdata.Size = new System.Drawing.Size(1246, 428);
+            this.orderdata.Size = new System.Drawing.Size(1246, 484);
             this.orderdata.TabIndex = 143;
             // 
             // label12
@@ -172,6 +172,76 @@
             this.paneledit.Size = new System.Drawing.Size(633, 598);
             this.paneledit.TabIndex = 146;
             // 
+            // date
+            // 
+            this.date.CalendarMonthBackground = System.Drawing.Color.Gainsboro;
+            this.date.Location = new System.Drawing.Point(162, 301);
+            this.date.Name = "date";
+            this.date.Size = new System.Drawing.Size(307, 22);
+            this.date.TabIndex = 148;
+            // 
+            // btncancle1
+            // 
+            this.btncancle1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btncancle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btncancle1.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btncancle1.FlatAppearance.BorderSize = 2;
+            this.btncancle1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btncancle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btncancle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btncancle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncancle1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btncancle1.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btncancle1.IconColor = System.Drawing.Color.Red;
+            this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btncancle1.IconSize = 35;
+            this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncancle1.Location = new System.Drawing.Point(227, 491);
+            this.btncancle1.Name = "btncancle1";
+            this.btncancle1.Size = new System.Drawing.Size(190, 62);
+            this.btncancle1.TabIndex = 200;
+            this.btncancle1.Text = "Cancel";
+            this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncancle1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btncancle1.UseVisualStyleBackColor = false;
+            this.btncancle1.Click += new System.EventHandler(this.btncancle1_Click);
+            // 
+            // cmbSuppliers
+            // 
+            this.cmbSuppliers.BackColor = System.Drawing.Color.Gainsboro;
+            this.cmbSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSuppliers.FormattingEnabled = true;
+            this.cmbSuppliers.Location = new System.Drawing.Point(162, 192);
+            this.cmbSuppliers.Name = "cmbSuppliers";
+            this.cmbSuppliers.Size = new System.Drawing.Size(307, 30);
+            this.cmbSuppliers.TabIndex = 147;
+            this.cmbSuppliers.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // btnsave
+            // 
+            this.btnsave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnsave.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btnsave.FlatAppearance.BorderSize = 2;
+            this.btnsave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnsave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btnsave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsave.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
+            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsave.IconSize = 35;
+            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnsave.Location = new System.Drawing.Point(227, 389);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(189, 62);
+            this.btnsave.TabIndex = 190;
+            this.btnsave.Text = "Proceed";
+            this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnsave.UseVisualStyleBackColor = false;
+            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -214,75 +284,6 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1312, 792);
             this.panel10.TabIndex = 16;
-            // 
-            // cmbSuppliers
-            // 
-            this.cmbSuppliers.BackColor = System.Drawing.Color.Gainsboro;
-            this.cmbSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSuppliers.FormattingEnabled = true;
-            this.cmbSuppliers.Location = new System.Drawing.Point(162, 192);
-            this.cmbSuppliers.Name = "cmbSuppliers";
-            this.cmbSuppliers.Size = new System.Drawing.Size(307, 30);
-            this.cmbSuppliers.TabIndex = 147;
-            this.cmbSuppliers.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // date
-            // 
-            this.date.CalendarMonthBackground = System.Drawing.Color.Gainsboro;
-            this.date.Location = new System.Drawing.Point(162, 301);
-            this.date.Name = "date";
-            this.date.Size = new System.Drawing.Size(307, 22);
-            this.date.TabIndex = 148;
-            // 
-            // btncancle1
-            // 
-            this.btncancle1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btncancle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btncancle1.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.btncancle1.FlatAppearance.BorderSize = 2;
-            this.btncancle1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btncancle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btncancle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btncancle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancle1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btncancle1.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btncancle1.IconColor = System.Drawing.Color.Red;
-            this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btncancle1.IconSize = 35;
-            this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.Location = new System.Drawing.Point(227, 491);
-            this.btncancle1.Name = "btncancle1";
-            this.btncancle1.Size = new System.Drawing.Size(190, 62);
-            this.btncancle1.TabIndex = 200;
-            this.btncancle1.Text = "Cancel";
-            this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btncancle1.UseVisualStyleBackColor = false;
-            // 
-            // btnsave
-            // 
-            this.btnsave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btnsave.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.btnsave.FlatAppearance.BorderSize = 2;
-            this.btnsave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnsave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnsave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnsave.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
-            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsave.IconSize = 35;
-            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(227, 389);
-            this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(189, 62);
-            this.btnsave.TabIndex = 190;
-            this.btnsave.Text = "Proceed";
-            this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnsave.UseVisualStyleBackColor = false;
-            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
             // iconButton9
             // 
@@ -328,6 +329,7 @@
             this.Controls.Add(this.panel10);
             this.Name = "OrdersMain";
             this.Text = "OrdersMain";
+            this.Load += new System.EventHandler(this.OrdersMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.orderdata)).EndInit();
             this.paneledit.ResumeLayout(false);
             this.paneledit.PerformLayout();

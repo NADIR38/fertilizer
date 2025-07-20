@@ -78,6 +78,17 @@ namespace fertilizesop.UI
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LoadOrderGrid();
+            paneledit.Visible = false;
+        }
+
+        private void OrdersMain_Load(object sender, EventArgs e)
+        {
+                                                                                                                                                                                                                                
+        }
+
+        private void btncancle1_Click(object sender, EventArgs e)
+        {
+            paneledit.Visible = false;
         }
     }
 }
