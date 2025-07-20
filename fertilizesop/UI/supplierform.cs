@@ -22,10 +22,18 @@ namespace fertilizesop.UI
             editpanel.Visible = false;
         }
 
-        private void setupgrid()
+        private void load()
         {
-            dataGridView1.
+            var supplier = _customerbl.getsupplier();
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.DataSource = supplier.OfType<Suppliers>().Select(c=> new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
+            dataGridView1.Columns["Id"].Visible = false;
+            UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
+            
         }
+        
+        
 
         private void txtfirstname_TextChanged(object sender, EventArgs e)
         {
@@ -96,6 +104,32 @@ namespace fertilizesop.UI
             txtaddress.Clear();
             txtcontact.Clear();
             txtfirstname.Clear();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void supplierform_Load(object sender, EventArgs e)
+        {
+            load();
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            string text = txtsearch.Text;
+            if(string.IsNullOrEmpty(text))
+            {
+                load();
+                return;
+            }
+            var sup = _customerbl.searchsupplier(text);
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; 
+            dataGridView1.DataSource = sup.OfType<Suppliers>().Select(c => new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
+            dataGridView1.Columns["Id"].Visible = false;
+            UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
         }
     }
 }

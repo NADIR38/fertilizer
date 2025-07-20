@@ -44,12 +44,71 @@ namespace fertilizesop.DL
 
         public List<Suppliers> getsupplier()
         {
-            throw new NotImplementedException();
+            List<Suppliers> suppliers = new List<Suppliers>();
+            try
+            {
+                using(var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    con.Open();
+                    string query = "select * from suppliers";
+                    using(var cmd = new MySqlCommand(query , con))
+                    {
+                        using(var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var supplier = new Suppliers(
+                                reader.GetInt32("supplier_id"),
+                                reader.GetString("name"),
+                                reader.IsDBNull(reader.GetOrdinal("phone")) ? "" : reader.GetString("phone"),
+                                reader.IsDBNull(reader.GetOrdinal("address")) ? "" : reader.GetString("address")    
+                                );
+                                suppliers.Add(supplier);                            
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return suppliers;
         }
 
         public List<Suppliers> searchsupplier(string text)
         {
-            throw new NotImplementedException();
+            List<Suppliers> suppliers = new List<Suppliers>();
+            try
+            {
+                using (var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    con.Open();
+                    string query = "select * from suppliers where name like @text";
+                    using (var cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("text", $"{text}%");
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var supplier = new Suppliers(
+                                    reader.GetInt32("supplier_id"),
+                                    reader.GetString("name"),
+                                    reader.IsDBNull(reader.GetOrdinal("address")) ? "" : reader.GetString("address"),
+                                    reader.IsDBNull(reader.GetOrdinal("phone")) ? "" : reader.GetString("phone")
+                                    );
+                                suppliers.Add(supplier);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+               return suppliers ;
         }
 
         public bool updatesupplier(Suppliers s)

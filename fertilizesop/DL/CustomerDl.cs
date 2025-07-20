@@ -127,7 +127,7 @@ or phone like @keyword;
             ";
                     using (var cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@keyword", $"%{text}%");
+                        cmd.Parameters.AddWithValue("@keyword", $"{text}%");
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())

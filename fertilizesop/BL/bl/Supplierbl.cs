@@ -12,6 +12,7 @@ namespace fertilizesop.BL.Bl
     internal class Supplierbl : Isupplierbl
     {
         private readonly Isupplierdl _supplierdl;
+        public List<Suppliers> s = new List<Suppliers>();
 
         public Supplierbl(Isupplierdl supplierdl)
         {
@@ -37,11 +38,26 @@ namespace fertilizesop.BL.Bl
 
         public List<Suppliers> getsupplier()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _supplierdl.getsupplier();
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error in BL " + e.Message);
+            }
         }
 
         public List<Suppliers> searchsupplier(string text)
         {
+            try
+            {
+                return _supplierdl.searchsupplier(text);
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error in searching in BL" +e.Message);
+            }
             throw new NotImplementedException();
         }
 
