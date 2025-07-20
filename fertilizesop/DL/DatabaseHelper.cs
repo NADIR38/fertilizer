@@ -1,10 +1,12 @@
-﻿using MySql.Data.MySqlClient;
+﻿using fertilizesop.BL.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KIMS
 {
@@ -132,6 +134,27 @@ namespace KIMS
                 throw new Exception("Error retrieving Supplier ID: " + ex.Message);
             }
         }
+        internal int getbatchid(string text)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT batch_id FROM batches WHERE batch_name = @name;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", text);
+                        object result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToInt32(result) : -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving batch ID: " + ex.Message);
+            }
+        }
         public List<string> Getbatches(string keyword)
         {
             List<string> suppliers = new List<string>();
@@ -189,6 +212,57 @@ namespace KIMS
                 throw new Exception("Error retrieving suppliers: " + ex.Message);
             }
             return suppliers;
+        }
+        internal int getsaleprice(int product_id)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT sale_price FROM products WHERE product_id = @name;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", product_id);
+                        object result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToInt32(result) : -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving Product ID: " + ex.Message);
+            }
+        }
+        public  List<Products> GetProductsByNames(string name)
+        {
+            var products = new List<Products>();
+
+            using (var conn = DatabaseHelper.Instance.GetConnection())
+            {
+                conn.Open();
+                string query = "SELECT product_id, name, description FROM products WHERE name like @name";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", $"%{name}%");
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            products.Add(new Products
+                            (
+                                 Convert.ToInt32(reader["product_id"]),
+                                 reader["name"].ToString(),
+                                 reader["description"].ToString()));
+
+                        }
+                    }
+                }
+            }
+
+            return products;
         }
         internal int getproductid(string text)
         {
