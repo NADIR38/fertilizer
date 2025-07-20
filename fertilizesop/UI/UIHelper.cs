@@ -1,9 +1,14 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TechStore.UI
+namespace fertilizesop.UI
 {
-    public static class UIHelper
+    public class UIHelper
     {
         public static void AddButtonColumn(DataGridView grid, string columnName, string headerText, string buttonText)
         {
@@ -22,25 +27,25 @@ namespace TechStore.UI
             }
         }
 
-     
-            public static void StyleGridView(DataGridView dgv)
-            {
-                if (dgv == null) return;
 
-                // Font styling only
-                dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-                dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+        public static void StyleGridView(DataGridView dgv)
+        {
+            if (dgv == null) return;
 
-                // Basic layout improvements
-                dgv.RowTemplate.Height = 30;
-                dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgv.MultiSelect = false;
-                dgv.AllowUserToResizeRows = false;
-                dgv.AllowUserToAddRows = false;
-                dgv.AllowUserToDeleteRows = false;
-                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            }
-        
+            // Font styling only
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+
+            // Basic layout improvements
+            dgv.RowTemplate.Height = 30;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
 
 
         public static void ApplyButtonStyles(DataGridView grid)
