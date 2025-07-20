@@ -122,13 +122,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Bl\Supplierbl.cs" />
     <Compile Include="BL\Models\Customers.cs" />
+    <Compile Include="BL\Models\Isupplier.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
     <Compile Include="DL\CustomerDl.cs" />
+    <Compile Include="DL\Supplierdl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ICustomerBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\Isupplierbl.cs" />
     <Compile Include="Interfaces\DLinterfaces\ICustomerDl.cs" />
-    <Compile Include="Interfaces\Isupplier.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="Interfaces\DLinterfaces\Isupplierdl.cs" />
     <Compile Include="UI\AddCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +159,12 @@
     <Compile Include="UI\HomeContentform.Designer.cs">
       <DependentUpon>HomeContentform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\supplierform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\supplierform.Designer.cs">
+      <DependentUpon>supplierform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIHelper.cs" />
     <EmbeddedResource Include="UI\AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
@@ -177,6 +187,9 @@
     </Compile>
     <EmbeddedResource Include="UI\HomeContentform.resx">
       <DependentUpon>HomeContentform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\supplierform.resx">
+      <DependentUpon>supplierform.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

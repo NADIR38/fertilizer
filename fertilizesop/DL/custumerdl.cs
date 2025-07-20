@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using fertilizesop.BL.Models;
 using fertilizesop.BL.Models.persons;
 using fertilizesop.Interfaces.DLInterfaces;
@@ -82,11 +83,79 @@ namespace fertilizesop.DL
 
         public List<Ipersons> getcustomers()
         {
-            throw new NotImplementedException();
+            List<Ipersons> customers = new List<Ipersons>();
+            try
+            {
+                using (var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    con.Open();
+                    string query = "Select * from customers";
+                    using (var cmd = new MySqlCommand(query, con))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Ipersons customer = new Customer
+                                (
+                                    reader.GetInt32("customer_id"),
+                                    reader.GetString("first_name"),
+                                    reader.IsDBNull(reader.GetOrdinal("last_name")) ? "" : reader.GetString("last_name"),
+                                    reader.GetString("type"),
+                                    reader.IsDBNull(reader.GetOrdinal("address")) ? "" : reader.GetString("address"),
+                                    reader.IsDBNull(reader.GetOrdinal("email")) ? "" : reader.GetString("emmail"),
+                                    reader.IsDBNull(reader.GetOrdinal("contact")) ? "" : reader.GetString("contact")
+                                    );
+                                customers.Add(customer);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error loading customers from database + ex.message");
+            }
+            return customers;
         }
 
-        public List<Ipersons> searchcustomer()
+        public List<Ipersons> searchcustomer(string s)
         {
+            List<Ipersons> customers = new List<Ipersons>();
+            try
+            {
+                using(var con = DatabaseHelper.Instance.GetConnection())
+                {
+                    string query = "select * from customers where first_name like @s OR last_name like @s OR type like @type";   
+                    con.Open(); 
+
+                    using(var cmd = new MySqlCommand(query,con) )
+                    {
+                        cmd.Parameters.AddWithValue("@s", $"{s}");
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var customer = new Customer(
+                                reader.GetInt32("customer_d"),
+                                reader.GetString("first_name"),
+                                reader.IsDBNull(reader.GetOrdinal("last_name")) ? "" : reader.GetString("last_name"),
+                                reader.GetString("type"),
+                                reader.IsDBNull(reader.GetOrdinal("address")) ? "" : reader.GetString("address"),
+                                reader.IsDBNull(reader.GetOrdinal("email")) ? "" : reader.GetString("email"),
+                                reader.IsDBNull(reader.GetOrdinal("contact")) ? "" : reader.GetString("contact")
+                                ); 
+                                customers.Add(customer);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving customers from the database" + ex.Message);
+            }
+            return customers;
             throw new NotImplementedException();
         }
 
