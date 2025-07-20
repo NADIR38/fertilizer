@@ -121,14 +121,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
     <Compile Include="BL\Bl\ProductsBl.cs" />
     <Compile Include="BL\Bl\Supplierbl.cs" />
+    <Compile Include="BL\Models\BatchDetails.cs" />
+    <Compile Include="BL\Models\Batches.cs" />
     <Compile Include="BL\Models\Customers.cs" />
     <Compile Include="BL\Models\Isupplier.cs" />
     <Compile Include="BL\Models\Products.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="DL\BatchdetailsDl.cs" />
+    <Compile Include="DL\BatchesDl.cs" />
     <Compile Include="DL\CustomerDl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IBatchesBl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IBatchesDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IProductBl.cs" />
     <Compile Include="Interfaces\DLinterfaces\IProductsDl.cs" />
     <Compile Include="DL\ProductsDl.cs" />

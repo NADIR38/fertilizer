@@ -20,24 +20,52 @@ namespace fertilizesop.DL
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();
-                    string query = "insert into products(name,sale_price,description,quantity) values(@name,@sale,@descp,@quantity);";
-                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var tx = conn.BeginTransaction())
                     {
-                        cmd.Parameters.AddWithValue("@name", p.Name);
-                        cmd.Parameters.AddWithValue("@sale", p.Price);
-                        cmd.Parameters.AddWithValue("@descp", p.Description);
-                        cmd.Parameters.AddWithValue("@quantity", p.quantity);
-                        int rowsaffected = cmd.ExecuteNonQuery();
-                        return rowsaffected > 0;
+                        string insertProductQuery = "INSERT INTO products(name, sale_price, description, quantity) " +
+                                                    "VALUES(@name, @sale, @descp, @quantity);";
+
+                        using (var cmd = new MySqlCommand(insertProductQuery, conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@name", p.Name);
+                            cmd.Parameters.AddWithValue("@sale", p.Price);
+                            cmd.Parameters.AddWithValue("@descp", p.Description);
+                            cmd.Parameters.AddWithValue("@quantity", p.quantity);
+                            int rows = cmd.ExecuteNonQuery();
+
+                            if (rows == 0)
+                            {
+                                tx.Rollback();
+                                return false;
+                            }
+                        }
+
+                        // Get the last inserted product ID
+                        // Get the last inserted product ID
+                        int productId = Convert.ToInt32(new MySqlCommand("SELECT LAST_INSERT_ID();", conn, tx).ExecuteScalar());
+
+                        // Insert into inventory_log
+                        string insertLogQuery = @"INSERT INTO inventory_log (product_id, change_type, quantity_change, log_date, remarks)
+                                          VALUES (@pid, 'manual_adjustment', @qty, NOW(), 'Manual adjustment by the user');";
+
+                        using (var logCmd = new MySqlCommand(insertLogQuery, conn, tx))
+                        {
+                            logCmd.Parameters.AddWithValue("@pid", productId);
+                            logCmd.Parameters.AddWithValue("@qty", p.quantity);
+                            logCmd.ExecuteNonQuery();
+                        }
+
+                        tx.Commit();
+                        return true;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error adding products " + ex.Message);
+                throw new Exception("Error adding product with log: " + ex.Message, ex);
             }
-
         }
+
         public List<Products> GetProducts()
         {
             var list = new List<Products>();
@@ -121,27 +149,63 @@ namespace fertilizesop.DL
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();
-                    string query = "UPDATE products SET name = @name, description = @descp, sale_price = @price, quantity = @quantity WHERE product_id = @id;";
-                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var tx = conn.BeginTransaction())
                     {
-                        cmd.Parameters.AddWithValue("@name", c.Name);
-                        cmd.Parameters.AddWithValue("@descp", c.Description);
-                        cmd.Parameters.AddWithValue("@price", c.Price);
-                        cmd.Parameters.AddWithValue("@quantity", c.quantity);
-                        cmd.Parameters.AddWithValue("@id", c.Id);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
+                        // Get current quantity before update
+                        int oldQuantity = 0;
+                        string getQtyQuery = "SELECT quantity FROM products WHERE product_id = @id;";
+                        using (var getQtyCmd = new MySqlCommand(getQtyQuery, conn, tx))
+                        {
+                            getQtyCmd.Parameters.AddWithValue("@id", c.Id);
+                            var result = getQtyCmd.ExecuteScalar();
+                            if (result != null)
+                                oldQuantity = Convert.ToInt32(result);
+                        }
+
+                        // Update product
+                        string updateQuery = @"UPDATE products 
+                                       SET name = @name, description = @descp, sale_price = @price, quantity = @quantity 
+                                       WHERE product_id = @id;";
+                        using (var cmd = new MySqlCommand(updateQuery, conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@name", c.Name);
+                            cmd.Parameters.AddWithValue("@descp", c.Description);
+                            cmd.Parameters.AddWithValue("@price", c.Price);
+                            cmd.Parameters.AddWithValue("@quantity", c.quantity);
+                            cmd.Parameters.AddWithValue("@id", c.Id);
+
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected == 0)
+                            {
+                                tx.Rollback();
+                                return false;
+                            }
+                        }
+
+                        int quantityChange = c.quantity - oldQuantity;
+                        if (quantityChange != 0)
+                        {
+                            string insertLogQuery = @"INSERT INTO inventory_log (product_id, change_type, quantity_change, log_date, remarks)
+                                              VALUES (@pid, 'manual_adjustment', @qtyChange, NOW(), 'Manual adjustment by the user');";
+
+                            using (var logCmd = new MySqlCommand(insertLogQuery, conn, tx))
+                            {
+                                logCmd.Parameters.AddWithValue("@pid", c.Id);
+                                logCmd.Parameters.AddWithValue("@qtyChange", quantityChange);
+                                logCmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        tx.Commit();
+                        return true;
                     }
                 }
             }
-            catch (MySqlException ex)
-            {
-                throw new Exception("Database error occurred while updating Products: " + ex.Message, ex);
-            }
             catch (Exception ex)
             {
-                throw new Exception("Error updating products: " + ex.Message, ex);
+                throw new Exception("Error updating product with log: " + ex.Message, ex);
             }
         }
+
     }
 }

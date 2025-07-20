@@ -111,9 +111,106 @@ namespace KIMS
                 Console.WriteLine($"{p.ParameterName} = {p.Value}");
             }
         }
+        internal int getsuppierid(string text)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT supplier_id FROM suppliers WHERE name = @text or phone = @text;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@text",text); 
+                        object result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToInt32(result) : -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving Supplier ID: " + ex.Message);
+            }
+        }
+        public List<string> Getbatches(string keyword)
+        {
+            List<string> suppliers = new List<string>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT batch_name FROM batches WHERE batch_name LIKE @keyword;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
 
-     
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                suppliers.Add(reader.GetString("batch_name"));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving batches: " + ex.Message);
+            }
+            return suppliers;
+        }
+        internal List<string> GetSuppliers(string keyword)
+        {
+            List<string> suppliers = new List<string>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT name FROM suppliers WHERE name LIKE @keyword;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
 
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                suppliers.Add(reader.GetString("name"));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving suppliers: " + ex.Message);
+            }
+            return suppliers;
+        }
+        internal int getproductid(string text)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT product_id FROM products WHERE name = @name;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", text);
+                        object result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToInt32(result) : -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving Product ID: " + ex.Message);
+            }
+        }
         public DataTable ExecuteDataTable(string query, MySqlParameter[] parameters = null)
         {
             var dt = new DataTable();

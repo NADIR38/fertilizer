@@ -31,13 +31,11 @@ namespace fertilizesop.UI
         {
             if (e.Control && e.KeyCode == Keys.R)
             {
-                // Ctrl+R → Refresh
                 pictureBox1_Click(sender, e);
                 e.Handled = true;
             }
             else if (e.Control && e.KeyCode == Keys.S)
             {
-                // Ctrl+S → Save
                 if (paneledit.Visible)
                 {
                     btnsave.PerformClick();
@@ -46,7 +44,6 @@ namespace fertilizesop.UI
             }
             else if (e.KeyCode == Keys.Escape)
             {
-                // Esc → Close panel
                 if (paneledit.Visible)
                 {
                     paneledit.Visible = false;
@@ -55,7 +52,6 @@ namespace fertilizesop.UI
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                // Enter → Edit selected row
                 if (!paneledit.Visible && dataGridView2.Focused)
                 {
                     editSelectedCustomer();
@@ -182,7 +178,6 @@ namespace fertilizesop.UI
             load();
             dataGridView2.Focus();
         }
-
         private void btncancle1_Click(object sender, EventArgs e)
         {
             paneledit.Visible = false;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace fertilizesop.BL.Models
 {
-    public  class Products
+    public class Products
     {
-        public int Id { get;private set; }
+        public int Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public decimal Price { get; private set; }
@@ -20,6 +20,14 @@ namespace fertilizesop.BL.Models
             Description = description;
             Price = price;
             this.quantity = quantity;
+        }
+        public Products(int id, string name, string description)
+        {
+            {
+                Id = id;
+                Name = name;
+                Description = description;
+            }
         }
     }
 }

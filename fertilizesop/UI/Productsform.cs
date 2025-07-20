@@ -133,6 +133,7 @@ namespace fertilizesop.UI
                     txtquantity.Clear();
                     txtprice.Clear();
                     editpanel.Visible=false;
+                    load();
                 }
                 else
                 {
