@@ -267,8 +267,9 @@ namespace fertilizesop.UI
 
         private void btninventory_Click(object sender, EventArgs e)
         {
-            activebutton(sender, sidebarColors[1]); // Midnight Blue
-                                                    // LoadFormIntoPanel(new InventoryForm());
+            activebutton(sender, sidebarColors[1]);
+            var f = Program.ServiceProvider.GetRequiredService<Productsform>();
+            LoadFormIntoPanel(f);
         }
 
         private void btnrecord_Click(object sender, EventArgs e)

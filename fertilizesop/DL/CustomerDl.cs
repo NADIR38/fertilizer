@@ -83,8 +83,6 @@ namespace fertilizesop.DL
         {
             try
             {
-
-
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();

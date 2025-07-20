@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using fertilizesop.BL.Models;
 using fertilizesop.Interfaces.BLInterfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace fertilizesop.UI
 {
     public partial class supplierform : Form
     {
         private readonly Isupplierbl _customerbl;
+        private int customerid = -1;
+        private int selectedRowIndex = -1;
         public supplierform(Isupplierbl customerbl)
         {
             InitializeComponent();
@@ -22,7 +25,50 @@ namespace fertilizesop.UI
             editpanel.Visible = false;
         }
 
-        private void load()
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (txtfirstname.Focused || txtcontact.Focused || txtaddress.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+
+                }
+
+            }
+
+            else if (keyData == Keys.Up)
+            {
+                if (dataGridView1.Visible && selectedRowIndex > 0)
+                {
+                    selectedRowIndex--;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+            else if (keyData == Keys.Down)
+            {
+                if (dataGridView1.Visible && selectedRowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    selectedRowIndex++;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+
+            else if (keyData == (Keys.Control | Keys.A))
+            {
+                Addbutton.PerformClick();
+                return true;
+            }
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+        public void load()
         {
             var supplier = _customerbl.getsupplier();
             dataGridView1.Columns.Clear();
@@ -30,6 +76,7 @@ namespace fertilizesop.UI
             dataGridView1.DataSource = supplier.OfType<Suppliers>().Select(c=> new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
             dataGridView1.Columns["Id"].Visible = false;
             UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
+            UIHelper.AddButtonColumn(dataGridView1, "Delete", "Delete", "Delete");
             
         }
         
@@ -57,7 +104,7 @@ namespace fertilizesop.UI
 
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtfirstname.Text))
+            if (string.IsNullOrEmpty(txtfirstname.Text))
             {
                 MessageBox.Show("Pease enter a name first");
                 return;
@@ -67,21 +114,20 @@ namespace fertilizesop.UI
             string address = txtaddress.Text;
             try
             {
-                var supplier = new Suppliers(fname, contact, address);
-                bool result = _customerbl.addsupplier(supplier);
+                var supplier = new Suppliers(customerid, fname, contact, address);
+                bool result = _customerbl.updatesupplier(supplier);
                 if (result)
                 {
-                    MessageBox.Show("supplier saved successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("supplier updated successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     clearfields();
+                    editpanel.Visible = false;
+                    load();
                 }
-                else
-                {
-                    MessageBox.Show("Invalid data entered");
-                }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error saving the supplier " +  ex.Message);
+                MessageBox.Show("Error saving the supplier " + ex.Message);
             }
         }
 
@@ -92,7 +138,8 @@ namespace fertilizesop.UI
 
         private void Addbutton_Click(object sender, EventArgs e)
         {
-            editpanel.Visible = true;
+            var form = Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            form.ShowDialog();
         }
 
         private void btncancel_Click(object sender, EventArgs e)
@@ -108,7 +155,47 @@ namespace fertilizesop.UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+            {
+                return;
+            }
+            var columnname = dataGridView1.Columns[e.ColumnIndex].Name;
+            var rowname = dataGridView1.Rows[e.RowIndex];
+            customerid = Convert.ToInt32(rowname.Cells["Id"].Value);
+            if (columnname == "Edit")
+            {
+                editpanel.Visible = true;
+                txtaddress.Text = rowname.Cells["address"].Value.ToString();
+                txtfirstname.Text = rowname.Cells["first_name"].Value.ToString();
+                txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
+                UIHelper.RoundPanelCorners(editpanel, 20);
+                UIHelper.ShowCenteredPanel(this, editpanel);
+            }
 
+            else if (columnname == "Delete")
+            {
+                try
+                {
+                    var confirm = MessageBox.Show("Are you sure that you want to delete this supplier", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        bool result = _customerbl.deletesupplier(customerid);
+                        if (result)
+                        {
+                            MessageBox.Show("Supplier deleted successfully", "Deletion succesfull" , MessageBoxButtons.OK , MessageBoxIcon.Information);
+                            load();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error in deleting the supplier");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error in deleting the supplier" + ex.Message);
+                }
+            } 
         }
 
         private void supplierform_Load(object sender, EventArgs e)
@@ -130,6 +217,12 @@ namespace fertilizesop.UI
             dataGridView1.DataSource = sup.OfType<Suppliers>().Select(c => new { c.Id, c.first_Name, c.Address, c.phonenumber }).ToList();
             dataGridView1.Columns["Id"].Visible = false;
             UIHelper.AddButtonColumn(dataGridView1, "Edit", "Edit", "Edit");
+            UIHelper.AddButtonColumn(dataGridView1, "Delete", "Delete", "Deleter");
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            load();
         }
     }
 }
