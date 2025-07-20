@@ -17,12 +17,56 @@ namespace fertilizesop.UI
     {
         private readonly Isupplierbl _customerbl;
         private int customerid = -1;
+        private int selectedRowIndex = -1;
         public supplierform(Isupplierbl customerbl)
         {
             InitializeComponent();
             _customerbl = customerbl;
             editpanel.Visible = false;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (txtfirstname.Focused || txtcontact.Focused || txtaddress.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+
+                }
+
+            }
+
+            else if (keyData == Keys.Up)
+            {
+                if (dataGridView1.Visible && selectedRowIndex > 0)
+                {
+                    selectedRowIndex--;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+            else if (keyData == Keys.Down)
+            {
+                if (dataGridView1.Visible && selectedRowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    selectedRowIndex++;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+
+            else if (keyData == (Keys.Control | Keys.A))
+            {
+                Addbutton.PerformClick();
+                return true;
+            }
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         public void load()
         {
