@@ -324,5 +324,11 @@ namespace fertilizesop.UI
         {
 
         }
+
+        private void btnSbills_Click_1(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<Supplierbillsform>();
+            LoadFormIntoPanel(f);
+        }
     }
 }
