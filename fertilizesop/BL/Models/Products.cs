@@ -28,6 +28,7 @@ namespace fertilizesop.BL.Models
                 Name = name;
                 Description = description;
             }
-        }
+        }      
+
     }
 }
