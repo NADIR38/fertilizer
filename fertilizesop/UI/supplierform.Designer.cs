@@ -29,8 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(supplierform));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.editpanel = new System.Windows.Forms.Panel();
+            this.btncancel = new FontAwesome.Sharp.IconButton();
+            this.btnsave = new FontAwesome.Sharp.IconButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -41,17 +45,14 @@
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.btnsearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Addbutton = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btncancel = new FontAwesome.Sharp.IconButton();
-            this.btnsave = new FontAwesome.Sharp.IconButton();
-            this.Addbutton = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.editpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -69,6 +70,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1396, 747);
             this.panel1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(190, 123);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(43, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 143;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // editpanel
             // 
@@ -89,6 +101,42 @@
             this.editpanel.Size = new System.Drawing.Size(378, 518);
             this.editpanel.TabIndex = 143;
             this.editpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editpanel_Paint);
+            // 
+            // btncancel
+            // 
+            this.btncancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btncancel.ForeColor = System.Drawing.Color.White;
+            this.btncancel.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btncancel.IconColor = System.Drawing.Color.Crimson;
+            this.btncancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btncancel.IconSize = 38;
+            this.btncancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncancel.Location = new System.Drawing.Point(211, 404);
+            this.btncancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btncancel.Name = "btncancel";
+            this.btncancel.Size = new System.Drawing.Size(115, 37);
+            this.btncancel.TabIndex = 198;
+            this.btncancel.Text = "Cancel";
+            this.btncancel.UseVisualStyleBackColor = false;
+            this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
+            // 
+            // btnsave
+            // 
+            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnsave.ForeColor = System.Drawing.Color.White;
+            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
+            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsave.IconSize = 38;
+            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnsave.Location = new System.Drawing.Point(39, 404);
+            this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(115, 37);
+            this.btnsave.TabIndex = 197;
+            this.btnsave.Text = "Save";
+            this.btnsave.UseVisualStyleBackColor = false;
+            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
             // label4
             // 
@@ -179,7 +227,7 @@
             this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtsearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtsearch.Location = new System.Drawing.Point(989, 140);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(230, 29);
             this.txtsearch.TabIndex = 142;
@@ -199,6 +247,10 @@
             // 
             // dataGridView1
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.SeaShell;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -212,6 +264,23 @@
             this.dataGridView1.Size = new System.Drawing.Size(1393, 427);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Addbutton
+            // 
+            this.Addbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.Addbutton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Addbutton.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.Addbutton.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.Addbutton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Addbutton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Addbutton.Location = new System.Drawing.Point(32, 116);
+            this.Addbutton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Addbutton.Name = "Addbutton";
+            this.Addbutton.Size = new System.Drawing.Size(132, 50);
+            this.Addbutton.TabIndex = 1;
+            this.Addbutton.Text = "Add";
+            this.Addbutton.UseVisualStyleBackColor = false;
+            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
             // 
             // panel2
             // 
@@ -235,70 +304,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Suppliers ";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(190, 123);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(43, 43);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 143;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // btncancel
-            // 
-            this.btncancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btncancel.ForeColor = System.Drawing.Color.White;
-            this.btncancel.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btncancel.IconColor = System.Drawing.Color.Crimson;
-            this.btncancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btncancel.IconSize = 38;
-            this.btncancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancel.Location = new System.Drawing.Point(211, 404);
-            this.btncancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btncancel.Name = "btncancel";
-            this.btncancel.Size = new System.Drawing.Size(115, 37);
-            this.btncancel.TabIndex = 198;
-            this.btncancel.Text = "Cancel";
-            this.btncancel.UseVisualStyleBackColor = false;
-            this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
-            // 
-            // btnsave
-            // 
-            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btnsave.ForeColor = System.Drawing.Color.White;
-            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
-            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsave.IconSize = 38;
-            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(39, 404);
-            this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(115, 37);
-            this.btnsave.TabIndex = 197;
-            this.btnsave.Text = "Save";
-            this.btnsave.UseVisualStyleBackColor = false;
-            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
-            // 
-            // Addbutton
-            // 
-            this.Addbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.Addbutton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.Addbutton.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.Addbutton.IconColor = System.Drawing.Color.MediumTurquoise;
-            this.Addbutton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.Addbutton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Addbutton.Location = new System.Drawing.Point(32, 116);
-            this.Addbutton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Addbutton.Name = "Addbutton";
-            this.Addbutton.Size = new System.Drawing.Size(132, 50);
-            this.Addbutton.TabIndex = 1;
-            this.Addbutton.Text = "Add";
-            this.Addbutton.UseVisualStyleBackColor = false;
-            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
-            // 
             // supplierform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -311,12 +316,12 @@
             this.Load += new System.EventHandler(this.supplierform_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.editpanel.ResumeLayout(false);
             this.editpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
