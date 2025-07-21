@@ -12,11 +12,13 @@ namespace fertilizesop.BL.Models
             
             public int SupplierId { get; set; }
             public DateTime OrderDate { get; set; }
+            public string status { get; set; }
 
-            public Order(int supplierId,DateTime date)
+        public Order(int supplierId,DateTime date,string sts)
             {
             SupplierId=supplierId;
             OrderDate=date;
+            status = sts;
             }
 
         }

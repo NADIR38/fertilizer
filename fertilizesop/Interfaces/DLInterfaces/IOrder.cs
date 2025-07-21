@@ -19,6 +19,7 @@ namespace fertilizesop.Interfaces.DLinterfaces
         DataTable LoadOrdersWithDetails();
         DataTable GetProducts();
         DataTable GetAllSuppliers();
+        DataTable GetOrders();
 
         void CreateOrderInvoicePdf(DataGridView cart, string filePath, string Name, DateTime saleDate);
         void PrintOrderInvoiceDirectly(DataGridView cart, string supplierName, DateTime Date);

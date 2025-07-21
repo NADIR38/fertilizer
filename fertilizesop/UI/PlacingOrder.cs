@@ -461,12 +461,12 @@ namespace fertilizesop.UI
 
         private void PlacingOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveTempInvoice();
+            //SaveTempInvoice();
         }
 
         private void PlacingOrder_Load(object sender, EventArgs e)
         {
-            LoadTempInvoice();
+            //LoadTempInvoice();
         }
 
         private void PlacingOrder_VisibleChanged(object sender, EventArgs e)

@@ -84,6 +84,19 @@ namespace fertilizesop.BL.Bl
             }
         }
 
+        public DataTable GetOrders()
+        {
+            try
+            {
+                return _orderDL.GetOrders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading orders: " + ex.Message);
+                return new DataTable();
+            }
+        }
+
         public DataTable GetProducts()
         {
             try

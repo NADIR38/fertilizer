@@ -29,26 +29,25 @@ namespace fertilizesop.UI
         {
             InitializeComponent();
             orderdata.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            date.Value = DateTime.Now;
             LoadOrderGrid();
-            LoadSuppliers();
-            paneledit.Visible = false;
+            //LoadSuppliers();
+            //paneledit.Visible = false;
             this.KeyPreview = true; // Put this in OrdersMain constructor
             this.KeyDown += OrdersMain_KeyDown;
 
 
         }
-        private void LoadSuppliers()
-        {
+        //private void LoadSuppliers()
+        //{
             
-            DataTable dt = o.GetAllSuppliers();
+        //    DataTable dt = o.GetAllSuppliers();
 
-            cmbSuppliers.DataSource = dt;
-            cmbSuppliers.DisplayMember = "name";          // What user sees
-            cmbSuppliers.ValueMember = "supplier_id";     // What you actually use
-            cmbSuppliers.SelectedIndex = -1;              // Optional: no item selected
+        //    cmbSuppliers.DataSource = dt;
+        //    cmbSuppliers.DisplayMember = "name";          // What user sees
+        //    cmbSuppliers.ValueMember = "supplier_id";     // What you actually use
+        //    cmbSuppliers.SelectedIndex = -1;              // Optional: no item selected
 
-        }
+        //}
 
         private void LoadOrderGrid()
         {
@@ -58,7 +57,7 @@ namespace fertilizesop.UI
 
         private void btnsave_Click(object sender, EventArgs e)
         {
-            SaveOrder();
+            //SaveOrder();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,13 +67,14 @@ namespace fertilizesop.UI
 
         private void iconButton9_Click(object sender, EventArgs e)
         {
-            paneledit.Visible = true;
+           OrderStatus status = new OrderStatus();
+           status.ShowDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LoadOrderGrid();
-            paneledit.Visible = false;
+            
         }
 
         private void OrdersMain_Load(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace fertilizesop.UI
 
         private void btncancle1_Click(object sender, EventArgs e)
         {
-            paneledit.Visible = false;
+           
         }
 
         // search function
@@ -106,67 +106,49 @@ namespace fertilizesop.UI
 
         // keys logic here 
 
-        private void OpenEditPanel()
-        {
-            if (paneledit.Visible == false)
-            {
-                paneledit.Visible = true;
-            }
+        //private void OpenEditPanel()
+        //{
+        //    if (paneledit.Visible == false)
+        //    {
+        //        paneledit.Visible = true;
+        //    }
                 
           
-        }
+        //}
 
-        private void CancelEdit()
-        {
-            paneledit.Visible = false;
+        //private void CancelEdit()
+        //{
+        //    paneledit.Visible = false;
            
-        }
+        //}
         
-        private void SaveOrder()
-        {
-            if (string.IsNullOrWhiteSpace(cmbSuppliers.Text) || cmbSuppliers.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a supplier before proceeding.", "Missing Supplier", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbSuppliers.Focus();
-                return;
-            }
+        //private void SaveOrder()
+        //{
+        //    if (string.IsNullOrWhiteSpace(cmbSuppliers.Text) || cmbSuppliers.SelectedIndex == -1)
+        //    {
+        //        MessageBox.Show("Please select a supplier before proceeding.", "Missing Supplier", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        cmbSuppliers.Focus();
+        //        return;
+        //    }
 
 
-            string supp = cmbSuppliers.Text;
-            int supplierId = Convert.ToInt32(cmbSuppliers.SelectedValue);
-            DateTime datePicker = date.Value;
-            Order or = new Order(supplierId, datePicker);
-            orderId = o.InsertOrder(or);
-            MessageBox.Show($"Order with orderId {orderId} created! Now add products.");
-            paneledit.Visible = false;
-            PlacingOrder placingOrder = new PlacingOrder(orderId, supp);
-            placingOrder.Show();
+        //    string supp = cmbSuppliers.Text;
+        //    int supplierId = Convert.ToInt32(cmbSuppliers.SelectedValue);
+        //    DateTime datePicker = date.Value;
+        //    Order or = new Order(supplierId, datePicker);
+        //    orderId = o.InsertOrder(or);
+        //    MessageBox.Show($"Order with orderId {orderId} created! Now add products.");
+        //    paneledit.Visible = false;
+        //    PlacingOrder placingOrder = new PlacingOrder(orderId, supp);
+        //    placingOrder.Show();
             
-        }
+        //}
 
         private void OrdersMain_KeyDown(object sender, KeyEventArgs e)
         {
             // Prevent duplicate handling
             if (e.Handled) return;
 
-            // Enter → Open Edit Panel
-            if (e.KeyCode == Keys.Enter)
-            {
-                OpenEditPanel();
-                e.Handled = true; // Mark as handled
-            }
-            // Esc → Cancel Edit
-            else if (e.KeyCode == Keys.Escape)
-            {
-                CancelEdit();
-                e.Handled = true; // Mark as handled
-            }
-            // Ctrl + S → Save
-            else if (e.Control && e.KeyCode == Keys.S)
-            {
-                SaveOrder();
-                e.Handled = true; // Mark as handled
-            }
             // Ctrl + R → Refresh
             else if (e.Control && e.KeyCode == Keys.R)
             {

@@ -244,6 +244,12 @@
     <Compile Include="UI\OrdersMain.Designer.cs">
       <DependentUpon>OrdersMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\OrderStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrderStatus.Designer.cs">
+      <DependentUpon>OrderStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\PlacingOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OrdersMain.resx">
       <DependentUpon>OrdersMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrderStatus.resx">
+      <DependentUpon>OrderStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\PlacingOrder.resx">
       <DependentUpon>PlacingOrder.cs</DependentUpon>
