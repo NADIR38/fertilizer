@@ -60,7 +60,7 @@
             this.toplbl.AutoSize = true;
             this.toplbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toplbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toplbl.Location = new System.Drawing.Point(466, 21);
+            this.toplbl.Location = new System.Drawing.Point(477, 21);
             this.toplbl.Name = "toplbl";
             this.toplbl.Size = new System.Drawing.Size(352, 38);
             this.toplbl.TabIndex = 6;
@@ -72,7 +72,7 @@
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(873, 126);
+            this.txtSearch.Location = new System.Drawing.Point(894, 126);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(257, 29);
@@ -125,7 +125,7 @@
             this.orderdata.ReadOnly = true;
             this.orderdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.orderdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.orderdata.Size = new System.Drawing.Size(1246, 596);
+            this.orderdata.Size = new System.Drawing.Size(1267, 497);
             this.orderdata.TabIndex = 143;
             // 
             // label12
@@ -135,7 +135,7 @@
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label12.Location = new System.Drawing.Point(774, 126);
+            this.label12.Location = new System.Drawing.Point(795, 126);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 25);
@@ -168,9 +168,9 @@
             this.paneledit.Controls.Add(this.label7);
             this.paneledit.Controls.Add(this.btnsave);
             this.paneledit.Controls.Add(this.label2);
-            this.paneledit.Location = new System.Drawing.Point(336, 250);
+            this.paneledit.Location = new System.Drawing.Point(347, 250);
             this.paneledit.Name = "paneledit";
-            this.paneledit.Size = new System.Drawing.Size(633, 598);
+            this.paneledit.Size = new System.Drawing.Size(633, 531);
             this.paneledit.TabIndex = 146;
             // 
             // date
@@ -197,7 +197,7 @@
             this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btncancle1.IconSize = 35;
             this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.Location = new System.Drawing.Point(227, 491);
+            this.btncancle1.Location = new System.Drawing.Point(220, 451);
             this.btncancle1.Name = "btncancle1";
             this.btncancle1.Size = new System.Drawing.Size(190, 62);
             this.btncancle1.TabIndex = 200;
@@ -234,7 +234,7 @@
             this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnsave.IconSize = 35;
             this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(227, 389);
+            this.btnsave.Location = new System.Drawing.Point(220, 349);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(189, 62);
             this.btnsave.TabIndex = 190;
@@ -250,7 +250,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(1150, 116);
+            this.button1.Location = new System.Drawing.Point(1171, 116);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 46);
@@ -265,7 +265,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1291, 84);
+            this.panel1.Size = new System.Drawing.Size(1312, 84);
             this.panel1.TabIndex = 15;
             // 
             // panel10

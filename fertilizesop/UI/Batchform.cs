@@ -53,6 +53,14 @@ namespace fertilizesop.UI
                     e.Handled = true;
                 
             }
+            else if (e.Control && e.KeyCode == Keys.Enter)
+            {
+                if (!paneledit.Visible && dataGridView2.Focused)
+                {
+                    OpenBatchDetailsForm();  // ✅ Open the batch details form with batch name
+                    e.Handled = true;
+                }
+            }
 
             else if (e.KeyCode == Keys.Escape)
             {
@@ -198,6 +206,24 @@ namespace fertilizesop.UI
 
                 UIHelper.RoundPanelCorners(paneledit, 20);
                 UIHelper.ShowCenteredPanel(this, paneledit);
+            }
+        }
+        private void OpenBatchDetailsForm()
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+                var batchName = dataGridView2.CurrentRow.Cells["batch_name"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(batchName))
+                {
+                    var form = Program.ServiceProvider.GetRequiredService<Addbatchdetailsform>();
+                    form.InitialBatchName = batchName; // ✅ Inject batch name via property
+                    form.ShowDialog(this);
+                }
+                else
+                {
+                    MessageBox.Show("No batch name found in selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 

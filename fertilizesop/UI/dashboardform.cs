@@ -144,12 +144,12 @@ namespace fertilizesop.UI
         // Panel toggles
         private void iconPictureBox2_Click(object sender, EventArgs e)
         {
-            if (panelbatch.Height == 183)
+            if (panelbatch.Height == 130)
                 CollapsePanel(panelbatch, 60);
             else
             {
                 CollapseAllTogglePanels();
-                ExpandPanel(panelbatch, 183);
+                ExpandPanel(panelbatch, 130);
             }
         }
 
@@ -226,8 +226,10 @@ namespace fertilizesop.UI
 
         private void btnorder_Click(object sender, EventArgs e)
         {
-            activebutton(sender, sidebarColors[0]); // Tech Blue
-            LoadFormIntoPanel(new OrdersMain());
+            activebutton(sender, sidebarColors[0]);
+            var f = Program.ServiceProvider.GetRequiredService<OrdersMain>();
+
+            LoadFormIntoPanel(f);
         }
 
         private void btnlogout_Click(object sender, EventArgs e)
@@ -262,7 +264,9 @@ namespace fertilizesop.UI
         private void btnbatches_Click(object sender, EventArgs e)
         {
             activebutton(sender, sidebarColors[8]); // Sunny Yellow
-                                                    // LoadFormIntoPanel(new BatchesForm());
+            var f = Program.ServiceProvider.GetRequiredService<Batchform>();
+
+            LoadFormIntoPanel(f);                       // LoadFormIntoPanel(new BatchesForm());
         }
 
         private void btninventory_Click(object sender, EventArgs e)
@@ -308,6 +312,17 @@ namespace fertilizesop.UI
             activebutton(sender, sidebarColors[5]);
             var f = Program.ServiceProvider.GetRequiredService<CustomerForm>();
             LoadFormIntoPanel(f);
+        }
+
+        private void btnbatchdetails_Click_1(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<BatchDetailsform>();
+            LoadFormIntoPanel(f);
+        }
+
+        private void btnadddetails_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

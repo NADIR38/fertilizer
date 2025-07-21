@@ -148,6 +148,7 @@
     <Compile Include="BL\Models\persons\Supplier.cs" />
     <Compile Include="BL\Models\Products.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="BL\Models\TempBatchDetail.cs" />
     <Compile Include="BL\Models\TempData.cs" />
     <Compile Include="DL\BatchdetailsDl.cs" />
     <Compile Include="DL\BatchesDl.cs" />

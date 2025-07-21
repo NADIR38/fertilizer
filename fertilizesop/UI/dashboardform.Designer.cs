@@ -29,33 +29,31 @@
         private void InitializeComponent()
         {
             this.panelmenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelinventory = new System.Windows.Forms.Panel();
-            this.panelbatch = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panelcust = new System.Windows.Forms.Panel();
-            this.panelsupp = new System.Windows.Forms.Panel();
-            this.panelreturn = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btndashboard = new FontAwesome.Sharp.IconButton();
+            this.panelinventory = new System.Windows.Forms.Panel();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.btncategories = new FontAwesome.Sharp.IconButton();
             this.btnproducts = new FontAwesome.Sharp.IconButton();
             this.btnrecord = new FontAwesome.Sharp.IconButton();
             this.btninventory = new FontAwesome.Sharp.IconButton();
+            this.panelbatch = new System.Windows.Forms.Panel();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
-            this.btnadddetails = new FontAwesome.Sharp.IconButton();
             this.btnbatchdetails = new FontAwesome.Sharp.IconButton();
             this.btnbatches = new FontAwesome.Sharp.IconButton();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.iconButton8 = new FontAwesome.Sharp.IconButton();
             this.btnsale = new FontAwesome.Sharp.IconButton();
+            this.panelcust = new System.Windows.Forms.Panel();
             this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
             this.btncustomerbill = new FontAwesome.Sharp.IconButton();
             this.btncustomers = new FontAwesome.Sharp.IconButton();
+            this.panelsupp = new System.Windows.Forms.Panel();
             this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
             this.btnSbills = new FontAwesome.Sharp.IconButton();
             this.btnsuppliers = new FontAwesome.Sharp.IconButton();
+            this.panelreturn = new System.Windows.Forms.Panel();
             this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
             this.btnSreturn = new FontAwesome.Sharp.IconButton();
             this.bntcustomerreturn = new FontAwesome.Sharp.IconButton();
@@ -63,18 +61,19 @@
             this.btnorder = new FontAwesome.Sharp.IconButton();
             this.btnlogout = new FontAwesome.Sharp.IconButton();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.panelmenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelinventory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.panelbatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.panel4.SuspendLayout();
             this.panelcust.SuspendLayout();
-            this.panelsupp.SuspendLayout();
-            this.panelreturn.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
+            this.panelsupp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
+            this.panelreturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,85 +97,6 @@
             this.panelmenu.Name = "panelmenu";
             this.panelmenu.Size = new System.Drawing.Size(270, 1010);
             this.panelmenu.TabIndex = 13;
-            // 
-            // panelinventory
-            // 
-            this.panelinventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panelinventory.Controls.Add(this.iconPictureBox1);
-            this.panelinventory.Controls.Add(this.btncategories);
-            this.panelinventory.Controls.Add(this.btnproducts);
-            this.panelinventory.Controls.Add(this.btnrecord);
-            this.panelinventory.Controls.Add(this.btninventory);
-            this.panelinventory.Location = new System.Drawing.Point(3, 219);
-            this.panelinventory.Name = "panelinventory";
-            this.panelinventory.Size = new System.Drawing.Size(270, 64);
-            this.panelinventory.TabIndex = 10;
-            // 
-            // panelbatch
-            // 
-            this.panelbatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panelbatch.Controls.Add(this.iconPictureBox2);
-            this.panelbatch.Controls.Add(this.btnadddetails);
-            this.panelbatch.Controls.Add(this.btnbatchdetails);
-            this.panelbatch.Controls.Add(this.btnbatches);
-            this.panelbatch.Location = new System.Drawing.Point(3, 289);
-            this.panelbatch.Name = "panelbatch";
-            this.panelbatch.Size = new System.Drawing.Size(270, 67);
-            this.panelbatch.TabIndex = 11;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panel4.Controls.Add(this.iconButton1);
-            this.panel4.Controls.Add(this.iconButton8);
-            this.panel4.Controls.Add(this.btnsale);
-            this.panel4.Location = new System.Drawing.Point(3, 362);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(270, 61);
-            this.panel4.TabIndex = 12;
-            // 
-            // panelcust
-            // 
-            this.panelcust.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panelcust.Controls.Add(this.iconPictureBox4);
-            this.panelcust.Controls.Add(this.btncustomerbill);
-            this.panelcust.Controls.Add(this.btncustomers);
-            this.panelcust.Location = new System.Drawing.Point(3, 429);
-            this.panelcust.Name = "panelcust";
-            this.panelcust.Size = new System.Drawing.Size(270, 63);
-            this.panelcust.TabIndex = 12;
-            // 
-            // panelsupp
-            // 
-            this.panelsupp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panelsupp.Controls.Add(this.iconPictureBox5);
-            this.panelsupp.Controls.Add(this.btnSbills);
-            this.panelsupp.Controls.Add(this.btnsuppliers);
-            this.panelsupp.Location = new System.Drawing.Point(3, 498);
-            this.panelsupp.Name = "panelsupp";
-            this.panelsupp.Size = new System.Drawing.Size(270, 65);
-            this.panelsupp.TabIndex = 13;
-            // 
-            // panelreturn
-            // 
-            this.panelreturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panelreturn.Controls.Add(this.iconPictureBox6);
-            this.panelreturn.Controls.Add(this.btnSreturn);
-            this.panelreturn.Controls.Add(this.bntcustomerreturn);
-            this.panelreturn.Controls.Add(this.btnreturns);
-            this.panelreturn.Location = new System.Drawing.Point(3, 569);
-            this.panelreturn.Name = "panelreturn";
-            this.panelreturn.Size = new System.Drawing.Size(270, 62);
-            this.panelreturn.TabIndex = 14;
-            // 
-            // panel10
-            // 
-            this.panel10.AutoScroll = true;
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(270, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1042, 1010);
-            this.panel10.TabIndex = 14;
             // 
             // pictureBox1
             // 
@@ -213,6 +133,19 @@
             this.btndashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btndashboard.UseVisualStyleBackColor = false;
             this.btndashboard.Click += new System.EventHandler(this.btndashboard_Click);
+            // 
+            // panelinventory
+            // 
+            this.panelinventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panelinventory.Controls.Add(this.iconPictureBox1);
+            this.panelinventory.Controls.Add(this.btncategories);
+            this.panelinventory.Controls.Add(this.btnproducts);
+            this.panelinventory.Controls.Add(this.btnrecord);
+            this.panelinventory.Controls.Add(this.btninventory);
+            this.panelinventory.Location = new System.Drawing.Point(3, 219);
+            this.panelinventory.Name = "panelinventory";
+            this.panelinventory.Size = new System.Drawing.Size(270, 64);
+            this.panelinventory.TabIndex = 10;
             // 
             // iconPictureBox1
             // 
@@ -330,6 +263,17 @@
             this.btninventory.UseVisualStyleBackColor = false;
             this.btninventory.Click += new System.EventHandler(this.btninventory_Click);
             // 
+            // panelbatch
+            // 
+            this.panelbatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panelbatch.Controls.Add(this.iconPictureBox2);
+            this.panelbatch.Controls.Add(this.btnbatchdetails);
+            this.panelbatch.Controls.Add(this.btnbatches);
+            this.panelbatch.Location = new System.Drawing.Point(3, 289);
+            this.panelbatch.Name = "panelbatch";
+            this.panelbatch.Size = new System.Drawing.Size(270, 66);
+            this.panelbatch.TabIndex = 11;
+            // 
             // iconPictureBox2
             // 
             this.iconPictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
@@ -344,31 +288,6 @@
             this.iconPictureBox2.TabIndex = 7;
             this.iconPictureBox2.TabStop = false;
             this.iconPictureBox2.Click += new System.EventHandler(this.iconPictureBox2_Click);
-            // 
-            // btnadddetails
-            // 
-            this.btnadddetails.BackColor = System.Drawing.Color.DimGray;
-            this.btnadddetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnadddetails.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnadddetails.FlatAppearance.BorderSize = 2;
-            this.btnadddetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnadddetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnadddetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnadddetails.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnadddetails.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnadddetails.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnadddetails.IconColor = System.Drawing.Color.White;
-            this.btnadddetails.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnadddetails.IconSize = 40;
-            this.btnadddetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadddetails.Location = new System.Drawing.Point(0, 121);
-            this.btnadddetails.Name = "btnadddetails";
-            this.btnadddetails.Size = new System.Drawing.Size(270, 60);
-            this.btnadddetails.TabIndex = 5;
-            this.btnadddetails.Text = "Add Details";
-            this.btnadddetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadddetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnadddetails.UseVisualStyleBackColor = false;
             // 
             // btnbatchdetails
             // 
@@ -394,6 +313,7 @@
             this.btnbatchdetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnbatchdetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnbatchdetails.UseVisualStyleBackColor = false;
+            this.btnbatchdetails.Click += new System.EventHandler(this.btnbatchdetails_Click_1);
             // 
             // btnbatches
             // 
@@ -420,6 +340,17 @@
             this.btnbatches.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnbatches.UseVisualStyleBackColor = false;
             this.btnbatches.Click += new System.EventHandler(this.btnbatches_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panel4.Controls.Add(this.iconButton1);
+            this.panel4.Controls.Add(this.iconButton8);
+            this.panel4.Controls.Add(this.btnsale);
+            this.panel4.Location = new System.Drawing.Point(3, 361);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(270, 61);
+            this.panel4.TabIndex = 12;
             // 
             // iconButton1
             // 
@@ -497,6 +428,17 @@
             this.btnsale.UseVisualStyleBackColor = false;
             this.btnsale.Click += new System.EventHandler(this.btnsale_Click);
             // 
+            // panelcust
+            // 
+            this.panelcust.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panelcust.Controls.Add(this.iconPictureBox4);
+            this.panelcust.Controls.Add(this.btncustomerbill);
+            this.panelcust.Controls.Add(this.btncustomers);
+            this.panelcust.Location = new System.Drawing.Point(3, 428);
+            this.panelcust.Name = "panelcust";
+            this.panelcust.Size = new System.Drawing.Size(270, 63);
+            this.panelcust.TabIndex = 12;
+            // 
             // iconPictureBox4
             // 
             this.iconPictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
@@ -563,6 +505,17 @@
             this.btncustomers.UseVisualStyleBackColor = false;
             this.btncustomers.Click += new System.EventHandler(this.btncustomers_Click_1);
             // 
+            // panelsupp
+            // 
+            this.panelsupp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panelsupp.Controls.Add(this.iconPictureBox5);
+            this.panelsupp.Controls.Add(this.btnSbills);
+            this.panelsupp.Controls.Add(this.btnsuppliers);
+            this.panelsupp.Location = new System.Drawing.Point(3, 497);
+            this.panelsupp.Name = "panelsupp";
+            this.panelsupp.Size = new System.Drawing.Size(270, 65);
+            this.panelsupp.TabIndex = 13;
+            // 
             // iconPictureBox5
             // 
             this.iconPictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
@@ -628,6 +581,18 @@
             this.btnsuppliers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnsuppliers.UseVisualStyleBackColor = false;
             this.btnsuppliers.Click += new System.EventHandler(this.btnsuppliers_Click);
+            // 
+            // panelreturn
+            // 
+            this.panelreturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panelreturn.Controls.Add(this.iconPictureBox6);
+            this.panelreturn.Controls.Add(this.btnSreturn);
+            this.panelreturn.Controls.Add(this.bntcustomerreturn);
+            this.panelreturn.Controls.Add(this.btnreturns);
+            this.panelreturn.Location = new System.Drawing.Point(3, 568);
+            this.panelreturn.Name = "panelreturn";
+            this.panelreturn.Size = new System.Drawing.Size(270, 62);
+            this.panelreturn.TabIndex = 14;
             // 
             // iconPictureBox6
             // 
@@ -734,7 +699,7 @@
             this.btnorder.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnorder.IconSize = 40;
             this.btnorder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnorder.Location = new System.Drawing.Point(3, 637);
+            this.btnorder.Location = new System.Drawing.Point(3, 636);
             this.btnorder.Name = "btnorder";
             this.btnorder.Size = new System.Drawing.Size(267, 60);
             this.btnorder.TabIndex = 15;
@@ -760,7 +725,7 @@
             this.btnlogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnlogout.IconSize = 40;
             this.btnlogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnlogout.Location = new System.Drawing.Point(3, 703);
+            this.btnlogout.Location = new System.Drawing.Point(3, 702);
             this.btnlogout.Name = "btnlogout";
             this.btnlogout.Size = new System.Drawing.Size(270, 60);
             this.btnlogout.TabIndex = 16;
@@ -786,7 +751,7 @@
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.IconSize = 40;
             this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(3, 769);
+            this.iconButton2.Location = new System.Drawing.Point(3, 768);
             this.iconButton2.Name = "iconButton2";
             this.iconButton2.Size = new System.Drawing.Size(270, 60);
             this.iconButton2.TabIndex = 17;
@@ -795,6 +760,15 @@
             this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton2.UseVisualStyleBackColor = false;
             this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
+            // 
+            // panel10
+            // 
+            this.panel10.AutoScroll = true;
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(270, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1042, 1010);
+            this.panel10.TabIndex = 14;
             // 
             // dashboardform
             // 
@@ -808,17 +782,17 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelmenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelinventory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.panelbatch.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panelcust.ResumeLayout(false);
-            this.panelsupp.ResumeLayout(false);
-            this.panelreturn.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
+            this.panelsupp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
+            this.panelreturn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).EndInit();
             this.ResumeLayout(false);
 
@@ -837,7 +811,6 @@
         private FontAwesome.Sharp.IconButton btninventory;
         private System.Windows.Forms.Panel panelbatch;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
-        private FontAwesome.Sharp.IconButton btnadddetails;
         private FontAwesome.Sharp.IconButton btnbatchdetails;
         private FontAwesome.Sharp.IconButton btnbatches;
         private System.Windows.Forms.Panel panel4;

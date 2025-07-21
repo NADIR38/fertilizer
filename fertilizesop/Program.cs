@@ -41,7 +41,7 @@ namespace fertilizesop
             services.AddScoped<Isupplierdl, Supplierdl>();
             services.AddScoped<IBatchdetailsDl,BatchdetailsDl>();
             services.AddScoped<IBatchesDl, BatchesDl>();
-            services.AddScoped<IOrder, OrderDAL>();
+            services.AddScoped<IProductsDl,ProductsDl>();
 
             //Bl Layer
             services.AddScoped<ICustomerBl, CustomerBl>();
@@ -49,6 +49,7 @@ namespace fertilizesop
             services.AddScoped<IbatchdetailsBl, BatchDetailsBl>();
             services.AddScoped<IBatchesBl, BatchesBl>();
             services.AddScoped<IOrderBl, OrderBl>();
+            services.AddScoped<IProductBl, ProductsBl>();
 
 
             //UI Layer
@@ -63,6 +64,12 @@ namespace fertilizesop
             services.AddTransient<Batchform>();
             services.AddTransient<Addbatchform>();
             services.AddTransient<BatchDetailsform>();
+            services.AddTransient<Addsupplier>();
+            services.AddTransient<Productsform>();
+            services.AddTransient<Addproductform>();
+
+
+
 
 
         }
