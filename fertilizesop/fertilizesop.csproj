@@ -152,6 +152,7 @@
     <Compile Include="DL\BatchdetailsDl.cs" />
     <Compile Include="DL\BatchesDl.cs" />
     <Compile Include="DL\CustomerDl.cs" />
+    <Compile Include="DL\Customersaledl.cs" />
     <Compile Include="DL\custumerdl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IbatchdetailsBl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IOrderBl.cs" />
@@ -217,6 +218,12 @@
     <Compile Include="UI\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Customersale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Customersale.Designer.cs">
+      <DependentUpon>Customersale.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\dashboardform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Customersale.resx">
+      <DependentUpon>Customersale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\dashboardform.resx">
       <DependentUpon>dashboardform.cs</DependentUpon>
