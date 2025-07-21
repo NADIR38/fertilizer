@@ -77,6 +77,9 @@
     <Reference Include="MySql.Data, Version=9.3.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.9.3.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QuestPDF, Version=2025.7.0.0, Culture=neutral, PublicKeyToken=0f3c2b2315ff52c8, processorArchitecture=MSIL">
@@ -132,6 +135,7 @@
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Bl\OrderBl.cs" />
     <Compile Include="BL\Bl\ProductsBl.cs" />
     <Compile Include="BL\Bl\Supplierbl.cs" />
     <Compile Include="BL\Models\BatchDetails.cs" />
@@ -144,11 +148,13 @@
     <Compile Include="BL\Models\persons\Supplier.cs" />
     <Compile Include="BL\Models\Products.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="BL\Models\TempData.cs" />
     <Compile Include="DL\BatchdetailsDl.cs" />
     <Compile Include="DL\BatchesDl.cs" />
     <Compile Include="DL\CustomerDl.cs" />
     <Compile Include="DL\custumerdl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IbatchdetailsBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IOrderBl.cs" />
     <Compile Include="Interfaces\DLinterfaces\IBatchdetailsDl.cs" />
     <Compile Include="DL\OrderDAL.cs" />
     <Compile Include="DL\ProductsDl.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="Interfaces\DLinterfaces\IBatchesDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\ICustomerDl.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IOrder.cs" />
     <Compile Include="Interfaces\DLinterfaces\IProductsDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\Isupplierdl.cs" />
     <Compile Include="UI\Addbatchdetailsform.cs">

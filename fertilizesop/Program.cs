@@ -32,7 +32,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<BatchDetailsform>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -41,12 +41,14 @@ namespace fertilizesop
             services.AddScoped<Isupplierdl, Supplierdl>();
             services.AddScoped<IBatchdetailsDl,BatchdetailsDl>();
             services.AddScoped<IBatchesDl, BatchesDl>();
+            services.AddScoped<IOrder, OrderDAL>();
 
             //Bl Layer
             services.AddScoped<ICustomerBl, CustomerBl>();
             services.AddScoped<Isupplierbl, Supplierbl>();
             services.AddScoped<IbatchdetailsBl, BatchDetailsBl>();
             services.AddScoped<IBatchesBl, BatchesBl>();
+            services.AddScoped<IOrderBl, OrderBl>();
 
 
             //UI Layer

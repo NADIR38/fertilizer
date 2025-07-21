@@ -227,7 +227,7 @@ namespace fertilizesop.UI
         private void btnorder_Click(object sender, EventArgs e)
         {
             activebutton(sender, sidebarColors[0]); // Tech Blue
-            // LoadFormIntoPanel(new OrdersForm());
+            LoadFormIntoPanel(new OrdersMain());
         }
 
         private void btnlogout_Click(object sender, EventArgs e)

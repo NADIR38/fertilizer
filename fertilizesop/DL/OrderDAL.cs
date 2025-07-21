@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using fertilizesop.UI;
 using MySql.Data.MySqlClient;
 using fertilizesop.BL.Models;
+using fertilizesop.Interfaces.DLinterfaces;
 using KIMS;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -19,7 +20,7 @@ using System.IO;
 
 namespace fertilizesop.DL
 {
-    internal class OrderDAL
+    internal class OrderDAL : IOrder
     {
         public int InsertOrder(Order order)
         {
