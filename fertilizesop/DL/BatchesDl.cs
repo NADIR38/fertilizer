@@ -71,7 +71,7 @@ namespace fertilizesop.DL
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();
-                    string query = @"SELECT b.batch_id, b.batch_name, s.name, s.phone, b.recieved_date 
+                    string query = @"SELECT b.batch_id, b.batch_name, s.name, s.phone, b.recieved_date ,b.supplier_id
                              FROM batches b 
                              JOIN suppliers s ON b.supplier_id = s.supplier_id;";
                     using (var cmd = new MySqlCommand(query, conn))
@@ -86,7 +86,8 @@ namespace fertilizesop.DL
                             string supplier_name = reader.GetString("name");
                             string supplier_phone = reader.GetString("phone");
                             DateTime received_date = reader.GetDateTime("recieved_date");
-                            var batches = new Batches(id, batch_name, received_date, supplier_name, supplier_phone);
+                            int supplier_id = reader.GetInt32("supplier_id");
+                            var batches = new Batches(id, batch_name, received_date, supplier_name, supplier_phone,supplier_id);
                             list.Add(batches);
                         }
                     }
@@ -108,7 +109,7 @@ namespace fertilizesop.DL
                 {
                     conn.Open();
                     string query = @"
-                SELECT b.batch_id, b.batch_name, s.name AS supplier_name, s.phone, b.recieved_date
+                SELECT b.batch_id, b.batch_name, s.name AS supplier_name, s.phone, b.recieved_date,b.supplier_id
                 FROM batches b
                 JOIN suppliers s ON b.supplier_id = s.supplier_id
                 WHERE b.batch_name LIKE @kw 
@@ -128,8 +129,9 @@ namespace fertilizesop.DL
                                 string supplier_name = reader.GetString("supplier_name");
                                 string supplier_phone = reader.GetString("phone");
                                 DateTime received_date = reader.GetDateTime("recieved_date");
+                                int supplier_id = reader.GetInt32("supplier_id");
 
-                                var batch = new Batches(id, batch_name, received_date, supplier_name, supplier_phone);
+                                var batch = new Batches(id, batch_name, received_date, supplier_name, supplier_phone, supplier_id);
                                 list.Add(batch);
                             }
                         }

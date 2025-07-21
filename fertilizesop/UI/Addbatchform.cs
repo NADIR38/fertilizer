@@ -58,7 +58,7 @@ namespace fertilizesop.UI
 
             try
             {
-                var batch = new Batches(0, name, date, supplier_name, "");
+                var batch = new Batches(0, name, date, supplier_name, "",0);
 
                 var result = ibl.addbatches(batch);
 

@@ -135,8 +135,16 @@
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ISbilldetailsBl.cs" />
+    <Compile Include="BL\Bl\SbilldetailsBl.cs" />
+    <Compile Include="BL\Models\Spricerecord.cs" />
+    <Compile Include="BL\Models\Supplierpayment.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ISbilldetailsDl.cs" />
+    <Compile Include="DL\SbilldetailsDl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ISupplierBillBl.cs" />
     <Compile Include="BL\Bl\OrderBl.cs" />
     <Compile Include="BL\Bl\ProductsBl.cs" />
+    <Compile Include="BL\Bl\SupplierBillBl.cs" />
     <Compile Include="BL\Bl\Supplierbl.cs" />
     <Compile Include="BL\Models\BatchDetails.cs" />
     <Compile Include="BL\Models\Batches.cs" />
@@ -147,13 +155,17 @@
     <Compile Include="BL\Models\persons\Customer.cs" />
     <Compile Include="BL\Models\persons\Supplier.cs" />
     <Compile Include="BL\Models\Products.cs" />
+    <Compile Include="BL\Models\Supplierbill.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="BL\Models\TempBatchDetail.cs" />
     <Compile Include="BL\Models\TempData.cs" />
     <Compile Include="DL\BatchdetailsDl.cs" />
     <Compile Include="DL\BatchesDl.cs" />
     <Compile Include="DL\CustomerDl.cs" />
     <Compile Include="DL\Customersaledl.cs" />
     <Compile Include="DL\custumerdl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ISupplierbillDl.cs" />
+    <Compile Include="DL\SupplierbillDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IbatchdetailsBl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IOrderBl.cs" />
     <Compile Include="Interfaces\DLinterfaces\IBatchdetailsDl.cs" />
@@ -262,6 +274,18 @@
     <Compile Include="UI\Productsform.Designer.cs">
       <DependentUpon>Productsform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Sbilldetailform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Sbilldetailform.Designer.cs">
+      <DependentUpon>Sbilldetailform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Supplierbillsform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Supplierbillsform.Designer.cs">
+      <DependentUpon>Supplierbillsform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\supplierform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +348,12 @@
     <EmbeddedResource Include="UI\Productsform.resx">
       <DependentUpon>Productsform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Sbilldetailform.resx">
+      <DependentUpon>Sbilldetailform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Supplierbillsform.resx">
+      <DependentUpon>Supplierbillsform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\supplierform.resx">
       <DependentUpon>supplierform.cs</DependentUpon>
     </EmbeddedResource>
@@ -349,6 +379,7 @@
     <Content Include="Resources\logo.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fertilizer Shop Logo Design.png" />

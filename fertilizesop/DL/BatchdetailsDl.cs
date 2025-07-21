@@ -54,7 +54,7 @@ namespace fertilizesop.DL
                         using (var cmd3 = new MySqlCommand(query3, conn, trans))
                         {
                             cmd3.Parameters.AddWithValue("@product_id", b.product_id);
-                            cmd3.Parameters.AddWithValue("@change_type", "purchase"); // could be enum/text like 'purchase', 'return', etc.
+                            cmd3.Parameters.AddWithValue("@change_type", "purchase"); 
                             cmd3.Parameters.AddWithValue("@change_quantity", b.quantity_received);
                             cmd3.Parameters.AddWithValue("@change_date", DateTime.Now);
                             cmd3.Parameters.AddWithValue("@remarks", $"Batch: {b.batch_name}, Price: {b.cost_price}");
