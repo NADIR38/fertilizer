@@ -152,7 +152,7 @@ namespace fertilizesop.DL
                                 comma.ExecuteNonQuery();
                             }
 
-                            string q = "insert into inventory_log (product_id, change_type, quantity_change, log_date) values (@p_id, @type, @quantity_changed, @date)";
+                            string q = "insert into inventory_log (product_id, change_type, quantity_change, log_date ) values (@p_id, @type, @quantity_changed, @date)";
                             using(MySqlCommand com = new MySqlCommand(q, con, tran))
                             {
                                 com.Parameters.AddWithValue("@p_id", productid);
