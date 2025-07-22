@@ -59,7 +59,21 @@ namespace fertilizesop.UI
                 {
                     if (dgvproductsearch.Visible)
                     {
-                        button1.PerformClick();
+                        if (dgvproductsearch.SelectedRows.Count > 0)
+                        {
+                            // Access selected row
+                            DataGridViewRow selectedRow = dgvproductsearch.SelectedRows[0];
+
+                            // Get values from the row
+                            string name = selectedRow.Cells["name"].Value.ToString();
+                            string description = selectedRow.Cells["description"].Value.ToString();
+                            int saleprice = Convert.ToInt32(selectedRow.Cells["sale_price"].Value.ToString());
+
+
+                            dataGridView1.Rows.Add(name, description, saleprice);
+                            dgvproductsearch.Visible = false;
+                            clearfields();
+                        }
                         return true;
                     }
 
