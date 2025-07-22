@@ -12,6 +12,8 @@ namespace fertilizesop.BL.Models
         public string first_Name { get; set; }
         public int Id { get; set; }
         public string phonenumber { get; set; }
+
+        public Suppliers() { }  
         public Suppliers(int id, string first_name, string phonenumber, string Address)
         {
             Id = id;

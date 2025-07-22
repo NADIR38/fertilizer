@@ -44,7 +44,6 @@
             this.btnrecord = new FontAwesome.Sharp.IconButton();
             this.btninventory = new FontAwesome.Sharp.IconButton();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
-            this.btnadddetails = new FontAwesome.Sharp.IconButton();
             this.btnbatchdetails = new FontAwesome.Sharp.IconButton();
             this.btnbatches = new FontAwesome.Sharp.IconButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
@@ -116,12 +115,11 @@
             // 
             this.panelbatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.panelbatch.Controls.Add(this.iconPictureBox2);
-            this.panelbatch.Controls.Add(this.btnadddetails);
             this.panelbatch.Controls.Add(this.btnbatchdetails);
             this.panelbatch.Controls.Add(this.btnbatches);
             this.panelbatch.Location = new System.Drawing.Point(3, 289);
             this.panelbatch.Name = "panelbatch";
-            this.panelbatch.Size = new System.Drawing.Size(270, 67);
+            this.panelbatch.Size = new System.Drawing.Size(270, 66);
             this.panelbatch.TabIndex = 11;
             // 
             // panel4
@@ -130,7 +128,7 @@
             this.panel4.Controls.Add(this.iconButton1);
             this.panel4.Controls.Add(this.iconButton8);
             this.panel4.Controls.Add(this.btnsale);
-            this.panel4.Location = new System.Drawing.Point(3, 362);
+            this.panel4.Location = new System.Drawing.Point(3, 361);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(270, 61);
             this.panel4.TabIndex = 12;
@@ -141,7 +139,7 @@
             this.panelcust.Controls.Add(this.iconPictureBox4);
             this.panelcust.Controls.Add(this.btncustomerbill);
             this.panelcust.Controls.Add(this.btncustomers);
-            this.panelcust.Location = new System.Drawing.Point(3, 429);
+            this.panelcust.Location = new System.Drawing.Point(3, 428);
             this.panelcust.Name = "panelcust";
             this.panelcust.Size = new System.Drawing.Size(270, 63);
             this.panelcust.TabIndex = 12;
@@ -152,9 +150,9 @@
             this.panelsupp.Controls.Add(this.iconPictureBox5);
             this.panelsupp.Controls.Add(this.btnSbills);
             this.panelsupp.Controls.Add(this.btnsuppliers);
-            this.panelsupp.Location = new System.Drawing.Point(3, 498);
+            this.panelsupp.Location = new System.Drawing.Point(3, 497);
             this.panelsupp.Name = "panelsupp";
-            this.panelsupp.Size = new System.Drawing.Size(270, 65);
+            this.panelsupp.Size = new System.Drawing.Size(270, 68);
             this.panelsupp.TabIndex = 13;
             // 
             // panelreturn
@@ -164,7 +162,7 @@
             this.panelreturn.Controls.Add(this.btnSreturn);
             this.panelreturn.Controls.Add(this.bntcustomerreturn);
             this.panelreturn.Controls.Add(this.btnreturns);
-            this.panelreturn.Location = new System.Drawing.Point(3, 569);
+            this.panelreturn.Location = new System.Drawing.Point(3, 571);
             this.panelreturn.Name = "panelreturn";
             this.panelreturn.Size = new System.Drawing.Size(270, 62);
             this.panelreturn.TabIndex = 14;
@@ -345,31 +343,6 @@
             this.iconPictureBox2.TabStop = false;
             this.iconPictureBox2.Click += new System.EventHandler(this.iconPictureBox2_Click);
             // 
-            // btnadddetails
-            // 
-            this.btnadddetails.BackColor = System.Drawing.Color.DimGray;
-            this.btnadddetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnadddetails.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnadddetails.FlatAppearance.BorderSize = 2;
-            this.btnadddetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnadddetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnadddetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnadddetails.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnadddetails.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnadddetails.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnadddetails.IconColor = System.Drawing.Color.White;
-            this.btnadddetails.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnadddetails.IconSize = 40;
-            this.btnadddetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadddetails.Location = new System.Drawing.Point(0, 121);
-            this.btnadddetails.Name = "btnadddetails";
-            this.btnadddetails.Size = new System.Drawing.Size(270, 60);
-            this.btnadddetails.TabIndex = 5;
-            this.btnadddetails.Text = "Add Details";
-            this.btnadddetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadddetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnadddetails.UseVisualStyleBackColor = false;
-            // 
             // btnbatchdetails
             // 
             this.btnbatchdetails.BackColor = System.Drawing.Color.DimGray;
@@ -394,6 +367,7 @@
             this.btnbatchdetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnbatchdetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnbatchdetails.UseVisualStyleBackColor = false;
+            this.btnbatchdetails.Click += new System.EventHandler(this.btnbatchdetails_Click_1);
             // 
             // btnbatches
             // 
@@ -602,6 +576,7 @@
             this.btnSbills.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSbills.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSbills.UseVisualStyleBackColor = false;
+            this.btnSbills.Click += new System.EventHandler(this.btnSbills_Click_1);
             // 
             // btnsuppliers
             // 
@@ -734,7 +709,7 @@
             this.btnorder.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnorder.IconSize = 40;
             this.btnorder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnorder.Location = new System.Drawing.Point(3, 637);
+            this.btnorder.Location = new System.Drawing.Point(3, 639);
             this.btnorder.Name = "btnorder";
             this.btnorder.Size = new System.Drawing.Size(267, 60);
             this.btnorder.TabIndex = 15;
@@ -760,7 +735,7 @@
             this.btnlogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnlogout.IconSize = 40;
             this.btnlogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnlogout.Location = new System.Drawing.Point(3, 703);
+            this.btnlogout.Location = new System.Drawing.Point(3, 705);
             this.btnlogout.Name = "btnlogout";
             this.btnlogout.Size = new System.Drawing.Size(270, 60);
             this.btnlogout.TabIndex = 16;
@@ -786,7 +761,7 @@
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.IconSize = 40;
             this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(3, 769);
+            this.iconButton2.Location = new System.Drawing.Point(3, 771);
             this.iconButton2.Name = "iconButton2";
             this.iconButton2.Size = new System.Drawing.Size(270, 60);
             this.iconButton2.TabIndex = 17;
@@ -837,7 +812,6 @@
         private FontAwesome.Sharp.IconButton btninventory;
         private System.Windows.Forms.Panel panelbatch;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
-        private FontAwesome.Sharp.IconButton btnadddetails;
         private FontAwesome.Sharp.IconButton btnbatchdetails;
         private FontAwesome.Sharp.IconButton btnbatches;
         private System.Windows.Forms.Panel panel4;

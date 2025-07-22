@@ -32,7 +32,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<Customersale>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -41,12 +41,22 @@ namespace fertilizesop
             services.AddScoped<Isupplierdl, Supplierdl>();
             services.AddScoped<IBatchdetailsDl,BatchdetailsDl>();
             services.AddScoped<IBatchesDl, BatchesDl>();
+            services.AddScoped<IProductsDl,ProductsDl>();
+            services.AddScoped<ISupplierbillDl, SupplierbillDl>();
+            services.AddScoped<ISbilldetailsDl, SbilldetailsDl>();
+
 
             //Bl Layer
             services.AddScoped<ICustomerBl, CustomerBl>();
             services.AddScoped<Isupplierbl, Supplierbl>();
             services.AddScoped<IbatchdetailsBl, BatchDetailsBl>();
             services.AddScoped<IBatchesBl, BatchesBl>();
+            services.AddScoped<IOrderBl, OrderBl>();
+            services.AddScoped<IProductBl, ProductsBl>();
+            services.AddScoped<ISupplierBillBl, SupplierBillBl>();
+            services.AddScoped<ISbilldetailsBl, SbilldetailsBl>();
+            services.AddTransient<Supplierbillsform>();
+
 
 
             //UI Layer
@@ -61,7 +71,12 @@ namespace fertilizesop
             services.AddTransient<Batchform>();
             services.AddTransient<Addbatchform>();
             services.AddTransient<BatchDetailsform>();
-            services.AddTransient<Customersale>();
+            services.AddTransient<Addsupplier>();
+            services.AddTransient<Productsform>();
+            services.AddTransient<Addproductform>();
+
+
+
 
 
         }

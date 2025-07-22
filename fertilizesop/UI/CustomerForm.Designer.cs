@@ -32,30 +32,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerForm));
             this.panel10 = new System.Windows.Forms.Panel();
             this.paneledit = new System.Windows.Forms.Panel();
+            this.btncancle1 = new FontAwesome.Sharp.IconButton();
             this.txtaddress = new System.Windows.Forms.TextBox();
             this.lblAddress = new System.Windows.Forms.Label();
             this.txtlname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtcontact = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnsave = new FontAwesome.Sharp.IconButton();
             this.txtname = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.iconButton9 = new FontAwesome.Sharp.IconButton();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toplbl = new System.Windows.Forms.Label();
-            this.btncancle1 = new FontAwesome.Sharp.IconButton();
-            this.btnsave = new FontAwesome.Sharp.IconButton();
-            this.iconButton9 = new FontAwesome.Sharp.IconButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel10.SuspendLayout();
             this.paneledit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel10
@@ -94,6 +94,31 @@
             this.paneledit.Name = "paneledit";
             this.paneledit.Size = new System.Drawing.Size(443, 687);
             this.paneledit.TabIndex = 146;
+            // 
+            // btncancle1
+            // 
+            this.btncancle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btncancle1.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btncancle1.FlatAppearance.BorderSize = 2;
+            this.btncancle1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btncancle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btncancle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btncancle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncancle1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btncancle1.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btncancle1.IconColor = System.Drawing.Color.Red;
+            this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btncancle1.IconSize = 35;
+            this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncancle1.Location = new System.Drawing.Point(214, 500);
+            this.btncancle1.Name = "btncancle1";
+            this.btncancle1.Size = new System.Drawing.Size(151, 42);
+            this.btncancle1.TabIndex = 200;
+            this.btncancle1.Text = "Cancel";
+            this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncancle1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btncancle1.UseVisualStyleBackColor = false;
+            this.btncancle1.Click += new System.EventHandler(this.btncancle1_Click);
             // 
             // txtaddress
             // 
@@ -162,6 +187,30 @@
             this.label7.Text = "Contact";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnsave
+            // 
+            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnsave.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btnsave.FlatAppearance.BorderSize = 2;
+            this.btnsave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnsave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btnsave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsave.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
+            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsave.IconSize = 35;
+            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnsave.Location = new System.Drawing.Point(49, 500);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(132, 42);
+            this.btnsave.TabIndex = 190;
+            this.btnsave.Text = "Save";
+            this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnsave.UseVisualStyleBackColor = false;
+            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
+            // 
             // txtname
             // 
             this.txtname.BackColor = System.Drawing.Color.Gainsboro;
@@ -214,13 +263,38 @@
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // iconButton9
+            // 
+            this.iconButton9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconButton9.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.iconButton9.FlatAppearance.BorderSize = 2;
+            this.iconButton9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.iconButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.iconButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton9.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton9.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton9.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.iconButton9.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.iconButton9.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton9.IconSize = 35;
+            this.iconButton9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton9.Location = new System.Drawing.Point(12, 111);
+            this.iconButton9.Name = "iconButton9";
+            this.iconButton9.Size = new System.Drawing.Size(151, 42);
+            this.iconButton9.TabIndex = 144;
+            this.iconButton9.Text = "Add";
+            this.iconButton9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton9.UseVisualStyleBackColor = false;
+            this.iconButton9.Click += new System.EventHandler(this.iconButton9_Click);
+            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Linen;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.SeaShell;
             this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -236,9 +310,20 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(1267, 440);
+            this.dataGridView2.Size = new System.Drawing.Size(1267, 452);
             this.dataGridView2.TabIndex = 143;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(169, 110);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(43, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 142;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label12
             // 
@@ -289,91 +374,6 @@
             this.toplbl.Text = "Customers";
             this.toplbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btncancle1
-            // 
-            this.btncancle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btncancle1.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.btncancle1.FlatAppearance.BorderSize = 2;
-            this.btncancle1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btncancle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btncancle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btncancle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancle1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btncancle1.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btncancle1.IconColor = System.Drawing.Color.Red;
-            this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btncancle1.IconSize = 35;
-            this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.Location = new System.Drawing.Point(214, 500);
-            this.btncancle1.Name = "btncancle1";
-            this.btncancle1.Size = new System.Drawing.Size(151, 42);
-            this.btncancle1.TabIndex = 200;
-            this.btncancle1.Text = "Cancel";
-            this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btncancle1.UseVisualStyleBackColor = false;
-            this.btncancle1.Click += new System.EventHandler(this.btncancle1_Click);
-            // 
-            // btnsave
-            // 
-            this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btnsave.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.btnsave.FlatAppearance.BorderSize = 2;
-            this.btnsave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnsave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnsave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnsave.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnsave.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.btnsave.IconColor = System.Drawing.Color.LimeGreen;
-            this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsave.IconSize = 35;
-            this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(49, 500);
-            this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(132, 42);
-            this.btnsave.TabIndex = 190;
-            this.btnsave.Text = "Save";
-            this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnsave.UseVisualStyleBackColor = false;
-            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
-            // 
-            // iconButton9
-            // 
-            this.iconButton9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.iconButton9.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.iconButton9.FlatAppearance.BorderSize = 2;
-            this.iconButton9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.iconButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.iconButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton9.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.iconButton9.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.iconButton9.IconColor = System.Drawing.Color.MediumTurquoise;
-            this.iconButton9.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton9.IconSize = 35;
-            this.iconButton9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton9.Location = new System.Drawing.Point(12, 111);
-            this.iconButton9.Name = "iconButton9";
-            this.iconButton9.Size = new System.Drawing.Size(151, 42);
-            this.iconButton9.TabIndex = 144;
-            this.iconButton9.Text = "Add";
-            this.iconButton9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton9.UseVisualStyleBackColor = false;
-            this.iconButton9.Click += new System.EventHandler(this.iconButton9_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(169, 110);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(43, 43);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 142;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -388,9 +388,9 @@
             this.paneledit.ResumeLayout(false);
             this.paneledit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

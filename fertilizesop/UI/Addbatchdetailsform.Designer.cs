@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Addbatchdetailsform));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSprice = new System.Windows.Forms.TextBox();
@@ -47,28 +48,32 @@
             this.btnsave = new FontAwesome.Sharp.IconButton();
             this.txtproducts = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnadd = new FontAwesome.Sharp.IconButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Linen;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Lime;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Linen;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Lime;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.dataGridView2.Location = new System.Drawing.Point(532, 112);
+            this.dataGridView2.Location = new System.Drawing.Point(11, 284);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
@@ -79,11 +84,10 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label3.Location = new System.Drawing.Point(23, 467);
+            this.label3.Location = new System.Drawing.Point(11, 469);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 30);
             this.label3.TabIndex = 188;
@@ -92,9 +96,8 @@
             // 
             // txtSprice
             // 
-            this.txtSprice.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSprice.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtSprice.Location = new System.Drawing.Point(27, 500);
+            this.txtSprice.Location = new System.Drawing.Point(15, 502);
             this.txtSprice.Multiline = true;
             this.txtSprice.Name = "txtSprice";
             this.txtSprice.Size = new System.Drawing.Size(313, 37);
@@ -102,11 +105,10 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label1.Location = new System.Drawing.Point(22, 369);
+            this.label1.Location = new System.Drawing.Point(10, 371);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 30);
             this.label1.TabIndex = 186;
@@ -115,9 +117,8 @@
             // 
             // txtprice
             // 
-            this.txtprice.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtprice.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtprice.Location = new System.Drawing.Point(23, 402);
+            this.txtprice.Location = new System.Drawing.Point(11, 404);
             this.txtprice.Multiline = true;
             this.txtprice.Name = "txtprice";
             this.txtprice.Size = new System.Drawing.Size(313, 37);
@@ -125,19 +126,17 @@
             // 
             // txtBname
             // 
-            this.txtBname.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBname.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtBname.FormattingEnabled = true;
-            this.txtBname.Location = new System.Drawing.Point(28, 145);
+            this.txtBname.Location = new System.Drawing.Point(16, 147);
             this.txtBname.Name = "txtBname";
             this.txtBname.Size = new System.Drawing.Size(313, 24);
             this.txtBname.TabIndex = 184;
             // 
             // txtquantity
             // 
-            this.txtquantity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtquantity.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtquantity.Location = new System.Drawing.Point(26, 315);
+            this.txtquantity.Location = new System.Drawing.Point(14, 317);
             this.txtquantity.Multiline = true;
             this.txtquantity.Name = "txtquantity";
             this.txtquantity.Size = new System.Drawing.Size(313, 37);
@@ -145,11 +144,10 @@
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label7.Location = new System.Drawing.Point(22, 282);
+            this.label7.Location = new System.Drawing.Point(10, 284);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(190, 30);
             this.label7.TabIndex = 180;
@@ -158,11 +156,10 @@
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label9.Location = new System.Drawing.Point(24, 190);
+            this.label9.Location = new System.Drawing.Point(12, 192);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(156, 30);
             this.label9.TabIndex = 179;
@@ -171,11 +168,10 @@
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label10.Location = new System.Drawing.Point(24, 112);
+            this.label10.Location = new System.Drawing.Point(12, 114);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(133, 30);
             this.label10.TabIndex = 178;
@@ -207,14 +203,13 @@
             // 
             // iconPictureBox3
             // 
-            this.iconPictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.iconPictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.iconPictureBox3.ForeColor = System.Drawing.SystemColors.Control;
             this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             this.iconPictureBox3.IconColor = System.Drawing.SystemColors.Control;
             this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox3.IconSize = 37;
-            this.iconPictureBox3.Location = new System.Drawing.Point(359, 223);
+            this.iconPictureBox3.Location = new System.Drawing.Point(347, 225);
             this.iconPictureBox3.Name = "iconPictureBox3";
             this.iconPictureBox3.Size = new System.Drawing.Size(47, 37);
             this.iconPictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -223,14 +218,13 @@
             // 
             // iconPictureBox2
             // 
-            this.iconPictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.iconPictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.iconPictureBox2.ForeColor = System.Drawing.SystemColors.Control;
             this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.Control;
             this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox2.IconSize = 37;
-            this.iconPictureBox2.Location = new System.Drawing.Point(359, 132);
+            this.iconPictureBox2.Location = new System.Drawing.Point(347, 134);
             this.iconPictureBox2.Name = "iconPictureBox2";
             this.iconPictureBox2.Size = new System.Drawing.Size(47, 37);
             this.iconPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -239,6 +233,7 @@
             // 
             // btnsave
             // 
+            this.btnsave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnsave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.btnsave.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
             this.btnsave.FlatAppearance.BorderSize = 2;
@@ -252,7 +247,7 @@
             this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnsave.IconSize = 35;
             this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(61, 602);
+            this.btnsave.Location = new System.Drawing.Point(61, 642);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(151, 42);
             this.btnsave.TabIndex = 183;
@@ -264,9 +259,8 @@
             // 
             // txtproducts
             // 
-            this.txtproducts.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtproducts.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtproducts.Location = new System.Drawing.Point(28, 223);
+            this.txtproducts.Location = new System.Drawing.Point(16, 225);
             this.txtproducts.Multiline = true;
             this.txtproducts.Name = "txtproducts";
             this.txtproducts.Size = new System.Drawing.Size(313, 37);
@@ -284,12 +278,72 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Linen;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Lime;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dataGridView1.Location = new System.Drawing.Point(556, 161);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.Size = new System.Drawing.Size(791, 313);
+            this.dataGridView1.TabIndex = 197;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // btnadd
+            // 
+            this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnadd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnadd.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btnadd.FlatAppearance.BorderSize = 2;
+            this.btnadd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnadd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btnadd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnadd.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnadd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnadd.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btnadd.IconColor = System.Drawing.Color.LimeGreen;
+            this.btnadd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnadd.IconSize = 35;
+            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnadd.Location = new System.Drawing.Point(285, 642);
+            this.btnadd.Name = "btnadd";
+            this.btnadd.Size = new System.Drawing.Size(151, 42);
+            this.btnadd.TabIndex = 198;
+            this.btnadd.Text = "Add";
+            this.btnadd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnadd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnadd.UseVisualStyleBackColor = false;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1456, 867);
+            this.panel2.TabIndex = 199;
+            // 
             // Addbatchdetailsform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
-            this.ClientSize = new System.Drawing.Size(1456, 727);
+            this.ClientSize = new System.Drawing.Size(1456, 867);
+            this.Controls.Add(this.btnadd);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtproducts);
             this.Controls.Add(this.panel1);
@@ -306,6 +360,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.panel2);
+            this.MaximizeBox = false;
             this.Name = "Addbatchdetailsform";
             this.Text = "Addbatchdetailsform";
             this.Load += new System.EventHandler(this.Addbatchdetailsform_Load);
@@ -315,6 +371,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,5 +396,8 @@
         private System.Windows.Forms.Label toplbl;
         private System.Windows.Forms.TextBox txtproducts;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private FontAwesome.Sharp.IconButton btnadd;
+        private System.Windows.Forms.Panel panel2;
     }
 }

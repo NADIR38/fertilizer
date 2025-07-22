@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using fertilizesop.UI;
 using MySql.Data.MySqlClient;
 using fertilizesop.BL.Models;
+using fertilizesop.Interfaces.DLinterfaces;
 using KIMS;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -16,20 +17,22 @@ using QuestPDF.Infrastructure;
 using System.Drawing.Printing;
 using System.Drawing;
 using System.IO;
+using fertilizesop.BL.Models.persons;
 
 namespace fertilizesop.DL
 {
-    internal class OrderDAL
+    internal class OrderDAL : IOrder
     {
         public int InsertOrder(Order order)
         {
             int orderId = 0;
             using (var con = DatabaseHelper.Instance.GetConnection())
             {
-                string query = "INSERT INTO orders (supplier_id, date) VALUES (@supplierId, @date); SELECT LAST_INSERT_ID();";
+                string query = "INSERT INTO orders (supplier_id, date, order_status) VALUES (@supplierId, @date, @status); SELECT LAST_INSERT_ID();";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@supplierId", order.SupplierId);
                 cmd.Parameters.AddWithValue("@date", order.OrderDate);
+                cmd.Parameters.AddWithValue("@status", order.status);
 
                 con.Open();
                 orderId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -144,6 +147,58 @@ namespace fertilizesop.DL
             return dt;
         }
 
+        public DataTable GetOrders()
+        {
+            using (var conn = DatabaseHelper.Instance.GetConnection())
+            {
+                string query = @"
+        SELECT 
+            o.order_id AS OrderID,
+            s.name AS SupplierName,
+            o.date AS OrderDate,
+            o.order_Status AS `Order Status`
+        FROM orders o
+        INNER JOIN suppliers s ON o.supplier_id = s.supplier_id
+        ORDER BY o.date DESC, o.order_id;";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    conn.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+
+        public List<Suppliers> GetSuppliers(string searchText)
+        {
+            List<Suppliers> suppliers = new List<Suppliers>();
+
+            using (var con = DatabaseHelper.Instance.GetConnection())
+            {
+                string query = "SELECT supplier_id, name FROM suppliers WHERE name LIKE @search";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@search", "%" + searchText + "%");
+
+                con.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        suppliers.Add(new Suppliers
+                        {
+                            Id = reader.GetInt32("supplier_id"),
+                            first_Name = reader.GetString("name")
+                        });
+                    }
+                }
+            }
+
+            return suppliers;
+        }
 
         // Pdf and Print Functions Here
 

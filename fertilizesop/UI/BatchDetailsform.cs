@@ -31,14 +31,14 @@ namespace fertilizesop.UI
                 e.Handled = true;
             }
          
-            else if (e.Control && e.KeyCode == Keys.A)
-            {
+            //else if (e.Control && e.KeyCode == Keys.A)
+            //{
 
 
-                iconButton9.PerformClick();
-                e.Handled = true;
+            //    iconButton9.PerformClick();
+            //    e.Handled = true;
 
-            }
+            //}
 
         }
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -80,8 +80,8 @@ namespace fertilizesop.UI
 
         private void iconButton9_Click(object sender, EventArgs e)
         {
-            var f = Program.ServiceProvider.GetRequiredService<Addbatchdetailsform>();
-            f.ShowDialog(this);
+            //var f = Program.ServiceProvider.GetRequiredService<Addbatchdetailsform>();
+            //f.ShowDialog(this);
         }
     }
 }

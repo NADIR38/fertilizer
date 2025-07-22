@@ -77,6 +77,9 @@
     <Reference Include="MySql.Data, Version=9.3.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.9.3.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QuestPDF, Version=2025.7.0.0, Culture=neutral, PublicKeyToken=0f3c2b2315ff52c8, processorArchitecture=MSIL">
@@ -132,7 +135,16 @@
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ISbilldetailsBl.cs" />
+    <Compile Include="BL\Bl\SbilldetailsBl.cs" />
+    <Compile Include="BL\Models\Spricerecord.cs" />
+    <Compile Include="BL\Models\Supplierpayment.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ISbilldetailsDl.cs" />
+    <Compile Include="DL\SbilldetailsDl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ISupplierBillBl.cs" />
+    <Compile Include="BL\Bl\OrderBl.cs" />
     <Compile Include="BL\Bl\ProductsBl.cs" />
+    <Compile Include="BL\Bl\SupplierBillBl.cs" />
     <Compile Include="BL\Bl\Supplierbl.cs" />
     <Compile Include="BL\Models\BatchDetails.cs" />
     <Compile Include="BL\Models\Batches.cs" />
@@ -143,13 +155,19 @@
     <Compile Include="BL\Models\persons\Customer.cs" />
     <Compile Include="BL\Models\persons\Supplier.cs" />
     <Compile Include="BL\Models\Products.cs" />
+    <Compile Include="BL\Models\Supplierbill.cs" />
     <Compile Include="BL\Models\Suppliers.cs" />
+    <Compile Include="BL\Models\TempBatchDetail.cs" />
+    <Compile Include="BL\Models\TempData.cs" />
     <Compile Include="DL\BatchdetailsDl.cs" />
     <Compile Include="DL\BatchesDl.cs" />
     <Compile Include="DL\CustomerDl.cs" />
     <Compile Include="DL\Customersaledl.cs" />
     <Compile Include="DL\custumerdl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ISupplierbillDl.cs" />
+    <Compile Include="DL\SupplierbillDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IbatchdetailsBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IOrderBl.cs" />
     <Compile Include="Interfaces\DLinterfaces\IBatchdetailsDl.cs" />
     <Compile Include="DL\OrderDAL.cs" />
     <Compile Include="DL\ProductsDl.cs" />
@@ -161,6 +179,7 @@
     <Compile Include="Interfaces\DLinterfaces\IBatchesDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\ICustomerDl.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IOrder.cs" />
     <Compile Include="Interfaces\DLinterfaces\IProductsDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\Isupplierdl.cs" />
     <Compile Include="UI\Addbatchdetailsform.cs">
@@ -237,6 +256,12 @@
     <Compile Include="UI\OrdersMain.Designer.cs">
       <DependentUpon>OrdersMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\OrderStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrderStatus.Designer.cs">
+      <DependentUpon>OrderStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\PlacingOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +273,18 @@
     </Compile>
     <Compile Include="UI\Productsform.Designer.cs">
       <DependentUpon>Productsform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Sbilldetailform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Sbilldetailform.Designer.cs">
+      <DependentUpon>Sbilldetailform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Supplierbillsform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Supplierbillsform.Designer.cs">
+      <DependentUpon>Supplierbillsform.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\supplierform.cs">
       <SubType>Form</SubType>
@@ -302,11 +339,20 @@
     <EmbeddedResource Include="UI\OrdersMain.resx">
       <DependentUpon>OrdersMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrderStatus.resx">
+      <DependentUpon>OrderStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\PlacingOrder.resx">
       <DependentUpon>PlacingOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Productsform.resx">
       <DependentUpon>Productsform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Sbilldetailform.resx">
+      <DependentUpon>Sbilldetailform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Supplierbillsform.resx">
+      <DependentUpon>Supplierbillsform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\supplierform.resx">
       <DependentUpon>supplierform.cs</DependentUpon>
@@ -333,6 +379,7 @@
     <Content Include="Resources\logo.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fertilizer Shop Logo Design.png" />
