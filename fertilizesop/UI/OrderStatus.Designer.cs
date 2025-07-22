@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderStatus));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.paneledit = new System.Windows.Forms.Panel();
             this.status = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,7 +41,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnsave = new FontAwesome.Sharp.IconButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnsearch = new System.Windows.Forms.Button();
             this.ordersdata = new System.Windows.Forms.DataGridView();
             this.iconButton9 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,12 +50,16 @@
             this.toplbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.dgvOrderDetails = new System.Windows.Forms.DataGridView();
+            this.lblSupplierInfo = new System.Windows.Forms.Label();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.button2 = new System.Windows.Forms.Button();
             this.paneledit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersdata)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // paneledit
@@ -210,20 +215,21 @@
             this.label2.Text = "Place Order\r\n";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // btnsearch
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(1129, 116);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 46);
-            this.button1.TabIndex = 145;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsearch.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnsearch.Location = new System.Drawing.Point(1129, 116);
+            this.btnsearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnsearch.Name = "btnsearch";
+            this.btnsearch.Size = new System.Drawing.Size(112, 46);
+            this.btnsearch.TabIndex = 145;
+            this.btnsearch.Text = "Search";
+            this.btnsearch.UseVisualStyleBackColor = false;
+            this.btnsearch.Click += new System.EventHandler(this.button1_Click);
             // 
             // ordersdata
             // 
@@ -241,13 +247,13 @@
             this.ordersdata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
             this.ordersdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ordersdata.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ordersdata.Location = new System.Drawing.Point(35, 250);
+            this.ordersdata.Location = new System.Drawing.Point(35, 226);
             this.ordersdata.Margin = new System.Windows.Forms.Padding(4);
             this.ordersdata.Name = "ordersdata";
             this.ordersdata.ReadOnly = true;
             this.ordersdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ordersdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ordersdata.Size = new System.Drawing.Size(1225, 764);
+            this.ordersdata.Size = new System.Drawing.Size(1225, 876);
             this.ordersdata.TabIndex = 143;
             // 
             // iconButton9
@@ -269,7 +275,7 @@
             this.iconButton9.Name = "iconButton9";
             this.iconButton9.Size = new System.Drawing.Size(207, 73);
             this.iconButton9.TabIndex = 144;
-            this.iconButton9.Text = "Place Order";
+            this.iconButton9.Text = "Add Order";
             this.iconButton9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton9.UseVisualStyleBackColor = false;
@@ -328,6 +334,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.toplbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -339,9 +346,11 @@
             // 
             this.panel10.AutoScroll = true;
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel10.Controls.Add(this.dgvOrderDetails);
+            this.panel10.Controls.Add(this.lblSupplierInfo);
             this.panel10.Controls.Add(this.iconButton1);
             this.panel10.Controls.Add(this.paneledit);
-            this.panel10.Controls.Add(this.button1);
+            this.panel10.Controls.Add(this.btnsearch);
             this.panel10.Controls.Add(this.iconButton9);
             this.panel10.Controls.Add(this.ordersdata);
             this.panel10.Controls.Add(this.pictureBox1);
@@ -353,6 +362,46 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1312, 792);
             this.panel10.TabIndex = 17;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            // 
+            // dgvOrderDetails
+            // 
+            this.dgvOrderDetails.AllowUserToAddRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.AntiqueWhite;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.OldLace;
+            this.dgvOrderDetails.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvOrderDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvOrderDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvOrderDetails.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvOrderDetails.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
+            this.dgvOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrderDetails.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dgvOrderDetails.Location = new System.Drawing.Point(35, 226);
+            this.dgvOrderDetails.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvOrderDetails.Name = "dgvOrderDetails";
+            this.dgvOrderDetails.ReadOnly = true;
+            this.dgvOrderDetails.RowHeadersWidth = 51;
+            this.dgvOrderDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvOrderDetails.Size = new System.Drawing.Size(1225, 502);
+            this.dgvOrderDetails.TabIndex = 150;
+            // 
+            // lblSupplierInfo
+            // 
+            this.lblSupplierInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSupplierInfo.AutoSize = true;
+            this.lblSupplierInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblSupplierInfo.Font = new System.Drawing.Font("Times New Roman", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSupplierInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.lblSupplierInfo.Location = new System.Drawing.Point(657, 125);
+            this.lblSupplierInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSupplierInfo.Name = "lblSupplierInfo";
+            this.lblSupplierInfo.Size = new System.Drawing.Size(0, 32);
+            this.lblSupplierInfo.TabIndex = 148;
             // 
             // iconButton1
             // 
@@ -379,6 +428,21 @@
             this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.button2.Location = new System.Drawing.Point(1148, 21);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(112, 46);
+            this.button2.TabIndex = 151;
+            this.button2.Text = "Go Back";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // OrderStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -387,6 +451,7 @@
             this.Controls.Add(this.panel10);
             this.Name = "OrderStatus";
             this.Text = "OrderStatus";
+            this.Load += new System.EventHandler(this.OrderStatus_Load);
             this.paneledit.ResumeLayout(false);
             this.paneledit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersdata)).EndInit();
@@ -395,6 +460,7 @@
             this.panel1.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,7 +475,7 @@
         private System.Windows.Forms.Label label7;
         private FontAwesome.Sharp.IconButton btnsave;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnsearch;
         private System.Windows.Forms.DataGridView ordersdata;
         private FontAwesome.Sharp.IconButton iconButton9;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -421,5 +487,8 @@
         private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.ComboBox status;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblSupplierInfo;
+        private System.Windows.Forms.DataGridView dgvOrderDetails;
+        private System.Windows.Forms.Button button2;
     }
 }

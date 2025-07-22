@@ -78,21 +78,20 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Lime;
             this.orderdata.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.orderdata.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.orderdata.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.orderdata.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.orderdata.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.orderdata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
             this.orderdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.orderdata.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.orderdata.Location = new System.Drawing.Point(12, 250);
+            this.orderdata.Location = new System.Drawing.Point(37, 225);
             this.orderdata.Margin = new System.Windows.Forms.Padding(4);
             this.orderdata.Name = "orderdata";
             this.orderdata.ReadOnly = true;
             this.orderdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.orderdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.orderdata.Size = new System.Drawing.Size(1246, 652);
+            this.orderdata.Size = new System.Drawing.Size(1246, 554);
             this.orderdata.TabIndex = 143;
             // 
             // label12

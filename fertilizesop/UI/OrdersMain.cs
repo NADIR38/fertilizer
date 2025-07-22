@@ -13,6 +13,7 @@ using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
 using fertilizesop.Interfaces.DLinterfaces;
+using FontAwesome.Sharp;
 using KIMS;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -149,6 +150,12 @@ namespace fertilizesop.UI
             // Prevent duplicate handling
             if (e.Handled) return;
 
+            // Ctrl + R → Refresh
+            else if (e.Control && e.KeyCode == Keys.A)
+            {
+                iconButton9.PerformClick();
+                e.Handled = true; // Mark as handled
+            }
             // Ctrl + R → Refresh
             else if (e.Control && e.KeyCode == Keys.R)
             {

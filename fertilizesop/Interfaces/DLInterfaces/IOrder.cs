@@ -21,6 +21,10 @@ namespace fertilizesop.Interfaces.DLinterfaces
         DataTable GetAllSuppliers();
         DataTable GetOrders();
 
+        List<Suppliers> GetSuppliers(string searchText);
+
+        void MarkOrderAsCompleted(int orderId);
+
         void CreateOrderInvoicePdf(DataGridView cart, string filePath, string Name, DateTime saleDate);
         void PrintOrderInvoiceDirectly(DataGridView cart, string supplierName, DateTime Date);
         void DrawPurchaseInvoice(PrintPageEventArgs e, DataGridView cart, string supplierName, DateTime Date);

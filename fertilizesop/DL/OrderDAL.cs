@@ -200,6 +200,49 @@ namespace fertilizesop.DL
             return suppliers;
         }
 
+
+        public DataTable GetOrderDetailsByOrderId(int orderId)
+        {
+            using (var con = DatabaseHelper.Instance.GetConnection())
+            {
+                string query = @"
+            SELECT 
+                p.name AS ProductName,
+                p.description AS Description,
+                p.sale_price AS Price,
+                od.quantity AS Quantity
+            FROM orderdetails od
+            LEFT JOIN products p ON od.product_id = p.product_id
+            WHERE od.order_id = @orderId";
+
+                using (var cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@orderId", orderId);
+                    using (var adapter = new MySqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+
+        public void MarkOrderAsCompleted(int orderId)
+        {
+            using (var con = DatabaseHelper.Instance.GetConnection())
+            {
+                string query = "UPDATE orders SET Order_Status = 'Completed' WHERE order_id = @orderId";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@orderId", orderId);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         // Pdf and Print Functions Here
 
 
