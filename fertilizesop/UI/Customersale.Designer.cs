@@ -32,17 +32,21 @@
             this.txtproductsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtfinalprice = new System.Windows.Forms.TextBox();
+            this.delete = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtcustsearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.delete = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.final = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtfinaldiscount = new System.Windows.Forms.TextBox();
+            this.totalwithoutdisc = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,7 +62,8 @@
             this.sale_price,
             this.quantity,
             this.discount,
-            this.total});
+            this.total,
+            this.final});
             this.dataGridView1.Location = new System.Drawing.Point(3, 348);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
@@ -90,6 +95,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel1.Controls.Add(this.totalwithoutdisc);
+            this.panel1.Controls.Add(this.txtfinaldiscount);
+            this.panel1.Controls.Add(this.txtfinalprice);
             this.panel1.Controls.Add(this.delete);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtcustsearch);
@@ -102,6 +110,24 @@
             this.panel1.Size = new System.Drawing.Size(1581, 905);
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // txtfinalprice
+            // 
+            this.txtfinalprice.Location = new System.Drawing.Point(1058, 209);
+            this.txtfinalprice.Name = "txtfinalprice";
+            this.txtfinalprice.Size = new System.Drawing.Size(276, 26);
+            this.txtfinalprice.TabIndex = 7;
+            this.txtfinalprice.TextChanged += new System.EventHandler(this.txtfinalprice_TextChanged);
+            // 
+            // delete
+            // 
+            this.delete.Location = new System.Drawing.Point(358, 247);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(75, 23);
+            this.delete.TabIndex = 6;
+            this.delete.Text = "delete";
+            this.delete.UseVisualStyleBackColor = true;
+            this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // button1
             // 
@@ -120,6 +146,7 @@
             this.txtcustsearch.Name = "txtcustsearch";
             this.txtcustsearch.Size = new System.Drawing.Size(272, 45);
             this.txtcustsearch.TabIndex = 4;
+            this.txtcustsearch.TextChanged += new System.EventHandler(this.txtcustsearch_TextChanged);
             // 
             // label2
             // 
@@ -138,16 +165,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1578, 100);
             this.panel2.TabIndex = 0;
-            // 
-            // delete
-            // 
-            this.delete.Location = new System.Drawing.Point(358, 247);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(75, 23);
-            this.delete.TabIndex = 6;
-            this.delete.Text = "delete";
-            this.delete.UseVisualStyleBackColor = true;
-            this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // name
             // 
@@ -199,6 +216,28 @@
             this.total.MinimumWidth = 8;
             this.total.Name = "total";
             // 
+            // final
+            // 
+            this.final.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.final.DataPropertyName = "final";
+            this.final.HeaderText = "Final";
+            this.final.MinimumWidth = 8;
+            this.final.Name = "final";
+            // 
+            // txtfinaldiscount
+            // 
+            this.txtfinaldiscount.Location = new System.Drawing.Point(1058, 283);
+            this.txtfinaldiscount.Name = "txtfinaldiscount";
+            this.txtfinaldiscount.Size = new System.Drawing.Size(276, 26);
+            this.txtfinaldiscount.TabIndex = 8;
+            // 
+            // totalwithoutdisc
+            // 
+            this.totalwithoutdisc.Location = new System.Drawing.Point(1058, 134);
+            this.totalwithoutdisc.Name = "totalwithoutdisc";
+            this.totalwithoutdisc.Size = new System.Drawing.Size(276, 26);
+            this.totalwithoutdisc.TabIndex = 9;
+            // 
             // Customersale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -227,11 +266,15 @@
         private System.Windows.Forms.TextBox txtcustsearch;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button delete;
+        private System.Windows.Forms.TextBox txtfinalprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn final;
+        private System.Windows.Forms.TextBox txtfinaldiscount;
+        private System.Windows.Forms.TextBox totalwithoutdisc;
     }
 }

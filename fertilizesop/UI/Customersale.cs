@@ -14,6 +14,7 @@ namespace fertilizesop.UI
     public partial class Customersale : Form
     {
         private DataGridView dgvproductsearch = new DataGridView();
+        private DataGridView dgvcustomersearch = new DataGridView();
         Customersaledl _customersaledl = new Customersaledl();
         private DataGridViewRow row;
         private int selectedRowIndex = -1;
@@ -23,8 +24,8 @@ namespace fertilizesop.UI
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
             dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-
             setupproductsearch();
+            setupcustomersearch();
             txtproductsearch.TextChanged += txtproductsearch_TextChanged;
         }
 
@@ -52,97 +53,184 @@ namespace fertilizesop.UI
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if(keyData == Keys.Enter)
+            try
             {
-                if(dgvproductsearch.Visible )
+                if (keyData == Keys.Enter)
                 {
-                    button1.PerformClick();
-                    return true;
-                       
-                }
-            }
-
-            else if (keyData == Keys.Right)
-            {
-                if (dataGridView1.CurrentCell != null)
-                {
-                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                    int colIndex = dataGridView1.CurrentCell.ColumnIndex;
-
-                    if (colIndex < dataGridView1.Columns.Count - 1)
+                    if (dgvproductsearch.Visible)
                     {
-                        dataGridView1.CurrentCell = dataGridView1.Rows[rowIndex].Cells[colIndex + 1];
+                        button1.PerformClick();
+                        return true;
                     }
 
-                    return true;
-                }
-            }
-
-            else if(keyData == Keys.Up)
-            {
-                if(dgvproductsearch.Visible && txtproductsearch.Focused && selectedRowIndex > 0)
-                {
-                    selectedRowIndex--;
-                    dgvproductsearch.ClearSelection();
-                    dgvproductsearch.Rows[selectedRowIndex].Selected = true;
-                }
-                
-                else if(dataGridView1.Focused && selectedRowIndex > 0)
-                {
-                    selectedRowIndex--;
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[selectedRowIndex ].Selected = true;
-                }
-            }
-
-            else if(keyData == Keys.Down)
-            {
-                if(dgvproductsearch.Visible && txtproductsearch.Focused && selectedRowIndex < dgvproductsearch.Rows.Count -1)
-                {
-                    selectedRowIndex++;
-                    dgvproductsearch.ClearSelection();
-                    dgvproductsearch.Rows[selectedRowIndex ].Selected = true;
-                }
-                else if(dataGridView1.Focused && selectedRowIndex < dataGridView1.Rows.Count -1)
-                {
-                    selectedRowIndex++;
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[selectedRowIndex].Selected = true;
-                }
-            }
-
-            else if (keyData == Keys.Left)
-            {
-                if (dataGridView1.CurrentCell != null)
-                {
-                    int rowindex = dataGridView1.CurrentCell.RowIndex;
-                    int colindex = dataGridView1.CurrentCell.ColumnIndex;
-                    if (colindex > 0)
+                    else if (dgvcustomersearch.Visible && txtcustsearch.Focused)
                     {
-                        dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex - 1];
-                    }
-                }
-            }
-
-            else if (keyData == Keys.Delete)
-            {
-                if (dataGridView1.SelectedRows.Count > 0)
-                {
-                    int row = dataGridView1.SelectedCells[0].RowIndex;
-                    if (row >= 0 && row < dataGridView1.Columns.Count - 1)
-                    {
-                        DialogResult result = MessageBox.Show("Are you sure you want to delete this product from the list?", "Confirm deletion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                        if (result == DialogResult.Yes)
+                        if(dgvcustomersearch.Rows.Count > 0)
                         {
-                            dataGridView1.Rows.RemoveAt(row);
+                            DataGridViewRow selectedrow = dgvcustomersearch.SelectedRows[0];
+                            string name = selectedrow.Cells["name"].Value.ToString();
+                            txtcustsearch.Text = name;
+                            dgvcustomersearch.Visible = false;
+                            return true;
+                        }
+                    }
+                }
+
+                else if (keyData == Keys.Right)
+                {
+                    if (dataGridView1.CurrentCell != null)
+                    {
+                        int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                        int colIndex = dataGridView1.CurrentCell.ColumnIndex;
+
+                        if (colIndex < dataGridView1.Columns.Count - 1)
+                        {
+                            dataGridView1.CurrentCell = dataGridView1.Rows[rowIndex].Cells[colIndex + 1];
+                        }
+
+                        return true;
+                    }
+                }
+
+                else if (keyData == Keys.Up)
+                {
+                    if (dgvproductsearch.Visible && txtproductsearch.Focused && selectedRowIndex > 0)
+                    {
+                        selectedRowIndex--;
+                        dgvproductsearch.ClearSelection();
+                        dgvproductsearch.Rows[selectedRowIndex].Selected = true;
+                    }
+
+                    else if (dataGridView1.Focused && selectedRowIndex > 0)
+                    {
+                        selectedRowIndex--;
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    }
+                    else if(txtcustsearch.Focused && selectedRowIndex > 0 && dgvcustomersearch.Visible)
+                    {
+                        selectedRowIndex--;
+                        dgvcustomersearch.ClearSelection();
+                        dgvcustomersearch.Rows[selectedRowIndex].Selected = true;
+                    }
+                }
+
+                else if (keyData == Keys.Down)
+                {
+                    if (dgvproductsearch.Visible && txtproductsearch.Focused && selectedRowIndex < dgvproductsearch.Rows.Count - 1)
+                    {
+                        selectedRowIndex++;
+                        dgvproductsearch.ClearSelection();
+                        dgvproductsearch.Rows[selectedRowIndex].Selected = true;
+                    }
+                    else if (dataGridView1.Focused && selectedRowIndex < dataGridView1.Rows.Count - 1)
+                    {
+                        selectedRowIndex++;
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    }
+                    else if(dgvcustomersearch.Visible && txtcustsearch.Visible && selectedRowIndex < dgvcustomersearch.Rows.Count - 1)
+                    {
+                        selectedRowIndex++;
+                        dgvcustomersearch.ClearSelection();
+                        dgvcustomersearch.Rows[selectedRowIndex ].Selected = true;
+                    }
+                }
+
+                else if (keyData == Keys.Left)
+                {
+                    if (dataGridView1.CurrentCell != null)
+                    {
+                        int rowindex = dataGridView1.CurrentCell.RowIndex;
+                        int colindex = dataGridView1.CurrentCell.ColumnIndex;
+                        if (colindex > 0)
+                        {
+                            dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex - 1];
+                        }
+                    }
+                }
+
+                else if (keyData == Keys.Delete)
+                {
+                    if (dataGridView1.SelectedRows.Count > 0)
+                    {
+                        int row = dataGridView1.SelectedCells[0].RowIndex;
+                        if (row >= 0 && row < dataGridView1.Columns.Count - 1)
+                        {
+                            DialogResult result = MessageBox.Show("Are you sure you want to delete this product from the list?", "Confirm deletion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                            if (result == DialogResult.Yes)
+                            {
+                                dataGridView1.Rows.RemoveAt(row);
+                            }
                         }
                     }
                 }
             }
-
-
+            catch(Exception e)
+            {
+                MessageBox.Show("Error in the keyboard" + e.Message , "Error in keyboard functionalities" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
                 return base.ProcessCmdKey(ref msg, keyData);
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvproductsearch.SelectedRows.Count > 0)
+            {
+                // Access selected row
+                DataGridViewRow selectedRow = dgvproductsearch.SelectedRows[0];
+
+                // Get values from the row
+                string name = selectedRow.Cells["name"].Value.ToString();
+                string description = selectedRow.Cells["description"].Value.ToString();
+                int saleprice = Convert.ToInt32(selectedRow.Cells["sale_price"].Value.ToString());
+
+
+                dataGridView1.Rows.Add(name, description, saleprice);
+                dgvproductsearch.Visible = false;
+                clearfields();
+            }
+        }
+
+        private void setupcustomersearch()
+        {
+            dgvcustomersearch.Visible = false;
+            dgvcustomersearch.ReadOnly = true;
+            dgvcustomersearch.AutoGenerateColumns = true;
+            dgvcustomersearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvcustomersearch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvcustomersearch.BackgroundColor = SystemColors.Control;
+            this.Controls.Add(dgvcustomersearch);
+            dgvcustomersearch.Size = new System.Drawing.Size(dataGridView1.Width, dataGridView1.Height/2);
+            dgvcustomersearch.Location = new System.Drawing.Point(90, 400);
+            dgvcustomersearch.BringToFront();
+            dgvcustomersearch.CellClick += Dgvcustomersearch_CellClick;
+        }
+
+        private void Dgvcustomersearch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedrow = dgvcustomersearch.Rows[e.RowIndex];
+
+                string name = selectedrow.Cells["name"].Value.ToString();
+                txtcustsearch.Text = name;
+                dgvcustomersearch.Visible = false;
+            }
+        }
+
+        private void dgvproductsearch_CellCliick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Access selected row
+                DataGridViewRow selectedRow = dgvproductsearch.Rows[e.RowIndex];
+
+                // Get values from the row
+                string name = selectedRow.Cells["name"].Value.ToString();
+                string description = selectedRow.Cells["description"].Value.ToString();
+
+            }
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -154,6 +242,7 @@ namespace fertilizesop.UI
             if (columnName == "quantity" || columnName == "discount")
             {
                 CalculateRowTotal(e.RowIndex);
+               
             }
         }
 
@@ -179,9 +268,12 @@ namespace fertilizesop.UI
                 // Calculate total
                 decimal discountedPrice = salePrice - discount;
                 decimal total = discountedPrice * quantity;
+                decimal finaltotal = salePrice * quantity;
 
                 // Set total cell value
                 row.Cells["total"].Value = total;
+                row.Cells["final"].Value = finaltotal;
+                totalprice();
             }
             catch
             {
@@ -194,7 +286,7 @@ namespace fertilizesop.UI
         private void setupproductsearch()
         {
             dgvproductsearch.Visible = false;
-            dgvproductsearch.ReadOnly = false;
+            dgvproductsearch.ReadOnly = true;
             dgvproductsearch.AutoGenerateColumns = true;
             dgvproductsearch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvproductsearch.AllowUserToAddRows = false;
@@ -211,19 +303,7 @@ namespace fertilizesop.UI
             dgvproductsearch.CellClick += dgvproductsearch_CellCliick;
         }
 
-        private void dgvproductsearch_CellCliick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                // Access selected row
-                DataGridViewRow selectedRow = dgvproductsearch.Rows[e.RowIndex];
-
-                // Get values from the row
-                string name = selectedRow.Cells["name"].Value.ToString();
-                string description = selectedRow.Cells["description"].Value.ToString();
-
-            }
-        }
+      
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -252,23 +332,7 @@ namespace fertilizesop.UI
             txtproductsearch.Text = string.Empty; txtproductsearch.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dgvproductsearch.SelectedRows.Count > 0)
-            {
-                // Access selected row
-                DataGridViewRow selectedRow = dgvproductsearch.SelectedRows[0];
-
-                // Get values from the row
-                string name = selectedRow.Cells["name"].Value.ToString();
-                string description = selectedRow.Cells["description"].Value.ToString();
-                int saleprice =Convert.ToInt32( selectedRow.Cells["sale_price"].Value.ToString());
-
-                dataGridView1.Rows.Add(name,description, saleprice);
-                dgvproductsearch.Visible = false;
-                clearfields();
-            }
-        }
+       
 
         private void delete_Click(object sender, EventArgs e)
         {
@@ -289,6 +353,49 @@ namespace fertilizesop.UI
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void totalprice()
+        {
+            int totalprice = 0;
+            int discountedprice = 0;
+            int finalprice = 0;
+            foreach(DataGridViewRow row in dataGridView1.Rows)
+            {
+                if(row.IsNewRow)
+                {
+                    continue;
+                }
+                int total = Convert.ToInt32(row.Cells["total"].Value.ToString());
+                int disc = Convert.ToInt32(row.Cells["discount"].Value ?? 0);
+                int quantity = Convert.ToInt32(row.Cells["quantity"].Value ?? 0);
+                discountedprice += (disc * quantity);
+                totalprice += total;
+                finalprice += total - discountedprice;
+            }
+            txtfinalprice.Text = finalprice.ToString();
+            txtfinaldiscount.Text = discountedprice.ToString();
+            totalwithoutdisc.Text = totalprice.ToString();
+        }
+        private void txtfinalprice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcustsearch_TextChanged(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtcustsearch.Text))
+            {
+                dgvcustomersearch.Visible = false;
+                return;                  
+            }
+            dgvcustomersearch.Visible = true;
+            if(dgvcustomersearch.Columns.Contains("customer_id"))
+            {
+                dgvcustomersearch.Columns["customer_id"].Visible = false;
+            }
+            DataTable dt = _customersaledl.getallcustomer(txtcustsearch.Text);
+            dgvcustomersearch.DataSource = dt;
         }
     }
 }

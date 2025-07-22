@@ -30,5 +30,26 @@ namespace fertilizesop.DL
             }
             return dt;
         }
+
+        public DataTable getallcustomer(string text)
+        {
+            DataTable dt = new DataTable();
+            using(var con = DatabaseHelper.Instance.GetConnection())
+            {
+                con.Open();
+                string query = "SELECT CONCAT(first_name, ' ', last_name) as name, address, phone FROM customers WHERE CONCAT(first_name, ' ', last_name) LIKE @text";
+
+                using (MySqlCommand cmd = new MySqlCommand( query, con))
+                {
+                    cmd.Parameters.AddWithValue("@text" , "%" + text + "%");
+                    using(MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
     }
 }
