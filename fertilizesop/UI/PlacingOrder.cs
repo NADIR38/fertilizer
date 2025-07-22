@@ -36,8 +36,7 @@ namespace fertilizesop.UI
             dgvInvoice.AllowUserToAddRows = false;
             this.supplierName = supplierName;
             this.KeyPreview = true; // Put this in OrdersMain constructor
-            
-
+           
         }
 
         private void ConfigureInvoiceGrid()
@@ -337,6 +336,7 @@ namespace fertilizesop.UI
                 }
 
                 ClearInvoiceForm();
+                o.MarkOrderAsCompleted(SelctedOrder);
             }
             else
             {
@@ -461,12 +461,12 @@ namespace fertilizesop.UI
 
         private void PlacingOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //SaveTempInvoice();
+            SaveTempInvoice();
         }
 
         private void PlacingOrder_Load(object sender, EventArgs e)
         {
-            //LoadTempInvoice();
+            LoadTempInvoice();
         }
 
         private void PlacingOrder_VisibleChanged(object sender, EventArgs e)

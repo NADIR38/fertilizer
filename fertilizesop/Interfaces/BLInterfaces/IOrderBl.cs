@@ -19,6 +19,11 @@ namespace fertilizesop.Interfaces.BLInterfaces
         DataTable LoadOrdersWithDetails();
         DataTable GetProducts();
         DataTable GetAllSuppliers();
+        DataTable GetOrders();
+
+        List<Suppliers> GetSuppliers(string searchText);
+
+        void MarkOrderAsCompleted(int orderId);
 
         void CreateOrderInvoicePdf(DataGridView cart, string filePath, string Name, DateTime saleDate);
         void PrintOrderInvoiceDirectly(DataGridView cart, string supplierName, DateTime Date);

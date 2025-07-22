@@ -19,15 +19,17 @@ namespace fertilizesop.UI
     {
         DataTable dt;
         OrderBl o = new OrderBl();
-        OrderDAL or =new OrderDAL();
+        OrderDAL or=new OrderDAL();
         int orderId;
         string supp;
+        int selectedRowIndex;
         public OrderStatus()
         {
             InitializeComponent();
             LoadOrderGrid();
             date.Value = DateTime.Now;
             ordersdata.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrderDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             cmbSuppliers.TextUpdate += cmbSuppliers_TextUpdate;
             cmbSuppliers.DropDownStyle = ComboBoxStyle.DropDown;
             //ordersdata.Columns["Order_id"].Visible=false;
@@ -61,7 +63,7 @@ namespace fertilizesop.UI
                 dv.RowFilter = $@"
             Convert(OrderID, 'System.String') LIKE '%{keyword}%' OR
             SupplierName LIKE '%{keyword}%' OR
-            Order Status LIKE '%{keyword}%'";
+            [Order Status] LIKE '%{keyword}%'";
 
                 ordersdata.DataSource = dv;
             }
@@ -75,7 +77,7 @@ namespace fertilizesop.UI
         {
             string searchText = cmbSuppliers.Text.Trim();
 
-            List<Suppliers> filteredSuppliers =or.GetSuppliers(searchText);
+            List<Suppliers> filteredSuppliers =o.GetSuppliers(searchText);
 
             if (filteredSuppliers != null && filteredSuppliers.Count > 0)
             {
@@ -142,10 +144,26 @@ namespace fertilizesop.UI
         {
 
         }
+        private void loadprevious()
+        {
+            LoadOrderGrid();
+
+            // Restore original view
+            ordersdata.Visible = true;
+            dgvOrderDetails.Visible = false;
+            lblSupplierInfo.Text = "";
+            lblSupplierInfo.Visible = false;
+        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LoadOrderGrid();
+
+            // Restore original view
+            ordersdata.Visible = true;
+            dgvOrderDetails.Visible = false;
+            lblSupplierInfo.Text = "";
+            lblSupplierInfo.Visible = false;
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
@@ -166,57 +184,121 @@ namespace fertilizesop.UI
         }
 
         //keys logic 
-
-        private void OpenEditPanel()
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (paneledit.Visible == false)
+            if (keyData == Keys.Enter &&
+                (!(ActiveControl is DataGridView) || ActiveControl == ordersdata || ordersdata.Focused))
             {
-                paneledit.Visible = true;
+                btnsearch.PerformClick(); // Simulate button click
+                return true; // Mark event as handled
             }
 
-
-        }
-
-        private void CancelEdit()
-        {
-            paneledit.Visible = false;
-
-        }
-
-        private void OrdersMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Prevent duplicate handling
-            if (e.Handled) return;
-
-            // Enter → Open Edit Panel
-            if (e.Control && e.KeyCode == Keys.A)
+            else if (keyData == (Keys.Control | Keys.S))
             {
-                OpenEditPanel();
-                e.Handled = true; // Mark as handled
+                btnsave.PerformClick();
+                return true;
             }
-            // Esc → Cancel Edit
-            else if (e.KeyCode == Keys.Escape)
+
+            else if (keyData == (Keys.Control | Keys.A))
             {
-                CancelEdit();
-                e.Handled = true; // Mark as handled
+                iconButton9.PerformClick();
+                return true;
             }
-            // Ctrl + S → Save
-            else if (e.Control && e.KeyCode == Keys.S)
+            else if (keyData == (Keys.Control | Keys.R))
             {
-                SaveOrder();
-                e.Handled = true; // Mark as handled
+                loadprevious();
+                return true;
             }
-            // Ctrl + R → Refresh
-            else if (e.Control && e.KeyCode == Keys.R)
+
+            else if (keyData ==Keys.Escape)
             {
-                LoadOrderGrid();
-                e.Handled = true; // Mark as handled
+                btncancle1.PerformClick();
+                return true;
             }
+
+            else if (keyData == Keys.Up)
+            {
+                if (ordersdata.Visible && selectedRowIndex > 0)
+                {
+                    selectedRowIndex--;
+                    ordersdata.ClearSelection();
+                    ordersdata.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+            else if (keyData == Keys.Down)
+            {
+                if (ordersdata.Visible && selectedRowIndex < ordersdata.Rows.Count - 1)
+                {
+                    selectedRowIndex++;
+                    ordersdata.ClearSelection();
+                    ordersdata.Rows[selectedRowIndex].Selected = true;
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData); // Allow default behavior
         }
 
         private void btnsave_Click(object sender, EventArgs e)
         {
             SaveOrder();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (ordersdata.SelectedRows.Count > 0)
+            {
+                int selectedOrderId = Convert.ToInt32(ordersdata.SelectedRows[0].Cells["OrderID"].Value);
+                string supplierName = ordersdata.SelectedRows[0].Cells["SupplierName"].Value?.ToString();
+
+                lblSupplierInfo.Text = $"Supplier: {supplierName}";
+                lblSupplierInfo.Visible = true;
+
+                // Call BLL to get order details
+                DataTable details = or.GetOrderDetailsByOrderId(selectedOrderId); // use OrderBl
+
+                if (details != null && details.Rows.Count > 0)
+                {
+                    dgvOrderDetails.AutoGenerateColumns = true;
+                    dgvOrderDetails.Visible = true;
+                    dgvOrderDetails.DataSource = details;
+                }
+                else
+                {
+                    // Show empty grid with columns
+                    dgvOrderDetails.DataSource = null;
+                    dgvOrderDetails.Rows.Clear();
+                    dgvOrderDetails.Columns.Clear();
+
+                    dgvOrderDetails.Columns.Add("ProductName", "Product Name");
+                    dgvOrderDetails.Columns.Add("Description", "Description");
+                    dgvOrderDetails.Columns.Add("Price", "Price");
+                    dgvOrderDetails.Columns.Add("Quantity", "Quantity");
+
+                    MessageBox.Show("No products found for this order.");
+                }
+                // Show details, hide orders grid
+                ordersdata.Visible = false;
+                dgvOrderDetails.Visible = true;
+                dgvOrderDetails.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Please select an order from the list first.");
+            }
+        }
+
+        private void OrderStatus_Load(object sender, EventArgs e)
+        {
+            dgvOrderDetails.Visible = false; // hide details grid initially
+            ordersdata.Visible = true;       // show orders grid
+           
+        }
+
+        private void panel10_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

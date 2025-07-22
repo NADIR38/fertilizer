@@ -123,6 +123,31 @@ namespace fertilizesop.BL.Bl
             }
         }
 
+        public void MarkOrderAsCompleted(int Id)
+        {
+            try
+            {
+                _orderDL.MarkOrderAsCompleted(Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating order detail: " + ex.Message);
+            }
+        }
+
+        public List<Suppliers> GetSuppliers(string text)
+        {
+            try
+            {
+                return _orderDL.GetSuppliers(text);  // Calls the DL function that returns List<Suppliers>
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading suppliers: " + ex.Message);
+                return new List<Suppliers>(); // Return an empty list instead of undefined "List"
+            }
+        }
+
         public void CreateOrderInvoicePdf(DataGridView cart, string filePath, string name, DateTime saleDate)
         {
             try
