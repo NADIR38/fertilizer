@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using fertilizesop.BL.Models;
 using fertilizesop.DL;
+using FontAwesome.Sharp;
+using Newtonsoft.Json;
 
 namespace fertilizesop.UI
 {
@@ -22,11 +26,27 @@ namespace fertilizesop.UI
         {
             InitializeComponent();
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
+            dataGridView1.RowsAdded += dataGridView1_RowsAdded;
             dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView1.AllowUserToAddRows = false;
+            this.VisibleChanged += Customersale_VisibleChanged;
+
             setupproductsearch();
             setupcustomersearch();
             txtproductsearch.TextChanged += txtproductsearch_TextChanged;
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++)
+            {
+                var row = dataGridView1.Rows[i];
+                if (row.Cells["quantity"].Value == null || Convert.ToString(row.Cells["quantity"].Value) == "")
+                {
+                    row.Cells["quantity"].Value = 1;
+                }
+            }
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -326,6 +346,7 @@ namespace fertilizesop.UI
 
         private void txtproductsearch_TextChanged(object sender, EventArgs e)
         {
+            dgvcustomersearch.Visible = false ;
             if (string.IsNullOrWhiteSpace(txtproductsearch.Text))
             {
                 clearfields();
@@ -374,23 +395,28 @@ namespace fertilizesop.UI
             int totalprice = 0;
             int discountedprice = 0;
             int finalprice = 0;
-            foreach(DataGridViewRow row in dataGridView1.Rows)
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if(row.IsNewRow)
-                {
+                if (row.IsNewRow)
                     continue;
-                }
-                int total = Convert.ToInt32(row.Cells["total"].Value.ToString());
-                int disc = Convert.ToInt32(row.Cells["discount"].Value ?? 0);
-                int quantity = Convert.ToInt32(row.Cells["quantity"].Value ?? 0);
+
+                // Safe parsing with fallback to 0
+                int total = ConvertToIntSafe(row.Cells["total"]?.Value);
+                int disc = ConvertToIntSafe(row.Cells["discount"]?.Value);
+                int quantity = ConvertToIntSafe(row.Cells["quantity"]?.Value);
+
                 discountedprice += (disc * quantity);
                 totalprice += total;
-                finalprice += total - discountedprice;
             }
+
+            finalprice = totalprice - discountedprice;
+
             txtfinalprice.Text = finalprice.ToString();
             txtfinaldiscount.Text = discountedprice.ToString();
             totalwithoutdisc.Text = totalprice.ToString();
         }
+
         private void txtfinalprice_TextChanged(object sender, EventArgs e)
         {
 
@@ -410,6 +436,107 @@ namespace fertilizesop.UI
             }
             DataTable dt = _customersaledl.getallcustomer(txtcustsearch.Text);
             dgvcustomersearch.DataSource = dt;
+        }
+
+        private void savetempsale()
+        {
+            try
+            {
+                var data = new Temporarycustomersale
+                {
+                    customername = txtcustsearch.Text ?? "",
+                    productname = txtproductsearch.Text ?? "",
+                    totaldiscount = int.TryParse(txtfinaldiscount.Text, out var discount) ? discount : 0,
+                    finalpriceafterdisc = decimal.TryParse(txtfinalprice.Text, out var finalprice) ? finalprice : 0,
+                    totalprice = decimal.TryParse(totalwithoutdisc.Text, out var total) ? total : 0,
+                    date = dateTimePicker1.Value,
+                    items = dataGridView1.Rows
+                        .Cast<DataGridViewRow>()
+                        .Where(r => !r.IsNewRow)
+                        .Select(r => new saleitems
+                        {
+                            productname = r.Cells["name"]?.Value?.ToString() ?? "",
+                            description = r.Cells["description"]?.Value?.ToString() ?? "",
+                            unitprice = ConvertToIntSafe(r.Cells["sale_price"]?.Value),
+                            quantity = ConvertToIntSafe(r.Cells["quantity"]?.Value),
+                            discount = ConvertToIntSafe(r.Cells["discount"]?.Value),
+                            total = ConvertToIntSafe(r.Cells["total"]?.Value),
+                            finalprice = ConvertToIntSafe(r.Cells["final"]?.Value)
+                        })
+                        .ToList()
+                };
+
+                string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+                File.WriteAllText("Temporarydata.json", json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving temporary sale: " + ex.Message);
+            }
+        }
+
+        private int ConvertToIntSafe(object value)
+        {
+            return int.TryParse(value?.ToString(), out var result) ? result : 0;
+        }
+
+
+        private void loadtempsale()
+        {
+            if(!File.Exists("Temporarydata.json")) return;
+            string json = File.ReadAllText("Temporarydata.json");
+            var data = JsonConvert.DeserializeObject<Temporarycustomersale>(json);
+            txtcustsearch.Text = data.customername;
+            txtproductsearch.Text = data.productname;
+            txtfinaldiscount.Text = data.totaldiscount.ToString();
+            txtfinalprice.Text = data.finalpriceafterdisc.ToString();
+            totalwithoutdisc.Text = data.totalprice.ToString();
+            dateTimePicker1.Value = data.date;
+            dataGridView1.Rows.Clear();
+            foreach(var item in data.items)
+            {
+                dataGridView1.Rows.Add(item.productname, item.description , item.unitprice , item.quantity , item.discount ,item.total , item.finalprice);
+            }
+        }
+
+        private void Customersale_Load(object sender, EventArgs e)
+        {
+            loadtempsale();
+        }
+        private void Customersale_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            savetempsale();
+        }
+
+        private void Customersale_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!this.Visible)
+            {
+                savetempsale();
+            }
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                int id = _customersaledl.getcustomerid(txtcustsearch.Text);
+                bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
+                if (result)
+                {
+                    MessageBox.Show("data saved successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Data not saved to the database");
+                    return;
+                }
+            }
+            catch  (Exception ex) 
+            {
+                MessageBox.Show("Error in saving the data to database " + ex.Message);
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace fertilizesop.UI
+﻿using System;
+using System.Windows.Forms;
+
+namespace fertilizesop.UI
 {
     partial class Customersale
     {
@@ -39,6 +42,12 @@
             this.txtproductsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.totalwithoutdisc = new System.Windows.Forms.TextBox();
             this.txtfinaldiscount = new System.Windows.Forms.TextBox();
             this.txtfinalprice = new System.Windows.Forms.TextBox();
@@ -47,10 +56,7 @@
             this.txtcustsearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtpaidamount = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -157,6 +163,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel1.Controls.Add(this.txtpaidamount);
+            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.iconButton1);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -177,23 +186,80 @@
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(47, 811);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(327, 26);
+            this.dateTimePicker1.TabIndex = 15;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Print;
+            this.iconButton1.IconColor = System.Drawing.Color.Green;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(614, 811);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(150, 64);
+            this.iconButton1.TabIndex = 14;
+            this.iconButton1.Text = "print";
+            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(591, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(127, 20);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "search customer";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1191, 206);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Final Price";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1191, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(104, 20);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "total discount";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1191, 103);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Total price";
+            // 
             // totalwithoutdisc
             // 
-            this.totalwithoutdisc.Location = new System.Drawing.Point(1302, 771);
+            this.totalwithoutdisc.Location = new System.Drawing.Point(1302, 97);
             this.totalwithoutdisc.Name = "totalwithoutdisc";
             this.totalwithoutdisc.Size = new System.Drawing.Size(276, 26);
             this.totalwithoutdisc.TabIndex = 9;
             // 
             // txtfinaldiscount
             // 
-            this.txtfinaldiscount.Location = new System.Drawing.Point(1305, 819);
+            this.txtfinaldiscount.Location = new System.Drawing.Point(1302, 153);
             this.txtfinaldiscount.Name = "txtfinaldiscount";
             this.txtfinaldiscount.Size = new System.Drawing.Size(276, 26);
             this.txtfinaldiscount.TabIndex = 8;
             // 
             // txtfinalprice
             // 
-            this.txtfinalprice.Location = new System.Drawing.Point(1305, 876);
+            this.txtfinalprice.Location = new System.Drawing.Point(1305, 203);
             this.txtfinalprice.Name = "txtfinalprice";
             this.txtfinalprice.Size = new System.Drawing.Size(276, 26);
             this.txtfinalprice.TabIndex = 7;
@@ -246,41 +312,12 @@
             this.panel2.Size = new System.Drawing.Size(1578, 100);
             this.panel2.TabIndex = 0;
             // 
-            // label3
+            // txtpaidamount
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1182, 777);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Total price";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1182, 825);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 20);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "total discount";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1182, 882);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Final Price";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(591, 111);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 20);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "search customer";
+            this.txtpaidamount.Location = new System.Drawing.Point(1302, 876);
+            this.txtpaidamount.Name = "txtpaidamount";
+            this.txtpaidamount.Size = new System.Drawing.Size(276, 26);
+            this.txtpaidamount.TabIndex = 16;
             // 
             // Customersale
             // 
@@ -290,6 +327,8 @@
             this.Controls.Add(this.panel1);
             this.Name = "Customersale";
             this.Text = "Customersale";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customersale_FormClosing);
+            this.Load += new System.EventHandler(this.Customersale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -298,6 +337,8 @@
             this.ResumeLayout(false);
 
         }
+
+        
 
         #endregion
 
@@ -324,5 +365,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private TextBox txtpaidamount;
     }
 }
