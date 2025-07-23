@@ -44,7 +44,7 @@ namespace fertilizesop.UI
             dgvInvoice.Columns.Clear();
 
             dgvInvoice.Columns.Add("product_id", "Product ID");
-            dgvInvoice.Columns["product_id"].Visible = false; // hide it
+            //dgvInvoice.Columns["product_id"].Visible = false; // hide it
             dgvInvoice.Columns.Add("Name", "Product Name");
             dgvInvoice.Columns.Add("Description", "Description");
             dgvInvoice.Columns.Add("Price", "Price");
@@ -131,82 +131,63 @@ namespace fertilizesop.UI
             }
 
             texttotal.Text = total.ToString("0.00"); // format to 2 decimal places
+
         }
 
         private void SaveOrder()
         {
-            if (string.IsNullOrWhiteSpace(txtProductName.Text) || string.IsNullOrWhiteSpace(txtQuantity.Text) || string.IsNullOrWhiteSpace(txtdescription.Text) || string.IsNullOrWhiteSpace(Price.Text))
+            if (string.IsNullOrWhiteSpace(txtProductName.Text) || string.IsNullOrWhiteSpace(txtQuantity.Text) ||
+        string.IsNullOrWhiteSpace(txtdescription.Text) || string.IsNullOrWhiteSpace(Price.Text))
             {
-                MessageBox.Show("Please fill in product name and quantity.");
+                MessageBox.Show("Please fill in all fields.");
                 return;
             }
 
             if (!int.TryParse(txtQuantity.Text.Trim(), out int quantity))
             {
-                MessageBox.Show("Quantity should be in digits only.", "Invalid Quantity", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Quantity should be in digits only.");
                 txtQuantity.Focus();
                 return;
             }
 
             if (selectedProductId == 0)
             {
-                MessageBox.Show("Please select a valid product from the list.", "Invalid Product", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a valid product.");
                 return;
             }
-
-            // Create OrderDetail object
-            OrderDetail detail = new OrderDetail(SelctedOrder, selectedProductId, quantity);
-
 
             decimal price = Convert.ToDecimal(Price.Text.Trim());
             decimal total = price * quantity;
 
-            try
+            if (editingRowIndex != null)
             {
-                if (editingRowIndex != null)
-                {
+                dgvInvoice.Rows[(int)editingRowIndex].SetValues(
+                    selectedProductId,
+                    txtProductName.Text,
+                    txtdescription.Text,
+                    Price.Text,
+                    txtQuantity.Text,
+                    total.ToString("0.00")
+                );
 
-                    o.UpdateOrderDetail(detail);
-
-
-                    dgvInvoice.Rows[(int)editingRowIndex].SetValues(
-                        selectedProductId,
-                        txtProductName.Text,
-                        txtdescription.Text,
-                        Price.Text,
-                        txtQuantity.Text,
-                        total.ToString("0.00")
-                    );
-
-                    editingRowIndex = null;
-                    CalculateTotalAmount();
-                    MessageBox.Show("Row and database updated successfully!");
-
-                }
-                else
-                {
-
-                    o.InsertOrderDetail(detail);
-
-
-                    dgvInvoice.Rows.Add(
-                        selectedProductId,
-                        txtProductName.Text,
-                        txtdescription.Text,
-                        Price.Text,
-                        txtQuantity.Text,
-                        total.ToString("0.00")
-                    );
-
-                    CalculateTotalAmount();
-                }
+                editingRowIndex = null;
+                MessageBox.Show("Row updated in grid.");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Database error: " + ex.Message);
+                dgvInvoice.Rows.Add(
+                    selectedProductId,
+                    txtProductName.Text,
+                    txtdescription.Text,
+                    Price.Text,
+                    txtQuantity.Text,
+                    total.ToString("0.00")
+                );
             }
 
-            // Clear all input fields
+            CalculateTotalAmount();
+
+            // Clear inputs
             txtProductName.Clear();
             txtdescription.Clear();
             Price.Clear();
@@ -217,7 +198,38 @@ namespace fertilizesop.UI
         private void btnadd_Click(object sender, EventArgs e)
         {
             SaveOrder();
+            SaveTempInvoiceToJson(SelctedOrder); // ✅ Save temp after adding to grid
         }
+
+        private void SaveAllGridToDatabase()
+        {
+            if (dgvInvoice.Rows.Count == 0)
+            {
+                MessageBox.Show("No products to save.");
+                return;
+            }
+
+            try
+            {
+                foreach (DataGridViewRow row in dgvInvoice.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    int productId = Convert.ToInt32(row.Cells["product_id"].Value); // ✅ Correct
+                    int quantity = Convert.ToInt32(row.Cells["Quantity"].Value);
+
+                    OrderDetail detail = new OrderDetail(SelctedOrder, productId, quantity);
+                    o.InsertOrderDetail(detail);
+                }
+
+                MessageBox.Show("All products saved to database successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while saving to database: " + ex.Message);
+            }
+        }
+
         private void btnedit_Click(object sender, EventArgs e)
         {
 
@@ -244,22 +256,10 @@ namespace fertilizesop.UI
                 DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                   
-                    int id = Convert.ToInt32(dgvInvoice.SelectedRows[0].Cells["Product_ID"].Value);
-
-                   
-                    bool success = o.Delete(id); 
-
-                    if (success)
-                    {
+                                     
                         dgvInvoice.Rows.RemoveAt(dgvInvoice.SelectedRows[0].Index);
                         CalculateTotalAmount();
-                        MessageBox.Show("Item deleted successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to delete item from database.");
-                    }
+                        MessageBox.Show("Item deleted successfully.");                   
                 }
             }
             else
@@ -271,6 +271,7 @@ namespace fertilizesop.UI
         private void btndelete_Click(object sender, EventArgs e)
         {
             DeleteSelectedRow();
+            SaveTempInvoiceToJson(SelctedOrder); // ✅ Save temp after deleting from grid
         }
 
         private void txtProductName_TextChanged_1(object sender, EventArgs e)
@@ -312,17 +313,18 @@ namespace fertilizesop.UI
             }
         }
 
+        //PDF button Code
         private void btnsave_Click(object sender, EventArgs e)
         {
-            
+            SaveAllGridToDatabase();
 
-            // ✅ Move the actual logic outside the if
+            
             DateTime Date = DateTime.Now;
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
             saveFileDialog.Title = "Save Order Invoice";
-            saveFileDialog.FileName = "OrderInvoice.pdf";
+            saveFileDialog.FileName = $"OrderInvoice_{SelctedOrder}.pdf";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -330,9 +332,11 @@ namespace fertilizesop.UI
                 o.CreateOrderInvoicePdf(dgvInvoice, filePath, supplierName, Date);
                 MessageBox.Show("PDF Generated Successfully.");
 
-                if (File.Exists("TempInvoice.json"))
+                string tempFilePath = GetJsonFilePath(SelctedOrder);
+
+                if (File.Exists(tempFilePath))
                 {
-                    File.Delete("TempInvoice.json");
+                    File.Delete(tempFilePath);
                 }
 
                 ClearInvoiceForm();
@@ -348,11 +352,14 @@ namespace fertilizesop.UI
         {
            
             dgvInvoice.Rows.Clear();
+            texttotal.Clear();
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Validate data
+            
             if (dgvInvoice.Rows.Count == 0)
             {
                 MessageBox.Show("No items to print in invoice.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -364,9 +371,11 @@ namespace fertilizesop.UI
             o.PrintOrderInvoiceDirectly(dgvInvoice, supplierName, purchaseDate);
 
 
-            if (File.Exists("TempInvoice.json"))
+            string tempFilePath = GetJsonFilePath(SelctedOrder);
+
+            if (File.Exists(tempFilePath))
             {
-                File.Delete("TempInvoice.json");
+                File.Delete(tempFilePath);
             }
 
 
@@ -375,52 +384,18 @@ namespace fertilizesop.UI
             MessageBox.Show("Invoice printed", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // storing data functions here
-
-        private void SaveTempInvoice()
-        {
-            var data = new TempInvoiceData
-            {
-                Items = dgvInvoice.Rows
-                    .Cast<DataGridViewRow>()
-                    .Where(r => !r.IsNewRow)
-                    .Select(r => new InvoiceItem
-                    {
-                        ProductName = r.Cells["Name"].Value?.ToString(),
-                        Description = r.Cells["Description"].Value?.ToString(),
-                        Quantity = int.TryParse(r.Cells["Quantity"].Value?.ToString(), out int q) ? q : 0,
-                        Price = int.TryParse(r.Cells["Price"].Value?.ToString(), out int p) ? p : 0,
-                        Total = int.TryParse(r.Cells["Total"].Value?.ToString(), out int t) ? t : 0
-                    }).ToList()
-            };
-
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText("TempInvoice.json", json);
-        }
-
-        private void LoadTempInvoice()
-        {
-            if (!File.Exists("TempInvoice.json")) return;
-
-            string json = File.ReadAllText("TempInvoice.json");
-            var data = JsonConvert.DeserializeObject<TempInvoiceData>(json);
-            dgvInvoice.Rows.Clear();
-            foreach (var item in data.Items)
-            {
-                dgvInvoice.Rows.Add(item.ProductName, item.Description, item.Quantity, item.Price, item.Total);
-            }
-        }
-
-        //keys function 
+       
+        //keys functions here
+        
 
         private int selectedRowIndex;
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // When Enter is pressed and focus is NOT on DataGridView (to avoid accidental row edits)
+           
             if (keyData == Keys.Enter && !(ActiveControl is DataGridView))
             {
-                btnadd.PerformClick(); // Simulate button click
-                return true; // Mark event as handled
+                btnadd.PerformClick();
+                return true;
             }
 
             else if (keyData == (Keys.Control | Keys.S))
@@ -459,23 +434,81 @@ namespace fertilizesop.UI
             return base.ProcessCmdKey(ref msg, keyData); // Allow default behavior
         }
 
+        //Json functions here
+
         private void PlacingOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveTempInvoice();
+            SaveTempInvoiceToJson(SelctedOrder);
         }
 
         private void PlacingOrder_Load(object sender, EventArgs e)
         {
-            LoadTempInvoice();
+            LoadTempInvoiceFromJson(SelctedOrder);
         }
 
         private void PlacingOrder_VisibleChanged(object sender, EventArgs e)
         {
             if (!this.Visible)
             {
-                SaveTempInvoice();
+                SaveTempInvoiceToJson(SelctedOrder);
             }
         }
+
+        private string GetJsonFilePath(int SelctedOrder)
+        {
+            string folder = Path.Combine(Application.StartupPath, "TempInvoices");
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            return Path.Combine(folder, $"Invoice_{SelctedOrder}.json");
+        }
+
+        private void SaveTempInvoiceToJson(int SelctedOrder)
+        {
+            var items = new List<TempInvoiceItem>();
+
+            foreach (DataGridViewRow row in dgvInvoice.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    items.Add(new TempInvoiceItem
+                    {
+                        ProductId = Convert.ToInt32(row.Cells["product_id"].Value),
+                        ProductName = row.Cells["Name"].Value?.ToString(),
+                        Description = row.Cells["Description"].Value?.ToString(),
+                        Price = Convert.ToDecimal(row.Cells["Price"].Value),
+                        Quantity = Convert.ToInt32(row.Cells["Quantity"].Value)
+                    });
+                }
+            }
+
+            string json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            File.WriteAllText(GetJsonFilePath(SelctedOrder), json);
+        }
+
+        private void LoadTempInvoiceFromJson(int SelctedOrder)
+        {
+            string filePath = GetJsonFilePath(SelctedOrder);
+            if (!File.Exists(filePath)) return;
+
+            string json = File.ReadAllText(filePath);
+            var items = JsonConvert.DeserializeObject<List<TempInvoiceItem>>(json);
+
+            dgvInvoice.Rows.Clear();
+            foreach (var item in items)
+            {
+                dgvInvoice.Rows.Add(
+                    item.ProductId,
+                    item.ProductName,
+                    item.Description,
+                    item.Price,
+                    item.Quantity,
+                    item.Total
+                );
+            }
+        }
+
+
     }
 
 }
