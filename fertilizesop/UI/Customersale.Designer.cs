@@ -55,8 +55,8 @@ namespace fertilizesop.UI
             this.sale_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.final = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.final = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -72,8 +72,8 @@ namespace fertilizesop.UI
             this.sale_price,
             this.quantity,
             this.discount,
-            this.final,
-            this.total});
+            this.total,
+            this.final});
             this.dataGridView1.Location = new System.Drawing.Point(6, 235);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
@@ -303,21 +303,21 @@ namespace fertilizesop.UI
             this.discount.MinimumWidth = 8;
             this.discount.Name = "discount";
             // 
-            // final
-            // 
-            this.final.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.final.DataPropertyName = "final";
-            this.final.HeaderText = "total";
-            this.final.MinimumWidth = 8;
-            this.final.Name = "final";
-            // 
             // total
             // 
             this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.total.DataPropertyName = "total";
-            this.total.HeaderText = "Final";
+            this.total.HeaderText = "total";
             this.total.MinimumWidth = 8;
             this.total.Name = "total";
+            // 
+            // final
+            // 
+            this.final.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.final.DataPropertyName = "final";
+            this.final.HeaderText = "Final";
+            this.final.MinimumWidth = 8;
+            this.final.Name = "final";
             // 
             // Customersale
             // 
@@ -366,7 +366,7 @@ namespace fertilizesop.UI
         private DataGridViewTextBoxColumn sale_price;
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewTextBoxColumn discount;
-        private DataGridViewTextBoxColumn final;
         private DataGridViewTextBoxColumn total;
+        private DataGridViewTextBoxColumn final;
     }
 }
