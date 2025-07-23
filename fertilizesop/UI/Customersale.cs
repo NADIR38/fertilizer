@@ -269,6 +269,11 @@ namespace fertilizesop.UI
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (dataGridView1.Focused)
+            {
+                this.ActiveControl = dataGridView1; // Ensures focus stays on the DataGridView
+            }
+
             // Get column name being edited
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
@@ -287,8 +292,8 @@ namespace fertilizesop.UI
                 DataGridViewRow row = dataGridView1.Rows[rowIndex];
 
                 // Get cell values
-                decimal salePrice = Convert.ToDecimal(row.Cells["sale_price"].Value ?? 0);
-                decimal discount = Convert.ToDecimal(row.Cells["discount"].Value ?? 0);
+                int salePrice = Convert.ToInt32(row.Cells["sale_price"].Value ?? 0);
+                int discount = Convert.ToInt32(row.Cells["discount"].Value ?? 0);
                 int quantity = Convert.ToInt32(row.Cells["quantity"].Value ?? 0);
 
                 // Validation
@@ -300,9 +305,9 @@ namespace fertilizesop.UI
                 }
 
                 // Calculate total
-                decimal discountedPrice = salePrice - discount;
-                decimal total = discountedPrice * quantity;
-                decimal finaltotal = salePrice * quantity;
+                int discountedPrice = salePrice - discount;
+                int total = discountedPrice * quantity;
+                int finaltotal = salePrice * quantity;
 
                 // Set total cell value
                 row.Cells["total"].Value = total;
@@ -516,6 +521,17 @@ namespace fertilizesop.UI
             }
         }
 
+        private void clearallfields()
+        {
+            txtcustsearch.Clear();
+            txtproductsearch.Clear();
+            txtfinaldiscount.Clear();
+            txtfinalprice.Clear();
+            totalwithoutdisc.Clear();
+            dataGridView1.ClearSelection();
+            txtpaidamount.Clear();
+        }
+
         private void iconButton1_Click(object sender, EventArgs e)
         {
             try
@@ -526,6 +542,7 @@ namespace fertilizesop.UI
                 if (result)
                 {
                     MessageBox.Show("data saved successfully");
+                    clearallfields();
                 }
                 else
                 {
