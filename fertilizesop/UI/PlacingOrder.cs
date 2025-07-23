@@ -416,11 +416,10 @@ namespace fertilizesop.UI
         private int selectedRowIndex;
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // When Enter is pressed and focus is NOT on DataGridView (to avoid accidental row edits)
             if (keyData == Keys.Enter && !(ActiveControl is DataGridView))
             {
-                btnadd.PerformClick(); // Simulate button click
-                return true; // Mark event as handled
+                btnadd.PerformClick(); 
+                return true; 
             }
 
             else if (keyData == (Keys.Control | Keys.S))
