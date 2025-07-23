@@ -97,7 +97,6 @@ namespace fertilizesop.UI
             {
                 DataView dv = dt.DefaultView;
                 dv.RowFilter = $@"
-            Convert(OrderID, 'System.String') LIKE '%{keyword}%' OR
             SupplierName LIKE '%{keyword}%' OR
             ProductName LIKE '%{keyword}%'";
 

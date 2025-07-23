@@ -95,10 +95,8 @@ namespace fertilizesop.DL
             {
                 string query = @"
             SELECT 
-                o.order_id              AS OrderID,
                 s.name                  AS SupplierName,
                 o.date                  AS OrderDate,
-                od.orderdetail_id      AS DetailID,
                 p.name                  AS ProductName,
                 od.quantity             AS Quantity,
                 p.sale_price            AS SalePrice
