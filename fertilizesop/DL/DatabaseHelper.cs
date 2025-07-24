@@ -184,7 +184,7 @@ namespace KIMS
             }
             return suppliers;
         }
-        internal List<string> GetSuppliers(string keyword)
+        public List<string> GetSuppliers(string keyword)
         {
             List<string> suppliers = new List<string>();
             try

@@ -31,6 +31,32 @@ namespace fertilizesop.UI
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // 🔹 ESC hides the edit panel
+            if (keyData == Keys.Escape)
+            {
+                if (paneledit.Visible)
+                {
+                    paneledit.Visible = false;
+                    return true;
+                }
+            }
+
+            // 🔹 Ctrl + Enter = Save when panel is visible
+            if (keyData == (Keys.Control | Keys.Enter))
+            {
+                if (paneledit.Visible)
+                {
+                    btnsave1.PerformClick();
+                    return true;
+                }
+                else if (dataGridView2.Focused || dataGridView2.ContainsFocus)
+                {
+                    PerformGridButtonClick("Edit"); // View Details
+                    return true;
+                }
+            }
+
+            // 🔹 Enter = Perform Add Payment from grid
             if (keyData == Keys.Enter)
             {
                 if (paneledit.Visible)
@@ -38,10 +64,36 @@ namespace fertilizesop.UI
                     btnsave1.PerformClick();
                     return true;
                 }
-
+                else if (dataGridView2.Focused || dataGridView2.ContainsFocus)
+                {
+                    PerformGridButtonClick("Delete"); // Add Payment
+                    return true;
+                }
             }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void PerformGridButtonClick(string buttonColumnName)
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+                int rowIndex = dataGridView2.CurrentRow.Index;
+
+                for (int col = 0; col < dataGridView2.Columns.Count; col++)
+                {
+                    if (dataGridView2.Columns[col] is DataGridViewButtonColumn &&
+                        dataGridView2.Columns[col].Name == buttonColumnName)
+                    {
+                        // Manually trigger CellContentClick
+                        dataGridView2_CellContentClick(dataGridView2,
+                            new DataGridViewCellEventArgs(col, rowIndex));
+                        break;
+                    }
+                }
+            }
+        }
+
 
         private void Supplierbillsform_Load(object sender, EventArgs e)
         {
@@ -117,7 +169,6 @@ namespace fertilizesop.UI
 
             UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
             UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payement");
-            UIHelper.ApplyButtonStyles(dataGridView2);
         }
 
 

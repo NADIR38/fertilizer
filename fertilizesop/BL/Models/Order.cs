@@ -13,15 +13,21 @@ namespace fertilizesop.BL.Models
             public int SupplierId { get; set; }
             public DateTime OrderDate { get; set; }
             public string status { get; set; }
-
+        public string supplier_name { get; set; }
         public Order(int supplierId,DateTime date,string sts)
             {
             SupplierId=supplierId;
             OrderDate=date;
             status = sts;
             }
-
+        public Order(int supplierId, DateTime date, string sts,string supplier_name)
+        {
+            SupplierId = supplierId;
+            OrderDate = date;
+            status = sts;
+            this.supplier_name = supplier_name;
         }
+    }
 
     public class OrderDetail
         {

@@ -135,7 +135,12 @@
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Models\Dashboard.cs" />
+    <Compile Include="BL\Models\inventorylog.cs" />
     <Compile Include="BL\Models\Temporarycustomersale.cs" />
+    <Compile Include="DL\DashboardDL.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IInventorylogDl.cs" />
+    <Compile Include="DL\InventorylogDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ISbilldetailsBl.cs" />
     <Compile Include="BL\Bl\SbilldetailsBl.cs" />
     <Compile Include="BL\Models\Spricerecord.cs" />
