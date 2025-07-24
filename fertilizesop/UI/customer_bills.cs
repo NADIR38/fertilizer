@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using fertilizesop.BL.Bl;
 using fertilizesop.BL.Models;
+using fertilizesop.DL;
 using FontAwesome.Sharp;
 
 namespace fertilizesop.UI
@@ -29,6 +30,7 @@ namespace fertilizesop.UI
         {
 
             load();
+            LoadBillingRecords();
             dataGridView2.Focus();
         }
 
@@ -58,41 +60,54 @@ namespace fertilizesop.UI
         //    }
         //}
 
+
+        private void OpenBillDetailsForm(int billId)
+        {
+            try
+            {
+                var billDetailsForm = new CustomerBill_SpecificProducts(billId);
+                billDetailsForm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening bill details: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            try
             {
-                string columnName = dataGridView2.Columns[e.ColumnIndex].Name;
-
-                if (columnName == "Edit")
+                if (e.RowIndex >= 0)
                 {
-                    var selectedBill = dataGridView2.Rows[e.RowIndex].DataBoundItem as Supplierbill;
+                    var clickedColumn = dataGridView2.Columns[e.ColumnIndex];
 
-                    if (selectedBill != null)
+                    if (clickedColumn.Name == "btnDetails")
                     {
-                        // Open new form and pass selected bill ID
-                        var detailsForm = new Sbilldetailform(selectedBill.bill_id);
-                        detailsForm.ShowDialog();
+                        var billIdCell = dataGridView2.Rows[e.RowIndex].Cells["BillID"];
+                        if (billIdCell.Value != null && int.TryParse(billIdCell.Value.ToString(), out int billId))
+                            OpenBillDetailsForm(billId);
+                    }
+                    else if (clickedColumn.Name == "btnPayment")
+                    {
+                        var row = dataGridView2.Rows[e.RowIndex];
+
+                        // Fetch values
+                        txtname1.Text = row.Cells["CustomerName"].Value?.ToString();
+                        txtbill.Text = row.Cells["BillID"].Value?.ToString();
+                        txtamount.Text = row.Cells["DueAmount"].Value?.ToString();
+                        txtpayment.Clear();
+                        txtremarks.Clear();
+                        txtdate.Text = DateTime.Now.ToString();
+
+                        paneledit.Visible = true;
                     }
                 }
-                if (columnName == "Delete")
-                {
-                    var selectedBill = dataGridView2.Rows[e.RowIndex].DataBoundItem as Supplierbill;
-
-                    if (selectedBill != null)
-                    {
-                        // Assign data to panel textboxes (ensure these exist on your form)
-                        txtname1.Text = selectedBill.supplier_name;
-                        txtamount.Text = selectedBill.pending.ToString("0.00");
-                        txtbill.Text = selectedBill.bill_id.ToString();
-                        txtdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-
-                        // Show the panel centered
-                        UIHelper.RoundPanelCorners(paneledit, 20);
-                        UIHelper.ShowCenteredPanel(this, paneledit);
-                    }
-                }
-
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show("Error in buttons " + ex.Message);
             }
         }
 
@@ -130,41 +145,6 @@ namespace fertilizesop.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Error in fetching the customer bills: " + ex.Message);
-            }
-        }
-
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Enter)
-            {
-                if (paneledit.Visible)
-                {
-                    btnsave1.PerformClick();
-                    return true;
-                }
-
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        private void LoadBillingRecords(string searchTerm = "")
-        {
-            try
-            {
-                DataTable dt = _billingBL.GetBillingRecords(searchTerm);
-                dataGridView2.DataSource = dt;
-
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridView2.ClearSelection();
-                    AddDetailsButtonColumn();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading billing records: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -212,6 +192,41 @@ namespace fertilizesop.UI
             dataGridView2.Columns.Add(btnDetails);
             dataGridView2.Columns.Add(btnPayment);
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (paneledit.Visible)
+                {
+                    btnsave1.PerformClick();
+                    return true;
+                }
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void LoadBillingRecords(string searchTerm = "")
+        {
+            try
+            {
+                DataTable dt = _billingBL.GetBillingRecords(searchTerm);
+                dataGridView2.DataSource = dt;
+
+                if (dt.Rows.Count > 0)
+                {
+                    dataGridView2.ClearSelection();
+                    AddDetailsButtonColumn();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading billing records: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
        
@@ -268,7 +283,7 @@ namespace fertilizesop.UI
 
         private void pictureBox10_Click(object sender, EventArgs e)
         {
-            load();
+            LoadBillingRecords();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -293,7 +308,58 @@ namespace fertilizesop.UI
 
         private void btnsave1_Click(object sender, EventArgs e)
         {
+            // Validate payment input
+            if (!decimal.TryParse(txtpayment.Text, out decimal payment) || payment <= 0)
+            {
+                MessageBox.Show("Enter a valid payment amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Extract other fields
+            string customerName = txtname1.Text.Trim();
+            if (!int.TryParse(txtbill.Text, out int billId))
+            {
+                MessageBox.Show("Invalid Bill ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string remarks = txtremarks.Text.Trim();
+
+            if (!DateTime.TryParse(txtdate.Text, out DateTime date))
+            {
+                MessageBox.Show("Enter a valid date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Create record object
+                var record = new Customerrecord
+                (0,
+                    customerName,
+                    payment,
+                    date,
+                    billId,
+                    remarks
+                );
+
+                // Call DL method
+                bool result = BillingRecordsOverviewDL.AddRecord(record);
+
+                if (result)
+                {
+                    MessageBox.Show("Payment recorded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBillingRecords(); // Reload updated data
+                }
+                else
+                {
+                    MessageBox.Show("Failed to record payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving payment: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void label5_Click(object sender, EventArgs e)

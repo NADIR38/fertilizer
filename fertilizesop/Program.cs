@@ -76,9 +76,7 @@ namespace fertilizesop
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
             services.AddTransient<customer_bills>();
-
-
-
+            services.AddTransient<CustomerBill_SpecificProducts>();
 
 
         }

@@ -134,12 +134,18 @@
   <ItemGroup>
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
+    <Compile Include="BL\Bl\BillingRecordsOverviewBL.cs" />
     <Compile Include="BL\Bl\Customerbillbl.cs" />
+    <Compile Include="BL\Bl\Customerbilldetailbl.cs" />
+    <Compile Include="BL\Bl\CustomerBill_SpecificProductsBL.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
     <Compile Include="BL\Models\Customerbill.cs" />
     <Compile Include="BL\Models\Customerrecord.cs" />
     <Compile Include="BL\Models\Temporarycustomersale.cs" />
+    <Compile Include="DL\BillingRecordsOverviewDL.cs" />
+    <Compile Include="DL\Customerbilldetaildl.cs" />
     <Compile Include="DL\Customerbilldl.cs" />
+    <Compile Include="DL\CustomerBill_SpecificProductsDL.cs" />
     <Compile Include="Interfaces\BLInterfaces\ISbilldetailsBl.cs" />
     <Compile Include="BL\Bl\SbilldetailsBl.cs" />
     <Compile Include="BL\Models\Spricerecord.cs" />
@@ -228,6 +234,12 @@
     </Compile>
     <Compile Include="UI\Batchform.Designer.cs">
       <DependentUpon>Batchform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerBill_SpecificProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CustomerBill_SpecificProducts.Designer.cs">
+      <DependentUpon>CustomerBill_SpecificProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\customer_bills.cs">
       <SubType>Form</SubType>
@@ -324,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Batchform.resx">
       <DependentUpon>Batchform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomerBill_SpecificProducts.resx">
+      <DependentUpon>CustomerBill_SpecificProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\customer_bills.resx">
       <DependentUpon>customer_bills.cs</DependentUpon>
