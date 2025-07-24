@@ -135,10 +135,13 @@
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
+    <Compile Include="BL\Bl\TransactionBL.cs" />
     <Compile Include="BL\Models\Dashboard.cs" />
     <Compile Include="BL\Models\inventorylog.cs" />
     <Compile Include="BL\Models\Temporarycustomersale.cs" />
+    <Compile Include="BL\Models\Transaction.cs" />
     <Compile Include="DL\DashboardDL.cs" />
+    <Compile Include="DL\TransactionDAL.cs" />
     <Compile Include="Interfaces\DLinterfaces\IInventorylogDl.cs" />
     <Compile Include="DL\InventorylogDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ISbilldetailsBl.cs" />
@@ -218,6 +221,12 @@
     <Compile Include="UI\Addsupplier.Designer.cs">
       <DependentUpon>Addsupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\AddTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddTransaction.Designer.cs">
+      <DependentUpon>AddTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\BatchDetailsform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,12 +238,6 @@
     </Compile>
     <Compile Include="UI\Batchform.Designer.cs">
       <DependentUpon>Batchform.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Customerbill.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Customerbill.Designer.cs">
-      <DependentUpon>Customerbill.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CustomerForm.cs">
       <SubType>Form</SubType>
@@ -304,6 +307,12 @@
     <Compile Include="UI\supplierform.Designer.cs">
       <DependentUpon>supplierform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\transactionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\transactionView.Designer.cs">
+      <DependentUpon>transactionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIHelper.cs" />
     <EmbeddedResource Include="UI\Addbatchdetailsform.resx">
       <DependentUpon>Addbatchdetailsform.cs</DependentUpon>
@@ -320,14 +329,14 @@
     <EmbeddedResource Include="UI\Addsupplier.resx">
       <DependentUpon>Addsupplier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\AddTransaction.resx">
+      <DependentUpon>AddTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\BatchDetailsform.resx">
       <DependentUpon>BatchDetailsform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Batchform.resx">
       <DependentUpon>Batchform.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Customerbill.resx">
-      <DependentUpon>Customerbill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
@@ -371,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\supplierform.resx">
       <DependentUpon>supplierform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\transactionView.resx">
+      <DependentUpon>transactionView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />
