@@ -41,56 +41,60 @@ namespace fertilizesop.UI
             btnBack.Click += BtnBack_Click;
         }
 
-        private void CustomerBill_SpecificProducts_Load(object sender, EventArgs e)
-        {
-            LoadBillData();
-            LoadPayments();
-            StyleDataGridView();
-        }
-        private void LoadPayments()
-        {
-            var list = BillingRecordsOverviewDL.getrecord(_currentBillId);
-            dataGridView1.DataSource = list;
-
-            // Apply styles
-            StylePaymentsGrid();
-
-            // Hide internal columns if needed
-            dataGridView1.Columns["name"].Visible = false;
-            dataGridView1.Columns["suppid"].Visible = false;
-            dataGridView1.Columns["bill_id"].Visible = false;
-            dataGridView1.Columns["id"].Visible = false;
-        }
-
-        private void LoadBillData()
+        private async void CustomerBill_SpecificProducts_Load(object sender, EventArgs e)
         {
             try
             {
-                // Load bill summary
-                DataTable billSummary = _billBL.GetBillSummary(_currentBillId);
-                if (billSummary.Rows.Count > 0)
-                {
-                    DataRow row = billSummary.Rows[0];
-                    lblname.Text = row["CustomerName"].ToString();
-
-                    // Format amounts as PKR using BL method
-                    lbltotal.Text = _billBL.FormatCurrency(
-                        Convert.ToDecimal(row["TotalAmount"]));
-                    lblpaid.Text = _billBL.FormatCurrency(
-                        Convert.ToDecimal(row["PaidAmount"]));
-                    lblpending.Text = _billBL.FormatCurrency(
-                        Convert.ToDecimal(row["PendingAmount"]));
-                }
-
-                // Load bill details
-                DataTable billDetails = _billBL.GetBillDetails(_currentBillId);
-                dataGridView2.DataSource = billDetails;
+                await LoadBillDataAsync();
+                await LoadPaymentsAsync();
+                StyleDataGridView();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading bill data: " + ex.Message, "Error",
+                MessageBox.Show($"Error loading bill data: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async Task LoadBillDataAsync()
+        {
+            // Load bill summary
+            DataTable billSummary = await Task.Run(() => _billBL.GetBillSummary(_currentBillId));
+            if (billSummary.Rows.Count > 0)
+            {
+                DataRow row = billSummary.Rows[0];
+                lblname.Invoke((MethodInvoker)(() => lblname.Text = row["CustomerName"].ToString()));
+                lbltotal.Invoke((MethodInvoker)(() => lbltotal.Text = _billBL.FormatCurrency(
+                    Convert.ToDecimal(row["TotalAmount"]))));
+                lblpaid.Invoke((MethodInvoker)(() => lblpaid.Text = _billBL.FormatCurrency(
+                    Convert.ToDecimal(row["PaidAmount"]))));
+                lblpending.Invoke((MethodInvoker)(() => lblpending.Text = _billBL.FormatCurrency(
+                    Convert.ToDecimal(row["PendingAmount"]))));
+            }
+
+            // Load bill details
+            DataTable billDetails = await Task.Run(() => _billBL.GetBillDetails(_currentBillId));
+            dataGridView2.Invoke((MethodInvoker)(() =>
+            {
+                dataGridView2.DataSource = billDetails;
+                StyleDataGridView();
+            }));
+        }
+
+        private async Task LoadPaymentsAsync()
+        {
+            var list = await Task.Run(() => BillingRecordsOverviewDL.getrecord(_currentBillId));
+            dataGridView1.Invoke((MethodInvoker)(() =>
+            {
+                dataGridView1.DataSource = list;
+                StylePaymentsGrid();
+
+                // Hide internal columns
+                if (dataGridView1.Columns.Contains("name")) dataGridView1.Columns["name"].Visible = false;
+                if (dataGridView1.Columns.Contains("suppid")) dataGridView1.Columns["suppid"].Visible = false;
+                if (dataGridView1.Columns.Contains("bill_id")) dataGridView1.Columns["bill_id"].Visible = false;
+                if (dataGridView1.Columns.Contains("id")) dataGridView1.Columns["id"].Visible = false;
+            }));
         }
 
         private void StyleDataGridView()
