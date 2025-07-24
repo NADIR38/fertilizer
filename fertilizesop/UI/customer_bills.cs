@@ -21,14 +21,13 @@ namespace fertilizesop.UI
         {
             InitializeComponent();
             _billingBL = new Customerbillbl();
-            this.Load += Customerbill_Load;
+            this.Load += customer_bills_load;
             paneledit.Visible = false;
             UIHelper.StyleGridView(dataGridView2);
         }
 
-        private void Customerbill_Load(object sender, EventArgs e)
+        private void customer_bills_load(object sender, EventArgs e)
         {
-
             load();
             LoadBillingRecords();
             dataGridView2.Focus();
@@ -112,8 +111,8 @@ namespace fertilizesop.UI
                     dataGridView2.Columns["batch_name"].Visible = false;
                 }
 
-                UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
-                UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
+                //UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
+                //UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
             }
             catch (Exception ex)
             {
@@ -377,8 +376,8 @@ namespace fertilizesop.UI
                     dataGridView2.Columns["batch_name"].Visible = false;
                 }
 
-                UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
-                UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
+                //UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
+                //UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
             }catch (Exception ex)
             {
                 MessageBox.Show("error in searching " + ex.Message );
@@ -393,6 +392,42 @@ namespace fertilizesop.UI
         private void paneledit_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(textBox1.Text))
+                {
+                    return;
+                }
+                var billdeta = _billingBL.searchbill(textBox1.Text);
+                dataGridView2.DataSource = billdeta;
+                dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                if (dataGridView2.Columns.Contains("customer_id"))
+                {
+                    dataGridView2.Columns["customer_id"].Visible = false;
+                }
+
+                if (dataGridView2.Columns.Contains("batch_name"))
+                {
+                    dataGridView2.Columns["batch_name"].Visible = false;
+                }
+
+                UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
+                UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error in searching " + ex.Message);
+            }
+        }
+
+        private void pictureBox10_Click_1(object sender, EventArgs e)
+        {
+            load();
         }
     }
 }
