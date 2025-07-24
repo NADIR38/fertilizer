@@ -10,12 +10,11 @@ namespace fertilizesop.BL.Models
     {
         public int totalproducts { get; set; }
         public int total_stock { get; set; }
-        public int totalcustomerstoday { get; set; }
+        public int totalcustomers { get; set; }
         public int salestodays { get; set; }
         public int totalsuppliers { get; set; }
-        public string outproduct { get; set; }
+        public int outproduct { get; set; }
         public int pendingbills { get; set; }
-        public int totalmoney { get; set; }
         public int total_stock_value { get; set; }
 
         public Dashboard() { }

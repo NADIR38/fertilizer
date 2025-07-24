@@ -2,6 +2,7 @@
 using fertilizesop.BL.Models;
 using fertilizesop.Interfaces.BLInterfaces;
 using KIMS;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
@@ -344,5 +345,10 @@ namespace fertilizesop.UI
             SaveTempData();
         }
 
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            var f=Program.ServiceProvider.GetRequiredService<Addproductform>();
+            f.ShowDialog(this);
+        }
     }
 }

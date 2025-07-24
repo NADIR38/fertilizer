@@ -57,6 +57,7 @@ namespace fertilizesop.UI
             this.txtcustsearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -168,6 +169,7 @@ namespace fertilizesop.UI
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.txtpaidamount);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.iconButton1);
@@ -195,7 +197,8 @@ namespace fertilizesop.UI
             // 
             // txtpaidamount
             // 
-            this.txtpaidamount.Location = new System.Drawing.Point(1157, 701);
+            this.txtpaidamount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtpaidamount.Location = new System.Drawing.Point(1079, 678);
             this.txtpaidamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtpaidamount.Name = "txtpaidamount";
             this.txtpaidamount.Size = new System.Drawing.Size(246, 22);
@@ -295,10 +298,10 @@ namespace fertilizesop.UI
             // 
             // delete
             // 
-            this.delete.Location = new System.Drawing.Point(318, 146);
+            this.delete.Location = new System.Drawing.Point(318, 145);
             this.delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(67, 26);
+            this.delete.Size = new System.Drawing.Size(67, 36);
             this.delete.TabIndex = 6;
             this.delete.Text = "delete";
             this.delete.UseVisualStyleBackColor = true;
@@ -309,7 +312,7 @@ namespace fertilizesop.UI
             this.button1.Location = new System.Drawing.Point(318, 107);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 21);
+            this.button1.Size = new System.Drawing.Size(67, 34);
             this.button1.TabIndex = 5;
             this.button1.Text = "Enter";
             this.button1.UseVisualStyleBackColor = true;
@@ -344,6 +347,17 @@ namespace fertilizesop.UI
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1407, 80);
             this.panel2.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(1079, 660);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(93, 16);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "paid Amount";
             // 
             // Customersale
             // 
@@ -395,5 +409,6 @@ namespace fertilizesop.UI
         private DataGridViewTextBoxColumn discount;
         private DataGridViewTextBoxColumn total;
         private DataGridViewTextBoxColumn final;
+        private Label label7;
     }
 }

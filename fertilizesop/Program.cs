@@ -33,7 +33,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<customer_bills>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -45,6 +45,8 @@ namespace fertilizesop
             services.AddScoped<IProductsDl,ProductsDl>();
             services.AddScoped<ISupplierbillDl, SupplierbillDl>();
             services.AddScoped<ISbilldetailsDl, SbilldetailsDl>();
+            services.AddScoped<IDashboardDL,DashboardDL>();
+            services.AddScoped<IInventorylogDl, InventorylogDl>();
 
 
             //Bl Layer
@@ -57,6 +59,8 @@ namespace fertilizesop
             services.AddScoped<ISupplierBillBl, SupplierBillBl>();
             services.AddScoped<ISbilldetailsBl, SbilldetailsBl>();
             services.AddTransient<Supplierbillsform>();
+            services.AddScoped<IdashboardBl, dashboardBl>();
+            services.AddScoped<IInventorylogBl, InventorylogBl>();
 
 
 
@@ -78,8 +82,9 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
-            //services.AddTransient<transactionView>();
-            //services.AddTransient<AddTransaction>();
+            services.AddTransient<transactionView>();
+            services.AddTransient<AddTransaction>();
+            services.AddTransient<Inventorylogform>();
 
 
 

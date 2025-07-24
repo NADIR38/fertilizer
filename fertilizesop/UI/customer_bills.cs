@@ -351,7 +351,7 @@ namespace fertilizesop.UI
 
         private void btncancle1_Click(object sender, EventArgs e)
         {
-
+            paneledit.Visible=false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

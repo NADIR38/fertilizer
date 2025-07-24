@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace fertilizesop.DL
 {
-    public class DashboardDL
+    public class DashboardDL : IDashboardDL
     {
         public int totalstock()
         {
@@ -72,7 +72,7 @@ namespace fertilizesop.DL
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();
-                    string query = @"SELECT COUNT(*) AS customers FROM customers WHERE type = 'regular';";
+                    string query = @"SELECT COUNT(*) AS customers FROM customers;";
 
                     using (var cmd = new MySqlCommand(query, conn))
                     using (var reader = cmd.ExecuteReader())
@@ -145,7 +145,7 @@ namespace fertilizesop.DL
                 throw new Exception("Error: " + ex.Message, ex);
             }
         }
-        public int totalbank()
+        public int totalproducts()
         {
             try
             {
@@ -215,7 +215,7 @@ namespace fertilizesop.DL
             return result;
         }
 
-     
+
 
         public List<(string MonthName, decimal TotalSales)> GetMonthlySalesComparison()
         {
@@ -426,5 +426,54 @@ namespace fertilizesop.DL
 
             return result;
         }
+        public List<(string ProductName, int QuantitySold)> GetTopSellingProducts()
+        {
+            var result = new List<(string, int)>();
+
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"
+               SELECT 
+                    p.name AS product_name,
+                    SUM(cd.quantity) AS total_quantity
+                FROM 
+                    customer_bill_details cd
+                JOIN 
+                    products p ON cd.product_id = p.product_id
+                JOIN 
+                    customerbills cb ON cb.billid = cd.Bill_id
+                WHERE 
+                    MONTH(cb.SaleDate) = MONTH(CURDATE())
+                    AND YEAR(cb.SaleDate) = YEAR(CURDATE())
+                GROUP BY 
+                    p.product_id
+                ORDER BY 
+                    total_quantity DESC
+                LIMIT 10;";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string productName = reader.GetString("product_name");
+                            int quantitySold = reader.GetInt32("total_quantity");
+
+                            result.Add((productName, quantitySold));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting top selling products: " + ex.Message, ex);
+            }
+
+            return result;
+        }
+
     }
 }

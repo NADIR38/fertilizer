@@ -113,7 +113,7 @@ namespace fertilizesop.UI
             CollapsePanel(panelbatch, 60);
             CollapsePanel(panelcust, 60);
             CollapsePanel(panelsupp, 60);
-            CollapsePanel(panelreturn, 60);
+            //CollapsePanel(panelreturn, 60);
             CollapsePanel(panelinventory, 60);
         }
 
@@ -166,23 +166,23 @@ namespace fertilizesop.UI
 
         private void iconPictureBox6_Click(object sender, EventArgs e)
         {
-            if (panelreturn.Height == 195)
-                CollapsePanel(panelreturn, 60);
-            else
-            {
-                CollapseAllTogglePanels();
-                ExpandPanel(panelreturn, 195);
-            }
+            //if (panelreturn.Height == 195)
+            //    CollapsePanel(panelreturn, 60);
+            //else
+            //{
+            //    CollapseAllTogglePanels();
+            //    ExpandPanel(panelreturn, 195);
+            //}
         }
 
         private void iconPictureBox1_Click(object sender, EventArgs e)
         {
-            if (panelinventory.Height == 251)
+            if (panelinventory.Height == 131)
                 CollapsePanel(panelinventory, 60);
             else
             {
                 CollapseAllTogglePanels();
-                ExpandPanel(panelinventory, 251);
+                ExpandPanel(panelinventory, 131);
             }
         }
 
@@ -235,7 +235,9 @@ namespace fertilizesop.UI
 
         private void btnlogout_Click(object sender, EventArgs e)
         {
-            activebutton(sender, sidebarColors[14]); // Crimson Red
+            activebutton(sender, sidebarColors[14]);
+            var f = Program.ServiceProvider.GetRequiredService<transactionView>();
+            LoadFormIntoPanel(f);// Crimson Red
             //Application.Exit();
         }
 
@@ -330,6 +332,18 @@ namespace fertilizesop.UI
         private void btnSbills_Click_1(object sender, EventArgs e)
         {
             var f = Program.ServiceProvider.GetRequiredService<Supplierbillsform>();
+            LoadFormIntoPanel(f);
+        }
+
+        private void btnrecord_Click_1(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<Inventorylogform>();
+            LoadFormIntoPanel(f);
+        }
+
+        private void btncustomerbill_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<customer_bills>();
             LoadFormIntoPanel(f);
         }
     }

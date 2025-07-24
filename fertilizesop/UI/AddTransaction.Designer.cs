@@ -104,9 +104,9 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.label1.Location = new System.Drawing.Point(105, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 38);
+            this.label1.Size = new System.Drawing.Size(270, 38);
             this.label1.TabIndex = 203;
-            this.label1.Text = "Add Batch";
+            this.label1.Text = "Add Transaction";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtDescription
@@ -209,6 +209,8 @@
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddTransaction";

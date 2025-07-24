@@ -80,6 +80,12 @@ namespace fertilizesop.UI
                     e.Handled = true;
                 }
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+
+                iconButton4.PerformClick();                    e.Handled = true;
+                
+            }
             else if (e.KeyCode == Keys.Enter)
             {
                 if (!paneledit.Visible && dataGridView2.Focused)
@@ -237,6 +243,7 @@ namespace fertilizesop.UI
             }
         }
 
+
         private void iconPictureBox2_Click(object sender, EventArgs e)
         {
             var f = Program.ServiceProvider.GetRequiredService<Addsupplier>();
@@ -330,6 +337,16 @@ namespace fertilizesop.UI
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void iconButton4_Click(object sender, EventArgs e)
+        {
+            PanelBill.Visible = false;
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            OpenBatchDetailsForm();
         }
     }
 }

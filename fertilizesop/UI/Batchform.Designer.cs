@@ -31,6 +31,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Batchform));
             this.panel10 = new System.Windows.Forms.Panel();
+            this.btnbill = new FontAwesome.Sharp.IconButton();
+            this.PanelBill = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtDate = new System.Windows.Forms.DateTimePicker();
+            this.iconButton4 = new FontAwesome.Sharp.IconButton();
+            this.iconButton5 = new FontAwesome.Sharp.IconButton();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.paneledit = new System.Windows.Forms.Panel();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -50,34 +65,21 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toplbl = new System.Windows.Forms.Label();
-            this.PanelBill = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtSupplierName = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtDate = new System.Windows.Forms.DateTimePicker();
-            this.iconButton4 = new FontAwesome.Sharp.IconButton();
-            this.iconButton5 = new FontAwesome.Sharp.IconButton();
-            this.txtTotal = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnbill = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel10.SuspendLayout();
+            this.PanelBill.SuspendLayout();
             this.paneledit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.PanelBill.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel10
             // 
             this.panel10.AutoScroll = true;
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel10.Controls.Add(this.iconButton1);
             this.panel10.Controls.Add(this.btnbill);
             this.panel10.Controls.Add(this.PanelBill);
             this.panel10.Controls.Add(this.paneledit);
@@ -93,6 +95,229 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1312, 792);
             this.panel10.TabIndex = 16;
+            // 
+            // btnbill
+            // 
+            this.btnbill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.btnbill.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.btnbill.FlatAppearance.BorderSize = 2;
+            this.btnbill.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnbill.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.btnbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnbill.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnbill.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnbill.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.btnbill.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.btnbill.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnbill.IconSize = 35;
+            this.btnbill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnbill.Location = new System.Drawing.Point(348, 109);
+            this.btnbill.Name = "btnbill";
+            this.btnbill.Size = new System.Drawing.Size(151, 42);
+            this.btnbill.TabIndex = 148;
+            this.btnbill.Text = "Bill";
+            this.btnbill.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnbill.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnbill.UseVisualStyleBackColor = false;
+            this.btnbill.Click += new System.EventHandler(this.btnbill_Click);
+            // 
+            // PanelBill
+            // 
+            this.PanelBill.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.PanelBill.Controls.Add(this.textBox3);
+            this.PanelBill.Controls.Add(this.label2);
+            this.PanelBill.Controls.Add(this.txtSupplierName);
+            this.PanelBill.Controls.Add(this.textBox2);
+            this.PanelBill.Controls.Add(this.label5);
+            this.PanelBill.Controls.Add(this.txtDate);
+            this.PanelBill.Controls.Add(this.iconButton4);
+            this.PanelBill.Controls.Add(this.iconButton5);
+            this.PanelBill.Controls.Add(this.txtTotal);
+            this.PanelBill.Controls.Add(this.label7);
+            this.PanelBill.Controls.Add(this.label8);
+            this.PanelBill.Controls.Add(this.label9);
+            this.PanelBill.Controls.Add(this.label10);
+            this.PanelBill.Location = new System.Drawing.Point(605, 110);
+            this.PanelBill.Name = "PanelBill";
+            this.PanelBill.Size = new System.Drawing.Size(443, 610);
+            this.PanelBill.TabIndex = 147;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.Gainsboro;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(54, 320);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(313, 37);
+            this.textBox3.TabIndex = 172;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label2.Location = new System.Drawing.Point(49, 287);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 30);
+            this.label2.TabIndex = 171;
+            this.label2.Text = "Payment";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtSupplierName
+            // 
+            this.txtSupplierName.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierName.Location = new System.Drawing.Point(54, 176);
+            this.txtSupplierName.Multiline = true;
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.ReadOnly = true;
+            this.txtSupplierName.Size = new System.Drawing.Size(313, 37);
+            this.txtSupplierName.TabIndex = 170;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.Gainsboro;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(54, 104);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(313, 37);
+            this.textBox2.TabIndex = 169;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label5.Location = new System.Drawing.Point(49, 373);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 30);
+            this.label5.TabIndex = 168;
+            this.label5.Text = "Date";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtDate
+            // 
+            this.txtDate.Location = new System.Drawing.Point(51, 416);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Size = new System.Drawing.Size(316, 22);
+            this.txtDate.TabIndex = 167;
+            // 
+            // iconButton4
+            // 
+            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconButton4.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.iconButton4.FlatAppearance.BorderSize = 2;
+            this.iconButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.iconButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.iconButton4.IconColor = System.Drawing.Color.Red;
+            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton4.IconSize = 35;
+            this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton4.Location = new System.Drawing.Point(243, 471);
+            this.iconButton4.Name = "iconButton4";
+            this.iconButton4.Size = new System.Drawing.Size(151, 42);
+            this.iconButton4.TabIndex = 166;
+            this.iconButton4.Text = "Cancel";
+            this.iconButton4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton4.UseVisualStyleBackColor = false;
+            this.iconButton4.Click += new System.EventHandler(this.iconButton4_Click);
+            // 
+            // iconButton5
+            // 
+            this.iconButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconButton5.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.iconButton5.FlatAppearance.BorderSize = 2;
+            this.iconButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.iconButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.iconButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton5.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.iconButton5.IconColor = System.Drawing.Color.LimeGreen;
+            this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton5.IconSize = 35;
+            this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton5.Location = new System.Drawing.Point(30, 471);
+            this.iconButton5.Name = "iconButton5";
+            this.iconButton5.Size = new System.Drawing.Size(151, 42);
+            this.iconButton5.TabIndex = 165;
+            this.iconButton5.Text = "Save";
+            this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton5.UseVisualStyleBackColor = false;
+            this.iconButton5.Click += new System.EventHandler(this.iconButton5_Click);
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotal.Location = new System.Drawing.Point(54, 247);
+            this.txtTotal.Multiline = true;
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(313, 37);
+            this.txtTotal.TabIndex = 164;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label7.Location = new System.Drawing.Point(49, 214);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(116, 30);
+            this.label7.TabIndex = 163;
+            this.label7.Text = "Total Price";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label8.Location = new System.Drawing.Point(52, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(161, 30);
+            this.label8.TabIndex = 162;
+            this.label8.Text = "Supplier Name";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label9.Location = new System.Drawing.Point(52, 71);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(133, 30);
+            this.label9.TabIndex = 161;
+            this.label9.Text = "Batch Name";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label10.Location = new System.Drawing.Point(113, 32);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(218, 38);
+            this.label10.TabIndex = 160;
+            this.label10.Text = "Generate Bill";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // paneledit
             // 
@@ -322,7 +547,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(404, 109);
+            this.pictureBox1.Location = new System.Drawing.Point(515, 104);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(43, 43);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -379,227 +604,30 @@
             this.toplbl.Text = "Batches";
             this.toplbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PanelBill
+            // iconButton1
             // 
-            this.PanelBill.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.PanelBill.Controls.Add(this.textBox3);
-            this.PanelBill.Controls.Add(this.label2);
-            this.PanelBill.Controls.Add(this.txtSupplierName);
-            this.PanelBill.Controls.Add(this.textBox2);
-            this.PanelBill.Controls.Add(this.label5);
-            this.PanelBill.Controls.Add(this.txtDate);
-            this.PanelBill.Controls.Add(this.iconButton4);
-            this.PanelBill.Controls.Add(this.iconButton5);
-            this.PanelBill.Controls.Add(this.txtTotal);
-            this.PanelBill.Controls.Add(this.label7);
-            this.PanelBill.Controls.Add(this.label8);
-            this.PanelBill.Controls.Add(this.label9);
-            this.PanelBill.Controls.Add(this.label10);
-            this.PanelBill.Location = new System.Drawing.Point(605, 110);
-            this.PanelBill.Name = "PanelBill";
-            this.PanelBill.Size = new System.Drawing.Size(443, 610);
-            this.PanelBill.TabIndex = 147;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.Gainsboro;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(54, 320);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(313, 37);
-            this.textBox3.TabIndex = 172;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label2.Location = new System.Drawing.Point(49, 287);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 30);
-            this.label2.TabIndex = 171;
-            this.label2.Text = "Payment";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtSupplierName
-            // 
-            this.txtSupplierName.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierName.Location = new System.Drawing.Point(54, 176);
-            this.txtSupplierName.Multiline = true;
-            this.txtSupplierName.Name = "txtSupplierName";
-            this.txtSupplierName.ReadOnly = true;
-            this.txtSupplierName.Size = new System.Drawing.Size(313, 37);
-            this.txtSupplierName.TabIndex = 170;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.Gainsboro;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(54, 104);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(313, 37);
-            this.textBox2.TabIndex = 169;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label5.Location = new System.Drawing.Point(49, 373);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 30);
-            this.label5.TabIndex = 168;
-            this.label5.Text = "Date";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtDate
-            // 
-            this.txtDate.Location = new System.Drawing.Point(51, 416);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(316, 22);
-            this.txtDate.TabIndex = 167;
-            // 
-            // iconButton4
-            // 
-            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.iconButton4.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.iconButton4.FlatAppearance.BorderSize = 2;
-            this.iconButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.iconButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.iconButton4.IconColor = System.Drawing.Color.Red;
-            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton4.IconSize = 35;
-            this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(243, 471);
-            this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Size = new System.Drawing.Size(151, 42);
-            this.iconButton4.TabIndex = 166;
-            this.iconButton4.Text = "Cancel";
-            this.iconButton4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton4.UseVisualStyleBackColor = false;
-            // 
-            // iconButton5
-            // 
-            this.iconButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.iconButton5.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.iconButton5.FlatAppearance.BorderSize = 2;
-            this.iconButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.iconButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.iconButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.iconButton5.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
-            this.iconButton5.IconColor = System.Drawing.Color.LimeGreen;
-            this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton5.IconSize = 35;
-            this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.Location = new System.Drawing.Point(30, 471);
-            this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Size = new System.Drawing.Size(151, 42);
-            this.iconButton5.TabIndex = 165;
-            this.iconButton5.Text = "Save";
-            this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton5.UseVisualStyleBackColor = false;
-            this.iconButton5.Click += new System.EventHandler(this.iconButton5_Click);
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(54, 247);
-            this.txtTotal.Multiline = true;
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(313, 37);
-            this.txtTotal.TabIndex = 164;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label7.Location = new System.Drawing.Point(49, 214);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(116, 30);
-            this.label7.TabIndex = 163;
-            this.label7.Text = "Total Price";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label8.Location = new System.Drawing.Point(52, 143);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(161, 30);
-            this.label8.TabIndex = 162;
-            this.label8.Text = "Supplier Name";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label9.Location = new System.Drawing.Point(52, 71);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(133, 30);
-            this.label9.TabIndex = 161;
-            this.label9.Text = "Batch Name";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label10.Location = new System.Drawing.Point(113, 32);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(218, 38);
-            this.label10.TabIndex = 160;
-            this.label10.Text = "Generate Bill";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnbill
-            // 
-            this.btnbill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.btnbill.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.btnbill.FlatAppearance.BorderSize = 2;
-            this.btnbill.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnbill.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.btnbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbill.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnbill.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnbill.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnbill.IconColor = System.Drawing.Color.MediumTurquoise;
-            this.btnbill.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnbill.IconSize = 35;
-            this.btnbill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnbill.Location = new System.Drawing.Point(200, 110);
-            this.btnbill.Name = "btnbill";
-            this.btnbill.Size = new System.Drawing.Size(151, 42);
-            this.btnbill.TabIndex = 148;
-            this.btnbill.Text = "Bill";
-            this.btnbill.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnbill.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnbill.UseVisualStyleBackColor = false;
-            this.btnbill.Click += new System.EventHandler(this.btnbill_Click);
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconButton1.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.iconButton1.FlatAppearance.BorderSize = 2;
+            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.iconButton1.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 35;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(181, 111);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(151, 42);
+            this.iconButton1.TabIndex = 149;
+            this.iconButton1.Text = "Add Details";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // Batchform
             // 
@@ -612,6 +640,8 @@
             this.Load += new System.EventHandler(this.Batchform_Load);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.PanelBill.ResumeLayout(false);
+            this.PanelBill.PerformLayout();
             this.paneledit.ResumeLayout(false);
             this.paneledit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
@@ -619,8 +649,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.PanelBill.ResumeLayout(false);
-            this.PanelBill.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -662,5 +690,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private FontAwesome.Sharp.IconButton btnbill;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

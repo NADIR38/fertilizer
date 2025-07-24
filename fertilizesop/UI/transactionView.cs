@@ -103,10 +103,9 @@ namespace fertilizesop.UI
             });
 
             transactionData.Columns["colTransactionId"].Visible = false;
-
+            transactionData.Focus();
         }
-
-
+       
         // Keys logic here
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

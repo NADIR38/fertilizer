@@ -64,9 +64,8 @@ namespace fertilizesop.UI
             this.panel1.Controls.Add(this.toplbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1388, 105);
+            this.panel1.Size = new System.Drawing.Size(1234, 84);
             this.panel1.TabIndex = 15;
             // 
             // toplbl
@@ -75,9 +74,9 @@ namespace fertilizesop.UI
             this.toplbl.AutoSize = true;
             this.toplbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toplbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toplbl.Location = new System.Drawing.Point(561, 32);
+            this.toplbl.Location = new System.Drawing.Point(499, 26);
             this.toplbl.Name = "toplbl";
-            this.toplbl.Size = new System.Drawing.Size(412, 46);
+            this.toplbl.Size = new System.Drawing.Size(341, 38);
             this.toplbl.TabIndex = 6;
             this.toplbl.Text = "Customer Bill Details";
             this.toplbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -98,10 +97,9 @@ namespace fertilizesop.UI
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dataGridView2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 105);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel2.Location = new System.Drawing.Point(0, 84);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1388, 806);
+            this.panel2.Size = new System.Drawing.Size(1234, 645);
             this.panel2.TabIndex = 16;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -111,9 +109,10 @@ namespace fertilizesop.UI
             this.btnBack.IconColor = System.Drawing.Color.DarkKhaki;
             this.btnBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBack.Location = new System.Drawing.Point(437, 42);
+            this.btnBack.Location = new System.Drawing.Point(410, 20);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(175, 48);
+            this.btnBack.Size = new System.Drawing.Size(156, 38);
             this.btnBack.TabIndex = 164;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -135,13 +134,13 @@ namespace fertilizesop.UI
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.dataGridView1.Location = new System.Drawing.Point(734, 265);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridView1.Location = new System.Drawing.Point(652, 212);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(640, 356);
+            this.dataGridView1.Size = new System.Drawing.Size(569, 285);
             this.dataGridView1.TabIndex = 163;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
@@ -150,9 +149,9 @@ namespace fertilizesop.UI
             this.lblpending.AutoSize = true;
             this.lblpending.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblpending.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.lblpending.Location = new System.Drawing.Point(223, 168);
+            this.lblpending.Location = new System.Drawing.Point(198, 134);
             this.lblpending.Name = "lblpending";
-            this.lblpending.Size = new System.Drawing.Size(79, 29);
+            this.lblpending.Size = new System.Drawing.Size(64, 25);
             this.lblpending.TabIndex = 162;
             this.lblpending.Text = "label5";
             // 
@@ -161,9 +160,9 @@ namespace fertilizesop.UI
             this.lblpaid.AutoSize = true;
             this.lblpaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblpaid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.lblpaid.Location = new System.Drawing.Point(223, 125);
+            this.lblpaid.Location = new System.Drawing.Point(198, 100);
             this.lblpaid.Name = "lblpaid";
-            this.lblpaid.Size = new System.Drawing.Size(79, 29);
+            this.lblpaid.Size = new System.Drawing.Size(64, 25);
             this.lblpaid.TabIndex = 161;
             this.lblpaid.Text = "label5";
             // 
@@ -172,9 +171,9 @@ namespace fertilizesop.UI
             this.lbltotal.AutoSize = true;
             this.lbltotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbltotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.lbltotal.Location = new System.Drawing.Point(223, 75);
+            this.lbltotal.Location = new System.Drawing.Point(198, 60);
             this.lbltotal.Name = "lbltotal";
-            this.lbltotal.Size = new System.Drawing.Size(79, 29);
+            this.lbltotal.Size = new System.Drawing.Size(64, 25);
             this.lbltotal.TabIndex = 160;
             this.lbltotal.Text = "label5";
             // 
@@ -183,9 +182,9 @@ namespace fertilizesop.UI
             this.lblname.AutoSize = true;
             this.lblname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.lblname.Location = new System.Drawing.Point(223, 25);
+            this.lblname.Location = new System.Drawing.Point(198, 20);
             this.lblname.Name = "lblname";
-            this.lblname.Size = new System.Drawing.Size(79, 29);
+            this.lblname.Size = new System.Drawing.Size(64, 25);
             this.lblname.TabIndex = 159;
             this.lblname.Text = "label5";
             this.lblname.Click += new System.EventHandler(this.lblname_Click);
@@ -194,9 +193,9 @@ namespace fertilizesop.UI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(94, 125);
+            this.label4.Location = new System.Drawing.Point(84, 100);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 25);
+            this.label4.Size = new System.Drawing.Size(52, 20);
             this.label4.TabIndex = 158;
             this.label4.Text = "Paid:";
             // 
@@ -204,9 +203,9 @@ namespace fertilizesop.UI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(94, 168);
+            this.label3.Location = new System.Drawing.Point(84, 134);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 25);
+            this.label3.Size = new System.Drawing.Size(82, 20);
             this.label3.TabIndex = 157;
             this.label3.Text = "Pending:";
             // 
@@ -214,9 +213,9 @@ namespace fertilizesop.UI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(94, 80);
+            this.label2.Location = new System.Drawing.Point(84, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 25);
+            this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 156;
             this.label2.Text = "Total:";
             // 
@@ -224,9 +223,9 @@ namespace fertilizesop.UI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(94, 30);
+            this.label1.Location = new System.Drawing.Point(84, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 25);
+            this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 155;
             this.label1.Text = " Name";
             // 
@@ -246,13 +245,13 @@ namespace fertilizesop.UI
             this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.dataGridView2.Location = new System.Drawing.Point(15, 265);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridView2.Location = new System.Drawing.Point(13, 212);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(698, 356);
+            this.dataGridView2.Size = new System.Drawing.Size(620, 285);
             this.dataGridView2.TabIndex = 154;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick_1);
             // 
@@ -305,12 +304,11 @@ namespace fertilizesop.UI
             // 
             // CustomerBill_SpecificProducts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1388, 911);
+            this.ClientSize = new System.Drawing.Size(1234, 729);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CustomerBill_SpecificProducts";
