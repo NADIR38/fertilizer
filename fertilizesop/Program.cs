@@ -1,4 +1,5 @@
 ﻿using fertilizesop.BL.Bl;
+using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
 using fertilizesop.Interfaces.DLinterfaces;
@@ -32,7 +33,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<Customersale>();
+            var mainform = ServiceProvider.GetRequiredService<transactionView>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -75,6 +76,8 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
+            services.AddTransient<transactionView>();
+            services.AddTransient<AddTransaction>();
 
 
 

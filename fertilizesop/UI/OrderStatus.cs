@@ -32,7 +32,7 @@ namespace fertilizesop.UI
             dgvOrderDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             cmbSuppliers.TextUpdate += cmbSuppliers_TextUpdate;
             cmbSuppliers.DropDownStyle = ComboBoxStyle.DropDown;
-            //ordersdata.Columns["Order_id"].Visible=false;
+            ordersdata.Columns["Order_id"].Visible = false;
             paneledit.Visible = false;
 
         }
