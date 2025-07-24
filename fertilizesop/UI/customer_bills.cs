@@ -34,33 +34,6 @@ namespace fertilizesop.UI
             dataGridView2.Focus();
         }
 
-        //private void load()
-        //{
-        //    try
-        //    {
-        //        var list = _billingBL.getbill();
-
-        //        // Filter out bills where total_price == 0
-        //        var filteredList = list.Where(b => b.total_price != 0.00m).ToList();
-
-        //        dataGridView2.Columns.Clear();
-        //        dataGridView2.DataSource = filteredList;
-        //        dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        //        if (dataGridView2.Columns.Contains("CustomerID"))
-        //        {
-        //            dataGridView2.Columns["CustomerID"].Visible = false;
-        //        }
-
-        //        UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
-        //        UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payement");
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show("Error in fetching the customerbills " + ex.Message);
-        //    }
-        //}
-
-
         private void OpenBillDetailsForm(int billId)
         {
             try
