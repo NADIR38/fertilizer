@@ -32,7 +32,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<Supplierbillsform>();
+            var mainform = ServiceProvider.GetRequiredService<customer_bills>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -75,6 +75,7 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
+            services.AddTransient<customer_bills>();
 
 
 
