@@ -1,6 +1,9 @@
-﻿namespace fertilizesop.UI
+﻿using System;
+using System.Windows.Forms;
+
+namespace fertilizesop.UI
 {
-    partial class Sbilldetailform
+    partial class CustomerBill_SpecificProducts
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +36,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.toplbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnBack = new FontAwesome.Sharp.IconButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblpending = new System.Windows.Forms.Label();
             this.lblpaid = new System.Windows.Forms.Label();
@@ -43,6 +47,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
+            this.lblPaidAmount = new System.Windows.Forms.Label();
+            this.lblPendingAmount = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -59,7 +68,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1388, 105);
             this.panel1.TabIndex = 15;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // toplbl
             // 
@@ -69,15 +77,16 @@
             this.toplbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.toplbl.Location = new System.Drawing.Point(561, 32);
             this.toplbl.Name = "toplbl";
-            this.toplbl.Size = new System.Drawing.Size(385, 46);
+            this.toplbl.Size = new System.Drawing.Size(412, 46);
             this.toplbl.TabIndex = 6;
-            this.toplbl.Text = "Supplier Bill Details";
+            this.toplbl.Text = "Customer Bill Details";
             this.toplbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toplbl.Click += new System.EventHandler(this.toplbl_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel2.Controls.Add(this.btnBack);
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Controls.Add(this.lblpending);
             this.panel2.Controls.Add(this.lblpaid);
@@ -95,6 +104,20 @@
             this.panel2.Size = new System.Drawing.Size(1388, 806);
             this.panel2.TabIndex = 16;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // btnBack
+            // 
+            this.btnBack.IconChar = FontAwesome.Sharp.IconChar.Backward;
+            this.btnBack.IconColor = System.Drawing.Color.DarkKhaki;
+            this.btnBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.Location = new System.Drawing.Point(437, 42);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(175, 48);
+            this.btnBack.TabIndex = 164;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // dataGridView1
             // 
@@ -120,7 +143,7 @@
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(640, 356);
             this.dataGridView1.TabIndex = 163;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // lblpending
             // 
@@ -132,7 +155,6 @@
             this.lblpending.Size = new System.Drawing.Size(79, 29);
             this.lblpending.TabIndex = 162;
             this.lblpending.Text = "label5";
-            this.lblpending.Click += new System.EventHandler(this.lblpending_Click);
             // 
             // lblpaid
             // 
@@ -144,7 +166,6 @@
             this.lblpaid.Size = new System.Drawing.Size(79, 29);
             this.lblpaid.TabIndex = 161;
             this.lblpaid.Text = "label5";
-            this.lblpaid.Click += new System.EventHandler(this.lblpaid_Click);
             // 
             // lbltotal
             // 
@@ -156,7 +177,6 @@
             this.lbltotal.Size = new System.Drawing.Size(79, 29);
             this.lbltotal.TabIndex = 160;
             this.lbltotal.Text = "label5";
-            this.lbltotal.Click += new System.EventHandler(this.lbltotal_Click);
             // 
             // lblname
             // 
@@ -179,7 +199,6 @@
             this.label4.Size = new System.Drawing.Size(62, 25);
             this.label4.TabIndex = 158;
             this.label4.Text = "Paid:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -190,7 +209,6 @@
             this.label3.Size = new System.Drawing.Size(98, 25);
             this.label3.TabIndex = 157;
             this.label3.Text = "Pending:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -201,7 +219,6 @@
             this.label2.Size = new System.Drawing.Size(68, 25);
             this.label2.TabIndex = 156;
             this.label2.Text = "Total:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -212,7 +229,6 @@
             this.label1.Size = new System.Drawing.Size(74, 25);
             this.label1.TabIndex = 155;
             this.label1.Text = " Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataGridView2
             // 
@@ -238,9 +254,56 @@
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView2.Size = new System.Drawing.Size(698, 356);
             this.dataGridView2.TabIndex = 154;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick_1);
             // 
-            // Sbilldetailform
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Snow;
+            this.lblTitle.Location = new System.Drawing.Point(317, 79);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(896, 69);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Customer Bill-Specific Products";
+            // 
+            // lblCustomerName
+            // 
+            this.lblCustomerName.AutoSize = true;
+            this.lblCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCustomerName.Location = new System.Drawing.Point(325, 264);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(0, 25);
+            this.lblCustomerName.TabIndex = 2;
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmount.Location = new System.Drawing.Point(325, 312);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(0, 25);
+            this.lblTotalAmount.TabIndex = 3;
+            // 
+            // lblPaidAmount
+            // 
+            this.lblPaidAmount.AutoSize = true;
+            this.lblPaidAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaidAmount.Location = new System.Drawing.Point(325, 358);
+            this.lblPaidAmount.Name = "lblPaidAmount";
+            this.lblPaidAmount.Size = new System.Drawing.Size(0, 25);
+            this.lblPaidAmount.TabIndex = 4;
+            // 
+            // lblPendingAmount
+            // 
+            this.lblPendingAmount.AutoSize = true;
+            this.lblPendingAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPendingAmount.Location = new System.Drawing.Point(325, 400);
+            this.lblPendingAmount.Name = "lblPendingAmount";
+            this.lblPendingAmount.Size = new System.Drawing.Size(0, 25);
+            this.lblPendingAmount.TabIndex = 5;
+            // 
+            // CustomerBill_SpecificProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,9 +313,9 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Sbilldetailform";
+            this.Name = "CustomerBill_SpecificProducts";
             this.Text = "Sbilldetailform";
-            this.Load += new System.EventHandler(this.Sbilldetailform_Load);
+            this.Load += new System.EventHandler(this.CustomerBill_SpecificProducts_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -262,6 +325,28 @@
             this.ResumeLayout(false);
 
         }
+
+        private void lblname_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        //private void panel2_Paint(object sender, PaintEventArgs e)
+        //{
+        //    throw new Exception("error in panel2_paint " );
+        //}
+
+        private void toplbl_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        //private void panel1_Paint(object sender, PaintEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         #endregion
 
@@ -278,5 +363,20 @@
         private System.Windows.Forms.Label lblpending;
         private System.Windows.Forms.Label lblpaid;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private DataGridViewCellEventHandler dataGridView2_CellContentClick;
+        private DataGridViewCellEventHandler dataGridView1_CellContentClick;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblCustomerName;
+        private System.Windows.Forms.Label lblTotalAmount;
+        private System.Windows.Forms.Label lblPaidAmount;
+        private System.Windows.Forms.Label lblPendingAmount;
+        private EventHandler label1_Click;
+        private EventHandler label2_Click;
+        private EventHandler label3_Click;
+        private EventHandler label4_Click;
+        private EventHandler lblpending_Click;
+        private EventHandler lbltotal_Click;
+        private EventHandler lblpaid_Click;
+        private FontAwesome.Sharp.IconButton btnBack;
     }
 }

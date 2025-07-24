@@ -19,18 +19,17 @@ namespace fertilizesop.DL
                 {
                     conn.Open();
                     string query = @"
-    SELECT 
-
-        p.product_id,
-        p.name,
-        p.description,
-        SUM(sb.quantity) AS quantity
-    FROM supplier_bill_details sb
-    JOIN supplierbills sbd ON sbd.supplier_bill_id = sb.supplier_bill_id
-    JOIN products p ON p.product_id = sb.product_id
-    WHERE sb.supplier_bill_id = @billid
-    GROUP BY p.product_id, p.name, p.description;
-";
+                                SELECT 
+                                    p.product_id,
+                                    p.name,
+                                    p.description,
+                                SUM(sb.quantity) AS quantity
+                                FROM supplier_bill_details sb
+                                JOIN supplierbills sbd ON sbd.supplier_bill_id = sb.supplier_bill_id
+                                JOIN products p ON p.product_id = sb.product_id
+                                WHERE sb.supplier_bill_id = @billid
+                                GROUP BY p.product_id, p.name, p.description;
+                                ";
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         var list = new List<Supplierpayment>();
