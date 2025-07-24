@@ -77,36 +77,52 @@ namespace fertilizesop.UI
             {
                 if (keyData == Keys.Enter)
                 {
-                    if (dgvproductsearch.Visible)
+                    if (txtproductsearch.Focused && dgvproductsearch.Visible)
                     {
-                        if (dgvproductsearch.SelectedRows.Count > 0)
+                        if (string.IsNullOrWhiteSpace(txtproductsearch.Text))
                         {
-                            // Access selected row
-                            DataGridViewRow selectedRow = dgvproductsearch.SelectedRows[0];
+                            MessageBox.Show("Please select atleast one product.", "Product not selected", (MessageBoxButtons)MessageBoxIcon.Warning);
+                            return false ;
+                        }
+                        if (dgvproductsearch.SelectedRows.Count == 0)
+                        {
+                            MessageBox.Show("Please select a product from the list.", "No product selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+                        // Access selected row
+                        DataGridViewRow selectedRow = dgvproductsearch.SelectedRows[0]; 
 
                             // Get values from the row
                             string name = selectedRow.Cells["name"].Value.ToString();
                             string description = selectedRow.Cells["description"].Value.ToString();
                             int saleprice = Convert.ToInt32(selectedRow.Cells["sale_price"].Value.ToString());
 
-
                             dataGridView1.Rows.Add(name, description, saleprice);
                             dgvproductsearch.Visible = false;
                             clearfields();
-                        }
+                        
                         return true;
                     }
 
-                    else if (dgvcustomersearch.Visible && txtcustsearch.Focused)
+                    else if (txtcustsearch.Focused && dgvcustomersearch.Visible)
                     {
-                        if(dgvcustomersearch.Rows.Count > 0)
+                        if (string.IsNullOrEmpty(txtcustsearch.Text))
                         {
-                            DataGridViewRow selectedrow = dgvcustomersearch.SelectedRows[0];
+                            MessageBox.Show("Please select atleast one product.", "Product not selected", (MessageBoxButtons)MessageBoxIcon.Warning);
+                            dgvcustomersearch.Visible = false;
+                            return false;
+                        }
+                        if (dgvcustomersearch.SelectedRows.Count == 0)
+                        {
+                            MessageBox.Show("Please select a customer from the list.", "No customer selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+
+                        DataGridViewRow selectedrow = dgvcustomersearch.SelectedRows[0];
                             string name = selectedrow.Cells["name"].Value.ToString();
                             txtcustsearch.Text = name;
                             dgvcustomersearch.Visible = false;
-                            return true;
-                        }
+                            return true;                   
                     }
                 }
 

@@ -258,7 +258,8 @@ namespace fertilizesop.UI
         private void btnsale_Click(object sender, EventArgs e)
         {
             activebutton(sender, sidebarColors[3]); // Coral Orange
-                                                    // LoadFormIntoPanel(new SalesForm());
+            var f = Program.ServiceProvider.GetRequiredService<Customersale>();
+            LoadFormIntoPanel(f);                               // LoadFormIntoPanel(new SalesForm());
         }
 
         private void btnbatches_Click(object sender, EventArgs e)
