@@ -32,7 +32,7 @@ namespace fertilizesop.UI
             dgvOrderDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             cmbSuppliers.TextUpdate += cmbSuppliers_TextUpdate;
             cmbSuppliers.DropDownStyle = ComboBoxStyle.DropDown;
-            //ordersdata.Columns["Order_id"].Visible=false;
+            ordersdata.Columns["Order_id"].Visible = false;
             paneledit.Visible = false;
 
         }
@@ -75,23 +75,23 @@ namespace fertilizesop.UI
         }
         private void cmbSuppliers_TextUpdate(object sender, EventArgs e)
         {
-            string searchText = cmbSuppliers.Text.Trim();
+            //string searchText = cmbSuppliers.Text.Trim();
 
-            List<Suppliers> filteredSuppliers =o.GetSuppliers(searchText);
+            //List<Suppliers> filteredSuppliers =o.GetSuppliers(searchText);
 
-            if (filteredSuppliers != null && filteredSuppliers.Count > 0)
-            {
-                cmbSuppliers.BeginUpdate();
-                cmbSuppliers.DataSource = null;
-                cmbSuppliers.DataSource = filteredSuppliers;
-                cmbSuppliers.DisplayMember = "first_Name"; // match your Suppliers class
-                cmbSuppliers.ValueMember = "Id";
-                cmbSuppliers.DroppedDown = true;
+            //if (filteredSuppliers != null && filteredSuppliers.Count > 0)
+            //{
+            //    cmbSuppliers.BeginUpdate();
+            //    cmbSuppliers.DataSource = null;
+            //    cmbSuppliers.DataSource = filteredSuppliers;
+            //    cmbSuppliers.DisplayMember = "first_Name"; // match your Suppliers class
+            //    cmbSuppliers.ValueMember = "Id";
+            //    cmbSuppliers.DroppedDown = true;
 
-                cmbSuppliers.SelectionStart = searchText.Length;
-                cmbSuppliers.SelectionLength = 0;
-                cmbSuppliers.EndUpdate();
-            }
+            //    cmbSuppliers.SelectionStart = searchText.Length;
+            //    cmbSuppliers.SelectionLength = 0;
+            //    cmbSuppliers.EndUpdate();
+            //}
         }
 
         private void SaveOrder()
@@ -113,27 +113,27 @@ namespace fertilizesop.UI
             //paneledit.Visible = false;
 
 
-            if (cmbSuppliers.SelectedItem == null || string.IsNullOrWhiteSpace(cmbSuppliers.Text))
-            {
-                MessageBox.Show("Please select a supplier before proceeding.", "Missing Supplier", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbSuppliers.Focus();
-                return;
-            }
+            //if (cmbSuppliers.SelectedItem == null || string.IsNullOrWhiteSpace(cmbSuppliers.Text))
+            //{
+            //    MessageBox.Show("Please select a supplier before proceeding.", "Missing Supplier", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    cmbSuppliers.Focus();
+            //    return;
+            //}
 
-            // Get selected supplier info
-            var selectedSupplier = cmbSuppliers.SelectedItem as Suppliers;
-            if (selectedSupplier == null)
-            {
-                MessageBox.Show("Invalid supplier selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //// Get selected supplier info
+            //var selectedSupplier = cmbSuppliers.SelectedItem as Suppliers;
+            //if (selectedSupplier == null)
+            //{
+            //    MessageBox.Show("Invalid supplier selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            string supplier = cmbSuppliers.Text.Trim();
 
-            int supplierId = selectedSupplier.Id;
-            supp = selectedSupplier.first_Name;
-            string sts = status.Text;
+            //supp = selectedSupplier.first_Name;
+            string sts = status.Text.Trim();
             DateTime datePicker = date.Value;
 
-            Order or = new Order(supplierId, datePicker, sts);
+            Order or = new Order(0, datePicker, sts,supplier);
             int orderIdd = o.InsertOrder(or);
 
             MessageBox.Show($"Order with orderId {orderIdd} created! Now add products.");
@@ -182,7 +182,21 @@ namespace fertilizesop.UI
             }
             
         }
+        private void txtBname_TextUpdate(object sender, EventArgs e)
+        {
+            string searchText = cmbSuppliers.Text.Trim();
 
+            var filteredBatches = DatabaseHelper.Instance.GetSuppliers(searchText);
+
+            if (filteredBatches != null)
+            {
+                cmbSuppliers.Items.Clear();
+                cmbSuppliers.Items.AddRange(filteredBatches.ToArray());
+                cmbSuppliers.SelectionStart = searchText.Length;
+                cmbSuppliers.SelectionLength = 0;
+                cmbSuppliers.DroppedDown = true;
+            }
+        }
         //keys logic 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

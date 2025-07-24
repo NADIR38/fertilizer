@@ -26,11 +26,12 @@ namespace fertilizesop.DL
         public int InsertOrder(Order order)
         {
             int orderId = 0;
+            int supplier_id=DatabaseHelper.Instance.getsuppierid(order.supplier_name);
             using (var con = DatabaseHelper.Instance.GetConnection())
             {
                 string query = "INSERT INTO orders (supplier_id, date, order_status) VALUES (@supplierId, @date, @status); SELECT LAST_INSERT_ID();";
                 MySqlCommand cmd = new MySqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@supplierId", order.SupplierId);
+                cmd.Parameters.AddWithValue("@supplierId", supplier_id);
                 cmd.Parameters.AddWithValue("@date", order.OrderDate);
                 cmd.Parameters.AddWithValue("@status", order.status);
 

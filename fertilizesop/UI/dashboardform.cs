@@ -216,8 +216,9 @@ namespace fertilizesop.UI
 
         private void btnsuppliers_Click(object sender, EventArgs e)
         {
-            activebutton(sender, sidebarColors[5]); // Leaf Green
-            // LoadFormIntoPanel(new SuppliersForm());
+            activebutton(sender, sidebarColors[5]);
+            var f = Program.ServiceProvider.GetRequiredService<supplierform>();
+            LoadFormIntoPanel(f);
         }
 
         private void btnSbills_Click(object sender, EventArgs e)
