@@ -564,8 +564,9 @@ namespace fertilizesop.UI
             txtfinaldiscount.Clear();
             txtfinalprice.Clear();
             totalwithoutdisc.Clear();
-            dataGridView1.ClearSelection();
+            dataGridView1.RowCount = 0;
             txtpaidamount.Clear();
+            //dataGridView1.ClearSelection();
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
@@ -584,7 +585,7 @@ namespace fertilizesop.UI
                         return;
                     }
                 }
-                
+                SavehthermalPdfInvoice();
                 int id = _customersaledl.getcustomerid(txtcustsearch.Text);
                 bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
                 if (result)
@@ -616,7 +617,31 @@ namespace fertilizesop.UI
                 dgvproductsearch.Visible = false;
             }
             button2.Visible = false;
-
         }
+
+        private void SavehthermalPdfInvoice()
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveDialog.Title = "Save PDF Invoice";
+                saveDialog.FileName = $"Invoice_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Customersaledl.CreateThermalReceiptPdf(dataGridView1, saveDialog.FileName, txtcustsearch.Text.Trim(), Convert.ToDecimal(txtfinalprice.Text), Convert.ToDecimal(txtpaidamount.Text));
+
+                        MessageBox.Show("PDF saved successfully!", "PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error generating PDF:\n" + ex.Message, "PDF Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
     }
 }
