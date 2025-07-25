@@ -49,7 +49,6 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.toplbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.dgvOrderDetails = new System.Windows.Forms.DataGridView();
             this.lblSupplierInfo = new System.Windows.Forms.Label();
@@ -254,7 +253,7 @@
             this.ordersdata.ReadOnly = true;
             this.ordersdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ordersdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ordersdata.Size = new System.Drawing.Size(1225, 932);
+            this.ordersdata.Size = new System.Drawing.Size(1225, 988);
             this.ordersdata.TabIndex = 143;
             // 
             // iconButton9
@@ -335,28 +334,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.toplbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1291, 84);
             this.panel1.TabIndex = 15;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.button2.Location = new System.Drawing.Point(1148, 21);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 46);
-            this.button2.TabIndex = 151;
-            this.button2.Text = "Go Back";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // panel10
             // 
@@ -402,7 +385,7 @@
             this.dgvOrderDetails.ReadOnly = true;
             this.dgvOrderDetails.RowHeadersWidth = 51;
             this.dgvOrderDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvOrderDetails.Size = new System.Drawing.Size(1225, 558);
+            this.dgvOrderDetails.Size = new System.Drawing.Size(1225, 614);
             this.dgvOrderDetails.TabIndex = 150;
             // 
             // lblSupplierInfo
@@ -490,6 +473,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblSupplierInfo;
         private System.Windows.Forms.DataGridView dgvOrderDetails;
-        private System.Windows.Forms.Button button2;
     }
 }

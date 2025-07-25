@@ -120,6 +120,7 @@
             // 
             // cmbTransactionType
             // 
+            this.cmbTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTransactionType.FormattingEnabled = true;
             this.cmbTransactionType.Items.AddRange(new object[] {
             "Withdraw",

@@ -23,6 +23,7 @@ namespace fertilizesop.UI
             InitializeComponent();
             _customerbl = customerbl;
             editpanel.Visible = false;
+            UIHelper.StyleGridView(dataGridView1);
         }
 
         int selectedRowIndex1 = 0; // Declare at the class level

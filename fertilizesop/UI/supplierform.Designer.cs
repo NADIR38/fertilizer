@@ -48,6 +48,7 @@
             this.Addbutton = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.editpanel.SuspendLayout();
@@ -58,6 +59,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.editpanel);
             this.panel1.Controls.Add(this.txtsearch);
@@ -96,7 +98,7 @@
             this.editpanel.Controls.Add(this.txtcontact);
             this.editpanel.Controls.Add(this.label2);
             this.editpanel.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.editpanel.Location = new System.Drawing.Point(506, 122);
+            this.editpanel.Location = new System.Drawing.Point(435, 138);
             this.editpanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editpanel.Name = "editpanel";
             this.editpanel.Size = new System.Drawing.Size(378, 518);
@@ -236,6 +238,7 @@
             // 
             // btnsearch
             // 
+            this.btnsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.btnsearch.ForeColor = System.Drawing.Color.Snow;
             this.btnsearch.Location = new System.Drawing.Point(1260, 138);
@@ -305,6 +308,20 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Suppliers ";
             // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label12.Location = new System.Drawing.Point(864, 139);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 25);
+            this.label12.TabIndex = 144;
+            this.label12.Text = "Search :";
+            // 
             // supplierform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -347,5 +364,6 @@
         private FontAwesome.Sharp.IconButton btnsave;
         private FontAwesome.Sharp.IconButton btncancel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label12;
     }
 }
