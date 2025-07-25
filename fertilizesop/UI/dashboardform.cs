@@ -115,6 +115,7 @@ namespace fertilizesop.UI
             CollapsePanel(panelsupp, 60);
             //CollapsePanel(panelreturn, 60);
             CollapsePanel(panelinventory, 60);
+            CollapsePanel(panelorder, 60);
         }
 
         private void activebutton(object senderBtn, Color color)
@@ -227,10 +228,7 @@ namespace fertilizesop.UI
 
         private void btnorder_Click(object sender, EventArgs e)
         {
-            activebutton(sender, sidebarColors[0]);
-            var f = Program.ServiceProvider.GetRequiredService<OrdersMain>();
-
-            LoadFormIntoPanel(f);
+       
         }
 
         private void btnlogout_Click(object sender, EventArgs e)
@@ -345,6 +343,32 @@ namespace fertilizesop.UI
         {
             var f = Program.ServiceProvider.GetRequiredService<customer_bills>();
             LoadFormIntoPanel(f);
+        }
+
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+            activebutton(sender, sidebarColors[0]);
+            var f = Program.ServiceProvider.GetRequiredService<OrderStatus>();
+
+            LoadFormIntoPanel(f);
+        }
+
+        private void iconButton4_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<OrdersMain>();
+
+            LoadFormIntoPanel(f);
+        }
+
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            if (panelorder.Height == 131)
+                CollapsePanel(panelorder, 60);
+            else
+            {
+                CollapseAllTogglePanels();
+                ExpandPanel(panelorder, 131);
+            }
         }
     }
 }

@@ -85,6 +85,7 @@ namespace fertilizesop
             services.AddTransient<transactionView>();
             services.AddTransient<AddTransaction>();
             services.AddTransient<Inventorylogform>();
+            services.AddTransient<OrderStatus>();
 
 
 

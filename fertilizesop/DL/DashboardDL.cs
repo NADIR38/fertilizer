@@ -126,7 +126,7 @@ namespace fertilizesop.DL
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
                     conn.Open();
-                    string query = @"select sum(sale_price) as total from products";
+                    string query = @"SELECT SUM(sale_price * quantity) AS total FROM products";
 
                     using (var cmd = new MySqlCommand(query, conn))
                     using (var reader = cmd.ExecuteReader())
@@ -145,6 +145,7 @@ namespace fertilizesop.DL
                 throw new Exception("Error: " + ex.Message, ex);
             }
         }
+
         public int totalproducts()
         {
             try
