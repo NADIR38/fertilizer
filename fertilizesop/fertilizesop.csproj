@@ -149,6 +149,7 @@
     <Compile Include="DL\CustomerBill_SpecificProductsDL.cs" />
     <Compile Include="Interfaces\BLInterfaces\IInventorylogBl.cs" />
     <Compile Include="BL\Bl\InventorylogBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\ItransactionBL.cs" />
     <Compile Include="Interfaces\DLinterfaces\IdashboardBl.cs" />
     <Compile Include="BL\Bl\TransactionBL.cs" />
     <Compile Include="BL\Models\Dashboard.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Interfaces\DLinterfaces\IOrder.cs" />
     <Compile Include="Interfaces\DLinterfaces\IProductsDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\Isupplierdl.cs" />
+    <Compile Include="Interfaces\DLinterfaces\ItransactionDL.cs" />
     <Compile Include="UI\Addbatchdetailsform.cs">
       <SubType>Form</SubType>
     </Compile>

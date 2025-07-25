@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using fertilizesop.DL;
 using fertilizesop.BL.Models;
+using fertilizesop.Interfaces.BLInterfaces;
 
 namespace fertilizesop.BL.Bl
 {
-    public class TransactionBL
+    public class TransactionBL: ItransactionBL
     {
         private TransactionDAL dal = new TransactionDAL();
 
