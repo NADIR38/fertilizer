@@ -126,6 +126,12 @@ namespace fertilizesop.UI
                     }
                 }
 
+                else if (keyData == (Keys.Control | Keys.P))
+                {
+                    iconButton1.PerformClick();
+                    return true;
+                }
+
                 else if (keyData == Keys.Right)
                 {
                     if (dataGridView1.CurrentCell != null)
@@ -157,7 +163,7 @@ namespace fertilizesop.UI
                         dataGridView1.ClearSelection();
                         dataGridView1.Rows[selectedRowIndex].Selected = true;
                     }
-                    else if(txtcustsearch.Focused && selectedRowIndex > 0 && dgvcustomersearch.Visible)
+                    else if (txtcustsearch.Focused && selectedRowIndex > 0 && dgvcustomersearch.Visible)
                     {
                         selectedRowIndex--;
                         dgvcustomersearch.ClearSelection();
@@ -179,11 +185,11 @@ namespace fertilizesop.UI
                         dataGridView1.ClearSelection();
                         dataGridView1.Rows[selectedRowIndex].Selected = true;
                     }
-                    else if(dgvcustomersearch.Visible && txtcustsearch.Visible && selectedRowIndex < dgvcustomersearch.Rows.Count - 1)
+                    else if (dgvcustomersearch.Visible && txtcustsearch.Visible && selectedRowIndex < dgvcustomersearch.Rows.Count - 1)
                     {
                         selectedRowIndex++;
                         dgvcustomersearch.ClearSelection();
-                        dgvcustomersearch.Rows[selectedRowIndex ].Selected = true;
+                        dgvcustomersearch.Rows[selectedRowIndex].Selected = true;
                     }
                 }
 
@@ -294,7 +300,7 @@ namespace fertilizesop.UI
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
             // Only run calculation if quantity or discount was edited
-            if (columnName == "quantity" || columnName == "discount")
+            if (columnName == "quantity" || columnName == "discount" || columnName == "sale_price")
             {
                 CalculateRowTotal(e.RowIndex);
                
@@ -423,7 +429,7 @@ namespace fertilizesop.UI
                     continue;
 
                 // Safe parsing with fallback to 0
-                int total = ConvertToIntSafe(row.Cells["total"]?.Value);
+                int total = ConvertToIntSafe(row.Cells["final"]?.Value);
                 int disc = ConvertToIntSafe(row.Cells["discount"]?.Value);
                 int quantity = ConvertToIntSafe(row.Cells["quantity"]?.Value);
 
@@ -552,6 +558,18 @@ namespace fertilizesop.UI
         {
             try
             {
+                if(string.IsNullOrEmpty(txtpaidamount.Text))
+                {
+                    DialogResult result1 = MessageBox.Show("Dont you want to enter the paid amount? " , "payment not enterd" , MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
+                    if(result1 == DialogResult.Yes)
+                    {
+                        txtpaidamount.Text = "0";
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 
                 int id = _customersaledl.getcustomerid(txtcustsearch.Text);
                 bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);

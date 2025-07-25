@@ -28,7 +28,7 @@ namespace fertilizesop.UI
 
         private void customer_bills_load(object sender, EventArgs e)
         {
-            load();
+            //load();
             LoadBillingRecords();
             dataGridView2.Focus();
         }
@@ -401,9 +401,10 @@ namespace fertilizesop.UI
                 if (string.IsNullOrEmpty(textBox1.Text))
                 {
                     return;
-                }
-                var billdeta = _billingBL.searchbill(textBox1.Text);
+                } 
+                var billdeta = _billingBL.GetBillingRecords(textBox1.Text);
                 dataGridView2.DataSource = billdeta;
+                AddDetailsButtonColumn();
                 dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 if (dataGridView2.Columns.Contains("customer_id"))
@@ -416,8 +417,8 @@ namespace fertilizesop.UI
                     dataGridView2.Columns["batch_name"].Visible = false;
                 }
 
-                UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
-                UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
+                //UIHelper.AddButtonColumn(dataGridView2, "Edit", "View Details", "Details");
+                //UIHelper.AddButtonColumn(dataGridView2, "Delete", "Add payment", "payment");
             }
             catch (Exception ex)
             {
@@ -427,7 +428,8 @@ namespace fertilizesop.UI
 
         private void pictureBox10_Click_1(object sender, EventArgs e)
         {
-            load();
+            //load();
+            LoadBillingRecords();
         }
     }
 }
