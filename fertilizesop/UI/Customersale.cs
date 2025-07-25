@@ -593,6 +593,11 @@ namespace fertilizesop.UI
                     MessageBox.Show("data saved successfully");
                     clearallfields();
                 }
+                if (File.Exists("Temporarydata.json"))
+                {
+                    File.Delete("Temporarydata.json");
+                }
+
                 else
                 {
                     MessageBox.Show("Data not saved to the database");
