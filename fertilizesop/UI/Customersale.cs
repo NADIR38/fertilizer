@@ -295,7 +295,12 @@ namespace fertilizesop.UI
                 // Get values from the row
                 string name = selectedRow.Cells["name"].Value.ToString();
                 string description = selectedRow.Cells["description"].Value.ToString();
+                int saleprice = Convert.ToInt32(selectedRow.Cells["sale_price"].Value.ToString());
 
+                dataGridView1.Rows.Add(name, description, saleprice);
+                dgvproductsearch.Visible = false;
+                button2.Visible = false;
+                clearfields();
             }
         }
 
@@ -386,8 +391,7 @@ namespace fertilizesop.UI
             dgvcustomersearch.Visible = false ;
             if (string.IsNullOrWhiteSpace(txtproductsearch.Text))
             {
-                clearfields();
-                button2.Visible = false;
+                txtproductsearch.Text = string.Empty; txtproductsearch.Focus(); button2.Visible = false;
                 return;
             }
             if (dgvproductsearch.Columns.Contains("product_id"))
@@ -566,13 +570,24 @@ namespace fertilizesop.UI
             totalwithoutdisc.Clear();
             dataGridView1.RowCount = 0;
             txtpaidamount.Clear();
-            //dataGridView1.ClearSelection();
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
             try
             {
+                if(string.IsNullOrEmpty(txtcustsearch.Text))
+                {
+                    MessageBox.Show("Please enter the name of customer");
+                    return;
+                }
+
+                if(dataGridView1.Rows.Count == 0)               
+                {
+                    MessageBox.Show("Please select some product first");
+                    return;
+                }
+
                 if(string.IsNullOrEmpty(txtpaidamount.Text))
                 {
                     DialogResult result1 = MessageBox.Show("Dont you want to enter the paid amount? " , "payment not enterd" , MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
@@ -585,9 +600,9 @@ namespace fertilizesop.UI
                         return;
                     }
                 }
-                SavehthermalPdfInvoice();
                 int id = _customersaledl.getcustomerid(txtcustsearch.Text);
                 bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
+                SavehthermalPdfInvoice();
                 if (result)
                 {
                     MessageBox.Show("data saved successfully");
