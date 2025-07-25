@@ -33,9 +33,31 @@ namespace fertilizesop.UI
                 {
                     btnsave.PerformClick();
                     return true;
-
                 }
 
+                else if (dataGridView1.Focused && dataGridView1.CurrentCell != null)
+                {
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
+
+                    if (rowIndex >= 0 && columnIndex >= 0)
+                    {
+                        //string columnName = dataGridView1.Columns[columnIndex].Name;
+                        DataGridViewRow row = dataGridView1.Rows[rowIndex];
+
+                        //if (columnName == "Edit")
+                        //{
+                            customerid = Convert.ToInt32(row.Cells["Id"].Value);
+                            editpanel.Visible = true;
+                            txtaddress.Text = row.Cells["address"].Value.ToString();
+                            txtfirstname.Text = row.Cells["first_name"].Value.ToString();
+                            txtcontact.Text = row.Cells["phonenumber"].Value.ToString();
+                            UIHelper.RoundPanelCorners(editpanel, 20);
+                            UIHelper.ShowCenteredPanel(this, editpanel);
+                            return true;
+                        //}
+                    }
+                }
             }
 
             else if (keyData == Keys.Up)

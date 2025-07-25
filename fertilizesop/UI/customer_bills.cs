@@ -397,6 +397,7 @@ namespace fertilizesop.UI
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             try
+
             {
                 if (string.IsNullOrEmpty(textBox1.Text))
                 {

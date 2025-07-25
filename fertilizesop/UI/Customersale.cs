@@ -30,11 +30,20 @@ namespace fertilizesop.UI
             dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             dataGridView1.AllowUserToAddRows = false;
+            button2.Visible = false;
             this.VisibleChanged += Customersale_VisibleChanged;
-
+            buttonshow();
             setupproductsearch();
             setupcustomersearch();
             txtproductsearch.TextChanged += txtproductsearch_TextChanged;
+        }
+
+        private void buttonshow()
+        {
+            if(txtcustsearch.Focused || txtproductsearch.Focused)
+            {
+                button2.Visible=true;
+            }
         }
 
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -99,8 +108,8 @@ namespace fertilizesop.UI
 
                             dataGridView1.Rows.Add(name, description, saleprice);
                             dgvproductsearch.Visible = false;
-                            clearfields();
-                        
+                            button2.Visible = false;
+                            clearfields();                        
                         return true;
                     }
 
@@ -122,6 +131,7 @@ namespace fertilizesop.UI
                             string name = selectedrow.Cells["name"].Value.ToString();
                             txtcustsearch.Text = name;
                             dgvcustomersearch.Visible = false;
+                            button2.Visible = false;
                             return true;                   
                     }
                 }
@@ -377,12 +387,14 @@ namespace fertilizesop.UI
             if (string.IsNullOrWhiteSpace(txtproductsearch.Text))
             {
                 clearfields();
+                button2.Visible = false;
                 return;
             }
             if (dgvproductsearch.Columns.Contains("product_id"))
             {
                 dgvproductsearch.Columns["product_id"].Visible = false;
             }
+            button2.Visible = true;
             dgvproductsearch.Visible = true;
             DataTable dt = new DataTable();
             dt = _customersaledl.getproductthings(txtproductsearch.Text);
@@ -454,8 +466,10 @@ namespace fertilizesop.UI
             if(string.IsNullOrEmpty(txtcustsearch.Text))
             {
                 dgvcustomersearch.Visible = false;
+                button2.Visible = false;
                 return;                  
             }
+            buttonshow();
             dgvcustomersearch.Visible = true;
             if(dgvcustomersearch.Columns.Contains("customer_id"))
             {
@@ -588,6 +602,21 @@ namespace fertilizesop.UI
             {
                 MessageBox.Show("Error in saving the data to database " + ex.Message);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dgvcustomersearch.Visible)
+            {
+                dgvcustomersearch.Visible = false;
+            }
+            
+            if(dgvproductsearch.Visible)
+            {
+                dgvproductsearch.Visible = false;
+            }
+            button2.Visible = false;
+
         }
     }
 }
