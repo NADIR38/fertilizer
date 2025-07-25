@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using KIMS;
 using MySql.Data.MySqlClient;
 using fertilizesop.BL.Models;
+using fertilizesop.Interfaces.DLinterfaces;
 
 namespace fertilizesop.DL
 {
-    public class TransactionDAL
+    public class TransactionDAL: ItransactionDL
     {
         private MySqlConnection conn => DatabaseHelper.Instance.GetConnection();
 
