@@ -73,7 +73,7 @@ namespace fertilizesop.UI
 
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
-            if (columnName == "quantity" || columnName == "discount")
+            if (columnName == "quantity" || columnName == "discount" || columnName == "sale_price")
             {
                 CalculateRowTotal(e.RowIndex);
             }
