@@ -203,6 +203,7 @@ namespace fertilizesop.UI
                 txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
                 UIHelper.RoundPanelCorners(editpanel, 20);
                 UIHelper.ShowCenteredPanel(this, editpanel);
+                txtfirstname.Focus();
 
             }
 

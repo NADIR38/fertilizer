@@ -1,4 +1,9 @@
-﻿using System;
+﻿using fertilizesop.BL.Models;
+using fertilizesop.DL;
+using FontAwesome.Sharp;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,10 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fertilizesop.BL.Models;
-using fertilizesop.DL;
-using FontAwesome.Sharp;
-using Newtonsoft.Json;
 
 namespace fertilizesop.UI
 {
@@ -36,6 +37,7 @@ namespace fertilizesop.UI
             setupproductsearch();
             setupcustomersearch();
             txtproductsearch.TextChanged += txtproductsearch_TextChanged;
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private void buttonshow()
@@ -663,5 +665,10 @@ namespace fertilizesop.UI
             }
         }
 
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<AddCustomer>();
+            f.ShowDialog(this);
+        }
     }
 }

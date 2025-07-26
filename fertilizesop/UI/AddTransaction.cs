@@ -113,5 +113,9 @@ namespace fertilizesop.UI
             return true;
         }
 
+        private void AddTransaction_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

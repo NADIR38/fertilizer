@@ -33,6 +33,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.editpanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.btnsearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Addbutton = new FontAwesome.Sharp.IconButton();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -96,6 +96,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1396, 648);
             this.panel1.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label12.Location = new System.Drawing.Point(898, 45);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 25);
+            this.label12.TabIndex = 144;
+            this.label12.Text = "Search :";
             // 
             // pictureBox1
             // 
@@ -150,7 +164,7 @@
             this.txtdescription.Multiline = true;
             this.txtdescription.Name = "txtdescription";
             this.txtdescription.Size = new System.Drawing.Size(313, 35);
-            this.txtdescription.TabIndex = 199;
+            this.txtdescription.TabIndex = 3;
             // 
             // btncancel
             // 
@@ -165,7 +179,7 @@
             this.btncancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(148, 48);
-            this.btncancel.TabIndex = 198;
+            this.btncancel.TabIndex = 5;
             this.btncancel.Text = "Cancel";
             this.btncancel.UseVisualStyleBackColor = false;
             this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
@@ -183,7 +197,7 @@
             this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(137, 48);
-            this.btnsave.TabIndex = 197;
+            this.btnsave.TabIndex = 4;
             this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
@@ -235,7 +249,7 @@
             this.txtname.Multiline = true;
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(313, 35);
-            this.txtname.TabIndex = 190;
+            this.txtname.TabIndex = 0;
             // 
             // txtquantity
             // 
@@ -245,7 +259,7 @@
             this.txtquantity.Multiline = true;
             this.txtquantity.Name = "txtquantity";
             this.txtquantity.Size = new System.Drawing.Size(313, 35);
-            this.txtquantity.TabIndex = 189;
+            this.txtquantity.TabIndex = 2;
             // 
             // txtprice
             // 
@@ -255,7 +269,7 @@
             this.txtprice.Multiline = true;
             this.txtprice.Name = "txtprice";
             this.txtprice.Size = new System.Drawing.Size(313, 35);
-            this.txtprice.TabIndex = 188;
+            this.txtprice.TabIndex = 1;
             // 
             // label2
             // 
@@ -330,20 +344,6 @@
             this.Addbutton.Text = "Add";
             this.Addbutton.UseVisualStyleBackColor = false;
             this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label12.Location = new System.Drawing.Point(898, 45);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(81, 25);
-            this.label12.TabIndex = 144;
-            this.label12.Text = "Search :";
             // 
             // Productsform
             // 

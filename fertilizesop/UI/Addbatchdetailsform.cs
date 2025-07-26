@@ -246,6 +246,7 @@ namespace fertilizesop.UI
             LoadTempData(); // ✅ Now this will load the correct JSON
 
             loadbatches();
+            txtproducts.Focus();
         }
 
 

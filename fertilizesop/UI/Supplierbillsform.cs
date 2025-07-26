@@ -204,6 +204,7 @@ namespace fertilizesop.UI
                         // Show the panel centered
                         UIHelper.RoundPanelCorners(paneledit, 20);
                         UIHelper.ShowCenteredPanel(this, paneledit);
+                        txtpayment.Focus();
                     }
                 }
 
