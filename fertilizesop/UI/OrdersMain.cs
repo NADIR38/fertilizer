@@ -35,6 +35,7 @@ namespace fertilizesop.UI
             //paneledit.Visible = false;
             this.KeyPreview = true; // Put this in OrdersMain constructor
             this.KeyDown += OrdersMain_KeyDown;
+            UIHelper.StyleGridView(orderdata);
 
 
         }

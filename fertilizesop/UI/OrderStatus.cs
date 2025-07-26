@@ -12,6 +12,7 @@ using fertilizesop.BL.Models;
 using fertilizesop.BL.Models.persons;
 using fertilizesop.DL;
 using KIMS;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace fertilizesop.UI
 {
@@ -34,6 +35,7 @@ namespace fertilizesop.UI
             cmbSuppliers.DropDownStyle = ComboBoxStyle.DropDown;
             //ordersdata.Columns["Order_id"].Visible = false;
             paneledit.Visible = false;
+            UIHelper.StyleGridView(dgvOrderDetails);
 
         }
 
@@ -318,6 +320,12 @@ namespace fertilizesop.UI
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            var f=Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            f.ShowDialog(this);
         }
     }
 }

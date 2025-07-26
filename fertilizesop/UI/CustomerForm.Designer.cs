@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerForm));
             this.panel10 = new System.Windows.Forms.Panel();
             this.paneledit = new System.Windows.Forms.Panel();
@@ -113,7 +113,7 @@
             this.btncancle1.Location = new System.Drawing.Point(214, 500);
             this.btncancle1.Name = "btncancle1";
             this.btncancle1.Size = new System.Drawing.Size(151, 42);
-            this.btncancle1.TabIndex = 200;
+            this.btncancle1.TabIndex = 5;
             this.btncancle1.Text = "Cancel";
             this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btncancle1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -127,7 +127,7 @@
             this.txtaddress.Multiline = true;
             this.txtaddress.Name = "txtaddress";
             this.txtaddress.Size = new System.Drawing.Size(313, 35);
-            this.txtaddress.TabIndex = 196;
+            this.txtaddress.TabIndex = 3;
             this.txtaddress.TabStop = false;
             // 
             // lblAddress
@@ -150,7 +150,7 @@
             this.txtlname.Multiline = true;
             this.txtlname.Name = "txtlname";
             this.txtlname.Size = new System.Drawing.Size(313, 35);
-            this.txtlname.TabIndex = 187;
+            this.txtlname.TabIndex = 1;
             // 
             // label1
             // 
@@ -172,7 +172,7 @@
             this.txtcontact.Multiline = true;
             this.txtcontact.Name = "txtcontact";
             this.txtcontact.Size = new System.Drawing.Size(313, 35);
-            this.txtcontact.TabIndex = 188;
+            this.txtcontact.TabIndex = 2;
             // 
             // label7
             // 
@@ -205,7 +205,7 @@
             this.btnsave.Location = new System.Drawing.Point(49, 500);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(132, 42);
-            this.btnsave.TabIndex = 190;
+            this.btnsave.TabIndex = 4;
             this.btnsave.Text = "Save";
             this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnsave.UseVisualStyleBackColor = false;
@@ -218,7 +218,7 @@
             this.txtname.Multiline = true;
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(313, 35);
-            this.txtname.TabIndex = 186;
+            this.txtname.TabIndex = 0;
             // 
             // label6
             // 
@@ -291,11 +291,11 @@
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Navy;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.SeaShell;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.AntiqueWhite;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.SeaShell;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -310,7 +310,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(1267, 452);
+            this.dataGridView2.Size = new System.Drawing.Size(1267, 464);
             this.dataGridView2.TabIndex = 143;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
