@@ -1,4 +1,9 @@
-﻿using System;
+﻿using fertilizesop.BL.Models;
+using fertilizesop.DL;
+using FontAwesome.Sharp;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,10 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fertilizesop.BL.Models;
-using fertilizesop.DL;
-using FontAwesome.Sharp;
-using Newtonsoft.Json;
 
 namespace fertilizesop.UI
 {
@@ -36,6 +37,7 @@ namespace fertilizesop.UI
             setupproductsearch();
             setupcustomersearch();
             txtproductsearch.TextChanged += txtproductsearch_TextChanged;
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private void buttonshow()
@@ -73,7 +75,7 @@ namespace fertilizesop.UI
 
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
-            if (columnName == "quantity" || columnName == "discount")
+            if (columnName == "quantity" || columnName == "discount" || columnName == "sale_price")
             {
                 CalculateRowTotal(e.RowIndex);
             }
@@ -295,7 +297,12 @@ namespace fertilizesop.UI
                 // Get values from the row
                 string name = selectedRow.Cells["name"].Value.ToString();
                 string description = selectedRow.Cells["description"].Value.ToString();
+                int saleprice = Convert.ToInt32(selectedRow.Cells["sale_price"].Value.ToString());
 
+                dataGridView1.Rows.Add(name, description, saleprice);
+                dgvproductsearch.Visible = false;
+                button2.Visible = false;
+                clearfields();
             }
         }
 
@@ -386,8 +393,7 @@ namespace fertilizesop.UI
             dgvcustomersearch.Visible = false ;
             if (string.IsNullOrWhiteSpace(txtproductsearch.Text))
             {
-                clearfields();
-                button2.Visible = false;
+                txtproductsearch.Text = string.Empty; txtproductsearch.Focus(); button2.Visible = false;
                 return;
             }
             if (dgvproductsearch.Columns.Contains("product_id"))
@@ -564,7 +570,7 @@ namespace fertilizesop.UI
             txtfinaldiscount.Clear();
             txtfinalprice.Clear();
             totalwithoutdisc.Clear();
-            dataGridView1.ClearSelection();
+            dataGridView1.RowCount = 0;
             txtpaidamount.Clear();
         }
 
@@ -572,6 +578,18 @@ namespace fertilizesop.UI
         {
             try
             {
+                if(string.IsNullOrEmpty(txtcustsearch.Text))
+                {
+                    MessageBox.Show("Please enter the name of customer");
+                    return;
+                }
+
+                if(dataGridView1.Rows.Count == 0)               
+                {
+                    MessageBox.Show("Please select some product first");
+                    return;
+                }
+
                 if(string.IsNullOrEmpty(txtpaidamount.Text))
                 {
                     DialogResult result1 = MessageBox.Show("Dont you want to enter the paid amount? " , "payment not enterd" , MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
@@ -584,14 +602,19 @@ namespace fertilizesop.UI
                         return;
                     }
                 }
-                
                 int id = _customersaledl.getcustomerid(txtcustsearch.Text);
                 bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
+                SavehthermalPdfInvoice();
                 if (result)
                 {
                     MessageBox.Show("data saved successfully");
                     clearallfields();
                 }
+                if (File.Exists("Temporarydata.json"))
+                {
+                    File.Delete("Temporarydata.json");
+                }
+
                 else
                 {
                     MessageBox.Show("Data not saved to the database");
@@ -616,7 +639,36 @@ namespace fertilizesop.UI
                 dgvproductsearch.Visible = false;
             }
             button2.Visible = false;
+        }
 
+        private void SavehthermalPdfInvoice()
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveDialog.Title = "Save PDF Invoice";
+                saveDialog.FileName = $"Invoice_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Customersaledl.CreateThermalReceiptPdf(dataGridView1, saveDialog.FileName, txtcustsearch.Text.Trim(), Convert.ToDecimal(txtfinalprice.Text), Convert.ToDecimal(txtpaidamount.Text));
+
+                        MessageBox.Show("PDF saved successfully!", "PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error generating PDF:\n" + ex.Message, "PDF Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<AddCustomer>();
+            f.ShowDialog(this);
         }
     }
 }

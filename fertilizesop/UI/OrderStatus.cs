@@ -12,6 +12,7 @@ using fertilizesop.BL.Models;
 using fertilizesop.BL.Models.persons;
 using fertilizesop.DL;
 using KIMS;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace fertilizesop.UI
 {
@@ -32,8 +33,9 @@ namespace fertilizesop.UI
             dgvOrderDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             cmbSuppliers.TextUpdate += cmbSuppliers_TextUpdate;
             cmbSuppliers.DropDownStyle = ComboBoxStyle.DropDown;
-            ordersdata.Columns["OrderID"].Visible = false;
+            //ordersdata.Columns["Order_id"].Visible = false;
             paneledit.Visible = false;
+            UIHelper.StyleGridView(dgvOrderDetails);
 
         }
 
@@ -315,9 +317,15 @@ namespace fertilizesop.UI
 
         }
 
-        private void dgvOrderDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void iconPictureBox3_Click(object sender, EventArgs e)
+        {
+            var f=Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            f.ShowDialog(this);
         }
     }
 }

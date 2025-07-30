@@ -23,7 +23,10 @@ namespace fertilizesop.UI
             InitializeComponent();
             _customerbl = customerbl;
             editpanel.Visible = false;
+            UIHelper.StyleGridView(dataGridView1);
         }
+
+        int selectedRowIndex1 = 0; // Declare at the class level
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -37,46 +40,46 @@ namespace fertilizesop.UI
 
                 else if (dataGridView1.Focused && dataGridView1.CurrentCell != null)
                 {
-                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                    int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
-                    if (rowIndex >= 0 && columnIndex >= 0)
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    if (rowIndex >= 0)
                     {
-                        //string columnName = dataGridView1.Columns[columnIndex].Name;
                         DataGridViewRow row = dataGridView1.Rows[rowIndex];
 
-                        //if (columnName == "Edit")
-                        //{
-                            customerid = Convert.ToInt32(row.Cells["Id"].Value);
-                            editpanel.Visible = true;
-                            txtaddress.Text = row.Cells["address"].Value.ToString();
-                            txtfirstname.Text = row.Cells["first_name"].Value.ToString();
-                            txtcontact.Text = row.Cells["phonenumber"].Value.ToString();
-                            UIHelper.RoundPanelCorners(editpanel, 20);
-                            UIHelper.ShowCenteredPanel(this, editpanel);
-                            return true;
-                        //}
+                        customerid = Convert.ToInt32(row.Cells["Id"].Value);
+                        txtfirstname.Text = row.Cells["first_name"].Value.ToString();
+                        txtcontact.Text = row.Cells["phonenumber"].Value.ToString();
+                        txtaddress.Text = row.Cells["address"].Value.ToString();
+
+                        editpanel.Visible = true;
+                        UIHelper.RoundPanelCorners(editpanel, 20);
+                        UIHelper.ShowCenteredPanel(this, editpanel);
+
+                        return true;
                     }
                 }
             }
 
             else if (keyData == Keys.Up)
             {
-                if (dataGridView1.Visible && selectedRowIndex > 0)
+                if (dataGridView1.Visible && dataGridView1.Rows.Count > 0)
                 {
-                    selectedRowIndex--;
+                    selectedRowIndex1 = Math.Max(0, selectedRowIndex1 - 1);
                     dataGridView1.ClearSelection();
-                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    dataGridView1.Rows[selectedRowIndex1].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[selectedRowIndex1].Cells[0];
                     return true;
                 }
             }
+
             else if (keyData == Keys.Down)
             {
-                if (dataGridView1.Visible && selectedRowIndex < dataGridView1.Rows.Count - 1)
+                if (dataGridView1.Visible && dataGridView1.Rows.Count > 0)
                 {
-                    selectedRowIndex++;
+                    selectedRowIndex1 = Math.Min(dataGridView1.Rows.Count - 1, selectedRowIndex1 + 1);
                     dataGridView1.ClearSelection();
-                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    dataGridView1.Rows[selectedRowIndex1].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[selectedRowIndex1].Cells[0];
                     return true;
                 }
             }
@@ -86,8 +89,10 @@ namespace fertilizesop.UI
                 Addbutton.PerformClick();
                 return true;
             }
-                return base.ProcessCmdKey(ref msg, keyData);
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
+
 
 
         public void load()
@@ -144,6 +149,8 @@ namespace fertilizesop.UI
                     clearfields();
                     editpanel.Visible = false;
                     load();
+                    dataGridView1.Focus();
+                    
                 }
                 
             }
@@ -167,6 +174,10 @@ namespace fertilizesop.UI
         private void btncancel_Click(object sender, EventArgs e)
         {
             editpanel.Visible = false;
+            dataGridView1.Focus();
+            //dataGridView1.ClearSelection();
+            //dataGridView1.Rows[selectedRowIndex].Selected = true;
+            //dataGridView1.CurrentCell = dataGridView1.Rows[selectedRowIndex].Cells[0];
         }
         private void clearfields()
         {
@@ -192,6 +203,8 @@ namespace fertilizesop.UI
                 txtcontact.Text = rowname.Cells["phonenumber"].Value.ToString();
                 UIHelper.RoundPanelCorners(editpanel, 20);
                 UIHelper.ShowCenteredPanel(this, editpanel);
+                txtfirstname.Focus();
+
             }
 
             else if (columnname == "Delete")

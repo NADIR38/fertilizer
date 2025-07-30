@@ -42,6 +42,14 @@ namespace fertilizesop.UI
                     e.Handled = true;
                 }
             }
+            else if (e.Control && e.KeyCode == Keys.A)
+            {
+                iconButton9.PerformClick();
+                e.Handled = true;
+                
+                   
+                
+            }
             else if (e.KeyCode == Keys.Escape)
             {
                 if (paneledit.Visible)

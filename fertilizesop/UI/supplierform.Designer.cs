@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(supplierform));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.editpanel = new System.Windows.Forms.Panel();
             this.btncancel = new FontAwesome.Sharp.IconButton();
@@ -58,6 +59,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.editpanel);
             this.panel1.Controls.Add(this.txtsearch);
@@ -71,6 +73,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1386, 742);
             this.panel1.TabIndex = 0;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label12.Location = new System.Drawing.Point(864, 139);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 25);
+            this.label12.TabIndex = 144;
+            this.label12.Text = "Search :";
             // 
             // pictureBox1
             // 
@@ -96,7 +112,7 @@
             this.editpanel.Controls.Add(this.txtcontact);
             this.editpanel.Controls.Add(this.label2);
             this.editpanel.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.editpanel.Location = new System.Drawing.Point(506, 122);
+            this.editpanel.Location = new System.Drawing.Point(435, 138);
             this.editpanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editpanel.Name = "editpanel";
             this.editpanel.Size = new System.Drawing.Size(378, 518);
@@ -116,7 +132,7 @@
             this.btncancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(115, 37);
-            this.btncancel.TabIndex = 198;
+            this.btncancel.TabIndex = 4;
             this.btncancel.Text = "Cancel";
             this.btncancel.UseVisualStyleBackColor = false;
             this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
@@ -134,7 +150,7 @@
             this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(115, 37);
-            this.btnsave.TabIndex = 197;
+            this.btnsave.TabIndex = 3;
             this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
@@ -186,7 +202,7 @@
             this.txtfirstname.Multiline = true;
             this.txtfirstname.Name = "txtfirstname";
             this.txtfirstname.Size = new System.Drawing.Size(313, 35);
-            this.txtfirstname.TabIndex = 190;
+            this.txtfirstname.TabIndex = 0;
             this.txtfirstname.TextChanged += new System.EventHandler(this.txtfirstname_TextChanged);
             // 
             // txtaddress
@@ -197,7 +213,7 @@
             this.txtaddress.Multiline = true;
             this.txtaddress.Name = "txtaddress";
             this.txtaddress.Size = new System.Drawing.Size(313, 35);
-            this.txtaddress.TabIndex = 189;
+            this.txtaddress.TabIndex = 2;
             this.txtaddress.TextChanged += new System.EventHandler(this.txtaddress_TextChanged);
             // 
             // txtcontact
@@ -208,7 +224,7 @@
             this.txtcontact.Multiline = true;
             this.txtcontact.Name = "txtcontact";
             this.txtcontact.Size = new System.Drawing.Size(313, 35);
-            this.txtcontact.TabIndex = 188;
+            this.txtcontact.TabIndex = 1;
             this.txtcontact.TextChanged += new System.EventHandler(this.txtcontact_TextChanged);
             // 
             // label2
@@ -236,6 +252,7 @@
             // 
             // btnsearch
             // 
+            this.btnsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnsearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
             this.btnsearch.ForeColor = System.Drawing.Color.Snow;
             this.btnsearch.Location = new System.Drawing.Point(1260, 138);
@@ -347,5 +364,6 @@
         private FontAwesome.Sharp.IconButton btnsave;
         private FontAwesome.Sharp.IconButton btncancel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label12;
     }
 }

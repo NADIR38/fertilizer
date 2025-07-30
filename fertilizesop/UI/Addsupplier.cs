@@ -23,6 +23,19 @@ namespace fertilizesop.UI
             _sup = sup;
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (txtaddress.Focused || txtcontact.Focused || txtfirstname.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+                }
+            }
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void btnsave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtfirstname.Text))

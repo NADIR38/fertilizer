@@ -49,23 +49,25 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.toplbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.dgvOrderDetails = new System.Windows.Forms.DataGridView();
             this.lblSupplierInfo = new System.Windows.Forms.Label();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             this.paneledit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersdata)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // paneledit
             // 
             this.paneledit.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.paneledit.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.paneledit.Controls.Add(this.iconPictureBox3);
             this.paneledit.Controls.Add(this.status);
             this.paneledit.Controls.Add(this.label3);
             this.paneledit.Controls.Add(this.date);
@@ -254,7 +256,7 @@
             this.ordersdata.ReadOnly = true;
             this.ordersdata.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ordersdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ordersdata.Size = new System.Drawing.Size(1225, 988);
+            this.ordersdata.Size = new System.Drawing.Size(1225, 1044);
             this.ordersdata.TabIndex = 143;
             // 
             // iconButton9
@@ -335,28 +337,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.toplbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1291, 84);
             this.panel1.TabIndex = 15;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(255)))), ((int)(((byte)(197)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.button2.Location = new System.Drawing.Point(1148, 21);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 46);
-            this.button2.TabIndex = 151;
-            this.button2.Text = "Go Back";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // panel10
             // 
@@ -402,9 +388,8 @@
             this.dgvOrderDetails.ReadOnly = true;
             this.dgvOrderDetails.RowHeadersWidth = 51;
             this.dgvOrderDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvOrderDetails.Size = new System.Drawing.Size(1225, 614);
+            this.dgvOrderDetails.Size = new System.Drawing.Size(1225, 670);
             this.dgvOrderDetails.TabIndex = 150;
-            this.dgvOrderDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetails_CellContentClick);
             // 
             // lblSupplierInfo
             // 
@@ -445,6 +430,22 @@
             this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
+            // iconPictureBox3
+            // 
+            this.iconPictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconPictureBox3.ForeColor = System.Drawing.SystemColors.Control;
+            this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.iconPictureBox3.IconColor = System.Drawing.SystemColors.Control;
+            this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox3.IconSize = 37;
+            this.iconPictureBox3.Location = new System.Drawing.Point(490, 166);
+            this.iconPictureBox3.Name = "iconPictureBox3";
+            this.iconPictureBox3.Size = new System.Drawing.Size(47, 37);
+            this.iconPictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.iconPictureBox3.TabIndex = 203;
+            this.iconPictureBox3.TabStop = false;
+            this.iconPictureBox3.Click += new System.EventHandler(this.iconPictureBox3_Click);
+            // 
             // OrderStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -463,6 +464,7 @@
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -491,6 +493,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblSupplierInfo;
         private System.Windows.Forms.DataGridView dgvOrderDetails;
-        private System.Windows.Forms.Button button2;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox3;
     }
 }

@@ -81,7 +81,7 @@
             this.txtAmount.Multiline = true;
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(313, 35);
-            this.txtAmount.TabIndex = 199;
+            this.txtAmount.TabIndex = 0;
             // 
             // label6
             // 
@@ -116,10 +116,11 @@
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(313, 111);
-            this.txtDescription.TabIndex = 207;
+            this.txtDescription.TabIndex = 2;
             // 
             // cmbTransactionType
             // 
+            this.cmbTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTransactionType.FormattingEnabled = true;
             this.cmbTransactionType.Items.AddRange(new object[] {
             "Withdraw",
@@ -127,7 +128,7 @@
             this.cmbTransactionType.Location = new System.Drawing.Point(81, 320);
             this.cmbTransactionType.Name = "cmbTransactionType";
             this.cmbTransactionType.Size = new System.Drawing.Size(313, 24);
-            this.cmbTransactionType.TabIndex = 209;
+            this.cmbTransactionType.TabIndex = 1;
             // 
             // label2
             // 
@@ -186,7 +187,7 @@
             this.btnsave.Location = new System.Drawing.Point(31, 563);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(152, 62);
-            this.btnsave.TabIndex = 201;
+            this.btnsave.TabIndex = 3;
             this.btnsave.Text = "Save";
             this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnsave.UseVisualStyleBackColor = false;
@@ -214,6 +215,7 @@
             this.Name = "AddTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddTransaction";
+            this.Load += new System.EventHandler(this.AddTransaction_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

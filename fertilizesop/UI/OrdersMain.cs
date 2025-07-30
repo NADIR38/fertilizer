@@ -35,6 +35,7 @@ namespace fertilizesop.UI
             //paneledit.Visible = false;
             this.KeyPreview = true; // Put this in OrdersMain constructor
             this.KeyDown += OrdersMain_KeyDown;
+            UIHelper.StyleGridView(orderdata);
 
 
         }
@@ -150,11 +151,11 @@ namespace fertilizesop.UI
             if (e.Handled) return;
 
             // Ctrl + R → Refresh
-            else if (e.Control && e.KeyCode == Keys.A)
-            {
-                iconButton9.PerformClick();
-                e.Handled = true; // Mark as handled
-            }
+            //else if (e.Control && e.KeyCode == Keys.A)
+            //{
+            //    iconButton9.PerformClick();
+            //    e.Handled = true; // Mark as handled
+            //}
             // Ctrl + R → Refresh
             else if (e.Control && e.KeyCode == Keys.R)
             {
