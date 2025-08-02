@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using fertilizesop.BL.Bl;
 using fertilizesop.BL.Models;
 using FontAwesome.Sharp;
@@ -21,6 +22,40 @@ namespace fertilizesop.UI
         {
             InitializeComponent();
             dtpDate.Value = DateTime.Now;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (txtAmount.Focused)
+                {
+                    dtpDate.Focus();
+                    return true;
+                }
+                else if (dtpDate.Focused)
+                {
+                    cmbTransactionType.Focus();
+                    return true;
+                }
+                else if (cmbTransactionType.Focused)
+                {
+                    txtDescription.Focus();
+                    return true;
+                }
+                else if (txtDescription.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+                }
+
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btncancle1.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void btnsave_Click(object sender, EventArgs e)
@@ -53,27 +88,6 @@ namespace fertilizesop.UI
         private void btncancle1_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            
-
-            if (keyData == (Keys.Control | Keys.S))
-            {
-                btnsave.PerformClick();
-                return true;
-            }
-
-            else if (keyData == Keys.Escape)
-            {
-                btncancle1.PerformClick();
-                return true;
-            }
-
-            
-
-            return base.ProcessCmdKey(ref msg, keyData); // Allow default behavior
         }
 
         private bool ValidateTransactionInputs()
@@ -114,6 +128,11 @@ namespace fertilizesop.UI
         }
 
         private void AddTransaction_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
         {
 
         }

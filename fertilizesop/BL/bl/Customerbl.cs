@@ -89,8 +89,8 @@ namespace fertilizesop.BL.Bl
             if (string.IsNullOrWhiteSpace(c.phonenumber))
                 throw new ArgumentException("Phone number is required.");
 
-            if (!Regex.IsMatch(c.phonenumber, @"^\+?\d{7,15}$"))
-                throw new ArgumentException("Invalid phone number format.");
+            //if (!Regex.IsMatch(c.phonenumber, @"^\+?\d{7,15}$"))
+            //    throw new ArgumentException("Invalid phone number format.");
 
             if (c.first_Name.Length > 50)
                 throw new ArgumentException("First name is too long.");

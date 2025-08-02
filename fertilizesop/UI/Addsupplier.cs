@@ -27,7 +27,17 @@ namespace fertilizesop.UI
         {
             if (keyData == Keys.Enter)
             {
-                if (txtaddress.Focused || txtcontact.Focused || txtfirstname.Focused)
+                if(txtfirstname.Focused)
+                {
+                    txtcontact.Focus();
+                    return true;
+                }
+                else if(txtcontact.Focused)
+                {
+                    txtaddress.Focus();
+                    return true;
+                }
+                else if (txtaddress.Focused)
                 {
                     btnsave.PerformClick();
                     return true;
@@ -75,5 +85,9 @@ namespace fertilizesop.UI
             txtfirstname.Clear();
         }
 
+        private void editpanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

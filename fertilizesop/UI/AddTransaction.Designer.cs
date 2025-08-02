@@ -43,9 +43,10 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(81, 229);
+            this.dtpDate.Location = new System.Drawing.Point(91, 286);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(313, 22);
+            this.dtpDate.Size = new System.Drawing.Size(352, 26);
             this.dtpDate.TabIndex = 202;
             // 
             // label4
@@ -54,9 +55,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label4.Location = new System.Drawing.Point(76, 196);
+            this.label4.Location = new System.Drawing.Point(86, 245);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 30);
+            this.label4.Size = new System.Drawing.Size(71, 36);
             this.label4.TabIndex = 206;
             this.label4.Text = "Date";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -67,9 +68,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label3.Location = new System.Drawing.Point(76, 370);
+            this.label3.Location = new System.Drawing.Point(86, 462);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 30);
+            this.label3.Size = new System.Drawing.Size(151, 36);
             this.label3.TabIndex = 205;
             this.label3.Text = "Description";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,11 +78,13 @@
             // txtAmount
             // 
             this.txtAmount.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtAmount.Location = new System.Drawing.Point(81, 137);
+            this.txtAmount.Location = new System.Drawing.Point(91, 171);
+            this.txtAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAmount.Multiline = true;
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(313, 35);
+            this.txtAmount.Size = new System.Drawing.Size(352, 43);
             this.txtAmount.TabIndex = 0;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // label6
             // 
@@ -89,9 +92,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label6.Location = new System.Drawing.Point(76, 104);
+            this.label6.Location = new System.Drawing.Point(86, 130);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 30);
+            this.label6.Size = new System.Drawing.Size(110, 36);
             this.label6.TabIndex = 204;
             this.label6.Text = "Amount";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,9 +105,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label1.Location = new System.Drawing.Point(105, 47);
+            this.label1.Location = new System.Drawing.Point(118, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(270, 38);
+            this.label1.Size = new System.Drawing.Size(326, 46);
             this.label1.TabIndex = 203;
             this.label1.Text = "Add Transaction";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,10 +115,11 @@
             // txtDescription
             // 
             this.txtDescription.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtDescription.Location = new System.Drawing.Point(81, 403);
+            this.txtDescription.Location = new System.Drawing.Point(91, 504);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(313, 111);
+            this.txtDescription.Size = new System.Drawing.Size(352, 138);
             this.txtDescription.TabIndex = 2;
             // 
             // cmbTransactionType
@@ -125,9 +129,10 @@
             this.cmbTransactionType.Items.AddRange(new object[] {
             "Withdraw",
             "Deposit"});
-            this.cmbTransactionType.Location = new System.Drawing.Point(81, 320);
+            this.cmbTransactionType.Location = new System.Drawing.Point(91, 400);
+            this.cmbTransactionType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbTransactionType.Name = "cmbTransactionType";
-            this.cmbTransactionType.Size = new System.Drawing.Size(313, 24);
+            this.cmbTransactionType.Size = new System.Drawing.Size(352, 28);
             this.cmbTransactionType.TabIndex = 1;
             // 
             // label2
@@ -136,9 +141,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label2.Location = new System.Drawing.Point(76, 287);
+            this.label2.Location = new System.Drawing.Point(86, 359);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 30);
+            this.label2.Size = new System.Drawing.Size(213, 36);
             this.label2.TabIndex = 210;
             this.label2.Text = "Transaction Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,9 +164,10 @@
             this.btncancle1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btncancle1.IconSize = 35;
             this.btncancle1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btncancle1.Location = new System.Drawing.Point(278, 563);
+            this.btncancle1.Location = new System.Drawing.Point(313, 704);
+            this.btncancle1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btncancle1.Name = "btncancle1";
-            this.btncancle1.Size = new System.Drawing.Size(151, 62);
+            this.btncancle1.Size = new System.Drawing.Size(170, 78);
             this.btncancle1.TabIndex = 211;
             this.btncancle1.Text = "Cancel";
             this.btncancle1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -184,9 +190,10 @@
             this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnsave.IconSize = 35;
             this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(31, 563);
+            this.btnsave.Location = new System.Drawing.Point(35, 704);
+            this.btnsave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(152, 62);
+            this.btnsave.Size = new System.Drawing.Size(171, 78);
             this.btnsave.TabIndex = 3;
             this.btnsave.Text = "Save";
             this.btnsave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -195,10 +202,10 @@
             // 
             // AddTransaction
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(255)))), ((int)(((byte)(228)))));
-            this.ClientSize = new System.Drawing.Size(471, 665);
+            this.ClientSize = new System.Drawing.Size(530, 831);
             this.Controls.Add(this.btncancle1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbTransactionType);
@@ -210,6 +217,7 @@
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddTransaction";

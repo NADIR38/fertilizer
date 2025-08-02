@@ -43,6 +43,7 @@ namespace fertilizesop
             //    Application.Run(ServiceProvider.GetRequiredService<dashboardform>());
             //    //}
             //}
+
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer

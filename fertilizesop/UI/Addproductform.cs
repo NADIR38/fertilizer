@@ -24,6 +24,34 @@ namespace fertilizesop.UI
             this.ibl = ibl;
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (txtname.Focused)
+                {
+                    txtprice.Focus();
+                    return true;
+                }
+                else if (txtprice.Focused)
+                {
+                    txtquantity.Focus();
+                    return true;
+                }
+                else if (txtquantity.Focused)
+                {
+                    txtdescription.Focus();
+                    return true;
+                }
+                else if (txtdescription.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void btnsave_Click(object sender, EventArgs e)
         {
             string name=txtname.Text.Trim();
@@ -64,5 +92,10 @@ namespace fertilizesop.UI
                 MessageBox.Show("An unexpected error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void txtprice_TextChanged(object sender, EventArgs e)
+        {
+
         }
+    }
     }
