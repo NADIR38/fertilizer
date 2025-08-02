@@ -29,6 +29,22 @@ namespace fertilizesop.UI
                 if(txtname.Focused)
                 {
                     txtlname.Focus();
+                    return true;
+                }
+                else if(txtlname.Focused)
+                {
+                    txtcontact.Focus(); 
+                    return true;
+                }
+                else if (txtcontact.Focused)
+                {
+                    txtaddress.Focus();
+                    return true;
+                }
+                else if(txtaddress.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -76,6 +92,11 @@ namespace fertilizesop.UI
         }
 
         private void AddCustomer_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtlname_TextChanged(object sender, EventArgs e)
         {
 
         }

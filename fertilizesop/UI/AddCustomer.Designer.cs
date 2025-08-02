@@ -75,6 +75,7 @@
             this.txtlname.Name = "txtlname";
             this.txtlname.Size = new System.Drawing.Size(352, 43);
             this.txtlname.TabIndex = 1;
+            this.txtlname.TextChanged += new System.EventHandler(this.txtlname_TextChanged);
             // 
             // label4
             // 
