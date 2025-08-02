@@ -370,5 +370,11 @@ namespace fertilizesop.UI
                 ExpandPanel(panelorder, 131);
             }
         }
+
+        private void iconButton5_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<Customerreturnform>();
+            LoadFormIntoPanel(f);
+        }
     }
 }

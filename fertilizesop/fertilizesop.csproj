@@ -141,12 +141,19 @@
     <Compile Include="BL\Bl\CustomerBill_SpecificProductsBL.cs" />
     <Compile Include="BL\Bl\CustomerBl.cs" />
     <Compile Include="BL\Bl\dashboardBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IReturnsBl.cs" />
+    <Compile Include="BL\Bl\ReturnsBl.cs" />
     <Compile Include="BL\Models\Customerbill.cs" />
     <Compile Include="BL\Models\Customerrecord.cs" />
+    <Compile Include="BL\Models\returns.cs" />
+    <Compile Include="BL\Models\Usersession.cs" />
     <Compile Include="DL\BillingRecordsOverviewDL.cs" />
     <Compile Include="DL\Customerbilldetaildl.cs" />
     <Compile Include="DL\Customerbilldl.cs" />
     <Compile Include="DL\CustomerBill_SpecificProductsDL.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IRetunrsDl.cs" />
+    <Compile Include="DL\LoginDL.cs" />
+    <Compile Include="DL\RetunrsDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IInventorylogBl.cs" />
     <Compile Include="BL\Bl\InventorylogBl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ItransactionBL.cs" />
@@ -233,6 +240,12 @@
     <Compile Include="UI\Addproductform.Designer.cs">
       <DependentUpon>Addproductform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Addreturmform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Addreturmform.Designer.cs">
+      <DependentUpon>Addreturmform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Addsupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +282,12 @@
     <Compile Include="UI\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Customerreturnform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Customerreturnform.Designer.cs">
+      <DependentUpon>Customerreturnform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Customersale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +319,12 @@
     </Compile>
     <Compile Include="UI\Inventorylogform.Designer.cs">
       <DependentUpon>Inventorylogform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\OrdersMain.cs">
       <SubType>Form</SubType>
@@ -362,6 +387,9 @@
     <EmbeddedResource Include="UI\Addproductform.resx">
       <DependentUpon>Addproductform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Addreturmform.resx">
+      <DependentUpon>Addreturmform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Addsupplier.resx">
       <DependentUpon>Addsupplier.cs</DependentUpon>
     </EmbeddedResource>
@@ -379,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Customerreturnform.resx">
+      <DependentUpon>Customerreturnform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Customersale.resx">
       <DependentUpon>Customersale.cs</DependentUpon>
@@ -404,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Inventorylogform.resx">
       <DependentUpon>Inventorylogform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OrdersMain.resx">
       <DependentUpon>OrdersMain.cs</DependentUpon>
