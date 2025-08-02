@@ -27,6 +27,40 @@ namespace fertilizesop.UI
 
             UIHelper.ApplyButtonStyles(dataGridView2);
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if(keyData == Keys.Enter)
+            {
+                if(txtname.Focused)
+                {
+                    txtlname.Focus();
+                    return true;
+                }
+                else if (txtlname.Focused)
+                {
+                    txtcontact.Focus();
+                    return true;
+                }
+                else if (txtcontact.Focused)
+                {
+                    txtaddress.Focus();
+                    return true;
+                }
+                else if (txtaddress.Focused)
+                {
+                    btnsave.PerformClick();
+                    return true;
+                }
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btncancle1.PerformClick();
+                return true;
+            }
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void CustomerForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.R)
@@ -189,6 +223,11 @@ namespace fertilizesop.UI
         private void btncancle1_Click(object sender, EventArgs e)
         {
             paneledit.Visible = false;
+        }
+
+        private void paneledit_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
