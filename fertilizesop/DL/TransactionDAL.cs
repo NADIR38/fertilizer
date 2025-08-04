@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using fertilizesop.BL.Models;
 using KIMS;
 using MySql.Data.MySqlClient;
-using fertilizesop.BL.Models;
-using fertilizesop.Interfaces.DLinterfaces;
+using Mysqlx.Crud;
+using System;
+using System.Collections.Generic;
 
 namespace fertilizesop.DL
 {
-    public class TransactionDAL: ItransactionDL
+    public class TransactionDAL : ITransactionDAL
     {
         private MySqlConnection conn => DatabaseHelper.Instance.GetConnection();
 
@@ -19,64 +15,107 @@ namespace fertilizesop.DL
         {
             using (var connection = conn)
             {
-                string query = @"INSERT INTO transaction_history (transaction_type, amount, transaction_date, description, remaining_balance)
-                             VALUES (@type, @amount, @date, @desc, @balance)";
-
+                string query = @"INSERT INTO transaction_history 
+                                (transaction_type, bank_id, date, amount) 
+                                 VALUES (@type, @bank_id, @date, @amount)";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@type", t.TransactionType);
-                cmd.Parameters.AddWithValue("@amount", t.Amount);
+                cmd.Parameters.AddWithValue("@bank_id", t.BankId);
                 cmd.Parameters.AddWithValue("@date", t.TransactionDate);
-                cmd.Parameters.AddWithValue("@desc", t.Description);
-                cmd.Parameters.AddWithValue("@balance", t.RemainingBalance);
-
+                cmd.Parameters.AddWithValue("@amount", t.Amount);
                 connection.Open();
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
-        public decimal GetLatestBalance()
+        public static List<Transaction> SearchTransactions(string keyword, int? bankId = null)
         {
+            var transactions = new List<Transaction>();
+
+            using (var connection = DatabaseHelper.Instance.GetConnection())
+            {
+                // Base query
+                string query = @"
+            SELECT t.record_id, t.transaction_type, t.bank_id, t.amount, t.date, b.bank_name
+            FROM transaction_history t
+            INNER JOIN new_table b ON t.bank_id = b.bank_id
+            WHERE (b.bank_name LIKE @keyword
+               OR t.transaction_type LIKE @keyword
+               OR t.amount LIKE @keyword
+               OR DATE_FORMAT(t.date, '%Y-%m-%d') LIKE @keyword)";
+
+                // Filter by bankId if provided
+                if (bankId.HasValue)
+                {
+                    query += " AND t.bank_id = @bankId";
+                }
+
+                query += " ORDER BY t.date DESC";
+
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                    if (bankId.HasValue)
+                        cmd.Parameters.AddWithValue("@bankId", bankId.Value);
+
+                    connection.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            transactions.Add(new Transaction
+                            {
+                                TransactionId = Convert.ToInt32(reader["transaction_id"]),
+                                BankId = Convert.ToInt32(reader["bank_id"]),
+                                BankName = reader["bank_name"].ToString(),
+                                TransactionType = reader["transaction_type"].ToString(),
+                                Amount = Convert.ToDecimal(reader["amount"]),
+                                TransactionDate = Convert.ToDateTime(reader["date"])
+                            });
+                        }
+                    }
+                }
+            }
+
+            return transactions;
+        }
+
+
+        public List<Transaction> GetTransactionsByBankId(int bankId)
+        {
+            var list = new List<Transaction>();
+
             using (var connection = conn)
             {
-                string query = "SELECT remaining_balance FROM transaction_history ORDER BY transaction_id DESC LIMIT 1";
+                string query = @"SELECT t.record_id, t.transaction_type, 
+                                        t.amount, t.date, b.bank_name
+                                 FROM transaction_history t
+                                 INNER JOIN new_table b ON t.bank_id = b.bank_id
+                                 WHERE t.bank_id = @bank_id
+                                 ORDER BY t.date DESC";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@bank_id", bankId);
                 connection.Open();
-                var result = cmd.ExecuteScalar();
-                return result != null ? Convert.ToDecimal(result) : 0;
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new Transaction
+                        {
+                            TransactionId = Convert.ToInt32(reader["record_id"]),
+                            BankId = bankId,
+                            BankName = reader["bank_name"].ToString(),
+                            TransactionType = reader["transaction_type"].ToString(),
+                            Amount = Convert.ToDecimal(reader["amount"]),
+                            TransactionDate = Convert.ToDateTime(reader["date"])
+                        });
+                    }
+                }
             }
-        }
 
-        public DataTable GetAllTransactions()
-        {
-            using (var connection = conn)
-            {
-                string query = "SELECT * FROM transaction_history ORDER BY transaction_date DESC";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
-
-        public DataTable SearchTransactions(string keyword)
-        {
-            using (var connection = conn)
-            {
-                string query = @"SELECT * FROM transaction_history 
-                             WHERE transaction_type LIKE @kw OR 
-                                   description LIKE @kw OR 
-                                   amount LIKE @kw OR 
-                                   remaining_balance LIKE @kw";
-
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
+            return list;
         }
     }
-
 }

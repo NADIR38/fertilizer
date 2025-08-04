@@ -234,7 +234,7 @@ namespace fertilizesop.UI
         private void btnlogout_Click(object sender, EventArgs e)
         {
             activebutton(sender, sidebarColors[14]);
-            var f = Program.ServiceProvider.GetRequiredService<transactionView>();
+            var f = Program.ServiceProvider.GetRequiredService<bankform>();
             LoadFormIntoPanel(f);// Crimson Red
             //Application.Exit();
         }

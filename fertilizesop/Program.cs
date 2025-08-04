@@ -57,6 +57,8 @@ namespace fertilizesop
             services.AddScoped<IDashboardDL,DashboardDL>();
             services.AddScoped<IInventorylogDl, InventorylogDl>();
             services.AddScoped<IRetunrsDl,RetunrsDl>();
+            services.AddScoped<ITransactionDAL,TransactionDAL>();
+            services.AddScoped<IBankDAL,BankDAL>();
 
 
             //Bl Layer
@@ -74,6 +76,8 @@ namespace fertilizesop
             services.AddScoped<IReturnsBl, ReturnsBl>();
 
             services.AddTransient<Customerbilldl>();
+            services.AddScoped<ItransactionBL, TransactionBL>();
+            services.AddScoped<IBankBl, BankBl>();
 
             //UI Layer
             services.AddTransient<HomeContentform>();
@@ -93,13 +97,14 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
-            services.AddTransient<transactionView>();
-            services.AddTransient<AddTransaction>();
+            //services.AddTransient<transactionView>();
+            //services.AddTransient<AddTransaction>();
             services.AddTransient<Inventorylogform>();
             services.AddTransient<OrderStatus>();
             services.AddTransient<Login>(); 
             services.AddTransient<Addreturmform>();
             services.AddTransient<Customerreturnform>();
+            services.AddTransient<bankform>();
 
 
 

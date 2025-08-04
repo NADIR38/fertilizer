@@ -9,24 +9,25 @@ namespace fertilizesop.BL.Models
 {
     public class Transaction
     {
-       
+        public int TransactionId { get; set; }
+        public int BankId { get; set; }
+        public string BankName { get; set; }
         public string TransactionType { get; set; } // "Deposit" or "Withdraw"
         public decimal Amount { get; set; }
         public DateTime TransactionDate { get; set; }
-        public string Description { get; set; }
-        public decimal RemainingBalance { get; set; }
 
         public Transaction ()
         {
 
         }
-        public Transaction(string type,decimal Amount,DateTime date,string desc,decimal balance)
+public Transaction(int transactionId, int bankId, string bankName, string transactionType, decimal amount, DateTime transactionDate)
         {
-            TransactionType = type;
-            this.Amount = Amount;
-            TransactionDate = date;
-            Description = desc;
-            RemainingBalance = balance;
+            TransactionId = transactionId;
+            BankId = bankId;
+            BankName = bankName;
+            TransactionType = transactionType;
+            Amount = amount;
+            TransactionDate = transactionDate;
         }
     }
 }
