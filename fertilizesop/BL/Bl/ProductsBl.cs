@@ -1,6 +1,8 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
+using Mysqlx.Session;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,12 @@ namespace fertilizesop.BL.Bl
             if (!IsValidProduct(p, isNew: true, out string error))
                 throw new ArgumentException(error);
 
-            return idl.Addproduct(p);
+            bool result= idl.Addproduct(p);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
 
         public List<Products> GetProducts()
@@ -42,7 +49,12 @@ namespace fertilizesop.BL.Bl
             if (!IsValidProduct(p, isNew: false, out string error))
                 throw new ArgumentException(error);
 
-            return idl.update(p);
+            bool result = idl.update(p);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
 
         private bool IsValidProduct(Products p, bool isNew, out string error)

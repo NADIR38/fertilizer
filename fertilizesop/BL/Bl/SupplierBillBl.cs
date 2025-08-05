@@ -1,5 +1,6 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,12 @@ namespace fertilizesop.BL.Bl
             }
             try
             {
-                return ibl.UpdateBill(b);
+                bool result = ibl.UpdateBill(b);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch (Exception e)
             {

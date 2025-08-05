@@ -46,11 +46,20 @@ private readonly ITransactionDAL dal;
                 TransactionDate = date
             };
 
+            // Insert transaction
             bool transactionInserted = dal.InsertTransaction(t);
             if (!transactionInserted) return false;
 
-            return bankDal.UpdateRemainingBalance(bankId, newBalance);
+            // Update remaining balance
+            bool balanceUpdated = bankDal.UpdateRemainingBalance(bankId, newBalance);
+            if (!balanceUpdated) return false;
+
+            // Create MySQL backup only after both actions succeed
+            MySqlBackupHelper.CreateBackup();
+
+            return true;
         }
+
 
         public List<Transaction> GetBankTransactionHistory(int bankId)
         {

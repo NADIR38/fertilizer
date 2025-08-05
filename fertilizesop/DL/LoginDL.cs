@@ -21,7 +21,7 @@ namespace fertilizesop.DL
                 using (var cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password); // You should hash this if you're using hash in DB
+                    cmd.Parameters.AddWithValue("@password", password); 
 
                     using (var reader = cmd.ExecuteReader())
                     {

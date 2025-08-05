@@ -456,57 +456,89 @@ namespace fertilizesop.UI
 
         private string GetJsonFilePath(int SelctedOrder)
         {
-            string folder = Path.Combine(Application.StartupPath, "TempInvoices");
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+            // Store inside: %AppData%\Fertilizer\TempInvoices
+            string folder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Fertilizer",
+                "TempInvoices"
+            );
+
+            try
+            {
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating temp folder: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return Path.Combine(folder, $"Invoice_{SelctedOrder}.json");
         }
 
+
         private void SaveTempInvoiceToJson(int SelctedOrder)
         {
-            var items = new List<TempInvoiceItem>();
-
-            foreach (DataGridViewRow row in dgvInvoice.Rows)
+            try
             {
-                if (!row.IsNewRow)
-                {
-                    items.Add(new TempInvoiceItem
-                    {
-                        ProductId = Convert.ToInt32(row.Cells["product_id"].Value),
-                        ProductName = row.Cells["Name"].Value?.ToString(),
-                        Description = row.Cells["Description"].Value?.ToString(),
-                        Price = Convert.ToDecimal(row.Cells["Price"].Value),
-                        Quantity = Convert.ToInt32(row.Cells["Quantity"].Value)
-                    });
-                }
-            }
+                var items = new List<TempInvoiceItem>();
 
-            string json = JsonConvert.SerializeObject(items, Formatting.Indented);
-            File.WriteAllText(GetJsonFilePath(SelctedOrder), json);
+                foreach (DataGridViewRow row in dgvInvoice.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        items.Add(new TempInvoiceItem
+                        {
+                            ProductId = Convert.ToInt32(row.Cells["product_id"].Value),
+                            ProductName = row.Cells["Name"].Value?.ToString(),
+                            Description = row.Cells["Description"].Value?.ToString(),
+                            Price = Convert.ToDecimal(row.Cells["Price"].Value),
+                            Quantity = Convert.ToInt32(row.Cells["Quantity"].Value)
+                        });
+                    }
+                }
+
+                string json = JsonConvert.SerializeObject(items, Formatting.Indented);
+                File.WriteAllText(GetJsonFilePath(SelctedOrder), json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving temp invoice: {ex.Message}");
+            }
         }
+
 
         private void LoadTempInvoiceFromJson(int SelctedOrder)
         {
             string filePath = GetJsonFilePath(SelctedOrder);
+
             if (!File.Exists(filePath)) return;
 
-            string json = File.ReadAllText(filePath);
-            var items = JsonConvert.DeserializeObject<List<TempInvoiceItem>>(json);
-
-            dgvInvoice.Rows.Clear();
-            foreach (var item in items)
+            try
             {
-                dgvInvoice.Rows.Add(
-                    item.ProductId,
-                    item.ProductName,
-                    item.Description,
-                    item.Price,
-                    item.Quantity,
-                    item.Total
-                );
+                string json = File.ReadAllText(filePath);
+                var items = JsonConvert.DeserializeObject<List<TempInvoiceItem>>(json);
+
+                dgvInvoice.Rows.Clear();
+
+                foreach (var item in items)
+                {
+                    dgvInvoice.Rows.Add(
+                        item.ProductId,
+                        item.ProductName,
+                        item.Description,
+                        item.Price,
+                        item.Quantity,
+                        item.Total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading temp invoice: {ex.Message}");
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

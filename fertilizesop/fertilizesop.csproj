@@ -145,6 +145,7 @@
     <Compile Include="BL\Bl\IBankBl.cs" />
     <Compile Include="BL\Models\Bank.cs" />
     <Compile Include="DL\BankDal.cs" />
+    <Compile Include="DL\MySqlbackupHelper.cs" />
     <Compile Include="DL\ITransactionDAL.cs" />
     <Compile Include="Interfaces\DLinterfaces\IBankDAL.cs" />
     <Compile Include="Interfaces\BLInterfaces\IReturnsBl.cs" />

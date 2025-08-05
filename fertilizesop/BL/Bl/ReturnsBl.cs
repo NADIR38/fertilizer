@@ -1,5 +1,6 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,12 @@ namespace fertilizesop.BL.Bl
 
 
             // ✅ Passed all checks → send to DL
-            return _retunrsDl.addreturn(r);
+            bool result = _retunrsDl.addreturn(r);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
         public List<Products> GetProducts(string name)
         {

@@ -1,5 +1,6 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,14 @@ namespace fertilizesop.BL.Bl
                 BankName = bankName,
                 RemainingBalance = initialDeposit
             };
-            return idl.InsertBank(bank);
+            bool result = idl.InsertBank(bank);
+            if (result)
+            {
+                // ✅ Automatically backup to .dat
+                MySqlBackupHelper.CreateBackup();
+            }
+
+            return result;
         }
 
         public decimal GetRemainingBalance(string bankName)

@@ -1,11 +1,13 @@
-﻿using System;
+﻿using fertilizesop.BL.Models;
+using fertilizesop.Interfaces.BLInterfaces;
+using fertilizesop.Interfaces.DLinterfaces;
+using Mysqlx.Session;
+using MySqlX.XDevAPI.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fertilizesop.BL.Models;
-using fertilizesop.Interfaces.BLInterfaces;
-using fertilizesop.Interfaces.DLinterfaces;
 
 namespace fertilizesop.BL.Bl
 {
@@ -23,7 +25,12 @@ namespace fertilizesop.BL.Bl
             try
             {
                 validatesuppliers(s);
-                return _supplierdl.addsupplier(s);
+                bool result = _supplierdl.addsupplier(s);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch(Exception e) 
             {
@@ -35,7 +42,12 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-                return _supplierdl.deletesupplier(s);
+                bool result = _supplierdl.deletesupplier(s);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch
             {
@@ -73,7 +85,12 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-                return _supplierdl.updatesupplier(s);
+                bool result = _supplierdl.updatesupplier(s);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch(Exception e)
             {

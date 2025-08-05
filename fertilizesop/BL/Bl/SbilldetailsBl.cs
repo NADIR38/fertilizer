@@ -1,5 +1,6 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,12 @@ namespace fertilizesop.BL.Bl
             {
                 throw new ArgumentException("Payement should be greater than zero");
             }
-            return ibl.addrecord(s);
+            bool result = ibl.addrecord(s);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
 
         public List<Supplierpayment> getdetails(int billid)

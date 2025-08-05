@@ -514,7 +514,7 @@ namespace fertilizesop.UI
                 };
 
                 string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-                File.WriteAllText("Temporarydata.json", json);
+                File.WriteAllText(GetTempSaleFilePath(), json);
             }
             catch (Exception ex)
             {
@@ -530,25 +530,41 @@ namespace fertilizesop.UI
 
         private void loadtempsale()
         {
-            if(!File.Exists("Temporarydata.json")) return;
-            string json = File.ReadAllText("Temporarydata.json");
-            var data = JsonConvert.DeserializeObject<Temporarycustomersale>(json);
-            txtcustsearch.Text = data.customername;
-            txtproductsearch.Text = data.productname;
-            txtfinaldiscount.Text = data.totaldiscount.ToString();
-            txtfinalprice.Text = data.finalpriceafterdisc.ToString();
-            totalwithoutdisc.Text = data.totalprice.ToString();
-            dateTimePicker1.Value = data.date;
-            dataGridView1.Rows.Clear();
-            foreach(var item in data.items)
+            try
             {
-                dataGridView1.Rows.Add(item.productname, item.description , item.unitprice , item.quantity , item.discount ,item.total , item.finalprice);
+                string filePath = GetTempSaleFilePath();
+                if (!File.Exists(filePath)) return;
+
+                string json = File.ReadAllText(filePath);
+                var data = JsonConvert.DeserializeObject<Temporarycustomersale>(json);
+
+                if (data == null) return;
+
+                txtcustsearch.Text = data.customername;
+                txtproductsearch.Text = data.productname;
+                txtfinaldiscount.Text = data.totaldiscount.ToString();
+                txtfinalprice.Text = data.finalpriceafterdisc.ToString();
+                totalwithoutdisc.Text = data.totalprice.ToString();
+                dateTimePicker1.Value = data.date;
+
+                dataGridView1.Rows.Clear();
+                foreach (var item in data.items)
+                {
+                    dataGridView1.Rows.Add(item.productname, item.description, item.unitprice, item.quantity, item.discount, item.total, item.finalprice);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading temporary sale: " + ex.Message);
             }
         }
+
 
         private void Customersale_Load(object sender, EventArgs e)
         {
             loadtempsale();
+           dateTimePicker1.Value = DateTime.Now;
+            // Load any other necessary data or perform additional setup here
         }
         private void Customersale_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -578,22 +594,24 @@ namespace fertilizesop.UI
         {
             try
             {
-                if(string.IsNullOrEmpty(txtcustsearch.Text))
+                if (string.IsNullOrEmpty(txtcustsearch.Text))
                 {
                     MessageBox.Show("Please enter the name of customer");
                     return;
                 }
 
-                if(dataGridView1.Rows.Count == 0)               
+                if (dataGridView1.Rows.Count == 0)
                 {
                     MessageBox.Show("Please select some product first");
                     return;
                 }
 
-                if(string.IsNullOrEmpty(txtpaidamount.Text))
+                if (string.IsNullOrEmpty(txtpaidamount.Text))
                 {
-                    DialogResult result1 = MessageBox.Show("Dont you want to enter the paid amount? " , "payment not enterd" , MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
-                    if(result1 == DialogResult.Yes)
+                    DialogResult result1 = MessageBox.Show("Don't you want to enter the paid amount?",
+                        "Payment not entered", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                    if (result1 == DialogResult.Yes)
                     {
                         txtpaidamount.Text = "0";
                     }
@@ -602,30 +620,33 @@ namespace fertilizesop.UI
                         return;
                     }
                 }
+
                 int id = _customersaledl.getcustomerid(txtcustsearch.Text);
-                bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value, Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
+                bool result = _customersaledl.SaveDataToDatabase(id, dateTimePicker1.Value,
+                    Convert.ToInt32(txtfinalprice.Text), Convert.ToInt32(txtpaidamount.Text), dataGridView1);
+
                 SavehthermalPdfInvoice();
+
                 if (result)
                 {
-                    MessageBox.Show("data saved successfully");
+                    MessageBox.Show("Data saved successfully");
                     clearallfields();
-                }
-                if (File.Exists("Temporarydata.json"))
-                {
-                    File.Delete("Temporarydata.json");
-                }
 
+                    string tempFile = GetTempSaleFilePath();
+                    if (File.Exists(tempFile))
+                        File.Delete(tempFile);
+                }
                 else
                 {
                     MessageBox.Show("Data not saved to the database");
-                    return;
                 }
             }
-            catch  (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show("Error in saving the data to database " + ex.Message);
+                MessageBox.Show("Error in saving the data to database: " + ex.Message);
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -664,6 +685,28 @@ namespace fertilizesop.UI
                 }
             }
         }
+        private string GetTempSaleFilePath()
+        {
+            // Store inside: %AppData%\Fertilizer\TempData
+            string folder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Fertilizer",
+                "TempData"
+            );
+
+            try
+            {
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating temp folder: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Path.Combine(folder, "Temporarydata.json");
+        }
+
 
         private void iconPictureBox3_Click(object sender, EventArgs e)
         {

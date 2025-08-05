@@ -1,6 +1,8 @@
 ﻿﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
+using Mysqlx.Session;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,12 @@ namespace fertilizesop.BL.Bl
             try
             {
                 ValidateCustomer(s);
-                return idl.Addcustomer(s);
+                bool result= idl.Addcustomer(s);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch (Exception ex)
             {
@@ -67,7 +74,12 @@ namespace fertilizesop.BL.Bl
                 if (c.Id <= 0)
                     throw new ArgumentException("Invalid customer ID for update.");
 
-                return idl.update(c);
+                bool result = idl.update(c);
+                if (result)
+                {
+                    MySqlBackupHelper.CreateBackup();
+                }
+                return result;
             }
             catch (Exception ex)
             {

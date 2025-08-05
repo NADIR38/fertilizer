@@ -18,30 +18,25 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-                // ✅ Input validation
-                if (b == null)
-                    throw new ArgumentNullException(nameof(b), "Batch details cannot be null.");
+                // Validation
+                if (b == null) throw new ArgumentNullException(nameof(b), "Batch details cannot be null.");
+                if (b.product_id <= 0) throw new ArgumentException("Invalid Product ID.");
+                if (b.cost_price <= 0) throw new ArgumentException("Cost price must be greater than 0.");
+                if (b.quantity_received < 0) throw new ArgumentException("Quantity received cannot be negative.");
+                if (b.sale_price <= 0) throw new ArgumentException("Sale price must be greater than 0.");
 
-             
+                bool result = idl.adddetails(b);
 
-                if (b.product_id <= 0)
-                    throw new ArgumentException("Invalid Product ID.");
-
-                if (b.cost_price<= 0)
-                    throw new ArgumentException("Cost price must be greater than 0.");
-
-                if (b.quantity_received< 0)
-                    throw new ArgumentException("Quantity received cannot be negative.");
-                if (b.sale_price <= 0)
+                if (result)
                 {
-                    throw new ArgumentException("Sale price must be greater than 0.");
+                    // ✅ Automatically backup to .dat
+                    MySqlBackupHelper.CreateBackup();
                 }
 
-                return idl.adddetails(b);
+                return result;
             }
             catch (Exception ex)
             {
-                // Optional: Log the exception here
                 throw new Exception("Error in BL while adding batch details: " + ex.Message, ex);
             }
         }
@@ -60,8 +55,7 @@ namespace fertilizesop.BL.Bl
 
         public int getsaleprice(int product_id)
         {
-            if (product_id <= 0)
-                throw new ArgumentException("error in getting sale price ");
+            if (product_id <= 0) throw new ArgumentException("Error in getting sale price.");
             return idl.getsaleprice(product_id);
         }
 
@@ -69,8 +63,6 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-           
-
                 return idl.SearchBatchDetails(searchText.Trim());
             }
             catch (Exception ex)
