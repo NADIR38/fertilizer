@@ -1,4 +1,5 @@
 ﻿using fertilizesop.BL.Bl;
+using fertilizesop.BL.Models;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace fertilizesop.UI
                 greeting = "Good Night";
 
             // Get user's name from session
-            string name =  "Nadir Jamal";
+            string name = Usersession.FullName ?? "Nadir Jamal";
 
             label10.Text = $"{greeting}, {name}";
         }

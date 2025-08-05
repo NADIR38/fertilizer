@@ -155,6 +155,27 @@ namespace KIMS
                 throw new Exception("Error retrieving batch ID: " + ex.Message);
             }
         }
+        internal int getbankid(string text)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT bank_id FROM new_table WHERE bank_name = @name;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", text);
+                        object result = cmd.ExecuteScalar();
+                        return result != null ? Convert.ToInt32(result) : -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving bank ID: " + ex.Message);
+            }
+        }
 
         internal int getcustid(string fullName)
         {
@@ -208,6 +229,35 @@ namespace KIMS
             catch (Exception ex)
             {
                 throw new Exception("Error retrieving batches: " + ex.Message);
+            }
+            return suppliers;
+        }
+        public List<string> getbanks(string keyword)
+        {
+            List<string> suppliers = new List<string>();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT bank_name FROM new_table WHERE bank_name LIKE @keyword;";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@keyword", $"%{keyword}%");
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                suppliers.Add(reader.GetString("bank_name"));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving suppliers: " + ex.Message);
             }
             return suppliers;
         }

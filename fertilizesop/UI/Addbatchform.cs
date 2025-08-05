@@ -1,6 +1,7 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.Interfaces.BLInterfaces;
 using KIMS;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
 using System.Windows.Forms;
@@ -103,6 +104,12 @@ namespace fertilizesop.UI
         private void Addbatchform_Load(object sender, EventArgs e)
         {
             dateTimePicker1.Value=DateTime.Now;
+        }
+
+        private void iconPictureBox2_Click(object sender, EventArgs e)
+        {
+            var f=Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            f.ShowDialog(this);
         }
     }
 }

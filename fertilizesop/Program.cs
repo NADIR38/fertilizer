@@ -12,6 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using TechStore.UI;
 
 namespace fertilizesop
 {
@@ -33,8 +34,16 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
-            Application.Run(mainform);
+            var login = ServiceProvider.GetRequiredService<dashboardform>();
+            //var result = login.ShowDialog();
+            Application.Run(login); // Show the login form as a modal dialog
+            //if (result == DialogResult.OK)
+            //{
+            //    // Run dashboard only after login passes
+            //    Application.Run(ServiceProvider.GetRequiredService<dashboardform>());
+            //    //}
+            //}
+
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer
@@ -47,6 +56,9 @@ namespace fertilizesop
             services.AddScoped<ISbilldetailsDl, SbilldetailsDl>();
             services.AddScoped<IDashboardDL,DashboardDL>();
             services.AddScoped<IInventorylogDl, InventorylogDl>();
+            services.AddScoped<IRetunrsDl,RetunrsDl>();
+            services.AddScoped<ITransactionDAL,TransactionDAL>();
+            services.AddScoped<IBankDAL,BankDAL>();
 
 
             //Bl Layer
@@ -61,8 +73,11 @@ namespace fertilizesop
             services.AddTransient<Supplierbillsform>();
             services.AddScoped<IdashboardBl, dashboardBl>();
             services.AddScoped<IInventorylogBl, InventorylogBl>();
+            services.AddScoped<IReturnsBl, ReturnsBl>();
 
-
+            services.AddTransient<Customerbilldl>();
+            services.AddScoped<ItransactionBL, TransactionBL>();
+            services.AddScoped<IBankBl, BankBl>();
 
             //UI Layer
             services.AddTransient<HomeContentform>();
@@ -82,11 +97,14 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
-            services.AddTransient<transactionView>();
-            services.AddTransient<AddTransaction>();
+            //services.AddTransient<transactionView>();
+            //services.AddTransient<AddTransaction>();
             services.AddTransient<Inventorylogform>();
             services.AddTransient<OrderStatus>();
-
+            services.AddTransient<Login>(); 
+            services.AddTransient<Addreturmform>();
+            services.AddTransient<Customerreturnform>();
+            services.AddTransient<bankform>();
 
 
 

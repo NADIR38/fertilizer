@@ -131,6 +131,7 @@
             this.iconPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.iconPictureBox2.TabIndex = 198;
             this.iconPictureBox2.TabStop = false;
+            this.iconPictureBox2.Click += new System.EventHandler(this.iconPictureBox2_Click);
             // 
             // btnsave
             // 
@@ -171,6 +172,7 @@
             this.Controls.Add(this.txtname);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Addbatchform";
             this.Text = "Addbatchform";
             this.Load += new System.EventHandler(this.Addbatchform_Load);

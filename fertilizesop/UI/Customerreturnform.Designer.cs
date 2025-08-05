@@ -1,6 +1,6 @@
 ﻿namespace fertilizesop.UI
 {
-    partial class BatchDetailsform
+    partial class Customerreturnform
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BatchDetailsform));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customerreturnform));
             this.panel10 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -57,8 +57,8 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1312, 792);
-            this.panel10.TabIndex = 17;
+            this.panel10.Size = new System.Drawing.Size(1294, 745);
+            this.panel10.TabIndex = 18;
             // 
             // button1
             // 
@@ -96,8 +96,9 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(1267, 440);
+            this.dataGridView2.Size = new System.Drawing.Size(1249, 393);
             this.dataGridView2.TabIndex = 143;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // pictureBox1
             // 
@@ -108,7 +109,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 142;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label12
             // 
@@ -141,7 +141,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1312, 84);
+            this.panel1.Size = new System.Drawing.Size(1294, 84);
             this.panel1.TabIndex = 15;
             // 
             // toplbl
@@ -150,22 +150,22 @@
             this.toplbl.AutoSize = true;
             this.toplbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toplbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toplbl.Location = new System.Drawing.Point(538, 26);
+            this.toplbl.Location = new System.Drawing.Point(529, 26);
             this.toplbl.Name = "toplbl";
-            this.toplbl.Size = new System.Drawing.Size(223, 38);
+            this.toplbl.Size = new System.Drawing.Size(286, 38);
             this.toplbl.TabIndex = 6;
-            this.toplbl.Text = "Batch Details";
+            this.toplbl.Text = "Customer returns";
             this.toplbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // BatchDetailsform
+            // Customerreturnform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 792);
+            this.ClientSize = new System.Drawing.Size(1294, 745);
             this.Controls.Add(this.panel10);
-            this.Name = "BatchDetailsform";
-            this.Text = "BatchDetailsform";
-            this.Load += new System.EventHandler(this.BatchDetailsform_Load);
+            this.Name = "Customerreturnform";
+            this.Text = "Customerreturnform";
+            this.Load += new System.EventHandler(this.Customerreturnform_Load);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
