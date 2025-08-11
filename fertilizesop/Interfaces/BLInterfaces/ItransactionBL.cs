@@ -9,10 +9,9 @@ using fertilizesop.BL.Models;
 
 namespace fertilizesop.Interfaces.BLInterfaces
 {
-    internal interface ItransactionBL
+    public interface ItransactionBL
     {
-        bool AddTransaction(Transaction t);
-        DataTable ViewAllTransactions();
-        DataTable Search(string keyword);
+        bool AddTransaction(string bankName, string type, decimal amount, DateTime date);
+        List<Transaction> GetBankTransactionHistory(int bankId);
     }
 }

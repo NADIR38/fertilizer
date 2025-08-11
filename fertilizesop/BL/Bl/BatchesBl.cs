@@ -1,6 +1,7 @@
 ﻿using fertilizesop.BL.Models;
 using fertilizesop.DL;
 using fertilizesop.Interfaces.BLInterfaces;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,12 @@ namespace fertilizesop.BL.Bl
         public bool addbatches(Batches b)
         {
             ValidateBatch(b);
-            return idl.addbatches(b);
+           bool result= idl.addbatches(b);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
 
         public List<Batches> GetAllBatches()
@@ -44,7 +50,12 @@ namespace fertilizesop.BL.Bl
                 throw new ArgumentException("Invalid batch ID for update.");
 
             ValidateBatch(b);
-            return idl.UpdateBatch(b);
+            bool result = idl.UpdateBatch(b);
+            if (result)
+            {
+                MySqlBackupHelper.CreateBackup();
+            }
+            return result;
         }
 
         /// <summary>

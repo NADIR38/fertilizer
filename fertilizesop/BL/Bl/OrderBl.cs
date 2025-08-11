@@ -25,7 +25,15 @@ namespace fertilizesop.BL.Bl
         {
             try
             {
-                return _orderDL.InsertOrder(order);
+                int orderId = _orderDL.InsertOrder(order);
+
+                if (orderId > 0)
+                {
+                    // ✅ Create MySQL full backup after order is successfully inserted
+                    MySqlBackupHelper.CreateBackup();
+                }
+
+                return orderId;
             }
             catch (Exception ex)
             {
@@ -34,31 +42,39 @@ namespace fertilizesop.BL.Bl
             }
         }
 
-        public void InsertOrderDetail(OrderDetail detail)
-        {
-            try
-            {
-                _orderDL.InsertOrderDetail(detail);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error inserting order detail: " + ex.Message);
-            }
-        }
 
-        public void UpdateOrderDetail(OrderDetail detail)
+public void InsertOrderDetail(OrderDetail detail)
+    {
+        try
         {
-            try
-            {
-                _orderDL.UpdateOrderDetail(detail);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating order detail: " + ex.Message);
-            }
-        }
+            _orderDL.InsertOrderDetail(detail);
 
-        public bool Delete(int orderDetailId)
+            // ✅ Create MySQL backup after inserting order detail
+            MySqlBackupHelper.CreateBackup();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error inserting order detail: " + ex.Message);
+        }
+    }
+
+    public void UpdateOrderDetail(OrderDetail detail)
+    {
+        try
+        {
+            _orderDL.UpdateOrderDetail(detail);
+
+            // ✅ Create MySQL backup after updating order detail
+            MySqlBackupHelper.CreateBackup();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error updating order detail: " + ex.Message);
+        }
+    }
+
+
+    public bool Delete(int orderDetailId)
         {
             try
             {

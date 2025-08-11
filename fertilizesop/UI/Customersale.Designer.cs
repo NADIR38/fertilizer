@@ -32,6 +32,13 @@ namespace fertilizesop.UI
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sale_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.final = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtproductsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -53,13 +60,6 @@ namespace fertilizesop.UI
             this.txtcustsearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sale_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.final = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
@@ -89,6 +89,64 @@ namespace fertilizesop.UI
             this.dataGridView1.Size = new System.Drawing.Size(1575, 530);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Product";
+            this.name.MinimumWidth = 8;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 8;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // sale_price
+            // 
+            this.sale_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sale_price.DataPropertyName = "sale_price";
+            this.sale_price.HeaderText = "Unit Price";
+            this.sale_price.MinimumWidth = 8;
+            this.sale_price.Name = "sale_price";
+            // 
+            // quantity
+            // 
+            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.quantity.DataPropertyName = "quantity";
+            this.quantity.HeaderText = "quantity";
+            this.quantity.MinimumWidth = 8;
+            this.quantity.Name = "quantity";
+            // 
+            // discount
+            // 
+            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.discount.DataPropertyName = "discount";
+            this.discount.HeaderText = "discount";
+            this.discount.MinimumWidth = 8;
+            this.discount.Name = "discount";
+            // 
+            // final
+            // 
+            this.final.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.final.DataPropertyName = "final";
+            this.final.HeaderText = "total";
+            this.final.MinimumWidth = 8;
+            this.final.Name = "final";
+            // 
+            // total
+            // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.total.DataPropertyName = "total";
+            this.total.HeaderText = "final";
+            this.total.MinimumWidth = 8;
+            this.total.Name = "total";
             // 
             // txtproductsearch
             // 
@@ -177,7 +235,7 @@ namespace fertilizesop.UI
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1214, 825);
+            this.label7.Location = new System.Drawing.Point(1210, 788);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(110, 20);
             this.label7.TabIndex = 17;
@@ -186,10 +244,11 @@ namespace fertilizesop.UI
             // txtpaidamount
             // 
             this.txtpaidamount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtpaidamount.Location = new System.Drawing.Point(1214, 848);
+            this.txtpaidamount.Location = new System.Drawing.Point(1214, 811);
             this.txtpaidamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtpaidamount.Multiline = true;
             this.txtpaidamount.Name = "txtpaidamount";
-            this.txtpaidamount.Size = new System.Drawing.Size(276, 26);
+            this.txtpaidamount.Size = new System.Drawing.Size(276, 63);
             this.txtpaidamount.TabIndex = 16;
             // 
             // dateTimePicker1
@@ -261,26 +320,29 @@ namespace fertilizesop.UI
             this.totalwithoutdisc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.totalwithoutdisc.Location = new System.Drawing.Point(1302, 98);
             this.totalwithoutdisc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.totalwithoutdisc.Multiline = true;
             this.totalwithoutdisc.Name = "totalwithoutdisc";
-            this.totalwithoutdisc.Size = new System.Drawing.Size(276, 26);
+            this.totalwithoutdisc.Size = new System.Drawing.Size(276, 33);
             this.totalwithoutdisc.TabIndex = 9;
             // 
             // txtfinaldiscount
             // 
             this.txtfinaldiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtfinaldiscount.Location = new System.Drawing.Point(1302, 152);
+            this.txtfinaldiscount.Location = new System.Drawing.Point(1302, 148);
             this.txtfinaldiscount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtfinaldiscount.Multiline = true;
             this.txtfinaldiscount.Name = "txtfinaldiscount";
-            this.txtfinaldiscount.Size = new System.Drawing.Size(276, 26);
+            this.txtfinaldiscount.Size = new System.Drawing.Size(276, 30);
             this.txtfinaldiscount.TabIndex = 8;
             // 
             // txtfinalprice
             // 
             this.txtfinalprice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtfinalprice.Location = new System.Drawing.Point(1305, 202);
+            this.txtfinalprice.Location = new System.Drawing.Point(1305, 195);
             this.txtfinalprice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtfinalprice.Multiline = true;
             this.txtfinalprice.Name = "txtfinalprice";
-            this.txtfinalprice.Size = new System.Drawing.Size(276, 26);
+            this.txtfinalprice.Size = new System.Drawing.Size(276, 33);
             this.txtfinalprice.TabIndex = 7;
             this.txtfinalprice.TextChanged += new System.EventHandler(this.txtfinalprice_TextChanged);
             // 
@@ -335,64 +397,6 @@ namespace fertilizesop.UI
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1583, 100);
             this.panel2.TabIndex = 0;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Product";
-            this.name.MinimumWidth = 8;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.description.DataPropertyName = "description";
-            this.description.HeaderText = "Description";
-            this.description.MinimumWidth = 8;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // sale_price
-            // 
-            this.sale_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sale_price.DataPropertyName = "sale_price";
-            this.sale_price.HeaderText = "Unit Price";
-            this.sale_price.MinimumWidth = 8;
-            this.sale_price.Name = "sale_price";
-            // 
-            // quantity
-            // 
-            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.quantity.DataPropertyName = "quantity";
-            this.quantity.HeaderText = "quantity";
-            this.quantity.MinimumWidth = 8;
-            this.quantity.Name = "quantity";
-            // 
-            // discount
-            // 
-            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.discount.DataPropertyName = "discount";
-            this.discount.HeaderText = "discount";
-            this.discount.MinimumWidth = 8;
-            this.discount.Name = "discount";
-            // 
-            // final
-            // 
-            this.final.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.final.DataPropertyName = "final";
-            this.final.HeaderText = "total";
-            this.final.MinimumWidth = 8;
-            this.final.Name = "final";
-            // 
-            // total
-            // 
-            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.total.DataPropertyName = "total";
-            this.total.HeaderText = "final";
-            this.total.MinimumWidth = 8;
-            this.total.Name = "total";
             // 
             // Customersale
             // 

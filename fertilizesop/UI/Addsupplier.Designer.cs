@@ -56,8 +56,9 @@
             this.editpanel.Location = new System.Drawing.Point(0, 0);
             this.editpanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editpanel.Name = "editpanel";
-            this.editpanel.Size = new System.Drawing.Size(380, 522);
+            this.editpanel.Size = new System.Drawing.Size(428, 652);
             this.editpanel.TabIndex = 144;
+            this.editpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.editpanel_Paint);
             // 
             // btnsave
             // 
@@ -68,10 +69,10 @@
             this.btnsave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnsave.IconSize = 38;
             this.btnsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsave.Location = new System.Drawing.Point(101, 376);
+            this.btnsave.Location = new System.Drawing.Point(114, 470);
             this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(136, 37);
+            this.btnsave.Size = new System.Drawing.Size(153, 46);
             this.btnsave.TabIndex = 197;
             this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
@@ -83,9 +84,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label4.Location = new System.Drawing.Point(28, 142);
+            this.label4.Location = new System.Drawing.Point(32, 178);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 30);
+            this.label4.Size = new System.Drawing.Size(106, 36);
             this.label4.TabIndex = 195;
             this.label4.Text = "Contact";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -96,9 +97,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label3.Location = new System.Drawing.Point(28, 236);
+            this.label3.Location = new System.Drawing.Point(32, 295);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 30);
+            this.label3.Size = new System.Drawing.Size(110, 36);
             this.label3.TabIndex = 194;
             this.label3.Text = "Address";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -109,9 +110,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label6.Location = new System.Drawing.Point(28, 52);
+            this.label6.Location = new System.Drawing.Point(32, 65);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 30);
+            this.label6.Size = new System.Drawing.Size(143, 36);
             this.label6.TabIndex = 193;
             this.label6.Text = "First Name";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,30 +121,33 @@
             // 
             this.txtfirstname.BackColor = System.Drawing.Color.Gainsboro;
             this.txtfirstname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtfirstname.Location = new System.Drawing.Point(32, 84);
+            this.txtfirstname.Location = new System.Drawing.Point(36, 105);
+            this.txtfirstname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtfirstname.Multiline = true;
             this.txtfirstname.Name = "txtfirstname";
-            this.txtfirstname.Size = new System.Drawing.Size(313, 35);
+            this.txtfirstname.Size = new System.Drawing.Size(352, 43);
             this.txtfirstname.TabIndex = 190;
             // 
             // txtaddress
             // 
             this.txtaddress.BackColor = System.Drawing.Color.Gainsboro;
             this.txtaddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtaddress.Location = new System.Drawing.Point(32, 268);
+            this.txtaddress.Location = new System.Drawing.Point(36, 335);
+            this.txtaddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtaddress.Multiline = true;
             this.txtaddress.Name = "txtaddress";
-            this.txtaddress.Size = new System.Drawing.Size(313, 35);
+            this.txtaddress.Size = new System.Drawing.Size(352, 43);
             this.txtaddress.TabIndex = 189;
             // 
             // txtcontact
             // 
             this.txtcontact.BackColor = System.Drawing.Color.Gainsboro;
             this.txtcontact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcontact.Location = new System.Drawing.Point(32, 174);
+            this.txtcontact.Location = new System.Drawing.Point(36, 218);
+            this.txtcontact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtcontact.Multiline = true;
             this.txtcontact.Name = "txtcontact";
-            this.txtcontact.Size = new System.Drawing.Size(313, 35);
+            this.txtcontact.Size = new System.Drawing.Size(352, 43);
             this.txtcontact.TabIndex = 188;
             // 
             // label2
@@ -151,17 +155,17 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label2.Location = new System.Drawing.Point(94, 15);
+            this.label2.Location = new System.Drawing.Point(106, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 38);
+            this.label2.Size = new System.Drawing.Size(260, 46);
             this.label2.TabIndex = 0;
             this.label2.Text = "Add Supplier";
             // 
             // Addsupplier
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 522);
+            this.ClientSize = new System.Drawing.Size(428, 652);
             this.Controls.Add(this.editpanel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Addsupplier";

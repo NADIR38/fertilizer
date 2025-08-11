@@ -322,6 +322,7 @@ namespace fertilizesop.UI
                 {
                     MessageBox.Show("Payment recorded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBillingRecords(); // Reload updated data
+                    MySqlBackupHelper.CreateBackup(); // Create backup after successful payment
                 }
                 else
                 {

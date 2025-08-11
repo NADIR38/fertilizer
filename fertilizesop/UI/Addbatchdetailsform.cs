@@ -79,12 +79,31 @@ namespace fertilizesop.UI
         }
         private string GetTempFilePath()
         {
-            string folder = Path.Combine(Application.StartupPath, "TempBatches");
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+            // ✅ Use AppData instead of Program Files
+            string folder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Fertilizer",
+                "TempBatches"
+            );
 
-            return Path.Combine(folder, $"{txtBname.Text.Trim()}.json");
+            try
+            {
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating temp folder: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Use batch name if available, otherwise default
+            string fileName = string.IsNullOrWhiteSpace(txtBname.Text)
+                ? "temp.json"
+                : $"{txtBname.Text.Trim()}.json";
+
+            return Path.Combine(folder, fileName);
         }
+
 
         private void SaveTempData()
         {
