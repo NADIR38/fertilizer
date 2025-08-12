@@ -33,7 +33,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<FinanceReportForm>();
+            var mainform = ServiceProvider.GetRequiredService<dashboardform>();
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
@@ -47,6 +47,9 @@ namespace fertilizesop
             services.AddScoped<ISbilldetailsDl, SbilldetailsDl>();
             services.AddScoped<IDashboardDL,DashboardDL>();
             services.AddScoped<IInventorylogDl, InventorylogDl>();
+            services.AddScoped<IBankDAL, BankDAL>();
+            services.AddScoped<ITransactionDAL, TransactionDAL>();
+            services.AddScoped<IRetunrsDl,RetunrsDl>();
 
 
             //Bl Layer
@@ -61,7 +64,9 @@ namespace fertilizesop
             services.AddTransient<Supplierbillsform>();
             services.AddScoped<IdashboardBl, dashboardBl>();
             services.AddScoped<IInventorylogBl, InventorylogBl>();
-
+            services.AddScoped<IBankBl, BankBl>();
+            services.AddScoped<ItransactionBL, TransactionBL>();
+            services.AddScoped<IReturnsBl, ReturnsBl>();
 
 
             //UI Layer
@@ -82,12 +87,16 @@ namespace fertilizesop
             services.AddTransient<Productsform>();
             services.AddTransient<Addproductform>();
             services.AddTransient<Customersale>();
-            services.AddTransient<transactionView>();
-            services.AddTransient<AddTransaction>();
+            //services.AddTransient<transactionView>();
+            //services.AddTransient<AddTransaction>();
             services.AddTransient<Inventorylogform>();
             services.AddTransient<OrderStatus>();
             services.AddTransient<FinanceReportForm>();
+            services.AddTransient<bankform>();
+            services.AddTransient<Addreturmform>();
+            services.AddTransient<Customerreturnform>();
 
+            services.AddTransient<Customerbilldl>();
 
 
 

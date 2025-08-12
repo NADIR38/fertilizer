@@ -133,6 +133,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Bl\BankBl.cs" />
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
     <Compile Include="BL\Bl\BillingRecordsOverviewBL.cs" />
@@ -142,16 +143,27 @@
     <Compile Include="BL\Bl\CustomerBl.cs" />
     <Compile Include="BL\Bl\dashboardBl.cs" />
     <Compile Include="BL\Bl\FinanceReportBL.cs" />
+    <Compile Include="BL\Bl\IBankBl.cs" />
+    <Compile Include="BL\Bl\ReturnsBl.cs" />
+    <Compile Include="BL\Models\Bank.cs" />
     <Compile Include="BL\Models\Customerbill.cs" />
     <Compile Include="BL\Models\Customerrecord.cs" />
+    <Compile Include="BL\Models\returns.cs" />
+    <Compile Include="BL\Models\Usersession.cs" />
+    <Compile Include="DL\BankDal.cs" />
     <Compile Include="DL\BillingRecordsOverviewDL.cs" />
     <Compile Include="DL\Customerbilldetaildl.cs" />
     <Compile Include="DL\Customerbilldl.cs" />
     <Compile Include="DL\CustomerBill_SpecificProductsDL.cs" />
     <Compile Include="DL\FinanceReportDAL.cs" />
+    <Compile Include="DL\ITransactionDAL.cs" />
+    <Compile Include="DL\MySqlbackupHelper.cs" />
+    <Compile Include="DL\RetunrsDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IInventorylogBl.cs" />
     <Compile Include="BL\Bl\InventorylogBl.cs" />
+    <Compile Include="Interfaces\BLInterfaces\IReturnsBl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ItransactionBL.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IBankDAL.cs" />
     <Compile Include="Interfaces\DLinterfaces\IdashboardBl.cs" />
     <Compile Include="BL\Bl\TransactionBL.cs" />
     <Compile Include="BL\Models\Dashboard.cs" />
@@ -167,6 +179,7 @@
     <Compile Include="BL\Bl\SbilldetailsBl.cs" />
     <Compile Include="BL\Models\Spricerecord.cs" />
     <Compile Include="BL\Models\Supplierpayment.cs" />
+    <Compile Include="Interfaces\DLinterfaces\IRetunrsDl.cs" />
     <Compile Include="Interfaces\DLinterfaces\ISbilldetailsDl.cs" />
     <Compile Include="DL\SbilldetailsDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\ISupplierBillBl.cs" />
@@ -235,17 +248,23 @@
     <Compile Include="UI\Addproductform.Designer.cs">
       <DependentUpon>Addproductform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Addreturmform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Addreturmform.Designer.cs">
+      <DependentUpon>Addreturmform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Addsupplier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Addsupplier.Designer.cs">
       <DependentUpon>Addsupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\AddTransaction.cs">
+    <Compile Include="UI\bankform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AddTransaction.Designer.cs">
-      <DependentUpon>AddTransaction.cs</DependentUpon>
+    <Compile Include="UI\bankform.Designer.cs">
+      <DependentUpon>bankform.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\BatchDetailsform.cs">
       <SubType>Form</SubType>
@@ -270,6 +289,12 @@
     </Compile>
     <Compile Include="UI\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Customerreturnform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Customerreturnform.Designer.cs">
+      <DependentUpon>Customerreturnform.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Customersale.cs">
       <SubType>Form</SubType>
@@ -351,12 +376,6 @@
     <Compile Include="UI\supplierform.Designer.cs">
       <DependentUpon>supplierform.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\transactionView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\transactionView.Designer.cs">
-      <DependentUpon>transactionView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\UIHelper.cs" />
     <EmbeddedResource Include="UI\Addbatchdetailsform.resx">
       <DependentUpon>Addbatchdetailsform.cs</DependentUpon>
@@ -370,11 +389,14 @@
     <EmbeddedResource Include="UI\Addproductform.resx">
       <DependentUpon>Addproductform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Addreturmform.resx">
+      <DependentUpon>Addreturmform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Addsupplier.resx">
       <DependentUpon>Addsupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\AddTransaction.resx">
-      <DependentUpon>AddTransaction.cs</DependentUpon>
+    <EmbeddedResource Include="UI\bankform.resx">
+      <DependentUpon>bankform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\BatchDetailsform.resx">
       <DependentUpon>BatchDetailsform.cs</DependentUpon>
@@ -387,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Customerreturnform.resx">
+      <DependentUpon>Customerreturnform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Customersale.resx">
       <DependentUpon>Customersale.cs</DependentUpon>
@@ -436,9 +461,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\supplierform.resx">
       <DependentUpon>supplierform.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\transactionView.resx">
-      <DependentUpon>transactionView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />
