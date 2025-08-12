@@ -34,13 +34,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.comboYear = new System.Windows.Forms.ComboBox();
-            this.comboMonth = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
-            this.radioMonthly = new System.Windows.Forms.RadioButton();
             this.radioYearly = new System.Windows.Forms.RadioButton();
+            this.radioMonthly = new System.Windows.Forms.RadioButton();
+            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboMonth = new System.Windows.Forms.ComboBox();
+            this.comboYear = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -81,7 +81,7 @@
             this.dgvReport.ReadOnly = true;
             this.dgvReport.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvReport.Size = new System.Drawing.Size(1246, 456);
+            this.dgvReport.Size = new System.Drawing.Size(1246, 449);
             this.dgvReport.TabIndex = 143;
             // 
             // label12
@@ -125,39 +125,56 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1312, 792);
+            this.panel10.Size = new System.Drawing.Size(1312, 785);
             this.panel10.TabIndex = 18;
             this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
-            // comboYear
+            // radioYearly
             // 
-            this.comboYear.FormattingEnabled = true;
-            this.comboYear.Location = new System.Drawing.Point(73, 137);
-            this.comboYear.Name = "comboYear";
-            this.comboYear.Size = new System.Drawing.Size(310, 24);
-            this.comboYear.TabIndex = 192;
+            this.radioYearly.AutoSize = true;
+            this.radioYearly.Location = new System.Drawing.Point(1206, 101);
+            this.radioYearly.Name = "radioYearly";
+            this.radioYearly.Size = new System.Drawing.Size(67, 20);
+            this.radioYearly.TabIndex = 198;
+            this.radioYearly.TabStop = true;
+            this.radioYearly.Text = "Yearly";
+            this.radioYearly.UseVisualStyleBackColor = true;
             // 
-            // comboMonth
+            // radioMonthly
             // 
-            this.comboMonth.FormattingEnabled = true;
-            this.comboMonth.Location = new System.Drawing.Point(566, 137);
-            this.comboMonth.Name = "comboMonth";
-            this.comboMonth.Size = new System.Drawing.Size(310, 24);
-            this.comboMonth.TabIndex = 193;
+            this.radioMonthly.AutoSize = true;
+            this.radioMonthly.Location = new System.Drawing.Point(1091, 101);
+            this.radioMonthly.Name = "radioMonthly";
+            this.radioMonthly.Size = new System.Drawing.Size(74, 20);
+            this.radioMonthly.TabIndex = 197;
+            this.radioMonthly.TabStop = true;
+            this.radioMonthly.Text = "Monthly";
+            this.radioMonthly.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // iconButton2
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.label1.Location = new System.Drawing.Point(68, 109);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 25);
-            this.label1.TabIndex = 194;
-            this.label1.Text = "Select Year :";
+            this.iconButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
+            this.iconButton2.FlatAppearance.BorderSize = 2;
+            this.iconButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.iconButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            this.iconButton2.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton2.IconSize = 35;
+            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton2.Location = new System.Drawing.Point(37, 722);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Size = new System.Drawing.Size(191, 51);
+            this.iconButton2.TabIndex = 196;
+            this.iconButton2.Text = "Export PDF";
+            this.iconButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton2.UseVisualStyleBackColor = false;
             // 
             // iconButton1
             // 
@@ -185,58 +202,41 @@
             this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
-            // iconButton2
+            // label1
             // 
-            this.iconButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
-            this.iconButton2.FlatAppearance.BorderColor = System.Drawing.Color.Indigo;
-            this.iconButton2.FlatAppearance.BorderSize = 2;
-            this.iconButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.iconButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(51)))), ((int)(((byte)(69)))));
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.iconButton2.IconColor = System.Drawing.Color.MediumTurquoise;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 35;
-            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(37, 729);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(191, 51);
-            this.iconButton2.TabIndex = 196;
-            this.iconButton2.Text = "Export PDF";
-            this.iconButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = false;
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(64)))), ((int)(((byte)(31)))));
+            this.label1.Location = new System.Drawing.Point(68, 109);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 25);
+            this.label1.TabIndex = 194;
+            this.label1.Text = "Select Year :";
             // 
-            // radioMonthly
+            // comboMonth
             // 
-            this.radioMonthly.AutoSize = true;
-            this.radioMonthly.Location = new System.Drawing.Point(1091, 101);
-            this.radioMonthly.Name = "radioMonthly";
-            this.radioMonthly.Size = new System.Drawing.Size(74, 20);
-            this.radioMonthly.TabIndex = 197;
-            this.radioMonthly.TabStop = true;
-            this.radioMonthly.Text = "Monthly";
-            this.radioMonthly.UseVisualStyleBackColor = true;
+            this.comboMonth.FormattingEnabled = true;
+            this.comboMonth.Location = new System.Drawing.Point(566, 137);
+            this.comboMonth.Name = "comboMonth";
+            this.comboMonth.Size = new System.Drawing.Size(310, 24);
+            this.comboMonth.TabIndex = 193;
             // 
-            // radioYearly
+            // comboYear
             // 
-            this.radioYearly.AutoSize = true;
-            this.radioYearly.Location = new System.Drawing.Point(1206, 101);
-            this.radioYearly.Name = "radioYearly";
-            this.radioYearly.Size = new System.Drawing.Size(67, 20);
-            this.radioYearly.TabIndex = 198;
-            this.radioYearly.TabStop = true;
-            this.radioYearly.Text = "Yearly";
-            this.radioYearly.UseVisualStyleBackColor = true;
+            this.comboYear.FormattingEnabled = true;
+            this.comboYear.Location = new System.Drawing.Point(73, 137);
+            this.comboYear.Name = "comboYear";
+            this.comboYear.Size = new System.Drawing.Size(310, 24);
+            this.comboYear.TabIndex = 192;
             // 
             // FinanceReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 792);
+            this.ClientSize = new System.Drawing.Size(1312, 785);
             this.Controls.Add(this.panel10);
             this.Name = "FinanceReportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
