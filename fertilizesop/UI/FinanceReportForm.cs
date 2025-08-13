@@ -15,9 +15,17 @@ namespace fertilizesop.UI
     public partial class FinanceReportForm : Form
     {
         private readonly FinanceReportBL reportBLL;
+        private DataTable currentReportData;
         public FinanceReportForm()
         {
             InitializeComponent();
+            dgvReport.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvReport.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvReport.DefaultCellStyle.WrapMode = DataGridViewTriState.True;          
+            dgvReport.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            dgvReport.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReport.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            dgvReport.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             reportBLL = new FinanceReportBL();
             InitControls();
         }
@@ -42,6 +50,9 @@ namespace fertilizesop.UI
 
             radioMonthly.Checked = true;
             comboMonth.Enabled = true;
+            // Add event handlers for radio buttons
+            radioMonthly.CheckedChanged += RadioButton_CheckedChanged;
+            radioYearly.CheckedChanged += RadioButton_CheckedChanged;
         }
 
         private void panel10_Paint(object sender, PaintEventArgs e)
@@ -49,6 +60,10 @@ namespace fertilizesop.UI
 
         }
 
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            comboMonth.Enabled = radioMonthly.Checked;
+        }
         private void iconButton9_Click(object sender, EventArgs e)
         {
             int month = int.Parse(comboMonth.SelectedItem.ToString());
@@ -58,60 +73,163 @@ namespace fertilizesop.UI
             dgvReport.DataSource = dt;
         }
 
+        private void dgvReport_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                // Only format if this is yearly report and we have data
+                if (!radioMonthly.Checked &&
+                    e.ColumnIndex >= 0 &&
+                    e.ColumnIndex < dgvReport.ColumnCount &&
+                    dgvReport.Columns[e.ColumnIndex].Name == "Month" &&
+                    e.Value != null)
+                {
+                    if (int.TryParse(e.Value.ToString(), out int monthNum) && monthNum >= 1 && monthNum <= 12)
+                    {
+                        e.Value = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthNum);
+                        e.FormattingApplied = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Ignore formatting errors
+            }
+        }
+
         private void iconButton1_Click(object sender, EventArgs e)
         {
             try
             {
+                if (comboYear.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select a year.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 int year = Convert.ToInt32(comboYear.SelectedItem);
                 DataTable dt;
 
                 if (radioMonthly.Checked)
                 {
-                    if (comboMonth.SelectedItem == null) { MessageBox.Show("Select month."); return; }
+                    if (comboMonth.SelectedItem == null)
+                    {
+                        MessageBox.Show("Please select a month.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     dynamic msel = comboMonth.SelectedItem;
                     int month = (int)msel.MonthNumber;
-                    dt = reportBLL.GetMonthlyReport(year, month);
+                    dt = reportBLL.GetMonthlyReport(month, year);
 
-                    //var totals = _service.GetTotalsForMonth(year, month);
-                    //ShowTotals(totals.totalSales, totals.totalExpenses, totals.profit);
-
-                    // Format datagrid: period is date
+                    // Format datagrid for monthly report
                     dgvReport.DataSource = dt;
-                    if (dgvReport.Columns.Contains("period"))
-                        dgvReport.Columns["period"].HeaderText = "Date";
+                    dgvReport.CellFormatting -= dgvReport_CellFormatting; // Remove formatting for monthly
+
+                    if (dgvReport.Columns.Contains("Date"))
+                    {
+                        dgvReport.Columns["Date"].HeaderText = "Date";
+                        dgvReport.Columns["Date"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    }
                 }
                 else
                 {
                     dt = reportBLL.GetYearlyReport(year);
-                    //var totals = _service.GetTotalsForYear(year);
-                    //ShowTotals(totals.totalSales, totals.totalExpenses, totals.profit);
-
                     dgvReport.DataSource = dt;
-                    if (dgvReport.Columns.Contains("period"))
-                        dgvReport.Columns["period"].HeaderText = "Month";
-                    // replace month numbers with names for readability
-                    foreach (DataGridViewRow r in dgvReport.Rows)
+
+                    // Format month column for yearly report
+                    if (dgvReport.Columns.Contains("Month"))
                     {
-                        if (r.Cells["period"].Value != null && int.TryParse(r.Cells["period"].Value.ToString(), out int mnum))
-                        {
-                            r.Cells["period"].Value = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(mnum);
-                        }
+                        dgvReport.Columns["Month"].HeaderText = "Month";
+
+                        // Handle the CellFormatting event to display month names
+                        dgvReport.CellFormatting -= dgvReport_CellFormatting; // Remove existing handler first
+                        dgvReport.CellFormatting += dgvReport_CellFormatting;
                     }
                 }
+
+                // Store current data for PDF generation
+                currentReportData = dt;
 
                 // Format numeric columns
                 foreach (DataGridViewColumn col in dgvReport.Columns)
                 {
-                    if (col.Name == "TotalSales" || col.Name == "TotalExpense" || col.Name == "Profit")
+                    if (col.Name == "TotalSales" || col.Name == "TotalExpenses" || col.Name == "Profit")
                     {
                         col.DefaultCellStyle.Format = "N2";
                         col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        col.HeaderText = col.Name == "TotalSales" ? "Total Sales" :
+                                       col.Name == "TotalExpenses" ? "Total Expenses" : "Profit";
                     }
+                }
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("No data found for the selected period.", "Information",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error generating report: " + ex.Message);
+                MessageBox.Show("Error generating report: " + ex.Message, "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (currentReportData == null || currentReportData.Rows.Count == 0)
+                {
+                    MessageBox.Show("No report data to export. Please generate a report first.",
+                                  "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveFileDialog.Title = "Save Finance Report";
+
+                string defaultFileName = "";
+                if (radioMonthly.Checked)
+                {
+                    dynamic msel = comboMonth.SelectedItem;
+                    int month = (int)msel.MonthNumber;
+                    int year = Convert.ToInt32(comboYear.SelectedItem);
+                    defaultFileName = $"Monthly_Report_{month:00}_{year}.pdf";
+                }
+                else
+                {
+                    int year = Convert.ToInt32(comboYear.SelectedItem);
+                    defaultFileName = $"Yearly_Report_{year}.pdf";
+                }
+
+                saveFileDialog.FileName = defaultFileName;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (radioMonthly.Checked)
+                    {
+                        dynamic msel = comboMonth.SelectedItem;
+                        int month = (int)msel.MonthNumber;
+                        int year = Convert.ToInt32(comboYear.SelectedItem);
+                        reportBLL.GenerateMonthlyReportPDF(currentReportData, saveFileDialog.FileName, month, year);
+                    }
+                    else
+                    {
+                        int year = Convert.ToInt32(comboYear.SelectedItem);
+                        reportBLL.GenerateYearlyReportPDF(currentReportData, saveFileDialog.FileName, year);
+                    }
+
+                    MessageBox.Show("PDF report generated successfully!", "Success",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating PDF: " + ex.Message, "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

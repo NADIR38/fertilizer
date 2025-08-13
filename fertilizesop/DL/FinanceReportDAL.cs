@@ -27,17 +27,25 @@ namespace fertilizesop.DL
             using (var connection = conn)
             {
                 string query = @"
-                    SELECT 
-                        DATE(transaction_date) AS Date, 
-                        SUM(CASE WHEN transaction_type = 'Sale' THEN amount ELSE 0 END) AS TotalSales,
-                        SUM(CASE WHEN transaction_type = 'Expense' THEN amount ELSE 0 END) AS TotalExpenses,
-                        (SUM(CASE WHEN transaction_type = 'Sale' THEN amount ELSE 0 END) -
-                         SUM(CASE WHEN transaction_type = 'Expense' THEN amount ELSE 0 END)) AS Profit
-                    FROM transaction_history
-                    WHERE MONTH(transaction_date) = @month AND YEAR(transaction_date) = @year
-                    GROUP BY DATE(transaction_date)
-                    ORDER BY Date ASC;
-                ";
+    SELECT 
+        dates.bill_date AS Date,
+        COALESCE(SUM(cb.total_price), 0) AS TotalSales,
+        COALESCE(SUM(sb.total_price), 0) AS TotalExpenses,
+        (COALESCE(SUM(cb.total_price), 0) - COALESCE(SUM(sb.total_price), 0)) AS Profit
+    FROM (
+        SELECT DISTINCT DATE(SaleDate) as bill_date 
+        FROM customerbills 
+        WHERE MONTH(SaleDate) = @month AND YEAR(SaleDate) = @year
+        UNION 
+        SELECT DISTINCT DATE(Date) as bill_date 
+        FROM supplierbills 
+        WHERE MONTH(Date) = @month AND YEAR(Date) = @year
+    ) dates
+    LEFT JOIN customerbills cb ON DATE(cb.SaleDate) = dates.bill_date
+    LEFT JOIN supplierbills sb ON DATE(sb.Date) = dates.bill_date
+    GROUP BY dates.bill_date
+    ORDER BY dates.bill_date ASC;
+";
 
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@month", month);
@@ -58,17 +66,27 @@ namespace fertilizesop.DL
             using (var connection = conn)
             {
                 string query = @"
-                    SELECT 
-                        MONTH(transaction_date) AS Month,
-                        SUM(CASE WHEN transaction_type = 'Sale' THEN amount ELSE 0 END) AS TotalSales,
-                        SUM(CASE WHEN transaction_type = 'Expense' THEN amount ELSE 0 END) AS TotalExpenses,
-                        (SUM(CASE WHEN transaction_type = 'Sale' THEN amount ELSE 0 END) -
-                         SUM(CASE WHEN transaction_type = 'Expense' THEN amount ELSE 0 END)) AS Profit
-                    FROM transaction_history
-                    WHERE YEAR(transaction_date) = @year
-                    GROUP BY MONTH(transaction_date)
-                    ORDER BY Month ASC;
-                ";
+    SELECT 
+        MONTH(dates.month_date) AS Month,
+        COALESCE(SUM(cb.total_price), 0) AS TotalSales,
+        COALESCE(SUM(sb.total_price), 0) AS TotalExpenses,
+        (COALESCE(SUM(cb.total_price), 0) - COALESCE(SUM(sb.total_price), 0)) AS Profit
+    FROM (
+        SELECT DISTINCT DATE(CONCAT(@year, '-', MONTH(SaleDate), '-01')) as month_date
+        FROM customerbills 
+        WHERE YEAR(SaleDate) = @year
+        UNION 
+        SELECT DISTINCT DATE(CONCAT(@year, '-', MONTH(Date), '-01')) as month_date
+        FROM supplierbills 
+        WHERE YEAR(Date) = @year
+    ) dates
+    LEFT JOIN customerbills cb ON MONTH(cb.SaleDate) = MONTH(dates.month_date) 
+        AND YEAR(cb.SaleDate) = @year
+    LEFT JOIN supplierbills sb ON MONTH(sb.Date) = MONTH(dates.month_date) 
+        AND YEAR(sb.Date) = @year
+    GROUP BY MONTH(dates.month_date)
+    ORDER BY MONTH(dates.month_date) ASC;
+";
 
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@year", year);
@@ -120,8 +138,8 @@ namespace fertilizesop.DL
                     // HEADER
                     page.Header().Column(col =>
                     {
-                        col.Item().AlignCenter().Text("My Shop Name").FontSize(18).Bold();
-                        col.Item().AlignCenter().Text("Address Line Here").FontSize(12);
+                        col.Item().AlignCenter().Text("Jamal's shop").FontSize(18).Bold();
+                        col.Item().AlignCenter().Text("HaroonAbad Sanghera 34 ").FontSize(12);
                         col.Item()
                             .PaddingTop(10f) // ✅ padding works here (on container)
                             .AlignCenter()
@@ -144,7 +162,7 @@ namespace fertilizesop.DL
                             foreach (DataColumn col in dt.Columns)
                             {
                                 header.Cell().Background(Colors.Grey.Lighten2).Padding(5)
-                                      .AlignCenter().Text(col.ColumnName).SemiBold();
+                                      .AlignCenter().Text(col.ColumnName).Bold();
                             }
                         });
 
@@ -162,11 +180,11 @@ namespace fertilizesop.DL
                             .ColumnSpan((uint)Math.Max(1, dt.Columns.Count - 3))
                             .Padding(5)
                             .AlignRight()
-                            .Text("TOTAL").SemiBold();
+                            .Text("TOTAL").Bold();
 
-                        table.Cell().AlignCenter().Padding(5).Text(totalSales.ToString("F2")).SemiBold();
-                        table.Cell().AlignCenter().Padding(5).Text(totalExpenses.ToString("F2")).SemiBold();
-                        table.Cell().AlignCenter().Padding(5).Text(totalProfit.ToString("F2")).SemiBold();
+                        table.Cell().AlignCenter().Padding(5).Text(totalSales.ToString("F2")).Bold();
+                        table.Cell().AlignCenter().Padding(5).Text(totalExpenses.ToString("F2")).Bold();
+                        table.Cell().AlignCenter().Padding(5).Text(totalProfit.ToString("F2")).Bold();
                     });
 
                     // FOOTER
