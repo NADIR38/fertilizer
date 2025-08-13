@@ -99,6 +99,36 @@ namespace fertilizesop.DL
             return dt;
         }
 
+        public (decimal customerDue, decimal supplierDue) GetDueAmounts()
+        {
+            decimal customerDue = 0;
+            decimal supplierDue = 0;
+
+            using (var connection = conn)
+            {
+                connection.Open();
+
+                // Customer Due
+                using (var cmd = new MySqlCommand(
+                    "SELECT IFNULL(SUM(paid_amount), 0) FROM customerbills WHERE payment_status = 'Due'",
+                    connection))
+                {
+                    customerDue = Convert.ToDecimal(cmd.ExecuteScalar());
+                }
+
+                // Supplier Due
+                using (var cmd = new MySqlCommand(
+                    "SELECT IFNULL(SUM(paid_amount), 0) FROM supplierbills WHERE payment_status = 'Due'",
+                    connection))
+                {
+                    supplierDue = Convert.ToDecimal(cmd.ExecuteScalar());
+                }
+            }
+
+            return (customerDue, supplierDue);
+        }
+
+
         // PDF Generation for Monthly
         public void GenerateMonthlyReportPDF(DataTable reportData, string filePath, int month, int year)
         {
@@ -126,6 +156,9 @@ namespace fertilizesop.DL
                 totalProfit += Convert.ToDecimal(row["Profit"]);
             }
 
+            // ✅ Get Due Amounts from DB
+            var (customerDue, supplierDue) = GetDueAmounts();
+
             Document.Create(container =>
             {
                 container.Page(page =>
@@ -139,52 +172,70 @@ namespace fertilizesop.DL
                     page.Header().Column(col =>
                     {
                         col.Item().AlignCenter().Text("Jamal's shop").FontSize(18).Bold();
-                        col.Item().AlignCenter().Text("HaroonAbad Sanghera 34 ").FontSize(12);
+                        col.Item().AlignCenter().Text("HaroonAbad Sanghera 34").FontSize(12);
                         col.Item()
-                            .PaddingTop(10f) // ✅ padding works here (on container)
+                            .PaddingTop(10f)
+                            .PaddingBottom(12) // 👈 extra space
                             .AlignCenter()
                             .Text(title).FontSize(16).Bold();
                     });
 
-                    // CONTENT - TABLE
-                    page.Content().Table(table =>
+                    // CONTENT
+                    page.Content().Column(content =>
                     {
-                        // Define columns (same as DataTable)
-                        table.ColumnsDefinition(columns =>
+                        // ✅ Due amounts side-by-side
+                        content.Item().Row(row =>
                         {
-                            foreach (DataColumn col in dt.Columns)
-                                columns.RelativeColumn();
+                            row.RelativeItem().Text($"Total Customer Due: {customerDue:F2}")
+                                .FontSize(13).Bold().FontColor(Colors.Red.Darken1);
+
+                            row.RelativeItem().AlignRight().Text($"Total Supplier Due: {supplierDue:F2}")
+                                .FontSize(13).Bold().FontColor(Colors.Orange.Darken1);
                         });
 
-                        // Table header
-                        table.Header(header =>
+                        // Thin separator
+                        // Thin separator with padding
+                        content.Item().PaddingBottom(5).Height(1).Background(Colors.Grey.Lighten2);
+
+                        // Finance Table
+                        content.Item().Table(table =>
                         {
-                            foreach (DataColumn col in dt.Columns)
+                            table.ColumnsDefinition(columns =>
                             {
-                                header.Cell().Background(Colors.Grey.Lighten2).Padding(5)
-                                      .AlignCenter().Text(col.ColumnName).Bold();
+                                foreach (DataColumn col in dt.Columns)
+                                    columns.RelativeColumn();
+                            });
+
+                            // Table header
+                            table.Header(header =>
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    header.Cell().Background(Colors.Grey.Lighten2).Padding(5)
+                                          .AlignCenter().Text(col.ColumnName).Bold();
+                                }
+                            });
+
+                            // Table rows
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (var item in row.ItemArray)
+                                {
+                                    table.Cell().Padding(5).AlignCenter().Text(item?.ToString() ?? "");
+                                }
                             }
+
+                            // Totals row
+                            table.Cell()
+                                .ColumnSpan((uint)Math.Max(1, dt.Columns.Count - 3))
+                                .Padding(5)
+                                .AlignRight()
+                                .Text("TOTAL").FontSize(13).Bold();
+
+                            table.Cell().AlignCenter().Padding(5).Text(totalSales.ToString("F2")).FontSize(13).Bold();
+                            table.Cell().AlignCenter().Padding(5).Text(totalExpenses.ToString("F2")).FontSize(13).Bold();
+                            table.Cell().AlignCenter().Padding(5).Text(totalProfit.ToString("F2")).FontSize(13).Bold();
                         });
-
-                        // Table rows
-                        foreach (DataRow row in dt.Rows)
-                        {
-                            foreach (var item in row.ItemArray)
-                            {
-                                table.Cell().Padding(5).AlignCenter().Text(item?.ToString() ?? "");
-                            }
-                        }
-
-                        // Totals row
-                        table.Cell()
-                            .ColumnSpan((uint)Math.Max(1, dt.Columns.Count - 3))
-                            .Padding(5)
-                            .AlignRight()
-                            .Text("TOTAL").Bold();
-
-                        table.Cell().AlignCenter().Padding(5).Text(totalSales.ToString("F2")).Bold();
-                        table.Cell().AlignCenter().Padding(5).Text(totalExpenses.ToString("F2")).Bold();
-                        table.Cell().AlignCenter().Padding(5).Text(totalProfit.ToString("F2")).Bold();
                     });
 
                     // FOOTER
@@ -195,6 +246,7 @@ namespace fertilizesop.DL
             })
             .GeneratePdf(filePath);
         }
+
     }
 }
 
