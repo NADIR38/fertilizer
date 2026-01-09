@@ -33,7 +33,7 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<customer_bills>();
+            var mainform = ServiceProvider.GetRequiredService<customerbill>;
             Application.Run(mainform);
         }
         public static void configureServices(IServiceCollection services)
