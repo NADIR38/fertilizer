@@ -59,6 +59,12 @@ namespace fertilizesop.BL.Bl
             return idl.getsaleprice(product_id);
         }
 
+        public List<BatchDetails> GetAllBatchDetails(int batchId)
+        {
+             // Static call to DL as per existing implementation structure
+             return BatchdetailsDl.GetAllBatchDetails(batchId);
+        }
+
         public List<BatchDetails> SearchBatchDetails(string searchText)
         {
             try

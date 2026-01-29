@@ -9,6 +9,7 @@ public class BatchDetails
     public decimal cost_price { get; private set; }
     public decimal sale_price { get; private set; }
     public int quantity_received { get; private set; }
+    public string supplier_name { get; set; }
 
     public BatchDetails(int details_id, string batch_name,  decimal cost_price, decimal sale_price,int product_id,string product_name, int quantity_received)
     {
@@ -21,6 +22,9 @@ public class BatchDetails
         this.product_name = product_name;
     }
 
-
+    public BatchDetails(int details_id, string batch_name, decimal cost_price, decimal sale_price, int product_id, string product_name, int quantity_received, string supplier_name) : this(details_id, batch_name, cost_price, sale_price, product_id, product_name, quantity_received)
+    {
+        this.supplier_name = supplier_name;
+    }
 
 }

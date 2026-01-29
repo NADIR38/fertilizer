@@ -171,8 +171,8 @@ namespace fertilizesop.DL
                     // HEADER
                     page.Header().Column(col =>
                     {
-                        col.Item().AlignCenter().Text("Jamal's shop").FontSize(18).Bold();
-                        col.Item().AlignCenter().Text("HaroonAbad Sanghera 34").FontSize(12);
+                        col.Item().AlignCenter().Text("Rashid Fertilizers").FontSize(18).Bold();
+                        col.Item().AlignCenter().Text("HaroonAbad ").FontSize(12);
                         col.Item()
                             .PaddingTop(10f)
                             .PaddingBottom(12) // 👈 extra space

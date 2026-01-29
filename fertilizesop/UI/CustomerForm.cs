@@ -12,7 +12,9 @@ namespace fertilizesop.UI
     public partial class CustomerForm : Form
     {
         private int selectedCustomerId = -1;
+        private bool isEditMode = false; // Track operation mode
         private readonly ICustomerBl ibl;
+
         public CustomerForm(ICustomerBl ibl)
         {
             InitializeComponent();
@@ -78,11 +80,8 @@ namespace fertilizesop.UI
             }
             else if (e.Control && e.KeyCode == Keys.A)
             {
-                iconButton9.PerformClick();
+                iconButton9.PerformClick(); // Add New
                 e.Handled = true;
-                
-                   
-                
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -105,6 +104,7 @@ namespace fertilizesop.UI
         {
             if (dataGridView2.CurrentRow != null)
             {
+                isEditMode = true; // Set to Edit Mode
                 var row = dataGridView2.CurrentRow;
                 selectedCustomerId = Convert.ToInt32(row.Cells["Id"].Value);
                 txtname.Text = row.Cells["first_Name"].Value?.ToString();
@@ -119,9 +119,24 @@ namespace fertilizesop.UI
 
         private void iconButton9_Click(object sender, EventArgs e)
         {
-            var f = Program.ServiceProvider.GetRequiredService<AddCustomer>();
-            f.ShowDialog(this);
+            // Open Panel for ADDING
+            isEditMode = false;
+            selectedCustomerId = -1;
+            ClearPanelFields();
+            
+            UIHelper.RoundPanelCorners(paneledit, 20);
+            UIHelper.ShowCenteredPanel(this, paneledit);
+            txtname.Focus();
         }
+
+        private void ClearPanelFields()
+        {
+            txtname.Clear();
+            txtlname.Clear();
+            txtcontact.Clear();
+            txtaddress.Clear();
+        }
+
         private void load()
         {
             var list = ibl.getcustomers();
@@ -162,11 +177,11 @@ namespace fertilizesop.UI
 
             if (columnName == "Edit")
             {
+                isEditMode = true;
                 txtname.Text = row.Cells["first_name"].Value?.ToString();
                 txtlname.Text = row.Cells["last_name"].Value?.ToString();
                 txtcontact.Text = row.Cells["phonenumber"].Value?.ToString();
                 txtaddress.Text = row.Cells["Address"].Value?.ToString();
-
 
                 UIHelper.RoundPanelCorners(paneledit, 20);
                 UIHelper.ShowCenteredPanel(this, paneledit);
@@ -180,38 +195,46 @@ namespace fertilizesop.UI
             string phone = txtcontact.Text.Trim();
             string address = txtaddress.Text.Trim();
 
-
-
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("First name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
                 var customer = new Customers(selectedCustomerId, name, phone, address, lname);
-                bool result = ibl.update(customer);
+                bool result = false;
 
-                MessageBox.Show(result ? "Customer updated successfully." : "Failed to update customer.", result ? "Success" : "Error",
-                    MessageBoxButtons.OK, result ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+                if (isEditMode)
+                {
+                    // UPDATE Logic
+                    result = ibl.update(customer);
+                    if(result) MessageBox.Show("Customer updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("Failed to update customer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    // ADD Logic
+                    result = ibl.Addcustomer(customer);
+                    if (result) MessageBox.Show("Customer added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("Failed to add customer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 if (result)
                 {
-                    txtname.Clear();
-                    txtlname.Clear();
-                    txtcontact.Clear();
-                    txtaddress.Clear();
+                    ClearPanelFields();
                     paneledit.Visible = false;
                     load();
                 }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Database error occurred while Updating: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show("Validation error: " + ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while updating : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

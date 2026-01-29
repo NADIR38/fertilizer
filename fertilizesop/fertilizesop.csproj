@@ -14,6 +14,8 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -133,6 +135,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="BL\Bl\BankBl.cs" />
     <Compile Include="BL\Bl\BatchDetailsBl.cs" />
     <Compile Include="BL\Bl\BatchesBl.cs" />
@@ -147,8 +152,10 @@
     <Compile Include="BL\Bl\ReturnsBl.cs" />
     <Compile Include="BL\Models\Bank.cs" />
     <Compile Include="BL\Models\Customerbill.cs" />
+    <Compile Include="BL\Models\CustomerPaymentSummary.cs" />
     <Compile Include="BL\Models\Customerrecord.cs" />
     <Compile Include="BL\Models\returns.cs" />
+    <Compile Include="BL\Models\SupplierPaymentSummary.cs" />
     <Compile Include="BL\Models\Usersession.cs" />
     <Compile Include="DL\BankDal.cs" />
     <Compile Include="DL\BillingRecordsOverviewDL.cs" />
@@ -157,6 +164,7 @@
     <Compile Include="DL\CustomerBill_SpecificProductsDL.cs" />
     <Compile Include="DL\FinanceReportDAL.cs" />
     <Compile Include="DL\ITransactionDAL.cs" />
+    <Compile Include="DL\LoginDL.cs" />
     <Compile Include="DL\MySqlbackupHelper.cs" />
     <Compile Include="DL\RetunrsDl.cs" />
     <Compile Include="Interfaces\BLInterfaces\IInventorylogBl.cs" />
@@ -278,6 +286,20 @@
     <Compile Include="UI\Batchform.Designer.cs">
       <DependentUpon>Batchform.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\BatchPurchaseform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BatchPurchaseform.Designer.cs">
+      <DependentUpon>BatchPurchaseform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\BulkCustomerPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BulkCustomerPaymentForm.Designer.cs" />
+    <Compile Include="UI\BulkSupplierPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BulkSupplierPaymentForm.Designer.cs" />
     <Compile Include="UI\CustomerBill_SpecificProducts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,6 +355,12 @@
     </Compile>
     <Compile Include="UI\Inventorylogform.Designer.cs">
       <DependentUpon>Inventorylogform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\OrdersMain.cs">
       <SubType>Form</SubType>
@@ -404,6 +432,9 @@
     <EmbeddedResource Include="UI\Batchform.resx">
       <DependentUpon>Batchform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\BatchPurchaseform.resx">
+      <DependentUpon>BatchPurchaseform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomerBill_SpecificProducts.resx">
       <DependentUpon>CustomerBill_SpecificProducts.cs</DependentUpon>
     </EmbeddedResource>
@@ -440,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Inventorylogform.resx">
       <DependentUpon>Inventorylogform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OrdersMain.resx">
       <DependentUpon>OrdersMain.cs</DependentUpon>

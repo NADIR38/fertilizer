@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace fertilizesop.UI
 {
@@ -11,6 +12,7 @@ namespace fertilizesop.UI
     {
         private Form activeForm = null;
         private IconButton currentBtn;
+        private bool _isClosingConfirmed = false;
 
         private readonly Color[] sidebarColors = new Color[]
         {
@@ -34,6 +36,8 @@ namespace fertilizesop.UI
         {
             InitializeComponent();
             this.Activated += Dashboard_Activated;
+            this.FormClosing += Dashboardform_FormClosing; // NEW
+
         }
         private void Dashboard_Activated(object sender, EventArgs e)
         {
@@ -63,7 +67,80 @@ namespace fertilizesop.UI
 
             await FadeInFormAsync(newForm);
         }
+        private void Dashboardform_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If user already confirmed, allow close
+            if (_isClosingConfirmed)
+                return;
 
+            // Check if this is a user-initiated close (not system shutdown)
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                // Show backup confirmation dialog
+                var backupResult = MySqlBackupHelper.CreateBackupWithConfirmation();
+
+                if (backupResult == DialogResult.Cancel)
+                {
+                    // User cancelled, don't close the application
+                    e.Cancel = true;
+                    return;
+                }
+                else if (backupResult == DialogResult.Yes)
+                {
+                    // Backup was successful or user chose Yes
+                    // Optionally clean up old backups
+                    try
+                    {
+                        MySqlBackupHelper.CleanupOldBackups(10); // Keep last 10 backups
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error cleaning up old backups: {ex.Message}");
+                    }
+                }
+                // If backupResult is No, user chose not to backup, continue closing
+            }
+
+            // Confirm exit one more time
+            var confirmExit = MessageBox.Show(
+                "Are you sure you want to exit the application?",
+                "Confirm Exit",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmExit != DialogResult.Yes)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            // User confirmed exit
+            _isClosingConfirmed = true;
+
+            // Dispose active forms
+            if (activeForm != null && !activeForm.IsDisposed)
+            {
+                try
+                {
+                    activeForm.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error disposing active form: {ex.Message}");
+                }
+            }
+
+            // Exit the application
+            Application.Exit();
+        }
+
+        // Update the iconButton2_Click_1 method (around line 307-310) to use the new closing logic:
+        private void iconButton2_Click_1(object sender, EventArgs e)
+        {
+            // Trigger the form closing event which will handle backup
+            this.Close();
+        }
         private async Task FadeOutFormAsync(Form form)
         {
             if (form == null || form.IsDisposed || !form.IsHandleCreated) return;
@@ -156,12 +233,12 @@ namespace fertilizesop.UI
 
         private void iconPictureBox5_Click(object sender, EventArgs e)
         {
-            if (panelsupp.Height == 132)
+            if (panelsupp.Height == 200)
                 CollapsePanel(panelsupp, 60);
             else
             {
                 CollapseAllTogglePanels();
-                ExpandPanel(panelsupp, 132);
+                ExpandPanel(panelsupp, 200  );
             }
         }
 
@@ -189,12 +266,12 @@ namespace fertilizesop.UI
 
         private void iconPictureBox4_Click(object sender, EventArgs e)
         {
-            if (panelcust.Height == 130)
+            if (panelcust.Height == 200)
                 CollapsePanel(panelcust, 60);
             else
             {
                 CollapseAllTogglePanels();
-                ExpandPanel(panelcust, 130);
+                ExpandPanel(panelcust, 200);
             }
         }
 
@@ -224,6 +301,7 @@ namespace fertilizesop.UI
 
         private void btnSbills_Click(object sender, EventArgs e)
         {
+
         }
 
         private void btnorder_Click(object sender, EventArgs e)
@@ -241,7 +319,7 @@ namespace fertilizesop.UI
 
         private void iconButton2_Click(object sender, EventArgs e)
         {
-            //Application.Exit(); // Close button
+            var f= Program.ServiceProvider.GetRequiredService<FinanceReportForm>();
         }
 
         private void btnreturns_Click(object sender, EventArgs e)
@@ -304,10 +382,10 @@ namespace fertilizesop.UI
         }
 
 
-        private void iconButton2_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        //private void iconButton2_Click_1(object sender, EventArgs e)
+        //{
+        //    Application.Exit();
+        //}
 
         private void btncustomers_Click_1(object sender, EventArgs e)
         {
@@ -329,7 +407,7 @@ namespace fertilizesop.UI
 
         private void btnSbills_Click_1(object sender, EventArgs e)
         {
-            var f = Program.ServiceProvider.GetRequiredService<Supplierbillsform>();
+            var f=Program.ServiceProvider.GetRequiredService<Supplierbillsform>();
             LoadFormIntoPanel(f);
         }
 
@@ -375,6 +453,18 @@ namespace fertilizesop.UI
         {
             var f = Program.ServiceProvider.GetRequiredService<Customerreturnform>();
             LoadFormIntoPanel(f);
+        }
+
+        private void iconButton7_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<BulkSupplierPaymentForm>();
+            f.ShowDialog(this);
+        }
+
+        private void iconButton6_Click(object sender, EventArgs e)
+        {
+            var f = Program.ServiceProvider.GetRequiredService<BulkCustomerPaymentForm>();
+            f.ShowDialog(this);
         }
     }
 }

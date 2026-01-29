@@ -13,6 +13,8 @@ namespace fertilizesop.BL.Models
         public string Description { get; private set; }
         public decimal Price { get; private set; }
         public int quantity { get; private set; }
+        public decimal LastCost { get; set; } // Added for Batch Entry auto-fill
+
         public Products(int id, string name, string description, decimal price, int quantity)
         {
             Id = id;

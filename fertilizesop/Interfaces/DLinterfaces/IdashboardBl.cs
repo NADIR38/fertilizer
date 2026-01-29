@@ -1,17 +1,18 @@
 ﻿using fertilizesop.BL.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace fertilizesop.BL.Bl
 {
     public interface IdashboardBl
     {
-        Dashboard GetDashboardSummary();
-        List<(string MonthName, decimal TotalSales)> GetMonthlySalesComparison();
-        List<(DateTime Day, decimal TotalSales)> GetMonthlySalesTrend();
-        List<(string name, int quantity)> gettopsellingproducts();
-        List<(string SupplierName, int TotalBatches)> GetTopSupplierContributions();
-        List<Products> outofstock();
-        List<inventorylog> recentlogs();
+        Task<Dashboard> GetDashboardSummary();
+        Task<List<(string MonthName, decimal TotalSales)>> GetMonthlySalesComparison();
+        Task<List<(DateTime Day, decimal TotalSales)>> GetMonthlySalesTrend();
+        Task<List<(string name, int quantity)>> gettopsellingproducts();
+        Task<List<(string SupplierName, int TotalBatches)>> GetTopSupplierContributions();
+        Task<List<Products>> outofstock();
+        Task<List<inventorylog>> recentlogs();
     }
 }

@@ -10,6 +10,7 @@ namespace fertilizesop.Interfaces.BLInterfaces
     {
         bool adddetails(BatchDetails b);
         List<BatchDetails> GetAllBatchDetails();
+        List<BatchDetails> GetAllBatchDetails(int batchId);
         List<BatchDetails> SearchBatchDetails(string searchText);
         int getsaleprice(int product_id);
     }

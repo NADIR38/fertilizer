@@ -318,7 +318,14 @@ namespace KIMS
             using (var conn = DatabaseHelper.Instance.GetConnection())
             {
                 conn.Open();
-                string query = "SELECT product_id, name, description FROM products WHERE name like @name";
+                // Fetch product details + Last Cost from batch_details
+                string query = @"
+                    SELECT p.product_id, p.name, p.description, p.sale_price, p.quantity,
+                           (SELECT cost_price FROM batch_details bd 
+                            WHERE bd.product_id = p.product_id 
+                            ORDER BY bd.batch_detail_id DESC LIMIT 1) as last_cost
+                    FROM products p 
+                    WHERE p.name LIKE @name";
 
                 using (var cmd = new MySqlCommand(query, conn))
                 {
@@ -328,12 +335,21 @@ namespace KIMS
                     {
                         while (reader.Read())
                         {
-                            products.Add(new Products
-                            (
-                                 Convert.ToInt32(reader["product_id"]),
-                                 reader["name"].ToString(),
-                                 reader["description"].ToString()));
+                            int id = Convert.ToInt32(reader["product_id"]);
+                            string pName = reader["name"].ToString();
+                            string desc = reader["description"].ToString();
+                            decimal price = reader.IsDBNull(reader.GetOrdinal("sale_price")) ? 0 : reader.GetDecimal("sale_price");
+                            int qty = reader.IsDBNull(reader.GetOrdinal("quantity")) ? 0 : reader.GetInt32("quantity");
+                            
+                            var prod = new Products(id, pName, desc, price, qty);
+                            
+                            // Populate LastCost if available
+                            if (!reader.IsDBNull(reader.GetOrdinal("last_cost")))
+                            {
+                                prod.LastCost = reader.GetDecimal("last_cost");
+                            }
 
+                            products.Add(prod);
                         }
                     }
                 }

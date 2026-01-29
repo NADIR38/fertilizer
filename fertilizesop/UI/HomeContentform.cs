@@ -34,14 +34,14 @@ namespace fertilizesop.UI
                 return cp;
             }
         }
-        private void loadgrid()
+        private async Task loadgrid()
         {
-            var list = ibl.recentlogs();
+            var list = await ibl.recentlogs();
             dataGridView1.DataSource = list;
             dataGridView1.Columns["log_date"].Visible = false;
             dataGridView1.Columns["remark"].Visible = false;
 
-            var lists = ibl.outofstock();
+            var lists = await ibl.outofstock();
             dataGridView2.DataSource = lists;
             dataGridView2.Columns["id"].Visible = false;
 
@@ -70,18 +70,18 @@ namespace fertilizesop.UI
             label10.Text = $"{greeting}, {name}";
         }
 
-        private void HomeContentform_Load(object sender, EventArgs e)
+        private async void HomeContentform_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            load();
-            LoadChartData();
-            LoadCompareChart();
-            LoadSupplierChart();
-            loadgrid();
-            LoadTopSellingProductsChart();
+            await load();
+            await LoadChartData();
+            await LoadCompareChart();
+            await LoadSupplierChart();
+            await loadgrid();
+            await LoadTopSellingProductsChart();
 
         }
-        private void LoadChartData()
+        private async Task LoadChartData()
         {
             chart1.Series.Clear();
             chart1.ChartAreas.Clear();
@@ -136,7 +136,7 @@ namespace fertilizesop.UI
             chart1.Titles[0].Font = new Font("Segoe UI", 13, FontStyle.Bold);
             chart1.Titles[0].ForeColor = Color.White;
 
-            var salesData = ibl.GetMonthlySalesTrend();
+            var salesData = await ibl.GetMonthlySalesTrend();
             foreach (var entry in salesData)
             {
                 int pointIndex = series.Points.AddXY(entry.Day.ToString("dd MMM"), entry.TotalSales);
@@ -145,7 +145,7 @@ namespace fertilizesop.UI
         }
 
 
-        private void LoadCompareChart()
+        private async Task LoadCompareChart()
         {
             chart2.Series.Clear();
             chart2.ChartAreas.Clear();
@@ -197,14 +197,14 @@ namespace fertilizesop.UI
             chart2.Titles[0].Font = new Font("Segoe UI", 13, FontStyle.Bold);
             chart2.Titles[0].ForeColor = Color.White;
 
-            var data = ibl.GetMonthlySalesComparison();
+            var data = await ibl.GetMonthlySalesComparison();
             foreach (var entry in data)
             {
                 var point = series.Points.AddXY(entry.MonthName, entry.TotalSales);
                 series.Points[point].ToolTip = $"{entry.MonthName}: Rs {entry.TotalSales:N0}";
             }
         }
-        private void LoadTopSellingProductsChart()
+        private async Task LoadTopSellingProductsChart()
         {
             chart6.Series.Clear();
             chart6.ChartAreas.Clear();
@@ -257,7 +257,7 @@ namespace fertilizesop.UI
             chart6.Titles[0].ForeColor = Color.White;
 
             // Get data from BL
-            var topProducts = ibl.gettopsellingproducts(); // List<(string ProductName, int QuantitySold)>
+            var topProducts = await ibl.gettopsellingproducts(); // List<(string ProductName, int QuantitySold)>
 
             foreach (var product in topProducts)
             {
@@ -266,7 +266,7 @@ namespace fertilizesop.UI
             }
         }
 
-        private void LoadSupplierChart()
+        private async Task LoadSupplierChart()
         {
             chart3.Series.Clear();
             chart3.ChartAreas.Clear();
@@ -318,7 +318,7 @@ namespace fertilizesop.UI
             chart3.Titles[0].Font = new Font("Segoe UI", 13, FontStyle.Bold);
             chart3.Titles[0].ForeColor = Color.White;
 
-            var data = ibl.GetTopSupplierContributions();
+            var data = await ibl.GetTopSupplierContributions();
             foreach (var entry in data)
             {
                 var point = series.Points.AddXY(entry.SupplierName, entry.TotalBatches);
@@ -327,16 +327,17 @@ namespace fertilizesop.UI
         }
 
 
-        private void load()
+        private async Task load()
         {
-            lbltotalp.Text=ibl.GetDashboardSummary().totalproducts.ToString();
-            lblcustomers.Text=ibl.GetDashboardSummary().totalcustomers.ToString();
-            lblsupp.Text=ibl.GetDashboardSummary().totalsuppliers.ToString();
-            lblsales.Text=ibl.GetDashboardSummary().salestodays.ToString();
-            lblout.Text=ibl.GetDashboardSummary().outproduct.ToString();
-            lbltstock.Text=ibl.GetDashboardSummary().total_stock.ToString();
-            lblbills.Text=ibl.GetDashboardSummary().pendingbills.ToString();
-            lblstockvalue.Text=ibl.GetDashboardSummary().total_stock_value.ToString();
+            var summary = await ibl.GetDashboardSummary();
+            lbltotalp.Text = summary.totalproducts.ToString();
+            lblcustomers.Text = summary.totalcustomers.ToString();
+            lblsupp.Text = summary.totalsuppliers.ToString();
+            lblsales.Text = summary.salestodays.ToString();
+            lblout.Text = summary.outproduct.ToString();
+            lbltstock.Text = summary.total_stock.ToString();
+            lblbills.Text = summary.pendingbills.ToString();
+            lblstockvalue.Text = summary.total_stock_value.ToString();
 
         }
 

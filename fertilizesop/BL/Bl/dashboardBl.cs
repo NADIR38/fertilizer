@@ -15,46 +15,56 @@ namespace fertilizesop.BL.Bl
         {
             this.idl = idl;
         }
-        public Dashboard GetDashboardSummary()
+        public async Task<Dashboard> GetDashboardSummary()
         {
+            var t1 = idl.totalproducts();
+            var t2 = idl.totalcustomers();
+            var t3 = idl.totalsuppliers();
+            var t4 = idl.totalstockvalue();
+            var t5 = idl.salestoday();
+            var t6 = idl.getpendingbills();
+            var t7 = idl.outofstocks();
+            var t8 = idl.totalstock();
+
+            await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7, t8);
+
             return new Dashboard
             {
-                totalproducts = idl.totalproducts(),
-                totalcustomers = idl.totalcustomers(),
-                totalsuppliers = idl.totalsuppliers(),
-                total_stock_value = idl.totalstockvalue(),
-                salestodays = idl.salestoday(),
-                pendingbills = idl.getpendingbills(),
-                outproduct = idl.outofstocks(),
-                total_stock = idl.totalstock()
-
+                totalproducts = await t1,
+                totalcustomers = await t2,
+                totalsuppliers = await t3,
+                total_stock_value = await t4,
+                salestodays = await t5,
+                pendingbills = await t6,
+                outproduct = await t7,
+                total_stock = await t8
             };
         }
-        public List<(string MonthName, decimal TotalSales)> GetMonthlySalesComparison()
+        public async Task<List<(string MonthName, decimal TotalSales)>> GetMonthlySalesComparison()
         {
-            return idl.GetMonthlySalesComparison();
+            return await idl.GetMonthlySalesComparison();
         }
 
-        public List<(DateTime Day, decimal TotalSales)> GetMonthlySalesTrend()
+        public async Task<List<(DateTime Day, decimal TotalSales)>> GetMonthlySalesTrend()
         {
-            return idl.GetMonthlySalesTrend();
+            return await idl.GetMonthlySalesTrend();
         }
 
-        public List<(string name, int quantity)> gettopsellingproducts() => idl.GetTopSellingProducts();
+        public async Task<List<(string name, int quantity)>> gettopsellingproducts() => await idl.GetTopSellingProducts();
 
-        public List<(string SupplierName, int TotalBatches)> GetTopSupplierContributions()
+        public async Task<List<(string SupplierName, int TotalBatches)>> GetTopSupplierContributions()
         {
-            return idl.GetTopSupplierContributions();
+            return await idl.GetTopSupplierContributions();
         }
 
-        public List<Products> outofstock()
+        public async Task<List<Products>> outofstock()
         {
-            return idl.outofstock();
+            return await idl.outofstock();
         }
 
-        public List<inventorylog> recentlogs()
+        public async Task<List<inventorylog>> recentlogs()
         {
-            return idl.recentlogs();
+            return await idl.recentlogs();
         }
     }
 }

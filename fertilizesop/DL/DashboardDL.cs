@@ -3,6 +3,7 @@ using KIMS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,21 +12,21 @@ namespace fertilizesop.DL
 {
     public class DashboardDL : IDashboardDL
     {
-        public int totalstock()
+        public async Task<int> totalstock()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"SELECT SUM(quantity) AS quantity_in_stock FROM products;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("quantity_in_stock");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -38,21 +39,21 @@ namespace fertilizesop.DL
             }
         }
 
-        public int totalsuppliers()
+        public async Task<int> totalsuppliers()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"SELECT COUNT(*) AS Total_Suppliers FROM suppliers;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("Total_Suppliers");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -65,21 +66,21 @@ namespace fertilizesop.DL
             }
         }
 
-        public int totalcustomers()
+        public async Task<int> totalcustomers()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"SELECT COUNT(*) AS customers FROM customers;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("customers");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -92,21 +93,21 @@ namespace fertilizesop.DL
             }
         }
 
-        public int salestoday()
+        public async Task<int> salestoday()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"SELECT COUNT(*) AS total_sales FROM customerbills WHERE DATE(SaleDate) = CURDATE();";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("total_sales");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -119,21 +120,21 @@ namespace fertilizesop.DL
             }
         }
 
-        public int totalstockvalue()
+        public async Task<int> totalstockvalue()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"SELECT SUM(sale_price * quantity) AS total FROM products";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("total");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -146,21 +147,21 @@ namespace fertilizesop.DL
             }
         }
 
-        public int totalproducts()
+        public async Task<int> totalproducts()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"select count(*) as total from products";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("total");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -173,7 +174,7 @@ namespace fertilizesop.DL
             }
         }
 
-        public List<(DateTime Day, decimal TotalSales)> GetMonthlySalesTrend()
+        public async Task<List<(DateTime Day, decimal TotalSales)>> GetMonthlySalesTrend()
         {
             var result = new List<(DateTime, decimal)>();
 
@@ -181,7 +182,7 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"
                         SELECT 
                             DATE(Saledate) AS sale_day,
@@ -197,12 +198,16 @@ namespace fertilizesop.DL
                             sale_day;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            var date = reader.GetDateTime("sale_day");
-                            var total = reader.IsDBNull(1) ? 0 : reader.GetDecimal("total_sales");
+                            int dateOrd = reader.GetOrdinal("sale_day");
+                            int totalOrd = reader.GetOrdinal("total_sales");
+
+                            DateTime date = reader.IsDBNull(dateOrd) ? DateTime.MinValue : reader.GetDateTime(dateOrd);
+                            decimal total = reader.IsDBNull(totalOrd) ? 0m : reader.GetDecimal(totalOrd);
+
                             result.Add((date, total));
                         }
                     }
@@ -216,9 +221,7 @@ namespace fertilizesop.DL
             return result;
         }
 
-
-
-        public List<(string MonthName, decimal TotalSales)> GetMonthlySalesComparison()
+        public async Task<List<(string MonthName, decimal TotalSales)>> GetMonthlySalesComparison()
         {
             var result = new List<(string, decimal)>();
 
@@ -226,7 +229,7 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"
                         SELECT 
                             DATE_FORMAT(Saledate, '%b') AS month_name,
@@ -242,12 +245,16 @@ namespace fertilizesop.DL
                             month_number;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            string month = reader.GetString("month_name");
-                            decimal total = reader.IsDBNull(2) ? 0 : reader.GetDecimal("total_sales");
+                            int monthNameOrd = reader.GetOrdinal("month_name");
+                            int totalSalesOrd = reader.GetOrdinal("total_sales");
+
+                            string month = reader.IsDBNull(monthNameOrd) ? string.Empty : reader.GetString(monthNameOrd);
+                            decimal total = reader.IsDBNull(totalSalesOrd) ? 0m : reader.GetDecimal(totalSalesOrd);
+
                             result.Add((month, total));
                         }
                     }
@@ -261,7 +268,7 @@ namespace fertilizesop.DL
             return result;
         }
 
-        public List<(string SupplierName, int TotalBatches)> GetTopSupplierContributions()
+        public async Task<List<(string SupplierName, int TotalBatches)>> GetTopSupplierContributions()
         {
             var result = new List<(string, int)>();
 
@@ -269,7 +276,7 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"
                         SELECT 
                             s.name AS supplier_name,
@@ -285,12 +292,16 @@ namespace fertilizesop.DL
                         LIMIT 5;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            string supplier = reader.GetString("supplier_name");
-                            int batches = reader.IsDBNull(1) ? 0 : reader.GetInt32("total_batches");
+                            int nameOrd = reader.GetOrdinal("supplier_name");
+                            int batchesOrd = reader.GetOrdinal("total_batches");
+
+                            string supplier = reader.IsDBNull(nameOrd) ? string.Empty : reader.GetString(nameOrd);
+                            int batches = reader.IsDBNull(batchesOrd) ? 0 : reader.GetInt32(batchesOrd);
+
                             result.Add((supplier, batches));
                         }
                     }
@@ -304,21 +315,21 @@ namespace fertilizesop.DL
             return result;
         }
 
-        public int getpendingbills()
+        public async Task<int> getpendingbills()
         {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "SELECT COUNT(*) AS pending FROM supplierbills WHERE payment_status = 'Due';";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("pending");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -330,23 +341,22 @@ namespace fertilizesop.DL
                 throw new Exception("Error getting pending bills: " + ex.Message, ex);
             }
         }
-        public int outofstocks()
-        {
 
+        public async Task<int> outofstocks()
+        {
             try
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
-                    string query = @"
-                        SELECT  count(*) as total from products where quantity=0;";
+                    await conn.OpenAsync();
+                    string query = @"SELECT count(*) as total from products where quantity=0;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read() && !reader.IsDBNull(0))
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
                         {
-                            return reader.GetInt32("total");
+                            return Convert.ToInt32(result);
                         }
                     }
                 }
@@ -358,7 +368,7 @@ namespace fertilizesop.DL
             return 0;
         }
 
-        public List<Products> outofstock()
+        public async Task<List<Products>> outofstock()
         {
             var result = new List<Products>();
 
@@ -366,19 +376,22 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
-                    string query = @"
-                        SELECT  p.name,p.description from products p where quantity<5;";
+                    await conn.OpenAsync();
+                    string query = @"SELECT p.name,p.description from products p where quantity<5;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            string supplier = reader.GetString("name");
-                            string description = reader.GetString("description");
+                            int nameOrd = reader.GetOrdinal("name");
+                            int descOrd = reader.GetOrdinal("description");
+
+                            string supplier = reader.IsDBNull(nameOrd) ? string.Empty : reader.GetString(nameOrd);
+                            string description = reader.IsDBNull(descOrd) ? string.Empty : reader.GetString(descOrd);
+
                             var stock = new Products(0, supplier, description);
-                            result.Add((stock));
+                            result.Add(stock);
                         }
                     }
                 }
@@ -390,7 +403,8 @@ namespace fertilizesop.DL
 
             return result;
         }
-        public List<inventorylog> recentlogs()
+
+        public async Task<List<inventorylog>> recentlogs()
         {
             var result = new List<inventorylog>();
 
@@ -398,7 +412,7 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"
     SELECT p.name, i.change_type, i.quantity_change 
     FROM inventory_log i 
@@ -407,13 +421,18 @@ namespace fertilizesop.DL
     LIMIT 15;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            string supplier = reader.GetString("name");
-                            string description = reader.GetString("change_type");
-                            int quantity = reader.GetInt32("quantity_change");
+                            int nameOrd = reader.GetOrdinal("name");
+                            int changeTypeOrd = reader.GetOrdinal("change_type");
+                            int qtyOrd = reader.GetOrdinal("quantity_change");
+
+                            string supplier = reader.IsDBNull(nameOrd) ? string.Empty : reader.GetString(nameOrd);
+                            string description = reader.IsDBNull(changeTypeOrd) ? string.Empty : reader.GetString(changeTypeOrd);
+                            int quantity = reader.IsDBNull(qtyOrd) ? 0 : reader.GetInt32(qtyOrd);
+
                             var log = new inventorylog(supplier, description, quantity);
                             result.Add(log);
                         }
@@ -427,7 +446,8 @@ namespace fertilizesop.DL
 
             return result;
         }
-        public List<(string ProductName, int QuantitySold)> GetTopSellingProducts()
+
+        public async Task<List<(string ProductName, int QuantitySold)>> GetTopSellingProducts()
         {
             var result = new List<(string, int)>();
 
@@ -435,9 +455,9 @@ namespace fertilizesop.DL
             {
                 using (var conn = DatabaseHelper.Instance.GetConnection())
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = @"
-               SELECT 
+                SELECT 
                     p.name AS product_name,
                     SUM(cd.quantity) AS total_quantity
                 FROM 
@@ -456,12 +476,15 @@ namespace fertilizesop.DL
                 LIMIT 10;";
 
                     using (var cmd = new MySqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
-                            string productName = reader.GetString("product_name");
-                            int quantitySold = reader.GetInt32("total_quantity");
+                            int nameOrd = reader.GetOrdinal("product_name");
+                            int qtyOrd = reader.GetOrdinal("total_quantity");
+
+                            string productName = reader.IsDBNull(nameOrd) ? string.Empty : reader.GetString(nameOrd);
+                            int quantitySold = reader.IsDBNull(qtyOrd) ? 0 : reader.GetInt32(qtyOrd);
 
                             result.Add((productName, quantitySold));
                         }

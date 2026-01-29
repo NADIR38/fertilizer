@@ -49,16 +49,16 @@ namespace fertilizesop.BL.Models
             this.status = status;
         }
 
-        public int bill_id { get; private set; }
-        public string supplier_name { get; private set; }
-        public int supplier_id { get; private set; }
-        public DateTime date { get; private set; }
-        public decimal total_price { get; private set; }
-        public decimal paid_price { get; private set; }
-        public string batch_name { get; private set; }
-        public int batch_id { get; private set; }
-        public decimal pending { get; private set; }
-        public string status { get; private set; }
+        public int bill_id { get;  set; }
+        public string supplier_name { get;  set; }
+        public int supplier_id { get;  set; }
+        public DateTime date { get;  set; }
+        public decimal total_price { get;  set; }
+        public decimal paid_price { get; set; }
+        public string batch_name { get;  set; }
+        public int batch_id { get;  set; }
+        public decimal pending { get;  set; }
+        public string status { get; set; }
 
     }
 }

@@ -12,6 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using TechStore.UI;
 
 namespace fertilizesop
 {
@@ -33,8 +34,16 @@ namespace fertilizesop
             var services = new ServiceCollection();
             configureServices(services);
             ServiceProvider = services.BuildServiceProvider();
-            var mainform = ServiceProvider.GetRequiredService<FinanceReportForm>();
-            Application.Run(mainform);
+
+            // Resolve Login form
+            using (var scope = ServiceProvider.CreateScope())
+            {
+
+                // If login successful, run the main dashboard
+                var mainform = scope.ServiceProvider.GetRequiredService<dashboardform>();
+                Application.Run(mainform);
+            }
+            
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer
@@ -70,6 +79,7 @@ namespace fertilizesop
 
 
             //UI Layer
+            services.AddTransient<Login>(); // Register Login form
             services.AddTransient<HomeContentform>();
             services.AddTransient<dashboardform>();
             services.AddTransient<AddCustomer>();
@@ -95,12 +105,11 @@ namespace fertilizesop
             services.AddTransient<bankform>();
             services.AddTransient<Addreturmform>();
             services.AddTransient<Customerreturnform>();
+            services.AddTransient<UnifiedBatchPurchaseForm>();
+            services.AddTransient<BulkSupplierPaymentForm>();
+            services.AddTransient<BulkCustomerPaymentForm>();
 
             services.AddTransient<Customerbilldl>();
-
-
-
-
         }
     }    
 }

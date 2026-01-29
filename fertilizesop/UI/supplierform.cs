@@ -142,17 +142,32 @@ namespace fertilizesop.UI
             try
             {
                 var supplier = new Suppliers(customerid, fname, contact, address);
-                bool result = _customerbl.updatesupplier(supplier);
+                bool result = false;
+
+                if (customerid > 0)
+                {
+                    // UPDATE
+                    result = _customerbl.updatesupplier(supplier);
+                    if (result) MessageBox.Show("Supplier updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // ADD
+                    result = _customerbl.addsupplier(supplier);
+                     if (result) MessageBox.Show("Supplier added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 if (result)
                 {
-                    MessageBox.Show("supplier updated successfully", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     clearfields();
                     editpanel.Visible = false;
                     load();
                     dataGridView1.Focus();
-                    
                 }
-                
+                else
+                {
+                    MessageBox.Show("Operation failed. Please try again.");
+                }
             }
             catch (Exception ex)
             {
@@ -167,8 +182,13 @@ namespace fertilizesop.UI
 
         private void Addbutton_Click(object sender, EventArgs e)
         {
-            var form = Program.ServiceProvider.GetRequiredService<Addsupplier>();
-            form.ShowDialog();
+            // Open Panel for Adding
+            customerid = -1; // Reset ID for new entry
+            clearfields();
+            editpanel.Visible = true;
+            UIHelper.RoundPanelCorners(editpanel, 20);
+            UIHelper.ShowCenteredPanel(this, editpanel);
+            txtfirstname.Focus();
         }
 
         private void btncancel_Click(object sender, EventArgs e)

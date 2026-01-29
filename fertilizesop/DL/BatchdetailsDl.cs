@@ -85,6 +85,7 @@ namespace fertilizesop.DL
                     b.batch_name,
                     p.product_id,
                     p.name AS product_name,
+s.name as supplier_name,
                    
                     bd.cost_price,
                     p.sale_price,
@@ -95,6 +96,7 @@ namespace fertilizesop.DL
                     batches b ON bd.batch_id = b.batch_id
                 JOIN 
                     products p ON bd.product_id = p.product_id
+join suppliers s on s.supplier_id=b.supplier_id
                 WHERE 
                     b.batch_name LIKE @search OR
                     p.name LIKE @search;";
@@ -114,8 +116,9 @@ namespace fertilizesop.DL
                                 decimal costPrice = reader.GetDecimal("cost_price");
                                 decimal salePrice = reader.GetDecimal("sale_price");
                                 int quantity = reader.GetInt32("quantity_recived");
+                                string supplierName = reader.GetString("supplier_name");
 
-                                var item = new BatchDetails(detailsId, batchName, costPrice, salePrice, productId, productName, quantity);
+                                var item = new BatchDetails(detailsId, batchName, costPrice, salePrice, productId, productName, quantity,supplierName);
                                 list.Add(item);
                             }
                         }
@@ -165,7 +168,6 @@ namespace fertilizesop.DL
                     b.batch_name,
                     p.product_id,
                     p.name AS product_name,
-                   
                     bd.cost_price,
                     p.sale_price,
                     bd.quantity_recived
@@ -202,9 +204,125 @@ namespace fertilizesop.DL
 
             return list;
         }
+        public static List<BatchDetails> GetAllBatchDetails(int batch_id)
+        {
+            var list = new List<BatchDetails>();
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    bd.batch_detail_id,
+                    b.batch_name,
+                    p.product_id,
+                    p.name AS product_name,
+                   s.name ,
+                    bd.cost_price,
+                    p.sale_price,
+                    bd.quantity_recived
+                FROM 
+                    batch_details bd
+                JOIN 
+                    batches b ON bd.batch_id = b.batch_id
+                JOIN 
+                    products p ON bd.product_id = p.product_id
+                   join suppliers s on s.supplier_id=b.supplier_id    
+where bd.batch_id=@id";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", batch_id);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int detailsId = reader.GetInt32("batch_detail_id");
+                                string batchName = reader.GetString("batch_name");
+                                int productId = reader.GetInt32("product_id");
+                                string productName = reader.GetString("product_name");
+                                decimal costPrice = reader.GetDecimal("cost_price");
+                                decimal salePrice = reader.GetDecimal("sale_price");
+                                int quantity = reader.GetInt32("quantity_recived");
+                                string supplierName = reader.GetString("name");
+
+                                var item = new BatchDetails(detailsId, batchName, costPrice, salePrice, productId, productName, quantity, supplierName);
+                                list.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting batch details: " + ex.Message);
+            }
+
+            return list;
+        }
         public int getsaleprice(int product_id)
         {
             return DatabaseHelper.Instance.getsaleprice(product_id);
         }
+        public  static List<BatchDetails> SearchBatchDetails(int batch_id, string searchText)
+        {
+            var list = new List<BatchDetails>();
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT 
+                    bd.batch_detail_id,
+                    b.batch_name,
+                    p.product_id,
+                    p.name AS product_name,
+                    s.name AS supplier_name,
+                    bd.cost_price,
+                    p.sale_price,
+                    bd.quantity_recived
+                FROM 
+                    batch_details bd
+                JOIN batches b ON bd.batch_id = b.batch_id
+                JOIN products p ON bd.product_id = p.product_id
+                JOIN suppliers s ON s.supplier_id = b.supplier_id
+                WHERE bd.batch_id = @batch_id AND
+                      (b.batch_name LIKE @search OR p.name LIKE @search);";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@batch_id", batch_id);
+                        cmd.Parameters.AddWithValue("@search", $"%{searchText}%");
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int detailsId = reader.GetInt32("batch_detail_id");
+                                string batchName = reader.GetString("batch_name");
+                                int productId = reader.GetInt32("product_id");
+                                string productName = reader.GetString("product_name");
+                                decimal costPrice = reader.GetDecimal("cost_price");
+                                decimal salePrice = reader.GetDecimal("sale_price");
+                                int quantity = reader.GetInt32("quantity_recived");
+                                string supplierName = reader.GetString("supplier_name");
+
+                                var item = new BatchDetails(detailsId, batchName, costPrice, salePrice, productId, productName, quantity, supplierName);
+                                list.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error searching batch details: " + ex.Message);
+            }
+
+            return list;
+        }
+
     }
 }

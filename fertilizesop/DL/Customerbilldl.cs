@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace fertilizesop.DL
 {
@@ -326,6 +327,233 @@ namespace fertilizesop.DL
                 }
             }
             catch (Exception ex) { throw new Exception("error" + ex.Message, ex); }
+        }
+
+        /// <summary>
+        /// Get payment summary for all customers (total pending, total paid, bill count)
+        /// </summary>
+        public List<CustomerPaymentSummary> GetCustomerPaymentSummary(string searchText = "")
+        {
+            var summaries = new List<CustomerPaymentSummary>();
+
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"
+                        SELECT 
+                            c.customer_id,
+                            CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+                            c.phone,
+                            COALESCE(SUM(cb.total_price - cb.paid_amount), 0) AS total_pending,
+                            COALESCE(SUM(cb.paid_amount), 0) AS total_paid,
+                            COUNT(CASE WHEN cb.payment_status = 'Due' THEN 1 END) AS pending_bill_count
+                        FROM 
+                            customers c
+                        LEFT JOIN 
+                            customerbills cb ON c.customer_id = cb.CustomerID
+                        WHERE 
+                            CONCAT(c.first_name, ' ', c.last_name) LIKE @searchText 
+                            OR c.phone LIKE @searchText 
+                            OR @searchText = ''
+                        GROUP BY 
+                            c.customer_id, c.first_name, c.last_name, c.phone
+                        HAVING 
+                            pending_bill_count > 0
+                        ORDER BY 
+                            total_pending DESC";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var summary = new CustomerPaymentSummary(
+                                    reader.GetInt32("customer_id"),
+                                    reader.GetString("customer_name"),
+                                    reader.IsDBNull(reader.GetOrdinal("phone")) ? "" : reader.GetString("phone"),
+                                    reader.GetDecimal("total_pending"),
+                                    reader.GetDecimal("total_paid"),
+                                    reader.GetInt32("pending_bill_count")
+                                );
+                                summaries.Add(summary);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error retrieving customer payment summary: " + ex.Message, ex);
+            }
+
+            return summaries;
+        }
+
+
+        /// <summary>
+        /// Get all pending bills for a specific customer
+        /// </summary>
+        public List<customerbill> GetPendingBillsByCustomer(int customerId)
+        {
+            var bills = new List<customerbill>();
+
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"
+                        SELECT 
+                            cb.BillID,
+                            CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+                            cb.SaleDate,
+                            cb.total_price,
+                            cb.paid_amount,
+                            (cb.total_price - cb.paid_amount) as pending,
+                            cb.CustomerID,
+                            cb.payment_status as status
+                        FROM 
+                            customerbills cb
+                        JOIN 
+                            customers c ON c.customer_id = cb.CustomerID
+                        WHERE 
+                            cb.CustomerID = @customerId 
+                            AND cb.payment_status = 'Due'
+                            AND (cb.total_price - cb.paid_amount) > 0
+                        ORDER BY 
+                            cb.SaleDate ASC";
+
+                    using (var cmd = new MySqlCommand(query,conn))
+                    {
+                        cmd.Parameters.AddWithValue("@customerId", customerId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var bill = new customerbill(
+                                    reader.GetInt32("BillID"),
+                                    reader.GetString("customer_name"),
+                                    reader.GetDateTime("SaleDate"),
+                                    reader.GetDecimal("total_price"),
+                                    reader.GetDecimal("paid_amount"),
+                                    reader.GetDecimal("pending"),
+                                    reader.GetInt32("CustomerID"),
+                                    reader.GetString("status")
+                                );
+                                bills.Add(bill);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Error retrieving pending bills: " + ex.Message, ex);
+            }
+
+            return bills;
+        }
+
+        /// <summary>
+        /// Process bulk payment across all pending bills for a customer
+        /// Payment is distributed proportionally based on each bill's pending amount
+        /// </summary>
+        public bool ProcessBulkPayment(int customerId, decimal totalPayment, string remarks)
+        {
+            if (totalPayment <= 0)
+                throw new ArgumentException("Payment amount must be greater than zero", nameof(totalPayment));
+
+            try
+            {
+                using (var conn = DatabaseHelper.Instance.GetConnection())
+                {
+                    conn.Open();
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Get all pending bills
+                            var pendingBills = GetPendingBillsByCustomer(customerId);
+
+                            if (pendingBills.Count == 0)
+                                throw new Exception("No pending bills found for this customer");
+
+                            // Calculate total pending amount
+                            decimal totalPending = pendingBills.Sum(b => b.pending);
+
+                            // Distribute payment across all bills proportionally
+                            decimal remainingPayment = totalPayment;
+
+                            for (int i = 0; i < pendingBills.Count; i++)
+                            {
+                                var bill = pendingBills[i];
+                                decimal billPayment;
+
+                                // For the last bill, use remaining payment to avoid rounding issues
+                                if (i == pendingBills.Count - 1)
+                                {
+                                    billPayment = remainingPayment;
+                                }
+                                else
+                                {
+                                    // Calculate proportional payment
+                                    billPayment = Math.Round((bill.pending / totalPending) * totalPayment, 2);
+                                    billPayment = Math.Min(billPayment, bill.pending); // Don't overpay
+                                }
+
+                                remainingPayment -= billPayment;
+
+                                // Update the bill
+                                string updateQuery = @"
+                                    UPDATE customerbills 
+                                    SET paid_amount = paid_amount + @payment
+                                    WHERE BillID = @billId";
+
+                                using (var cmd = new MySqlCommand(updateQuery, conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@payment", billPayment);
+                                    cmd.Parameters.AddWithValue("@billId", bill.bill_id);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                // Insert payment record
+                                string insertQuery = @"
+                                    INSERT INTO customerpricerecord 
+                                    (customer_id, BillID, date, payment, remarks)
+                                    VALUES (@customerId, @billId, @date, @payment, @remarks)";
+
+                                using (var cmd = new MySqlCommand(insertQuery, conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@customerId", customerId);
+                                    cmd.Parameters.AddWithValue("@billId", bill.bill_id);
+                                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                                    cmd.Parameters.AddWithValue("@payment", billPayment);
+                                    cmd.Parameters.AddWithValue("@remarks", remarks);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Failed during bulk payment transaction: " + ex.Message, ex);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error processing bulk payment: " + ex.Message, ex);
+            }
         }
     }
 }
