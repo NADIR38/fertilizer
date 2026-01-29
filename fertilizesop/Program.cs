@@ -43,7 +43,9 @@ namespace fertilizesop
                 var mainform = scope.ServiceProvider.GetRequiredService<dashboardform>();
                 Application.Run(mainform);
             }
-            
+         
+           
+
         }
         public static void configureServices(IServiceCollection services)
         {//DL Layer

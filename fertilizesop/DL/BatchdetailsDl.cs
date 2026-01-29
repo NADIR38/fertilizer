@@ -10,7 +10,7 @@ namespace fertilizesop.DL
         public bool adddetails(BatchDetails b)
         {
             int batch_id = DatabaseHelper.Instance.getbatchid(b.batch_name);
-            int old = oldquantity(b.product_id);
+                int old = oldquantity(b.product_id);
 
             try
             {
