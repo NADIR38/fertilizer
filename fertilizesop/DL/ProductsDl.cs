@@ -26,7 +26,7 @@ namespace fertilizesop.DL
                                                     "VALUES(@name, @sale, @descp, @quantity);";
 
                         using (var cmd = new MySqlCommand(insertProductQuery, conn, tx))
-                        {
+                        {   
                             cmd.Parameters.AddWithValue("@name", p.Name);
                             cmd.Parameters.AddWithValue("@sale", p.Price);
                             cmd.Parameters.AddWithValue("@descp", p.Description);
@@ -114,9 +114,9 @@ namespace fertilizesop.DL
                     string query = "select * from products where name like @name;";
                     using (var cmd = new MySqlCommand(query, conn))
                     {
+                       cmd.Parameters.AddWithValue("@name", $"{text}%");
                         using (var reader = cmd.ExecuteReader())
                         {
-                            cmd.Parameters.AddWithValue("@name", $"{text}%");
 
                             while (reader.Read())
                             {
@@ -129,8 +129,6 @@ namespace fertilizesop.DL
                                 int quantity = reader.GetInt32("quantity");
                                 var products = new Products(id, name, descp, sale_price, quantity);
                                 list.Add(products);
-
-
                             }
                         }
                     }
