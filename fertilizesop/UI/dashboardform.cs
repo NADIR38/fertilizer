@@ -192,7 +192,7 @@ namespace fertilizesop.UI
             CollapsePanel(panelsupp, 60);
             //CollapsePanel(panelreturn, 60);
             CollapsePanel(panelinventory, 60);
-            CollapsePanel(panelorder, 60);
+            //CollapsePanel(panelorder, 60);
         }
 
         private void activebutton(object senderBtn, Color color)
@@ -436,13 +436,13 @@ namespace fertilizesop.UI
 
         private void iconPictureBox3_Click(object sender, EventArgs e)
         {
-            if (panelorder.Height == 131)
-                CollapsePanel(panelorder, 60);
-            else
-            {
-                CollapseAllTogglePanels();
-                ExpandPanel(panelorder, 131);
-            }
+            //if (panelorder.Height == 131)
+            //    CollapsePanel(panelorder, 60);
+            //else
+            //{
+            //    CollapseAllTogglePanels();
+            //    ExpandPanel(panelorder, 131);
+            //}
         }
 
         private void iconButton5_Click(object sender, EventArgs e)
