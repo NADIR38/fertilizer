@@ -23,6 +23,7 @@ obj/
 *.log
 *.vspscc
 *.vssscc
+*.zip
 
 # Debug/Release folders
 **/Debug/
