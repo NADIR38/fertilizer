@@ -133,6 +133,7 @@
             this.btnAddSupplier.Size = new System.Drawing.Size(47, 37);
             this.btnAddSupplier.TabIndex = 4;
             this.btnAddSupplier.TabStop = false;
+            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
             // 
             // label3
             // 
@@ -366,7 +367,6 @@
             this.txtTotalAmount.Size = new System.Drawing.Size(199, 30);
             this.txtTotalAmount.TabIndex = 9;
             this.txtTotalAmount.Text = "0";
-            this.txtTotalAmount.TextChanged += new System.EventHandler(this.txtTotalAmount_TextChanged);
             // 
             // label9
             // 

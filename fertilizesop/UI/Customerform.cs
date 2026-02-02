@@ -242,6 +242,7 @@ namespace fertilizesop.UI
         {
             load();
             dataGridView2.Focus();
+            textBox1.Clear();
         }
         private void btncancle1_Click(object sender, EventArgs e)
         {

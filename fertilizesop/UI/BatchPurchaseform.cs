@@ -63,12 +63,15 @@ namespace fertilizesop.UI
 
             // Product search events
             txtProductSearch.TextChanged += TxtProductSearch_TextChanged;
+            txtProductSearch.KeyDown += TxtProductSearch_KeyDown; // NEW: Add keyboard navigation
             dgvProductSearch.CellClick += DgvProductSearch_CellClick;
+            dgvProductSearch.KeyDown += DgvProductSearch_KeyDown; // NEW: Add keyboard navigation
 
             // Batch details grid events
             dgvBatchDetails.CellDoubleClick += DgvBatchDetails_CellDoubleClick;
             dgvBatchDetails.CellClick += DgvBatchDetails_CellClick; // NEW: Single click to edit
             dgvBatchDetails.CellEndEdit += DgvBatchDetails_CellEndEdit;
+            dgvBatchDetails.KeyDown += DgvBatchDetails_KeyDown; // NEW: Add keyboard navigation
 
             // Button events
             btnAddProduct.Click += BtnAddProduct_Click;
@@ -78,6 +81,9 @@ namespace fertilizesop.UI
 
             // Payment events
             txtPaidAmount.TextChanged += TxtPaidAmount_TextChanged;
+
+            // FIXED: Add total amount text changed event
+            txtTotalAmount.TextChanged += TxtTotalAmount_TextChanged;
         }
 
         private void InitializeAutoSaveTimer()
@@ -114,16 +120,29 @@ namespace fertilizesop.UI
             dtpReceivedDate.Value = DateTime.Now;
             txtProductSearch.Focus();
 
-            // Style grids
-            UIHelper.StyleGridView(dgvBatchDetails);
-            UIHelper.StyleGridView(dgvProductSearch);
+            // Apply enhanced styling
+            StyleBatchDetailsGrid();
+            StyleProductSearchGrid();
 
-            dgvProductSearch.Location = new Point(txtProductSearch.Left, txtProductSearch.Bottom + 2);
-            dgvProductSearch.Width = 500;
-            dgvProductSearch.Height = 200;
+            // FIXED: Make product search grid a top-level control on the form (not in panel)
+            // This ensures it displays above all panels
+            if (dgvProductSearch.Parent != this)
+            {
+                // Remove from current parent (likely a panel)
+                dgvProductSearch.Parent?.Controls.Remove(dgvProductSearch);
+                // Add directly to form
+                this.Controls.Add(dgvProductSearch);
+            }
+
+            // Position relative to txtProductSearch's screen coordinates
+            Point searchBoxLocation = this.PointToClient(txtProductSearch.Parent.PointToScreen(txtProductSearch.Location));
+            dgvProductSearch.Location = new Point(searchBoxLocation.X, searchBoxLocation.Y + txtProductSearch.Height + 2);
+            dgvProductSearch.Width = 700; // Wider for better visibility
+            dgvProductSearch.Height = 380; // Taller for more products
             dgvProductSearch.Anchor = AnchorStyles.None;
             dgvProductSearch.Visible = false;
             dgvProductSearch.BringToFront();
+
             btnAddProduct.BackColor = Color.Green;
             UpdateBillSummary();
 
@@ -156,8 +175,88 @@ namespace fertilizesop.UI
             dgvBatchDetails.AllowUserToAddRows = false;
             dgvBatchDetails.AllowUserToDeleteRows = false;
             dgvBatchDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvBatchDetails.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // NEW: Full row selection
-            dgvBatchDetails.MultiSelect = false; // NEW: Single row selection only
+            dgvBatchDetails.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBatchDetails.MultiSelect = false;
+
+            // Enhanced styling for batch details grid
+            StyleBatchDetailsGrid();
+        }
+
+        private void StyleBatchDetailsGrid()
+        {
+            // Row styling
+            dgvBatchDetails.RowTemplate.Height = 35;
+            dgvBatchDetails.ColumnHeadersHeight = 40;
+
+            // Header styling
+            dgvBatchDetails.EnableHeadersVisualStyles = false;
+            dgvBatchDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94);
+            dgvBatchDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvBatchDetails.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvBatchDetails.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBatchDetails.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+
+            // Cell styling
+            dgvBatchDetails.DefaultCellStyle.Font = new Font("Segoe UI", 9.5F);
+            dgvBatchDetails.DefaultCellStyle.ForeColor = Color.FromArgb(44, 62, 80);
+            dgvBatchDetails.DefaultCellStyle.BackColor = Color.White;
+            dgvBatchDetails.DefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 152, 219);
+            dgvBatchDetails.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvBatchDetails.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);
+
+            // Alternating row colors
+            dgvBatchDetails.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(236, 240, 241);
+            dgvBatchDetails.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(44, 62, 80);
+
+            // Grid line styling
+            dgvBatchDetails.GridColor = Color.FromArgb(189, 195, 199);
+            dgvBatchDetails.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            // Border
+            dgvBatchDetails.BorderStyle = BorderStyle.None;
+
+            // Remove default selection border
+            dgvBatchDetails.RowHeadersVisible = false;
+        }
+
+        private void StyleProductSearchGrid()
+        {
+            // Row styling
+            dgvProductSearch.RowTemplate.Height = 38;
+            dgvProductSearch.ColumnHeadersHeight = 42;
+
+            // Header styling
+            dgvProductSearch.EnableHeadersVisualStyles = false;
+            dgvProductSearch.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
+            dgvProductSearch.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProductSearch.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvProductSearch.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvProductSearch.ColumnHeadersDefaultCellStyle.Padding = new Padding(8, 5, 8, 5);
+
+            // Cell styling
+            dgvProductSearch.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvProductSearch.DefaultCellStyle.ForeColor = Color.FromArgb(44, 62, 80);
+            dgvProductSearch.DefaultCellStyle.BackColor = Color.White;
+            dgvProductSearch.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 204, 113);
+            dgvProductSearch.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvProductSearch.DefaultCellStyle.Padding = new Padding(8, 5, 8, 5);
+
+            // Alternating row colors
+            dgvProductSearch.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
+
+            // Grid line styling
+            dgvProductSearch.GridColor = Color.FromArgb(189, 195, 199);
+            dgvProductSearch.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            // Border
+            dgvProductSearch.BorderStyle = BorderStyle.FixedSingle;
+
+            // Row headers
+            dgvProductSearch.RowHeadersVisible = false;
+
+            // Selection
+            dgvProductSearch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProductSearch.MultiSelect = false;
         }
 
         private void LoadSuppliers()
@@ -211,6 +310,7 @@ namespace fertilizesop.UI
             return Path.Combine(folder, fileName);
         }
 
+        // FIXED: Improved serialization with null checks and error handling
         private void SaveTempData()
         {
             try
@@ -230,23 +330,40 @@ namespace fertilizesop.UI
                 {
                     if (row.IsNewRow) continue;
 
+                    // FIXED: Add null checks for all cell values
                     tempData.BatchDetails.Add(new TempBatchDetailItem
                     {
-                        ProductId = Convert.ToInt32(row.Cells["ProductId"].Value),
-                        ProductName = row.Cells["ProductName"].Value.ToString(),
-                        Description = row.Cells["Description"].Value.ToString(),
-                        CostPrice = Convert.ToDecimal(row.Cells["CostPrice"].Value),
-                        SalePrice = Convert.ToDecimal(row.Cells["SalePrice"].Value),
-                        Quantity = Convert.ToInt32(row.Cells["Quantity"].Value)
+                        ProductId = row.Cells["ProductId"].Value != null ? Convert.ToInt32(row.Cells["ProductId"].Value) : 0,
+                        ProductName = row.Cells["ProductName"].Value?.ToString() ?? "",
+                        Description = row.Cells["Description"].Value?.ToString() ?? "",
+                        CostPrice = row.Cells["CostPrice"].Value != null ? Convert.ToDecimal(row.Cells["CostPrice"].Value) : 0,
+                        SalePrice = row.Cells["SalePrice"].Value != null ? Convert.ToDecimal(row.Cells["SalePrice"].Value) : 0,
+                        Quantity = row.Cells["Quantity"].Value != null ? Convert.ToInt32(row.Cells["Quantity"].Value) : 0
                     });
                 }
 
-                string json = JsonConvert.SerializeObject(tempData, Formatting.Indented);
+                // FIXED: Add proper JSON settings
+                var settings = new JsonSerializerSettings
+                {
+                    DateFormatString = "yyyy-MM-dd HH:mm:ss",
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+
+                string json = JsonConvert.SerializeObject(tempData, settings);
                 File.WriteAllText(GetTempFilePath(), json);
+
+                System.Diagnostics.Debug.WriteLine($"[SAVE-SUCCESS] Temp data saved successfully at {DateTime.Now:HH:mm:ss}");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error saving temp data: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error saving temp data: {ex.Message}\nStack: {ex.StackTrace}");
+                // Only show message box on critical errors, not during auto-save
+                if (!_autoSaveTimer.Enabled)
+                {
+                    MessageBox.Show($"Error saving data: {ex.Message}", "Save Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -383,17 +500,25 @@ namespace fertilizesop.UI
                     if (dgvProductSearch.Columns.Contains("quantity"))
                         dgvProductSearch.Columns["quantity"].Visible = false;
 
-                    dgvProductSearch.Location = new Point(txtProductSearch.Left, txtProductSearch.Bottom + 2);
-                    dgvProductSearch.Width = Math.Max(txtProductSearch.Width + 200, 400);
-                    dgvProductSearch.Height = Math.Min(products.Count * 35 + 40, 200);
+                    // FIXED: Calculate position relative to the form, not the panel
+                    Point searchBoxLocation = this.PointToClient(txtProductSearch.Parent.PointToScreen(txtProductSearch.Location));
+                    dgvProductSearch.Location = new Point(searchBoxLocation.X, searchBoxLocation.Y + txtProductSearch.Height + 2);
+                    dgvProductSearch.Width = Math.Max(700, txtProductSearch.Width + 450); // Much larger
+                    dgvProductSearch.Height = Math.Min(products.Count * 48 + 70, 450); // Taller rows with new styling
+
                     dgvProductSearch.Visible = true;
                     dgvProductSearch.BringToFront();
                     dgvProductSearch.Cursor = Cursors.Default;
+
+                    // Auto-size columns for better visibility
+                    dgvProductSearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                    // Ensure it's on top of everything
+                    this.Controls.SetChildIndex(dgvProductSearch, 0);
                 }
                 else
                 {
                     dgvProductSearch.Visible = false;
-                    dgvProductSearch.SendToBack();
                 }
             }
             catch (Exception ex)
@@ -409,16 +534,129 @@ namespace fertilizesop.UI
         {
             if (e.RowIndex >= 0)
             {
-                var row = dgvProductSearch.Rows[e.RowIndex];
-                _selectedProductId = Convert.ToInt32(row.Cells["Id"].Value);
-                _selectedProductName = row.Cells["Name"].Value.ToString();
-                _selectedProductDescription = row.Cells["Description"].Value?.ToString() ?? "";
+                SelectProductFromSearchGrid(e.RowIndex);
+            }
+        }
 
-                txtProductSearch.Text = _selectedProductName;
-                txtSalePrice.Text = _batchDetailsBl.getsaleprice(_selectedProductId).ToString();
+        // FIXED: Extract product selection logic into reusable method
+        private void SelectProductFromSearchGrid(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= dgvProductSearch.Rows.Count)
+                return;
 
-                dgvProductSearch.Visible = false;
-                txtCostPrice.Focus();
+            var row = dgvProductSearch.Rows[rowIndex];
+            _selectedProductId = Convert.ToInt32(row.Cells["Id"].Value);
+            _selectedProductName = row.Cells["Name"].Value.ToString();
+            _selectedProductDescription = row.Cells["Description"].Value?.ToString() ?? "";
+
+            txtProductSearch.Text = _selectedProductName;
+            txtSalePrice.Text = _batchDetailsBl.getsaleprice(_selectedProductId).ToString();
+
+            dgvProductSearch.Visible = false;
+            txtCostPrice.Focus();
+            txtCostPrice.SelectAll();
+        }
+
+        // NEW: Keyboard navigation for product search textbox
+        private void TxtProductSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!dgvProductSearch.Visible || dgvProductSearch.Rows.Count == 0)
+            {
+                // Only handle Enter when grid is not visible
+                if (e.KeyCode == Keys.Enter && _selectedProductId > 0)
+                {
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    txtCostPrice.Focus();
+                    txtCostPrice.SelectAll();
+                }
+                return;
+            }
+
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                    // Move to product search grid
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
+                    try
+                    {
+                        dgvProductSearch.Focus();
+                        if (dgvProductSearch.Rows.Count > 0)
+                        {
+                            // Find first visible column
+                            DataGridViewColumn firstVisibleColumn = null;
+                            foreach (DataGridViewColumn col in dgvProductSearch.Columns)
+                            {
+                                if (col.Visible)
+                                {
+                                    firstVisibleColumn = col;
+                                    break;
+                                }
+                            }
+
+                            if (firstVisibleColumn != null)
+                            {
+                                dgvProductSearch.CurrentCell = dgvProductSearch.Rows[0].Cells[firstVisibleColumn.Index];
+                                dgvProductSearch.Rows[0].Selected = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error setting grid focus: {ex.Message}");
+                    }
+                    break;
+
+                case Keys.Escape:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    dgvProductSearch.Visible = false;
+                    break;
+
+                case Keys.Enter:
+                    if (dgvProductSearch.Rows.Count > 0)
+                    {
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        SelectProductFromSearchGrid(0);
+                    }
+                    break;
+            }
+        }
+
+        // NEW: Keyboard navigation for product search grid
+        private void DgvProductSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    if (dgvProductSearch.CurrentRow != null)
+                    {
+                        SelectProductFromSearchGrid(dgvProductSearch.CurrentRow.Index);
+                    }
+                    break;
+
+                case Keys.Escape:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    dgvProductSearch.Visible = false;
+                    txtProductSearch.Focus();
+                    break;
+
+                case Keys.Up:
+                    // If at first row, go back to search textbox
+                    if (dgvProductSearch.CurrentRow != null && dgvProductSearch.CurrentRow.Index == 0)
+                    {
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        dgvProductSearch.Visible = false;
+                        txtProductSearch.Focus();
+                    }
+                    break;
             }
         }
         #endregion
@@ -714,20 +952,110 @@ namespace fertilizesop.UI
                 }
             }
         }
+
+        // NEW: Keyboard navigation for batch details grid
+        private void DgvBatchDetails_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dgvBatchDetails.CurrentRow == null || dgvBatchDetails.CurrentRow.IsNewRow)
+                return;
+
+            int currentIndex = dgvBatchDetails.CurrentRow.Index;
+
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
+                    var result = MessageBox.Show(
+                        "Do you want to delete this product?",
+                        "Confirm Delete",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // If deleting the row being edited, cancel edit mode
+                        if (_editingRowIndex == currentIndex)
+                        {
+                            CancelEdit();
+                        }
+
+                        dgvBatchDetails.Rows.RemoveAt(currentIndex);
+
+                        if (!_dataSavedSuccessfully)
+                        {
+                            SaveTempData();
+                        }
+
+                        UpdateBillSummary();
+
+                        MessageBox.Show("✅ Product deleted successfully!", "Deleted",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    break;
+
+                case Keys.Enter:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
+                    // Simulate click to enter edit mode
+                    DgvBatchDetails_CellClick(sender, new DataGridViewCellEventArgs(0, currentIndex));
+                    break;
+
+                case Keys.Escape:
+                    if (_isEditMode)
+                    {
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        CancelEdit();
+                    }
+                    break;
+            }
+        }
         #endregion
 
         #region Bill Summary
+        // FIXED: Properly calculate and update total amount automatically
         private void UpdateBillSummary()
         {
-            decimal totalAmount = 0;
-            if (!string.IsNullOrWhiteSpace(txtTotalAmount.Text))
+            try
             {
-                decimal.TryParse(txtTotalAmount.Text, out totalAmount);
+                decimal calculatedTotal = 0;
+
+                // Calculate total from all products in grid
+                foreach (DataGridViewRow row in dgvBatchDetails.Rows)
+                {
+                    if (!row.IsNewRow && row.Cells["TotalCost"].Value != null)
+                    {
+                        calculatedTotal += Convert.ToDecimal(row.Cells["TotalCost"].Value);
+                    }
+                }
+
+                // FIXED: Always update the total amount field with calculated value
+                txtTotalAmount.Text = calculatedTotal.ToString("0.00");
+
+                // Store the calculated total for reference
+                _totalBillAmount = calculatedTotal;
+
+                System.Diagnostics.Debug.WriteLine($"[BILL-SUMMARY] Calculated Total: Rs. {calculatedTotal:N2}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating bill summary: {ex.Message}");
             }
         }
 
         private void TxtPaidAmount_TextChanged(object sender, EventArgs e)
         {
+            // Optional: Add validation or real-time balance calculation here
+        }
+
+        // FIXED: Add explicit handler for total amount changes
+        private void TxtTotalAmount_TextChanged(object sender, EventArgs e)
+        {
+            // This allows user to manually override the calculated total
+            // No auto-calculation here to respect user input
         }
         #endregion
 
@@ -1148,6 +1476,14 @@ namespace fertilizesop.UI
         #region Keyboard Shortcuts
         private void UnifiedBatchPurchaseForm_KeyDown(object sender, KeyEventArgs e)
         {
+            // Don't handle keys if product search grid is visible and has focus
+            if (dgvProductSearch.Visible && dgvProductSearch.Focused)
+                return;
+
+            // Don't handle keys if editing a cell in batch details grid
+            if (dgvBatchDetails.IsCurrentCellInEditMode)
+                return;
+
             // Ctrl + S = Save
             if (e.Control && e.KeyCode == Keys.S)
             {
@@ -1168,18 +1504,19 @@ namespace fertilizesop.UI
                     CancelEdit();
                     e.Handled = true;
                 }
-                else
+                else if (!dgvProductSearch.Visible) // Only close if search grid not visible
                 {
                     this.Close();
                     e.Handled = true;
                 }
             }
-            // Enter on product search
-            else if (e.KeyCode == Keys.Enter && txtProductSearch.Focused)
+            // Enter on product search (only if grid not visible)
+            else if (e.KeyCode == Keys.Enter && txtProductSearch.Focused && !dgvProductSearch.Visible)
             {
-                if (!dgvProductSearch.Visible && _selectedProductId > 0)
+                if (_selectedProductId > 0)
                 {
                     txtCostPrice.Focus();
+                    txtCostPrice.SelectAll();
                 }
                 e.Handled = true;
             }
@@ -1224,9 +1561,10 @@ namespace fertilizesop.UI
         }
         #endregion
 
-        private void txtTotalAmount_TextChanged(object sender, EventArgs e)
+        private void btnAddSupplier_Click(object sender, EventArgs e)
         {
-            UpdateBillSummary();
+            var f=Program.ServiceProvider.GetRequiredService<Addsupplier>();
+            f.ShowDialog(this);
         }
     }
 

@@ -41,6 +41,7 @@ namespace fertilizesop.UI
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LoadBatchDetails();
+            textBox1.Clear();
         }
 
         private void LoadBatchDetails()

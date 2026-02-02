@@ -19,7 +19,7 @@ namespace fertilizesop.BL.Bl
         }
 
         public bool addbatches(Batches b)
-        {
+        {   
             ValidateBatch(b);
            bool result= idl.addbatches(b);
             if (result)

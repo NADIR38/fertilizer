@@ -97,23 +97,23 @@ namespace fertilizesop.UI
                 var summaries = _customerBillDl.GetCustomerPaymentSummary(searchText);
                 dgvCustomers.DataSource = summaries;
 
-                // Customize column headers and formatting
+                // FIXED: Check if columns exist before accessing them
                 if (dgvCustomers.Columns.Contains("CustomerId"))
                     dgvCustomers.Columns["CustomerId"].Visible = false;
 
-                if (dgvCustomers.Columns.Contains("CustomerName"))
+                if (dgvCustomers.Columns.Contains("CustomerName") && dgvCustomers.Columns["CustomerName"] != null)
                 {
                     dgvCustomers.Columns["CustomerName"].HeaderText = "Customer Name";
                     dgvCustomers.Columns["CustomerName"].Width = 200;
                 }
 
-                if (dgvCustomers.Columns.Contains("CustomerPhone"))
+                if (dgvCustomers.Columns.Contains("CustomerPhone") && dgvCustomers.Columns["CustomerPhone"] != null)
                 {
                     dgvCustomers.Columns["CustomerPhone"].HeaderText = "Phone";
                     dgvCustomers.Columns["CustomerPhone"].Width = 120;
                 }
 
-                if (dgvCustomers.Columns.Contains("TotalPending"))
+                if (dgvCustomers.Columns.Contains("TotalPending") && dgvCustomers.Columns["TotalPending"] != null)
                 {
                     dgvCustomers.Columns["TotalPending"].HeaderText = "Total Pending";
                     dgvCustomers.Columns["TotalPending"].DefaultCellStyle.Format = "N2";
@@ -122,7 +122,7 @@ namespace fertilizesop.UI
                     dgvCustomers.Columns["TotalPending"].Width = 120;
                 }
 
-                if (dgvCustomers.Columns.Contains("TotalPaid"))
+                if (dgvCustomers.Columns.Contains("TotalPaid") && dgvCustomers.Columns["TotalPaid"] != null)
                 {
                     dgvCustomers.Columns["TotalPaid"].HeaderText = "Total Paid";
                     dgvCustomers.Columns["TotalPaid"].DefaultCellStyle.Format = "N2";
@@ -131,7 +131,7 @@ namespace fertilizesop.UI
                     dgvCustomers.Columns["TotalPaid"].Width = 120;
                 }
 
-                if (dgvCustomers.Columns.Contains("PendingBillCount"))
+                if (dgvCustomers.Columns.Contains("PendingBillCount") && dgvCustomers.Columns["PendingBillCount"] != null)
                 {
                     dgvCustomers.Columns["PendingBillCount"].HeaderText = "Pending Bills";
                     dgvCustomers.Columns["PendingBillCount"].Width = 100;

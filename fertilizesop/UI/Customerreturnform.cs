@@ -69,5 +69,10 @@ namespace fertilizesop.UI
         {
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+        }
     }
 }

@@ -320,6 +320,7 @@ namespace fertilizesop.UI
         private void iconButton2_Click(object sender, EventArgs e)
         {
             var f= Program.ServiceProvider.GetRequiredService<FinanceReportForm>();
+            LoadFormIntoPanel(f);
         }
 
         private void btnreturns_Click(object sender, EventArgs e)
@@ -423,20 +424,15 @@ namespace fertilizesop.UI
             LoadFormIntoPanel(f);
         }
 
-        private void iconButton3_Click(object sender, EventArgs e)
-        {
-            activebutton(sender, sidebarColors[0]);
-            var f = Program.ServiceProvider.GetRequiredService<OrderStatus>();
+        //private void iconButton3_Click(object sender, EventArgs e)
+        //{
+        //    activebutton(sender, sidebarColors[0]);
+        //    var f = Program.ServiceProvider.GetRequiredService<OrderStatus>();
 
-            LoadFormIntoPanel(f);
-        }
+        //    LoadFormIntoPanel(f);
+        //}
 
-        private void iconButton4_Click(object sender, EventArgs e)
-        {
-            var f = Program.ServiceProvider.GetRequiredService<OrdersMain>();
-
-            LoadFormIntoPanel(f);
-        }
+       
 
         private void iconPictureBox3_Click(object sender, EventArgs e)
         {

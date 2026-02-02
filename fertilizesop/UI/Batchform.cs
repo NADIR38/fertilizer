@@ -579,6 +579,7 @@ namespace fertilizesop.UI
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             load();
+            textBox1.Clear();   
         }
 
         private void btnbill_Click(object sender, EventArgs e)
